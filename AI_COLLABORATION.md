@@ -71,6 +71,27 @@ tools/continuum task close pagos-recurrentes           # exige handoff.md comple
 Nunca renumerar ni reutilizar identificadores de requisitos/tareas ya usados
 (RF-###, PA-##, slugs de tarea) aunque se hayan cerrado o descartado.
 
+### 2.1 Historias, tareas Continuum y ramas por sprint
+
+- Antes de implementar cada historia de usuario de un sprint, crea una tarea
+  Continuum independiente. El agente orquestador asigna cada tarea al agente
+  o rol adecuado según su alcance; registra criterios de aceptación,
+  dependencias y write-set en la tarea.
+- Trabaja las historias del sprint en su rama `sprint/<slug>`, creada desde
+  `develop`. Al cerrar cada tarea de historia, valida el cambio, deja el
+  handoff de la tarea y crea un commit en la rama del sprint con el slug de
+  la tarea en el mensaje.
+- Cierra la tarea del sprint solo cuando sus historias estén cerradas y el
+  resultado integrado y validado. Entonces une la rama `sprint/<slug>` a
+  `develop`.
+- Al concluir y validar el prototipo completo, une `develop` a `main`. No
+  adelantes historias, sprints ni el prototipo a la rama siguiente si sus
+  validaciones o tareas de cierre están pendientes.
+- Si el repositorio aún no tiene `develop`, créala desde `main` antes de
+  comenzar el primer sprint. Si hay trabajo paralelo, conserva el aislamiento
+  de agente/worktree/tarea (§6) e integra los commits de historia en la rama
+  del sprint antes de cerrarlo.
+
 ## 3. Contexto mínimo suficiente (eficiencia de tokens)
 
 - Localiza antes de leer: `rg`/`grep` para encontrar, no explorar carpetas completas "por si acaso".
@@ -162,6 +183,9 @@ nativamente Claude Code (`MEMORY.md` + archivos por tema, ver
 
 ## 6. Trabajo en equipo (múltiples personas)
 
+- **Flujo sprint/historia**: aplica §2.1. La rama de sprint es la integración
+  de las historias; el commit de cada tarea de historia no sustituye el merge
+  del sprint a `develop`.
 - **Aislamiento por tarea**: Cada desarrollador o sesión trabaja en su subcarpeta `.ai/tasks/<slug>/`. Al estar aisladas por slug, los merges entre ramas de Git no producen conflictos en los archivos de tarea.
 - **Visibilidad y ownership**: `continuum task claim <slug> <owner>` marca quién está trabajando en una tarea para dar visibilidad al resto del equipo en `continuum status` o `continuum task list`.
 - **Manejo de `HANDOFF.md` en merges**: `.ai/HANDOFF.md` representa la continuidad de la rama actual. En Pull Requests o merges a `main`, si ocurre un conflicto en `HANDOFF.md`, la regla es aceptar la versión de la rama principal o regenerarla inmediatamente ejecutando `tools/continuum handoff --auto` — nunca dejar marcadores de conflicto sin resolver commiteados; `tools/continuum doctor` lo trata como problema crítico si se te escapa (ver `docs/investigacion-2026.md` §10: se evaluó y descartó resolver esto con una estrategia de merge automática, porque descartaría contenido en silencio sin que nadie lo note).

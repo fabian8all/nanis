@@ -28,7 +28,7 @@ El Reto 4 presenta las áreas Datos, Documentos, Evaluación, Reporte, Normativa
 - Tareas, accesos y decisiones permitidos a cada actor.
 - Etapas de las prácticas, transiciones, responsables, fechas y cierre.
 - Documentos y reportes requeridos, formatos, revisiones, correcciones y retención.
-- Cómo registrar/acreditar las 240 horas de práctica.
+- Formato, contenido y validación de la carta de término que acredita las 240 horas.
 - Contenido de Normativa, Formatos y Contacto; canales de notificación/mensajería.
 - Privacidad, transparencia, acceso a datos y límites de indicadores/automatización.
 - Criterios de éxito del prototipo y capacidad/cadencia del equipo.

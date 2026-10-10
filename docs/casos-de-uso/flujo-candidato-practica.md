@@ -11,10 +11,10 @@
 3. **Empresa:** el alumno lleva la carta a la empresa; si esta acepta, carga la carta de aceptación en la plataforma.
 4. **Plan:** el alumno crea su plan de trabajo.
 5. **Desarrollo y conclusión:** el alumno realiza la práctica operativa o de mandos medios hasta completar 240 horas.
-6. **Cierre académico:** al término se realiza una evaluación y el alumno elabora un reporte final. No habrá evaluaciones ni reportes intermedios; confirmar el orden de estas dos actividades, quién realiza la evaluación y su instrumento.
+6. **Cierre académico:** al término la empresa/supervisor realiza una evaluación y el alumno entrega un reporte final al tutor/asesor académico. Si hay observaciones, el tutor lo devuelve para corrección y el alumno lo reenvía hasta su aprobación. No habrá evaluaciones ni reportes intermedios; el ciclo de corrección es del reporte final.
 7. **Término:** la empresa entrega la carta de término al alumno y este la sube a la plataforma.
 
-La evaluación ocurre una sola vez, al término; la persona evaluadora, los criterios/instrumento y la forma de acreditar las 240 horas quedan por precisar. La revisión del reporte final también está pendiente.
+La evaluación ocurre una sola vez, al término, y la aplicará la empresa o supervisor con una rúbrica específica que se definirá para estas prácticas. El tutor/asesor académico puede devolver el reporte final con observaciones; el alumno corrige y reenvía hasta que se apruebe. La carta de término registrada en el expediente acredita las 240 horas; no se requiere un contador independiente en la plataforma. Falta definir el contenido/aprobación de la rúbrica y el formato/validación de la carta.
 
 ## Referencia documental fuera del alcance de este prototipo
 
@@ -38,8 +38,8 @@ Los documentos señalan que las entregas pueden ocurrir por Drive, correo instit
 
 - Alumno: solicitud, búsqueda de empresa, entrega de la carta de presentación, plan, reporte final y entrega de cartas/documentos.
 - Coordinador: explica el proceso, comparte convenios/formatos, mantiene el catálogo de empresas y convenios vigentes, revisa solicitudes, emite cartas y resguarda documentos de cierre. Otras responsabilidades por confirmar.
-- Empresa/supervisor: carta de aceptación, evaluación al término y entrega de carta de término al alumno; los detalles de la evaluación quedan por confirmar.
-- Tutor académico: rol y participación en estas prácticas por confirmar; el ciclo de evaluaciones y reportes intermedios de la fuente de estancias no aplica.
+- Empresa/supervisor: carta de aceptación, evaluación única al término y entrega de carta de término al alumno; quedan por confirmar instrumento y criterios de evaluación.
+- Tutor/asesor académico: revisa el reporte final, señala observaciones y lo aprueba; puede devolverlo para corrección hasta que el alumno lo reenvíe atendiendo las observaciones.
 
 ## Diferencias y preguntas pendientes
 
@@ -47,7 +47,7 @@ Los documentos señalan que las entregas pueden ocurrir por Drive, correo instit
 - **Directorio de empresas:** la plataforma debe mostrar al alumno empresas con convenio vigente para su selección. Coordinación capturará y actualizará en la plataforma las empresas, sus convenios y vigencias. Cuando venza un convenio, la empresa se ocultará para nuevas solicitudes y no se afectarán prácticas ya iniciadas. Si vence entre la selección y el inicio, coordinación debe revisar y autorizar el caso antes de continuar.
 - **Flujo digital:** el procedimiento actual contempla Drive, correo, Classroom y entrega física. Acordar qué flujo pretende centralizar/sustituir el prototipo.
 - **Aceptación:** el procedimiento indica que el estudiante lleva la carta de aceptación a coordinación para resguardo; el flujo inicial indica que la empresa la carga a la plataforma.
-- **Alcance académico:** para este prototipo hay una evaluación al término y un reporte final; no hay evaluaciones ni reportes intermedios. Las evaluaciones y ciclos de revisión intermedia de la fuente de estancias quedan excluidos.
+- **Alcance académico:** para este prototipo hay una evaluación al término y un reporte final, con ciclo de correcciones de la versión final hasta su aprobación; no hay evaluaciones ni reportes intermedios.
 - Acordar ciclo de solicitud devuelta: estados/comentarios, número de reenvíos y trazabilidad de cambios.
 - Confirmar documentos/plantillas, firmas, quién revisa cartas/plan, estados y condiciones de expediente completo.
 - Confirmar finalidad, acceso y conservación del NSS antes de tratarlo como campo obligatorio.

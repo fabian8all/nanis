@@ -21,7 +21,11 @@ Organizar el backlog candidato en sprints y proponer su asignación a los roles/
 ## Write-set (archivos que se espera tocar)
 No editar fuera de esta lista sin actualizarla primero. Evita refactors oportunistas.
 
+- `AI_COLLABORATION.md`
+- `.github/copilot-instructions.md` (solo sincronizar huella canónica, si cambia)
 - `docs/backlog/candidatos-iniciales.md`
+- `docs/casos-de-uso/flujo-candidato-practica.md`
+- `docs/requerimientos/vision-inicial.md`
 - `docs/sprints/**`
 - `.ai/HANDOFF.md`
 - `.ai/tasks/planificacion-sprints-agentes/**`
@@ -35,7 +39,7 @@ No editar fuera de esta lista sin actualizarla primero. Evita refactors oportuni
 - `docs/requerimientos/vision-inicial.md`
 - `docs/casos-de-uso/flujo-candidato-practica.md`
 - `docs/backlog/candidatos-iniciales.md`
-- `.ai/roles/comun/gestion-proyecto.md` y roles técnicos/agentes aplicables del catálogo activo.
+- `tools/continuum roles list` y las definiciones de los roles/agentes aplicables del catálogo activo.
 
 ## Contexto mínimo sugerido
 Según el tamaño declarado arriba, no cargues más de lo necesario:
