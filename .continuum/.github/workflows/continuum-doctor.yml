@@ -1,0 +1,21 @@
+name: continuum-doctor
+
+# Corre `continuum doctor` en cada PR y en cada push a main como check
+# bloqueante cuando la protección de rama lo exige.
+# Si solo disparara en pull_request, un flujo de commits directos a main
+# (como el de este repositorio mientras hay un único mantenedor) nunca
+# lo ejecutaría — de ahí el trigger de push.
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  doctor:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: continuum doctor
+        run: python3 tools/continuum doctor
