@@ -43,7 +43,7 @@ Los documentos señalan que las entregas pueden ocurrir por Drive, correo instit
 
 ## Identidad y acceso — historias candidatas por refinar
 
-- El alumno inicia sesión con el IDP institucional SAML2. En su primer acceso válido, la plataforma crea una cuenta local con rol de alumno y la vincula por matrícula/identificador institucional inmutable, no por correo. El atributo SAML exacto queda pendiente de validar con el administrador del IDP. Este acceso antecede el catálogo autenticado (GT-HU-019 → GT-HU-014).
+- El alumno inicia sesión con el IDP institucional SAML2. Una aserción válida se vincula por `uCorreo` (correo institucional), declarado único por la persona solicitante: si ya existe en la plataforma, se inicia sesión con su perfil actual; si no, se crea una cuenta con rol de alumno. El claim real que contiene el correo se debe validar. Este acceso antecede el catálogo autenticado (GT-HU-019 → GT-HU-014).
 - Coordinación podrá registrar supervisores con correo local; la plataforma envía un enlace para confirmar el correo y el supervisor establece su contraseña. GT-HU-020 no bloquea HU-014.
 - Cada cuenta tiene un solo rol activo. Coordinación podrá editar perfiles/cambiar roles, por ejemplo de alumno a tutor; los campos, transiciones y auditoría se deben refinar en GT-HU-021.
 - HU-020 y HU-021 son candidatas fuera del Sprint 1 hasta que se prioricen. No inferirlas del proyecto de ejemplo ni reutilizar valores de simulación o identificadores numéricos de rol.

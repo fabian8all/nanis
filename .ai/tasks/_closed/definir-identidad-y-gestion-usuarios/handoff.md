@@ -9,9 +9,9 @@ dependencia con HU-014. No hizo cambios de código.
 ## Requisitos expresados
 
 - Alumnos inician sesión mediante el IDP institucional SAML2; al primer acceso,
-  su cuenta local se crea automáticamente con perfil de alumno. La identidad
-  debe vincularse por matrícula/identificador institucional inmutable, no por
-  email; falta obtener el nombre exacto del atributo SAML.
+  su cuenta local se crea automáticamente con perfil de alumno. Decisión más
+  reciente: usar `uCorreo` como identificador único en lugar de
+  `student_number`/`worker_number`; falta validar claim real.
 - Supervisores mantienen usuario/contraseña locales; Coordinación registra su
   correo y la aplicación envía un enlace que el supervisor confirma para
   establecer su contraseña.
@@ -31,7 +31,7 @@ credenciales.
 
 ## Pendiente para historias de implementación
 
-1. Confirmar el nombre del atributo SAML inmutable y recuperación de contraseña para supervisores.
+1. Confirmar el claim real de `uCorreo` y recuperación de contraseña para supervisores.
 2. Completar campos de perfil editables, restricciones por transición y auditoría.
 3. Acordar pruebas y compatibilidad del paquete con Laravel 13/PHP 8.4 en la tarea de implementación HU-019.
 

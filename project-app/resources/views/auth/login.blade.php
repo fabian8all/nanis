@@ -12,7 +12,19 @@
             <div class="col-md-6 col-lg-4">
                 <div class="card shadow-sm">
                     <div class="card-body p-4">
-                        <h1 class="h4 mb-3">Acceso de Coordinación</h1>
+                        <h1 class="h4 mb-3">Acceso</h1>
+                        @error('saml')
+                            <div class="alert alert-danger" role="alert">{{ $message }}</div>
+                        @enderror
+                        @if (config('services.saml2.simulator_enabled') && app()->environment(['local', 'testing']))
+                            <a class="btn btn-outline-primary w-100 mb-3" href="{{ route('auth.saml.simulate') }}">
+                                Acceder como alumno de prueba
+                            </a>
+                        @elseif (config('services.saml2.enabled'))
+                            <a class="btn btn-outline-primary w-100 mb-3" href="{{ route('auth.saml.login') }}">
+                                Acceso institucional para alumnos
+                            </a>
+                        @endif
                         <form method="POST" action="{{ route('login.store') }}">
                             @csrf
                             <div class="mb-3">

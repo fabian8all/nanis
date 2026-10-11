@@ -12,8 +12,8 @@ exactamente dónde retomar sin releer todo desde cero.
 Tarea completada. Se definieron HU-019 (SAML2 + alta automática de
 alumnos; prerequisito de HU-014), HU-020 (supervisores locales con verificación
 de correo) y HU-021 (gestión de perfiles/roles). La persona solicitante aprobó
-que solo HU-019 bloquee HU-014, y definió identificador institucional
-inmutable/rol único y verificación del correo con enlace + contraseña definida
+que solo HU-019 bloquee HU-014, y definió `uCorreo` como identificador
+único/rol único y verificación del correo con enlace + contraseña definida
 por el supervisor. El atributo SAML exacto, campos editables, recuperación de
 contraseña y auditoría quedan abiertos. Se actualizaron backlog, flujo y plan
 candidato. La implementación de HU-019 requiere una tarea independiente

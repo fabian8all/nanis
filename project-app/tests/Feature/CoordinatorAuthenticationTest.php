@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Enums\UserRole;
 use App\Models\User;
 use Illuminate\Foundation\Http\Middleware\PreventRequestForgery;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -16,7 +17,7 @@ class CoordinatorAuthenticationTest extends TestCase
         $this->withoutMiddleware(PreventRequestForgery::class);
 
         $coordinator = User::factory()->create([
-            'is_coordinator' => true,
+            'role' => UserRole::Coordinator,
             'password' => 'CorrectHorseBattery1!',
         ]);
 
@@ -34,7 +35,7 @@ class CoordinatorAuthenticationTest extends TestCase
         $this->withoutMiddleware(PreventRequestForgery::class);
 
         $user = User::factory()->create([
-            'is_coordinator' => false,
+            'role' => UserRole::Student,
             'password' => 'CorrectHorseBattery1!',
         ]);
 
@@ -54,7 +55,7 @@ class CoordinatorAuthenticationTest extends TestCase
         $this->get(route('coordinacion.companies.index'))
             ->assertRedirect(route('login'));
 
-        $this->actingAs(User::factory()->create(['is_coordinator' => false]))
+        $this->actingAs(User::factory()->create(['role' => UserRole::Student]))
             ->get(route('coordinacion.companies.index'))
             ->assertForbidden();
     }

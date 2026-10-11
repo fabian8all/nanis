@@ -11,8 +11,9 @@ pasa a `handoff.md` o a un ADR — este archivo se archiva junto con la tarea.
 
 ## Evidencia recopilada
 - Persona solicitante requiere alta local automática como alumno al primer
-  acceso SAML2, vinculada por matrícula/identificador institucional inmutable
-  y no por email. El nombre exacto del atributo SAML está pendiente.
+  acceso SAML2. Primero indicó identificador institucional inmutable y luego
+  cambió la decisión: usar `uCorreo` como identificador único; validar claim
+  real.
 - Supervisores deben conservar autenticación local usuario/contraseña y ser
   agregados por Coordinación tras confirmar correo.
 - Aclaración: Coordinación registra el correo; la aplicación envía un enlace y

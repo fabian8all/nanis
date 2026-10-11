@@ -44,13 +44,13 @@ No editar fuera de esta lista sin actualizarla primero. Evita refactors oportuni
 - `/home/fabian/code/redi/redi-app/composer.json`
 
 ## Requisitos expresados
-- Alumno: autenticación del IDP institucional SAML2 y alta local automática con perfil de alumno al iniciar sesión por primera vez. Vincular cuentas mediante matrícula/identificador institucional inmutable, no por email; falta precisar el nombre del atributo SAML.
+- Alumno: autenticación del IDP institucional SAML2 y alta local automática con perfil de alumno al iniciar sesión por primera vez. Decisión posterior: `uCorreo` (email institucional) como identificador único en lugar de `student_number`/`worker_number`; verificar el claim real del IDP.
 - Supervisor: conservar inicio de sesión local con usuario y contraseña; Coordinación registra su correo, la aplicación envía un enlace y el supervisor confirma y establece su propia contraseña.
 - Coordinación: editar el perfil de otros usuarios y cambiar roles, incluyendo alumno a tutor. Cada cuenta mantiene un único rol activo; cambiarlo reemplaza el rol anterior.
 - No reutilizar directamente datos de simulación, IDs numéricos de rol ni credenciales del proyecto de ejemplo.
 
 ## Decisiones abiertas
-- Nombre exacto del atributo SAML que contiene la matrícula/identificador institucional inmutable.
+- Nombre/formato real del claim SAML de `uCorreo`.
 - Recuperación/cambio posterior de contraseña local para supervisores.
 - Campos de perfil editables, matriz de roles y acciones permitidas por rol; si debe quedar auditoría de cambios.
 - Si el cambio de rol debe dejar auditoría visible a Coordinación.

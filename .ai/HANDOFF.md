@@ -1,6 +1,6 @@
 # Handoff: nanis
 
-**Fecha:** 2026-10-10 · **Rol:** gestion-proyecto
+**Fecha:** 2026-10-11 · **Rol:** backend
 
 ## Objetivo
 Iniciar una nueva aplicación y establecer Continuum para descubrir requisitos, diseñar backlog y plan de trabajo.
@@ -35,9 +35,9 @@ Iniciar una nueva aplicación y establecer Continuum para descubrir requisitos, 
 - Coordinación podrá modificar las dos rúbricas de evaluación; cada evaluación conserva la versión aplicada. El formato de tutor incluye evaluación del reporte. La encuesta de satisfacción a empresa (GT-HU-013) es distinta de ambas, la responde el supervisor cuando Coordinación la solicite y solo Coordinación consulta las respuestas; faltan definir preguntas, canal y resguardo.
 
 ## Validación
-- `docker compose up --build -d`: app, MySQL y `nginx-proxy` iniciados; MySQL healthy.
-- `http://nanis.net`: HTTP 200. Base `project` accesible con el usuario solicitado y 0 tablas; no se ejecutaron migraciones.
-- `php artisan test`: 2 pruebas aprobadas. `tools/continuum doctor`: 0 problemas críticos y una advertencia sobre el costo del contexto de arranque.
+- Tras los cambios de HU-019, `docker compose up --build -d` reconstruye la aplicación; `http://nanis.net/login` y `/auth/saml/metadata` responden HTTP 200.
+- `php artisan test --no-coverage`: 23 pruebas y 101 aserciones aprobadas, incluida migración de coordinadores existentes; Pint pasa en los 18 archivos PHP revisados.
+- `python3 tools/continuum doctor` en WSL: 0 problemas críticos y 2 advertencias (dos tareas activas en el mismo worktree, trabajo secuencial; y costo estimado del paquete de arranque).
 
 ## Riesgos / pendientes
 - El objetivo general ya se conoce; faltan reglas, documentos, flujo y responsabilidades. El backlog conserva solo hipótesis no aprobadas. La revisión encontró actividades 1–27 y luego 33–36 en el procedimiento; validar si faltan 28–32.
@@ -50,7 +50,7 @@ Iniciar una nueva aplicación y establecer Continuum para descubrir requisitos, 
 - Se creó `develop` desde `main`; el último commit en ambas ramas es `c2892d5`.
 - Sprint 1 está en `sprint/1-catalogo-solicitud`, último commit `7ac394b`. `gt-hu-015-empresas-convenios` (backend) cerrada y archivada tras implementar el catálogo: Coordinación registra nombre, dirección, teléfono, email y contacto; altas/bajas son manuales y una baja oculta a la empresa para nuevas solicitudes conservando referencias existentes. El login local de Coordinación y el comando Artisan interactivo para crear la cuenta inicial no versionan credenciales.
 - HU-015 implementada y comprometida en `54c0edf` en `sprint/1-catalogo-solicitud`: limitador de intentos, rutas/middleware protegidos, CRUD Livewire y migraciones aplicadas a MySQL. PHPUnit: 11 pruebas y 41 aserciones; Pint PASS para 13 archivos PHP; `/login` responde HTTP 200. No se creó una cuenta real de Coordinación.
-- Se abrió `gt-hu-014-consulta-seleccion-empresa` (rol `frontend`) y se dejó en espera. Se refinó la identidad en las historias candidatas HU-019 (SAML2 de alumnos y alta automática por identificador inmutable; prerequisito de HU-014), HU-020 (supervisor local con verificación de correo y creación de contraseña por el supervisor) y HU-021 (Coordinación edita perfiles/roles; un rol activo reemplaza al anterior). Solo HU-019 bloquea HU-014; HU-020/021 quedan sin sprint asignado. Backlog, flujo y plan candidato actualizados; la tarea `definir-identidad-y-gestion-usuarios` se cerró y archivó. Próximo paso: abrir tarea `backend` para HU-019; el atributo exacto del IDP sigue abierto.
+- Se abrió HU-014 (`frontend`) y se refinó la identidad en HU-019 (SAML2 y alta automática), HU-020 (supervisor local) y HU-021 (gestión de roles); solo HU-019 bloqueaba HU-014. HU-019 (`backend`, `sprint/1-catalogo-solicitud`) se implementó, validó y archivó: `onelogin/php-saml` 4.3.2, ACS con RelayState aleatorio de un solo uso y request ID en cache, metadata SP, rol único y simulador con atributos `uCorreo`, `uNombre`, `sn`, `givenName`, `displayName` configurados por `SAML_SIMULATOR_*`. `.env.example` usa datos sintéticos `example.test`; no se guardaron datos personales de la conversación. 23 pruebas/101 aserciones y Pint pasan; login local muestra el simulador y metadata responde HTTP 200. Por decisión de la persona solicitante, la metadata/claim reales del IDP se incorporarán después. HU-014 ya puede iniciar su implementación en Sprint 1.
 - Las fuentes de `docs/formatos/` siguen fuera del commit por contener ejemplos rellenados con datos personales.
 - `ajuste-sprints-formatos-y-evaluaciones` quedó cerrada y archivada en `.ai/tasks/_closed/`; sus cambios documentales se incluyen en el commit de la tarea. El plan agrega HU-016 (evaluación del tutor), HU-017 (rúbricas editables/versionadas) y HU-018 (aceptación e impresión de no responsiva).
 - Se confirmó que el alumno firma físicamente la carta impresa y el sistema no conserva copia firmada.

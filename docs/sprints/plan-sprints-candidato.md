@@ -45,7 +45,7 @@ Los roles se toman del catálogo disponible con `tools/continuum roles list`. **
 
 La persona solicitante aprobó usar estos grupos como base de refinamiento por dependencias del flujo; todavía no son compromisos de calendario. Las estimaciones quedan abiertas.
 
-**Ajuste por requisito de identidad:** HU-019 (SAML2 de alumnos y alta local automática por identificador institucional inmutable) se añade como prerequisito de HU-014 dentro del Sprint 1 candidato. HU-020 (cuentas locales de supervisor) y HU-021 (edición de perfiles/roles por Coordinación) se mantienen como historias candidatas aún sin sprint asignado; no bloquean HU-014.
+**Ajuste por requisito de identidad:** HU-019 (SAML2 de alumnos y alta local automática con `uCorreo` como identificador único) se añade como prerequisito de HU-014 dentro del Sprint 1 candidato. HU-020 (cuentas locales de supervisor) y HU-021 (edición de perfiles/roles por Coordinación) se mantienen como historias candidatas aún sin sprint asignado; no bloquean HU-014.
 
 ## Bloqueos para comprometer un sprint
 

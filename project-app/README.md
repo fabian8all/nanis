@@ -36,6 +36,30 @@ Después de ejecutar las migraciones, crea la primera cuenta de Coordinación co
 terminal; no hay cuentas predeterminadas ni credenciales guardadas en el
 repositorio. El acceso administrativo se realiza por `/login`.
 
+### Acceso institucional SAML2 (alumnos)
+
+El inicio institucional solo se habilita al configurar `SAML2_ENABLED=true`,
+`SAML2_IDP_ENTITY_ID`, `SAML2_IDP_SSO_URL` y `SAML2_IDP_X509_CERT` en el `.env`.
+El certificado debe ser el certificado público de firma del IDP. `uCorreo` es
+el atributo predeterminado que identifica la cuenta; `SAML2_EMAIL_ATTRIBUTE` y
+`SAML2_NAME_ATTRIBUTE` permiten ajustarlo al contrato real del IDP. El proveedor
+de identidad debe registrar la URL de ACS `/auth/saml/acs` y el entity ID
+publicado por `/auth/saml/metadata` (o el valor explícito de
+`SAML2_SP_ENTITY_ID`). No habilites la simulación fuera de `local` o `testing`.
+
+Para desarrollo, `.env.example` habilita `SAML_SIMULATOR=true` con valores
+sintéticos `example.test` en `SAML_SIMULATOR_EMAIL`, `SAML_SIMULATOR_NAME`,
+`SAML_SIMULATOR_FIRSTNAME` y `SAML_SIMULATOR_LASTNAME`. El acceso de prueba aparece en `/login`; el
+controlador también limita la ruta a `local` y `testing`. No versionar datos
+personales en esos valores. Un primer acceso crea una cuenta `student`; correos
+ya registrados usan su cuenta y rol existentes sin sobrescribirlos.
+
+La correlación usa un `RelayState` aleatorio, de un solo uso y con vigencia de
+cinco minutos, guardado en el cache configurado; así el callback HTTP-POST no
+depende de que el navegador envíe la cookie de sesión en una solicitud
+cross-site. En despliegues con varias réplicas, configura `CACHE_STORE` con un
+almacenamiento compartido.
+
 Los datos de MySQL persisten en el volumen `mysql-data`. `docker compose down -v` elimina esos datos y el volumen de dependencias.
 
 Compose exige esas variables y falla si no están definidas. No compartas ni versionas `.env` y no reutilices credenciales locales en producción. Nginx no configura TLS; el entorno es para desarrollo local.

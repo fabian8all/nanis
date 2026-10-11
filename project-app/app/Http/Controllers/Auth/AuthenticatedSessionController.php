@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Enums\UserRole;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -26,7 +27,7 @@ class AuthenticatedSessionController extends Controller
         if (! Auth::attempt([
             'email' => $credentials['email'],
             'password' => $credentials['password'],
-            'is_coordinator' => true,
+            'role' => UserRole::Coordinator->value,
         ])) {
             throw ValidationException::withMessages([
                 'email' => 'Las credenciales no son válidas.',

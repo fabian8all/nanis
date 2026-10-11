@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Enums\UserRole;
 use App\Models\User;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Validator;
@@ -42,7 +43,7 @@ class CreateCoordinator extends Command
         $user->name = $name;
         $user->email = $email;
         $user->password = $password;
-        $user->is_coordinator = true;
+        $user->role = UserRole::Coordinator;
         $user->save();
 
         $this->info('La cuenta de Coordinación fue creada.');

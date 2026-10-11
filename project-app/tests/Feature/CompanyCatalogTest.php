@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Enums\UserRole;
 use App\Livewire\Companies\Index;
 use App\Models\Company;
 use App\Models\User;
@@ -15,7 +16,7 @@ class CompanyCatalogTest extends TestCase
 
     public function test_coordinator_can_create_and_update_a_company(): void
     {
-        $this->actingAs(User::factory()->create(['is_coordinator' => true]));
+        $this->actingAs(User::factory()->create(['role' => UserRole::Coordinator]));
 
         Livewire::test(Index::class)
             ->set('name', 'Hotel Ejemplo')
@@ -45,7 +46,7 @@ class CompanyCatalogTest extends TestCase
 
     public function test_coordinator_can_hide_and_reactivate_a_company_without_deleting_it(): void
     {
-        $this->actingAs(User::factory()->create(['is_coordinator' => true]));
+        $this->actingAs(User::factory()->create(['role' => UserRole::Coordinator]));
         $company = Company::query()->create(['name' => 'Hotel Ejemplo']);
 
         Livewire::test(Index::class)
@@ -69,7 +70,7 @@ class CompanyCatalogTest extends TestCase
 
     public function test_company_email_must_be_valid_when_provided(): void
     {
-        $this->actingAs(User::factory()->create(['is_coordinator' => true]));
+        $this->actingAs(User::factory()->create(['role' => UserRole::Coordinator]));
 
         Livewire::test(Index::class)
             ->set('name', 'Hotel Ejemplo')
@@ -85,7 +86,7 @@ class CompanyCatalogTest extends TestCase
         $this->get(route('coordinacion.companies.index'))
             ->assertRedirect(route('login'));
 
-        $this->actingAs(User::factory()->create(['is_coordinator' => false]))
+        $this->actingAs(User::factory()->create(['role' => UserRole::Student]))
             ->get(route('coordinacion.companies.index'))
             ->assertForbidden();
     }

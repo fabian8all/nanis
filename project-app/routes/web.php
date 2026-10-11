@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\Auth\SamlSessionController;
 use App\Http\Middleware\EnsureCoordinator;
 use App\Livewire\Companies\Index as CompanyCatalog;
 use Illuminate\Http\Request;
@@ -15,6 +16,15 @@ Route::get('/login', [AuthenticatedSessionController::class, 'create'])->name('l
 Route::post('/login', [AuthenticatedSessionController::class, 'store'])
     ->middleware('throttle:5,1')
     ->name('login.store');
+
+Route::get('/auth/saml/login', [SamlSessionController::class, 'login'])->name('auth.saml.login');
+Route::post('/auth/saml/acs', [SamlSessionController::class, 'assertionConsumer'])->name('auth.saml.acs');
+Route::get('/auth/saml/metadata', [SamlSessionController::class, 'metadata'])->name('auth.saml.metadata');
+
+if (app()->environment(['local', 'testing'])) {
+    Route::get('/auth/saml/simulate', [SamlSessionController::class, 'simulate'])
+        ->name('auth.saml.simulate');
+}
 
 Route::middleware(['auth', EnsureCoordinator::class])
     ->prefix('coordinacion')
