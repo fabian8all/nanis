@@ -16,6 +16,7 @@
                     <a class="navbar-brand" href="{{ route('coordinacion.companies.index') }}">Nanis</a>
                     <span class="navbar-text me-auto">Coordinación</span>
                     <a class="nav-link me-3" href="{{ route('coordinacion.practice-requests.index') }}">Solicitudes</a>
+                    <a class="nav-link me-3" href="{{ route('coordinacion.practice-acceptances.index') }}">Aceptaciones</a>
                     <form method="POST" action="{{ route('coordinacion.logout') }}">
                         @csrf
                         <button class="btn btn-outline-secondary btn-sm" type="submit">Cerrar sesión</button>
@@ -25,6 +26,14 @@
                     <span class="navbar-text me-auto">Alumno</span>
                     <a class="nav-link me-3" href="{{ route('alumno.practice-request.show') }}">Solicitud de práctica</a>
                     <form method="POST" action="{{ route('alumno.logout') }}">
+                        @csrf
+                        <button class="btn btn-outline-secondary btn-sm" type="submit">Cerrar sesión</button>
+                    </form>
+                @elseif ($role === 'supervisor')
+                    <a class="navbar-brand" href="{{ route('supervisor.practice-letters.index') }}">Nanis</a>
+                    <span class="navbar-text me-auto">Supervisor de empresa</span>
+                    <a class="nav-link me-3" href="{{ route('supervisor.practice-letters.index') }}">Cartas pendientes</a>
+                    <form method="POST" action="{{ route('supervisor.logout') }}">
                         @csrf
                         <button class="btn btn-outline-secondary btn-sm" type="submit">Cerrar sesión</button>
                     </form>

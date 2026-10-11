@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Enums\UserRole;
+use App\Models\Company;
 use App\Models\User;
 use Illuminate\Foundation\Http\Middleware\PreventRequestForgery;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -42,6 +43,45 @@ class CoordinatorAuthenticationTest extends TestCase
         $this->from(route('login'))
             ->post(route('login.store'), [
                 'email' => $user->email,
+                'password' => 'CorrectHorseBattery1!',
+            ])
+            ->assertRedirect(route('login'))
+            ->assertSessionHasErrors('email');
+
+        $this->assertGuest();
+    }
+
+    public function test_verified_supervisor_can_sign_in_to_company_letters(): void
+    {
+        $this->withoutMiddleware(PreventRequestForgery::class);
+        $company = Company::query()->create(['name' => 'Hotel Supervisor']);
+        $supervisor = User::factory()->create([
+            'role' => UserRole::Supervisor,
+            'company_id' => $company->id,
+            'password' => 'CorrectHorseBattery1!',
+        ]);
+
+        $this->post(route('login.store'), [
+            'email' => $supervisor->email,
+            'password' => 'CorrectHorseBattery1!',
+        ])->assertRedirect(route('supervisor.practice-letters.index'));
+
+        $this->assertAuthenticatedAs($supervisor);
+    }
+
+    public function test_unverified_supervisor_cannot_sign_in(): void
+    {
+        $this->withoutMiddleware(PreventRequestForgery::class);
+        $company = Company::query()->create(['name' => 'Hotel Supervisor']);
+        $supervisor = User::factory()->unverified()->create([
+            'role' => UserRole::Supervisor,
+            'company_id' => $company->id,
+            'password' => 'CorrectHorseBattery1!',
+        ]);
+
+        $this->from(route('login'))
+            ->post(route('login.store'), [
+                'email' => $supervisor->email,
                 'password' => 'CorrectHorseBattery1!',
             ])
             ->assertRedirect(route('login'))

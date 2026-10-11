@@ -13,6 +13,7 @@
                 <div class="card shadow-sm">
                     <div class="card-body p-4">
                         <h1 class="h4 mb-3">Acceso</h1>
+                        <p class="text-secondary">Coordinación y supervisores invitados.</p>
                         @error('saml')
                             <div class="alert alert-danger" role="alert">{{ $message }}</div>
                         @enderror

@@ -84,6 +84,9 @@
                             </span>
                         </td>
                         <td class="text-end text-nowrap">
+                            <a class="btn btn-sm btn-outline-success" href="{{ route('coordinacion.companies.supervisors.invite', $company) }}">
+                                Invitar supervisor
+                            </a>
                             <button class="btn btn-sm btn-outline-primary" type="button" wire:click="edit({{ $company->id }})">
                                 Editar
                             </button>

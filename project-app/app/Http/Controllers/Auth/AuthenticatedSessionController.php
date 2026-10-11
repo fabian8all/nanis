@@ -27,8 +27,23 @@ class AuthenticatedSessionController extends Controller
         if (! Auth::attempt([
             'email' => $credentials['email'],
             'password' => $credentials['password'],
-            'role' => UserRole::Coordinator->value,
         ])) {
+            throw ValidationException::withMessages([
+                'email' => 'Las credenciales no son válidas.',
+            ]);
+        }
+
+        $user = Auth::user();
+        $destination = match ($user?->role) {
+            UserRole::Coordinator => 'coordinacion.companies.index',
+            UserRole::Supervisor => $user->email_verified_at && $user->company_id !== null
+                    ? 'supervisor.practice-letters.index'
+                    : null,
+            default => null,
+        };
+
+        if ($destination === null) {
+            Auth::logout();
             throw ValidationException::withMessages([
                 'email' => 'Las credenciales no son válidas.',
             ]);
@@ -36,6 +51,6 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->intended(route('coordinacion.companies.index'));
+        return redirect()->route($destination);
     }
 }

@@ -36,6 +36,15 @@ Después de ejecutar las migraciones, crea la primera cuenta de Coordinación co
 terminal; no hay cuentas predeterminadas ni credenciales guardadas en el
 repositorio. El acceso administrativo se realiza por `/login`.
 
+Coordinación puede invitar supervisores desde el catálogo de empresas. La
+invitación verifica el correo mediante un enlace de un solo uso (vence en siete
+días) y permite establecer una contraseña. En el entorno local, el mailer
+predeterminado `log` escribe la invitación en `storage/logs/laravel.log`; para
+enviar correo real, configura `MAIL_MAILER` y sus variables SMTP en `.env`.
+Las cartas de aceptación aceptan PDF, JPG o PNG hasta 20 MB y se guardan en
+almacenamiento privado, accesible solo a Coordinación y al supervisor de la
+empresa correspondiente.
+
 ### Acceso institucional SAML2 (alumnos)
 
 El inicio institucional solo se habilita al configurar `SAML2_ENABLED=true`,
