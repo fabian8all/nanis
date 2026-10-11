@@ -63,6 +63,6 @@ Iniciar una nueva aplicación y establecer Continuum para descubrir requisitos, 
 ## Continuidad actual — GT-HU-002
 - GT-HU-002 está implementada en `sprint/2-revision-cartas`; Coordinación revisa pendientes, devuelve con comentario e historial o aprueba para generar/imprimir una carta con copia editable y folio anual. NSS y cuenta se mantienen cifrados y fuera de bandeja, revisión e historial.
 - Validación final: 42 pruebas/228 aserciones aprobadas; Pint `--test` pasa para los 12 archivos PHP modificados. Migraciones HU-002 aplicadas al MySQL local.
-- `.ai/tasks/_closed/gt-hu-002-revision-solicitud/handoff.md` contiene el handoff detallado. HU-002 queda cerrada en la rama del sprint; no integrar aún a `develop`, pues HU-003 sigue pendiente.
+- `.ai/tasks/_closed/gt-hu-002-revision-solicitud/handoff.md` contiene el handoff detallado. HU-002 quedó comprometida como `c2dd745` en la rama del sprint; no integrar aún a `develop`, pues HU-003 sigue pendiente.
 - Preservar sin cambios los archivos preexistentes ajenos: `.continuum/tools/continuum`, `.githooks/pre-commit`, `tools/continuum`, fuentes de `docs/formatos/` y archivos `Zone.Identifier`.
 - Siguiente historia: GT-HU-003, consulta/descarga de la carta por el alumno.
