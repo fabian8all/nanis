@@ -71,5 +71,5 @@ Iniciar una nueva aplicación y establecer Continuum para descubrir requisitos, 
 - GT-HU-003 está activa en `sprint/2-revision-cartas`, asignada a `backend`. Decisión confirmada: el alumno propietario puede consultar e imprimir/guardar como PDF su carta aprobada; no se registran descargas ni entrega.
 - Implementación lista para revisar/cerrar: enlace desde solicitud aprobada, vista imprimible compartida con Coordinación, autorización por rol/propiedad y 404 para cartas de solicitudes no aprobadas.
 - Validación: suite completa 45 pruebas/246 aserciones; Pint `--test` pasa en 6 archivos PHP. Contenedor de desarrollo reconstruido; rutas estudiantiles protegidas respondieron 302 sin sesión.
-- `.ai/tasks/_closed/gt-hu-003-consulta-carta-alumno/handoff.md` contiene el handoff y las decisiones de HU-003. Comprometer la historia en la rama del sprint; HU-004 sigue pendiente.
+- `.ai/tasks/_closed/gt-hu-003-consulta-carta-alumno/handoff.md` contiene el handoff y las decisiones de HU-003. La historia quedó comprometida como `4362cec` en la rama del sprint; HU-004 sigue pendiente.
 - Se preservan las modificaciones y formatos fuente ya presentes en el worktree, fuera del alcance de GT-HU-003.
