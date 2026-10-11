@@ -1,9 +1,11 @@
 <?php
 
+use App\Enums\UserRole;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\SamlSessionController;
 use App\Http\Middleware\EnsureCoordinator;
 use App\Livewire\Companies\Index as CompanyCatalog;
+use App\Livewire\Student\Companies\Index as StudentCompanyCatalog;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -33,6 +35,23 @@ Route::middleware(['auth', EnsureCoordinator::class])
         Route::get('/empresas', CompanyCatalog::class)->name('companies.index');
 
         Route::post('/logout', function (Request $request) {
+            Auth::logout();
+            $request->session()->invalidate();
+            $request->session()->regenerateToken();
+
+            return redirect()->route('login');
+        })->name('logout');
+    });
+
+Route::middleware('auth')
+    ->prefix('alumno')
+    ->name('alumno.')
+    ->group(function (): void {
+        Route::get('/empresas', StudentCompanyCatalog::class)->name('companies.index');
+
+        Route::post('/logout', function (Request $request) {
+            abort_unless($request->user()?->role === UserRole::Student, 403);
+
             Auth::logout();
             $request->session()->invalidate();
             $request->session()->regenerateToken();

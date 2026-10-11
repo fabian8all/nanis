@@ -11,12 +11,25 @@
     @auth
         <nav class="navbar navbar-expand-lg bg-light border-bottom">
             <div class="container">
-                <a class="navbar-brand" href="{{ route('coordinacion.companies.index') }}">Nanis</a>
-                <span class="navbar-text me-auto">Coordinación</span>
-                <form method="POST" action="{{ route('coordinacion.logout') }}">
-                    @csrf
-                    <button class="btn btn-outline-secondary btn-sm" type="submit">Cerrar sesión</button>
-                </form>
+                @php($role = auth()->user()->role->value)
+                @if ($role === 'coordinator')
+                    <a class="navbar-brand" href="{{ route('coordinacion.companies.index') }}">Nanis</a>
+                    <span class="navbar-text me-auto">Coordinación</span>
+                    <form method="POST" action="{{ route('coordinacion.logout') }}">
+                        @csrf
+                        <button class="btn btn-outline-secondary btn-sm" type="submit">Cerrar sesión</button>
+                    </form>
+                @elseif ($role === 'student')
+                    <a class="navbar-brand" href="{{ route('alumno.companies.index') }}">Nanis</a>
+                    <span class="navbar-text me-auto">Alumno</span>
+                    <form method="POST" action="{{ route('alumno.logout') }}">
+                        @csrf
+                        <button class="btn btn-outline-secondary btn-sm" type="submit">Cerrar sesión</button>
+                    </form>
+                @else
+                    <a class="navbar-brand" href="{{ route('home') }}">Nanis</a>
+                    <span class="navbar-text me-auto">{{ ucfirst($role) }}</span>
+                @endif
             </div>
         </nav>
     @endauth

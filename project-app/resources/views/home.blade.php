@@ -17,7 +17,19 @@
                         <p class="text-secondary mb-0">
                             Prototipo para prácticas operativas y de mandos medios de Gestión Turística.
                         </p>
-                        <a class="btn btn-primary mt-4" href="{{ route('login') }}">Acceso de Coordinación</a>
+                        @guest
+                            <a class="btn btn-primary mt-4" href="{{ route('login') }}">Iniciar sesión</a>
+                        @else
+                            @if (auth()->user()->isCoordinator())
+                                <a class="btn btn-primary mt-4" href="{{ route('coordinacion.companies.index') }}">
+                                    Abrir catálogo de Coordinación
+                                </a>
+                            @elseif (auth()->user()->role->value === 'student')
+                                <a class="btn btn-primary mt-4" href="{{ route('alumno.companies.index') }}">
+                                    Consultar empresas con convenio
+                                </a>
+                            @endif
+                        @endguest
                         <div class="mt-4" x-data="{ detailsVisible: false }">
                             <button class="btn btn-primary" type="button" x-on:click="detailsVisible = !detailsVisible">
                                 <span x-text="detailsVisible ? 'Ocultar stack' : 'Ver stack técnico'"></span>
