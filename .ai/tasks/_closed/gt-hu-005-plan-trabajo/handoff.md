@@ -2,9 +2,9 @@
 
 ## Estado
 
-GT-HU-005 implementada y validada en `sprint/3-aceptacion-empresa`. HU-004 se
-comprometió como `00db4dc`; Sprint 3 no debe integrarse en `develop` hasta
-revisar y validar la rama completa.
+GT-HU-005 implementada, validada y comprometida como `23bf1bb` en
+`sprint/3-aceptacion-empresa`. HU-004 se comprometió como `00db4dc`; Sprint 3
+no debe integrarse en `develop` hasta revisar y validar la rama completa.
 
 ## Criterios confirmados
 
@@ -45,6 +45,6 @@ revisar y validar la rama completa.
 
 ## Siguiente paso
 
-Cerrar/archivar la tarea y comprometer HU-005 en la rama Sprint 3. Después,
-revisar que el conjunto de HU-004/HU-005 esté completo antes de integrar Sprint
-3 a `develop`.
+Revisar el diff completo del Sprint 3 y validar HU-004/HU-005 juntas antes de
+integrarlo a `develop`. Las modificaciones ajenas preexistentes continúan fuera
+de ambos commits.
