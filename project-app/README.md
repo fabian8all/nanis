@@ -26,9 +26,15 @@ Comandos habituales:
 
 ```sh
 docker compose exec app php artisan migrate
+docker compose exec app php artisan app:create-coordinator
 docker compose exec app php artisan test
 docker compose down
 ```
+
+Después de ejecutar las migraciones, crea la primera cuenta de Coordinación con
+`app:create-coordinator`. El comando solicita nombre, email y contraseña en la
+terminal; no hay cuentas predeterminadas ni credenciales guardadas en el
+repositorio. El acceso administrativo se realiza por `/login`.
 
 Los datos de MySQL persisten en el volumen `mysql-data`. `docker compose down -v` elimina esos datos y el volumen de dependencias.
 

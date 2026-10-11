@@ -15,9 +15,9 @@
                     <div class="card-body p-4 p-md-5">
                         <h1 class="h3">Gestión de prácticas profesionales</h1>
                         <p class="text-secondary mb-0">
-                            Base inicial para gestionar la documentación de prácticas profesionales de estudiantes.
-                            Los roles, responsabilidades y flujos están pendientes de definición.
+                            Prototipo para prácticas operativas y de mandos medios de Gestión Turística.
                         </p>
+                        <a class="btn btn-primary mt-4" href="{{ route('login') }}">Acceso de Coordinación</a>
                         <div class="mt-4" x-data="{ detailsVisible: false }">
                             <button class="btn btn-primary" type="button" x-on:click="detailsVisible = !detailsVisible">
                                 <span x-text="detailsVisible ? 'Ocultar stack' : 'Ver stack técnico'"></span>

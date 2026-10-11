@@ -10,4 +10,4 @@
 - **Estado del entorno:** servicios iniciados; reconstruir la imagen de la aplicación al cambiar código porque Docker Desktop no monta directamente esta distribución WSL.
 - **Documentación del producto:** `docs/` (requisitos, casos de uso, backlog, sprints y manuales).
 - **Continuidad y memoria IA:** `.ai/`; no mover aquí artefactos funcionales del producto.
-- **Tareas activas:** `.ai/tasks/gt-hu-015-empresas-convenios/` (backend) espera la regla para baja de empresas; `.ai/tasks/ajuste-sprints-formatos-y-evaluaciones/` (gestion-proyecto) actualiza Sprint 1 y Sprint 4 con los formatos en `docs/formatos/`. Rama activa `sprint/1-catalogo-solicitud`.
+- **Última historia cerrada:** `.ai/tasks/_closed/gt-hu-015-empresas-convenios/` en `sprint/1-catalogo-solicitud`: login local de Coordinación y CRUD Livewire del catálogo implementados, migrados y probados. El commit de la historia está pendiente de incorporarse. Próximas HU-014, HU-001 y HU-018 requieren tareas Continuum asignadas por el orquestador.

@@ -3,11 +3,13 @@
 **Creada:** 2026-10-10 · **Tamaño:** medium · **Owner:** backend · **Rol:** Backend (`software/backend`)
 
 ## Objetivo
-Permitir que Coordinación de prácticas mantenga manualmente el catálogo de empresas que se muestra al alumnado. Implementar después de confirmar qué significa dar de baja una empresa para sus referencias existentes.
+Permitir que Coordinación de prácticas inicie sesión y mantenga manualmente el catálogo de empresas que se muestra al alumnado, con altas/bajas que preserven referencias históricas.
 
 ## Incluido en el alcance
 - Refinar criterios de aceptación de GT-HU-015 con la persona solicitante.
+- Implementar autenticación local de Laravel y autorización exclusiva para Coordinación en la administración del catálogo.
 - Diseñar e implementar el modelo y la administración de empresas con los campos y reglas confirmados.
+- Mantener Bootstrap/Livewire existentes; no añadir Vite ni Tailwind.
 - Agregar pruebas para los criterios confirmados y actualizar el backlog si se precisan reglas.
 
 ## Explícitamente fuera de alcance
@@ -21,8 +23,15 @@ No editar fuera de esta lista sin actualizarla primero. Evita refactors oportuni
 - `project-app/app/Models/**`
 - `project-app/app/Livewire/**`
 - `project-app/app/Http/**`
+- `project-app/app/Console/Commands/**`
+- `project-app/bootstrap/app.php`
+- `project-app/config/auth.php`
+- `project-app/phpunit.xml`
 - `project-app/database/migrations/**`
+- `project-app/database/seeders/**`
+- `project-app/database/factories/**`
 - `project-app/resources/views/**`
+- `project-app/README.md`
 - `project-app/routes/web.php`
 - `project-app/tests/Feature/**`
 - `docs/backlog/candidatos-iniciales.md`
@@ -32,6 +41,7 @@ No editar fuera de esta lista sin actualizarla primero. Evita refactors oportuni
 - `.ai/HANDOFF.md`
 - `.ai/state/topics/pendientes.md`
 - `.ai/tasks/gt-hu-015-empresas-convenios/**`
+- `.ai/tasks/ajuste-sprints-formatos-y-evaluaciones/**` (solo si hay que ajustar criterios por autenticación)
 
 ## Fuentes de verdad a leer antes de empezar
 - `.ai/state/estado-dev.md`
