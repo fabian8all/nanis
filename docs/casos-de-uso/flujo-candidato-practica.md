@@ -1,20 +1,20 @@
 # Flujo candidato de prácticas operativas y de mandos medios
 
-**Alcance:** prácticas operativas y de mandos medios de la Licenciatura en Gestión Turística; no estancias profesionales. La conclusión es a las 240 horas, con una evaluación al término y un reporte final, sin actividades intermedias de evaluación o reporte.
+**Alcance:** prácticas operativas y de mandos medios de la Licenciatura en Gestión Turística; no estancias profesionales. La conclusión es a las 240 horas, con evaluaciones finales separadas del supervisor y del tutor, y un reporte final, sin actividades intermedias de evaluación o reporte.
 
 **Estado:** borrador. La persona solicitante confirmó tomar como base el flujo digital compartido inicialmente; el procedimiento institucional 2025 se conserva como referencia, pero sus reglas propias de estancias no se trasladan automáticamente al prototipo.
 
 ## Secuencia compartida inicialmente por la persona solicitante
 
-1. **Selección y solicitud:** el alumno consulta el listado de empresas con convenio vigente en la plataforma, elige una y registra nombre, número de cuenta, semestre, NSS, puesto, contacto/supervisor y fechas.
+1. **Selección y solicitud:** el alumno consulta el catálogo de empresas, elige una y completa el formato de solicitud. Durante el trámite acepta la carta de no responsiva y la imprime para firmarla físicamente; el sistema no conserva copia firmada.
 2. **Revisión y presentación:** coordinación revisa la solicitud; la devuelve para corrección y reenvío si hace falta. Si la aprueba, los datos se precargan en la carta de presentación y coordinación puede modificarlos.
 3. **Empresa:** el alumno lleva la carta a la empresa; si esta acepta, carga la carta de aceptación en la plataforma.
 4. **Plan:** el alumno crea su plan de trabajo.
 5. **Desarrollo y conclusión:** el alumno realiza la práctica operativa o de mandos medios hasta completar 240 horas.
-6. **Cierre académico:** al término la empresa/supervisor realiza una evaluación y el alumno entrega un reporte final al tutor/asesor académico. Si hay observaciones, el tutor lo devuelve para corrección y el alumno lo reenvía hasta su aprobación. No habrá evaluaciones ni reportes intermedios; el ciclo de corrección es del reporte final.
+6. **Cierre académico:** al término el supervisor de la empresa llena su evaluación y el tutor llena una evaluación independiente que incluye el reporte final. Si el reporte tiene observaciones, el tutor lo devuelve para corrección y el alumno lo reenvía hasta su aprobación. No habrá evaluaciones ni reportes intermedios.
 7. **Término:** la empresa entrega la carta de término al alumno y este la sube a la plataforma.
 
-La evaluación ocurre una sola vez, al término, y la aplicará la empresa o supervisor con una rúbrica específica que se definirá para estas prácticas. El tutor/asesor académico puede devolver el reporte final con observaciones; el alumno corrige y reenvía hasta que se apruebe. La carta de término registrada en el expediente acredita las 240 horas; no se requiere un contador independiente en la plataforma. Falta definir el contenido/aprobación de la rúbrica y el formato/validación de la carta.
+Hay dos evaluaciones al término: una del supervisor de la empresa y otra del tutor; el tutor también evalúa el reporte final, cuyo ciclo de corrección y aprobación se conserva. Coordinación podrá modificar las rúbricas; faltan definir alcance de edición, publicación y manejo de versiones históricas. La carta de término registrada en el expediente acredita las 240 horas; no se requiere un contador independiente en la plataforma.
 
 ## Referencia documental fuera del alcance de este prototipo
 
@@ -38,16 +38,17 @@ Los documentos señalan que las entregas pueden ocurrir por Drive, correo instit
 
 - Alumno: solicitud, búsqueda de empresa, entrega de la carta de presentación, plan, reporte final y entrega de cartas/documentos.
 - Coordinador: explica el proceso, comparte convenios/formatos, mantiene el catálogo de empresas y convenios vigentes, revisa solicitudes, emite cartas y resguarda documentos de cierre. Otras responsabilidades por confirmar.
-- Empresa/supervisor: carta de aceptación, evaluación única al término y entrega de carta de término al alumno; quedan por confirmar instrumento y criterios de evaluación.
-- Tutor/asesor académico: revisa el reporte final, señala observaciones y lo aprueba; puede devolverlo para corrección hasta que el alumno lo reenvíe atendiendo las observaciones.
+- Empresa/supervisor: carta de aceptación, evaluación terminal propia y entrega de carta de término al alumno.
+- Tutor/asesor académico: llena su evaluación terminal, revisa el reporte final, señala observaciones y lo aprueba; puede devolverlo para corrección hasta que el alumno lo reenvíe atendiendo las observaciones.
 
 ## Diferencias y preguntas pendientes
 
 - **Orden de solicitud/empresa:** el procedimiento 2025 pone una aceptación verbal previa; la persona solicitante confirmó que el prototipo conserva el flujo digital compartido inicialmente: solicitud, revisión de coordinación, carta de presentación y después respuesta de empresa. La aceptación verbal previa no es condición de entrada.
-- **Directorio de empresas:** la plataforma debe mostrar al alumno empresas con convenio vigente para su selección. Coordinación capturará y actualizará en la plataforma las empresas, sus convenios y vigencias. Cuando venza un convenio, la empresa se ocultará para nuevas solicitudes y no se afectarán prácticas ya iniciadas. Si vence entre la selección y el inicio, coordinación debe revisar y autorizar el caso antes de continuar.
+- **Directorio de empresas:** Coordinación da de alta y baja manualmente las empresas que el alumno puede consultar; se muestran nombre, dirección, teléfono, email y persona de contacto. La baja oculta la empresa para nuevas solicitudes, pero conserva referencias existentes y no afecta prácticas iniciadas. Si el convenio vence entre selección e inicio, Coordinación revisa y autoriza el caso antes de continuar.
 - **Flujo digital:** el procedimiento actual contempla Drive, correo, Classroom y entrega física. Acordar qué flujo pretende centralizar/sustituir el prototipo.
 - **Aceptación:** el procedimiento indica que el estudiante lleva la carta de aceptación a coordinación para resguardo; el flujo inicial indica que la empresa la carga a la plataforma.
-- **Alcance académico:** para este prototipo hay una evaluación al término y un reporte final, con ciclo de correcciones de la versión final hasta su aprobación; no hay evaluaciones ni reportes intermedios.
+- **Evaluaciones finales:** los formatos entregados distinguen evaluación de supervisor y evaluación de tutor; ambas ocurren al cierre y no sustituyen ni generan reportes intermedios. Coordinación podrá modificar las rúbricas; falta definir versionado y permisos.
+- **Carta de no responsiva:** el alumno acepta e imprime el formato durante la solicitud para firmarlo físicamente; el sistema no conserva copia firmada.
 - Acordar ciclo de solicitud devuelta: estados/comentarios, número de reenvíos y trazabilidad de cambios.
 - Confirmar documentos/plantillas, firmas, quién revisa cartas/plan, estados y condiciones de expediente completo.
 - Confirmar finalidad, acceso y conservación del NSS antes de tratarlo como campo obligatorio.

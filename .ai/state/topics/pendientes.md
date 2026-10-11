@@ -1,8 +1,9 @@
 # Pendientes
 
-- Definir campos del catálogo de empresas/convenios y flujo/registro de autorización de coordinación ante vencimientos entre selección e inicio; coordinación administra los registros, las empresas vencidas se ocultan para nuevas solicitudes y no se afectan estancias iniciadas.
+- El catálogo muestra nombre, dirección, teléfono, email y persona de contacto; Coordinación da altas/bajas manualmente. La baja oculta a la empresa en nuevas solicitudes, pero conserva referencias existentes y no afecta prácticas iniciadas.
 - Conciliar canales del prototipo frente a Drive/correo/Classroom/papel descritos en el procedimiento institucional 2025.
-- Diseñar/aprobar la rúbrica específica de la evaluación única (la aplica empresa/supervisor), criterios/estados de aprobación y formato/validación de la carta de término que acredita las 240 horas. El reporte final se devuelve para corrección hasta aprobarse; no hay reportes de avance ni evaluaciones intermedias, ni contador independiente de horas.
+- Los formatos distinguen evaluaciones finales separadas de supervisor y tutor; la del tutor incluye evaluación del reporte. Coordinación podrá modificar ambas rúbricas y cada evaluación conservará la versión aplicada. Definir criterios/escala, captura, estados y permisos; mantener fuera las evaluaciones/reportes intermedios.
+- Definir formato/validación de la carta de término que acredita las 240 horas. El reporte final se devuelve para corrección hasta aprobarse; no hay contador independiente de horas.
 - Refinar la encuesta de satisfacción a empresa, incluida en el alcance y separada de la evaluación terminal; la responde el supervisor directo cuando coordinación la solicite, sin fecha fija, y solo coordinación consulta las respuestas. Falta definir responsable del cuestionario, preguntas, canal y resguardo de respuestas.
 - Validar permisos/tareas de coordinador, asesor, alumno y empresa, además de estados/plazos.
 - Confirmar necesidad, acceso y retención del NSS y de los resultados de la evaluación final.

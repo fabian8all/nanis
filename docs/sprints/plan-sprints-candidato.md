@@ -8,17 +8,17 @@
 - Una persona desarrolladora a tiempo completo, con apoyo de agentes IA por rol.
 - La persona solicitante no quiere fijar por ahora una duración estándar de sprint. Esta propuesta agrupa trabajo por resultado, no por calendario.
 - Los sprints no se estiman en horas ni fechas hasta refinar criterios y capacidad real.
-- Alcance: prácticas operativas y de mandos medios, con conclusión a las 240 horas, una evaluación al término y un reporte final; sin evaluaciones ni reportes intermedios.
+- Alcance: prácticas operativas y de mandos medios, con conclusión a las 240 horas, evaluaciones terminales separadas del supervisor y del tutor, y un reporte final; sin actividades intermedias.
 - Los agentes IA apoyan análisis, diseño, implementación y revisión; no se consideran personas ejecutoras adicionales ni trabajo de código paralelo. La persona desarrolladora integra y valida los cambios.
 
 ## Secuencia candidata
 
 | Orden | Objetivo del sprint candidato | Historias | Dependencias / salida esperada |
 |---|---|---|---|
-| 1 | Catálogo y solicitud de práctica | GT-HU-015, GT-HU-014, GT-HU-001 | Coordinación mantiene convenios; el alumno puede seleccionar empresa vigente y enviar solicitud. HU-014 depende de HU-015; HU-001 depende del catálogo. |
+| 1 | Catálogo, solicitud y carta de no responsiva | GT-HU-015, GT-HU-014, GT-HU-001, GT-HU-018 | Coordinación mantiene manualmente empresas para mostrar en el catálogo con nombre, dirección, teléfono, email y persona de contacto; la baja oculta para nuevas solicitudes y conserva referencias existentes. El alumno selecciona una empresa, registra su solicitud, acepta e imprime la carta de no responsiva para firmarla físicamente; el sistema no guarda copia firmada. HU-014 depende de HU-015; HU-001 depende del catálogo; HU-018 se realiza como parte de HU-001. |
 | 2 | Revisión de coordinación y carta de presentación | GT-HU-002, GT-HU-003 | Coordinación revisa, devuelve para corrección o aprueba; el alumno consulta/descarga la carta. Depende de HU-001. |
 | 3 | Aceptación de empresa y plan de trabajo | GT-HU-004, GT-HU-005 | Se registra aceptación y el alumno prepara el plan. Depende de la carta y de la selección aprobada. |
-| 4 | Cierre académico | GT-HU-006, GT-HU-007 | Una evaluación de empresa/supervisor al término con rúbrica específica por definir y un reporte final que el tutor/asesor académico devuelve para corrección hasta aprobarlo. No hay reportes de avance. Su tamaño no puede estimarse hasta acordar rúbrica y criterios/estados de revisión. |
+| 4 | Evaluaciones finales y reporte | GT-HU-006, GT-HU-007, GT-HU-016, GT-HU-017 | Dos evaluaciones finales separadas: supervisor de empresa (HU-006) y tutor (HU-016); la evaluación del tutor incluye el reporte final, cuyo ciclo de correcciones se mantiene en HU-007. Coordinación podrá modificar ambas rúbricas mediante HU-017, conservando en cada evaluación la versión con la que fue contestada. No hay actividades intermedias. HU-016 depende de la entrega del reporte; HU-006 y HU-016 dependen de rúbricas publicadas. Faltan escalas, captura, estados y acceso. |
 | 5 | Carta de término, expediente y retroalimentación | GT-HU-008, GT-HU-009, GT-HU-012, GT-HU-010, GT-HU-013 | La carta de término confirma las 240 horas y coordinación consulta/resguarda el expediente final; también se recoge la satisfacción de la empresa, separada de la evaluación terminal. No hay contador independiente en la plataforma. Depende del cierre académico; falta refinar la encuesta. |
 
 El orden y agrupación son la base aprobada para refinar. El formato/validación de la carta de término, permisos/usuarios, tratamiento del NSS, revisión de solicitudes y gestión de archivos pueden generar criterios o dependencias adicionales antes de comprometer la secuencia.
@@ -29,19 +29,19 @@ Los roles se toman del catálogo disponible con `tools/continuum roles list`. **
 
 | Sprint candidato | Rol/agente principal de apoyo | Participación y responsabilidad |
 |---|---|---|
-| 1 | `producto-jtbd`, `ux-research`, `ux-ui`, `backend`, `frontend` | Enmarcar el resultado para alumno/coordinación; validar necesidades con actores; diseñar y construir catálogo/solicitud y pantallas Livewire. |
+| 1 | `producto-jtbd`, `ux-research`, `ux-ui`, `backend`, `frontend` | Enmarcar el resultado para alumno/coordinación; validar necesidades con actores; diseñar y construir catálogo/solicitud y pantallas Livewire, incluyendo aceptación e impresión de la carta de no responsiva. |
 | 2 | `backend`, `frontend`, `ux-ui` | Estados de revisión, correcciones, datos de carta y consulta/descarga. |
 | 3 | `backend`, `frontend`, `ux-ui` | Registro de aceptación y captura del plan. |
-| 4 | `backend`, `frontend` | Registro de evaluación terminal aplicada por empresa/supervisor y flujo iterativo de revisión/corrección/aprobación del reporte final por tutor/asesor académico; requiere criterios antes de implementar. |
+| 4 | `backend`, `frontend`, `ux-ui` | Administración de rúbricas por coordinación; captura de las evaluaciones finales separadas del supervisor y tutor; revisión/corrección/aprobación del reporte. |
 | 5 | `backend`, `frontend` | Carta de término, documentos finales, vista de expediente/avance y captura de retroalimentación de empresa. |
 
 **Revisión transversal aprobada como base:** `gestion-proyecto` mantiene backlog y objetivos; `qa` revisa criterios y casos límite por historia; `privacidad-datos` revisa NSS y resultados de evaluación; `seguridad` revisa autorización y manejo de documentos; `accesibilidad` revisa los flujos de interfaz. Involucrar `devops-infraestructura` solo si una historia requiere despliegue o cambio de infraestructura; no hay una historia de infraestructura de producto definida ahora.
 
 ## Prioridades provisionales
 
-- **P0 — Inicio del flujo:** catálogo, selección de empresa y solicitud (HU-015, HU-014, HU-001).
+- **P0 — Inicio del flujo:** catálogo, selección de empresa, solicitud y aceptación/impresión de carta de no responsiva (HU-015, HU-014, HU-001, HU-018).
 - **P1 — Autorización de inicio:** revisión y carta de presentación (HU-002, HU-003), aceptación y plan (HU-004, HU-005).
-- **P2 — Conclusión y expediente:** evaluación/reporte finales, documentos de cierre y encuesta de satisfacción (HU-006, HU-007, HU-008, HU-009, HU-010, HU-012, HU-013).
+- **P2 — Conclusión y expediente:** evaluaciones finales del supervisor y tutor, rúbricas configurables, reporte y documentos de cierre y encuesta de satisfacción (HU-006, HU-007, HU-008, HU-009, HU-010, HU-012, HU-013, HU-016, HU-017).
 
 La persona solicitante aprobó usar estos grupos como base de refinamiento por dependencias del flujo; todavía no son compromisos de calendario. Las estimaciones quedan abiertas.
 
@@ -50,7 +50,8 @@ La persona solicitante aprobó usar estos grupos como base de refinamiento por d
 - Definir roles, inicio de sesión y permisos de alumno, coordinación y empresa.
 - Acordar campos mínimos de empresas/convenios y de la solicitud; justificar acceso y retención del NSS.
 - Confirmar formato, contenido y validación de la carta de término, que acredita las 240 horas.
-- Diseñar/aprobar la rúbrica específica de la evaluación única, sus criterios y quién puede consultar resultados.
+- Acordar criterios y escala de ambas evaluaciones finales y permisos de consulta.
+- Definir qué partes de las rúbricas pueden editarse y quién publica cambios; cada evaluación debe conservar su versión aplicada.
 - Definir quién diseña/aprueba el cuestionario, preguntas, canal y resguardo de la encuesta de satisfacción a empresa (HU-013). La responde el supervisor directo cuando coordinación la solicite, sin fecha fija; solo coordinación consulta las respuestas. Es separada de la evaluación terminal.
 - Definir estructura, carga, estados y criterios de aprobación del reporte final y su ciclo de correcciones.
 - Confirmar documentos, firma, canal de carga/entrega y reglas de expediente completo.
