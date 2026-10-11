@@ -41,6 +41,13 @@ Los documentos señalan que las entregas pueden ocurrir por Drive, correo instit
 - Empresa/supervisor: carta de aceptación, evaluación terminal propia y entrega de carta de término al alumno.
 - Tutor/asesor académico: llena su evaluación terminal, revisa el reporte final, señala observaciones y lo aprueba; puede devolverlo para corrección hasta que el alumno lo reenvíe atendiendo las observaciones.
 
+## Identidad y acceso — historias candidatas por refinar
+
+- El alumno inicia sesión con el IDP institucional SAML2. En su primer acceso válido, la plataforma crea una cuenta local con rol de alumno y la vincula por matrícula/identificador institucional inmutable, no por correo. El atributo SAML exacto queda pendiente de validar con el administrador del IDP. Este acceso antecede el catálogo autenticado (GT-HU-019 → GT-HU-014).
+- Coordinación podrá registrar supervisores con correo local; la plataforma envía un enlace para confirmar el correo y el supervisor establece su contraseña. GT-HU-020 no bloquea HU-014.
+- Cada cuenta tiene un solo rol activo. Coordinación podrá editar perfiles/cambiar roles, por ejemplo de alumno a tutor; los campos, transiciones y auditoría se deben refinar en GT-HU-021.
+- HU-020 y HU-021 son candidatas fuera del Sprint 1 hasta que se prioricen. No inferirlas del proyecto de ejemplo ni reutilizar valores de simulación o identificadores numéricos de rol.
+
 ## Diferencias y preguntas pendientes
 
 - **Orden de solicitud/empresa:** el procedimiento 2025 pone una aceptación verbal previa; la persona solicitante confirmó que el prototipo conserva el flujo digital compartido inicialmente: solicitud, revisión de coordinación, carta de presentación y después respuesta de empresa. La aceptación verbal previa no es condición de entrada.

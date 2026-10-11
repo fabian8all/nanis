@@ -10,4 +10,4 @@
 - **Estado del entorno:** servicios iniciados; reconstruir la imagen de la aplicación al cambiar código porque Docker Desktop no monta directamente esta distribución WSL.
 - **Documentación del producto:** `docs/` (requisitos, casos de uso, backlog, sprints y manuales).
 - **Continuidad y memoria IA:** `.ai/`; no mover aquí artefactos funcionales del producto.
-- **Última historia cerrada:** `.ai/tasks/_closed/gt-hu-015-empresas-convenios/` en `sprint/1-catalogo-solicitud`, commit `54c0edf`: login local de Coordinación y CRUD Livewire del catálogo implementados, migrados y probados. Próximas HU-014, HU-001 y HU-018 requieren tareas Continuum asignadas por el orquestador.
+- **Sprint 1:** última historia cerrada HU-015 (`54c0edf`). Refinamiento de identidad archivado en `.ai/tasks/_closed/definir-identidad-y-gestion-usuarios/`: HU-019 (SAML2/alta automática de alumnos, prerequisito de HU-014), HU-020 (supervisores locales) y HU-021 (gestión de roles; HU-020/021 sin sprint asignado) añadidas al backlog. HU-014 (`frontend`) espera a HU-019 (`backend`, tarea por abrir); vínculo SAML por ID institucional inmutable, nombre exacto del atributo pendiente.

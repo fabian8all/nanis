@@ -15,7 +15,7 @@
 
 | Orden | Objetivo del sprint candidato | Historias | Dependencias / salida esperada |
 |---|---|---|---|
-| 1 | Catálogo, solicitud y carta de no responsiva | GT-HU-015, GT-HU-014, GT-HU-001, GT-HU-018 | Coordinación mantiene manualmente empresas para mostrar en el catálogo con nombre, dirección, teléfono, email y persona de contacto; la baja oculta para nuevas solicitudes y conserva referencias existentes. El alumno selecciona una empresa, registra su solicitud, acepta e imprime la carta de no responsiva para firmarla físicamente; el sistema no guarda copia firmada. HU-014 depende de HU-015; HU-001 depende del catálogo; HU-018 se realiza como parte de HU-001. |
+| 1 | Acceso del alumno, catálogo, solicitud y carta de no responsiva | GT-HU-015, GT-HU-019, GT-HU-014, GT-HU-001, GT-HU-018 | Coordinación mantiene manualmente empresas para mostrar en el catálogo con nombre, dirección, teléfono, email y persona de contacto; la baja oculta para nuevas solicitudes y conserva referencias existentes. El alumno inicia sesión por IDP institucional (HU-019), selecciona una empresa (HU-014), registra su solicitud, acepta e imprime la carta de no responsiva para firmarla físicamente; el sistema no guarda copia firmada. Dependencias: HU-015 → HU-019 → HU-014 → HU-001; HU-018 se realiza como parte de HU-001. |
 | 2 | Revisión de coordinación y carta de presentación | GT-HU-002, GT-HU-003 | Coordinación revisa, devuelve para corrección o aprueba; el alumno consulta/descarga la carta. Depende de HU-001. |
 | 3 | Aceptación de empresa y plan de trabajo | GT-HU-004, GT-HU-005 | Se registra aceptación y el alumno prepara el plan. Depende de la carta y de la selección aprobada. |
 | 4 | Evaluaciones finales y reporte | GT-HU-006, GT-HU-007, GT-HU-016, GT-HU-017 | Dos evaluaciones finales separadas: supervisor de empresa (HU-006) y tutor (HU-016); la evaluación del tutor incluye el reporte final, cuyo ciclo de correcciones se mantiene en HU-007. Coordinación podrá modificar ambas rúbricas mediante HU-017, conservando en cada evaluación la versión con la que fue contestada. No hay actividades intermedias. HU-016 depende de la entrega del reporte; HU-006 y HU-016 dependen de rúbricas publicadas. Faltan escalas, captura, estados y acceso. |
@@ -44,6 +44,8 @@ Los roles se toman del catálogo disponible con `tools/continuum roles list`. **
 - **P2 — Conclusión y expediente:** evaluaciones finales del supervisor y tutor, rúbricas configurables, reporte y documentos de cierre y encuesta de satisfacción (HU-006, HU-007, HU-008, HU-009, HU-010, HU-012, HU-013, HU-016, HU-017).
 
 La persona solicitante aprobó usar estos grupos como base de refinamiento por dependencias del flujo; todavía no son compromisos de calendario. Las estimaciones quedan abiertas.
+
+**Ajuste por requisito de identidad:** HU-019 (SAML2 de alumnos y alta local automática por identificador institucional inmutable) se añade como prerequisito de HU-014 dentro del Sprint 1 candidato. HU-020 (cuentas locales de supervisor) y HU-021 (edición de perfiles/roles por Coordinación) se mantienen como historias candidatas aún sin sprint asignado; no bloquean HU-014.
 
 ## Bloqueos para comprometer un sprint
 

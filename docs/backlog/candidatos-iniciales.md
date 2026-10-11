@@ -58,6 +58,14 @@ La distribución candidata de historias en sprints y grupos de prioridad P0/P1/P
 | GT-HU-014 | Como alumno, quiero consultar las empresas con convenio vigente y seleccionar una para mi solicitud de práctica. | Mostrar solo empresas activas para nuevas solicitudes. Coordinación retira manualmente las empresas que dejan de estar vigentes; la baja las oculta sin borrar referencias de solicitudes/prácticas existentes. Si el convenio vence después de iniciar la práctica, no afectarla; si vence entre selección e inicio, coordinación revisa y autoriza antes de continuar. Datos visibles: nombre, dirección, teléfono, email y persona de contacto. |
 | GT-HU-015 | Como coordinador, quiero registrar y actualizar las empresas con convenio para mantener al día el catálogo que consulta el alumnado. | Solo una cuenta autenticada de Coordinación puede administrar el catálogo. La primera cuenta se provisiona mediante un comando Artisan interactivo, sin credenciales predeterminadas. Coordinación da de alta y baja manualmente las empresas. Campos para mostrar: nombre, dirección, teléfono, email y persona de contacto. La baja oculta la empresa para nuevas solicitudes y conserva las referencias de solicitudes/prácticas existentes. |
 
+## Épica GT-EP-05 — Identidad y gestión de usuarios
+
+| ID | Historia candidata | Criterios de aceptación por acordar |
+|---|---|---|
+| GT-HU-019 | Como alumno, quiero iniciar sesión con la identidad institucional SAML2 para acceder a la plataforma sin crear otra contraseña. | En el primer acceso válido, crear una cuenta local con rol único de alumno; vincularla mediante matrícula/identificador institucional inmutable, no por email. En accesos posteriores conservar el rol local asignado. Validar el atributo exacto y los datos de perfil disponibles con el administrador del IDP; no crear cuentas si faltan datos o si la respuesta SAML no valida. Esta historia es prerrequisito de GT-HU-014. |
+| GT-HU-020 | Como coordinador, quiero invitar supervisores con acceso local para que puedan usar usuario y contraseña después de confirmar su correo. | Coordinación captura el correo y la aplicación envía un enlace de verificación; tras confirmarlo, el supervisor establece su contraseña. Definir campos de perfil, expiración/reenvío del enlace y recuperación de contraseña. No forma parte del bloqueo de GT-HU-014. |
+| GT-HU-021 | Como coordinador, quiero editar perfiles y asignar un rol a cada usuario para mantener actualizados sus permisos. | Una cuenta tiene un único rol activo; cambiar alumno a tutor reemplaza el rol anterior. Definir campos editables, roles disponibles, restricciones por transición y auditoría del cambio. No forma parte del bloqueo de GT-HU-014. |
+
 La cédula/procedimiento institucional 2025 corresponden a estancias: sus 800 horas y evaluaciones/reportes intermedios quedan fuera de este prototipo, cuyo alcance confirmado es prácticas operativas y de mandos medios de 240 horas con dos evaluaciones finales independientes (supervisor y tutor) y un reporte final.
 
 ## Candidatos explícitamente fuera de alcance
@@ -73,6 +81,7 @@ Pendientes de confirmar después del flujo esencial: Datos/expediente; Normativa
 ## Dependencias e incógnitas
 
 - Definir usuarios/autenticación y permisos para alumno, coordinación, empresa y asesor académico. El flujo narrado no especifica todavía qué tareas tiene el asesor académico.
+- El inicio de sesión SAML2 y alta automática de alumno (GT-HU-019) precede la consulta/selección autenticada de empresas (GT-HU-014). Las cuentas locales de supervisores (GT-HU-020) y la administración de perfiles/roles por coordinación (GT-HU-021) son historias candidatas independientes, todavía sin sprint asignado.
 - El catálogo incluye nombre, dirección, teléfono, email y persona de contacto; Coordinación hace altas y bajas manualmente. La baja oculta la empresa para nuevas solicitudes y conserva referencias existentes.
 - Definir estados/comentarios/reenvíos de solicitud devuelta, modificaciones a los datos precargados de la carta y registro de cambios.
 - Definir estados, vencimientos, notificaciones, correcciones y quién puede ver cada documento/evaluación.
