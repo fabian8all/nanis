@@ -43,6 +43,7 @@ No editar fuera de esta lista sin actualizarla primero. Evita refactors oportuni
 - `project-app/resources/views/layouts/app.blade.php`
 - `project-app/resources/views/livewire/student/companies/index.blade.php`
 - `project-app/tests/Feature/StudentPracticeRequestTest.php`
+- `project-app/tests/Feature/UserRoleMigrationTest.php` (ajuste de regresión por orden de migraciones)
 - `docs/backlog/candidatos-iniciales.md`
 - `.ai/HANDOFF.md`
 - `.ai/state/topics/resumen.md`

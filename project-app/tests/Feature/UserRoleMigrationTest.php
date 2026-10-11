@@ -14,7 +14,7 @@ class UserRoleMigrationTest extends TestCase
     public function test_existing_coordinator_flag_is_migrated_to_the_coordinator_role(): void
     {
         $this->artisan('migrate:rollback', [
-            '--step' => 1,
+            '--path' => 'database/migrations/2026_10_10_000003_migrate_users_to_single_role.php',
             '--force' => true,
         ])->assertExitCode(0);
 

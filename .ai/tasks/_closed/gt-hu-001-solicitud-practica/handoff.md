@@ -38,9 +38,9 @@ carta de no responsiva.
 - `StudentPracticeRequestTest`: 7 pruebas y 46 aserciones aprobadas.
 - Pint: archivos PHP de HU-001 aprobados.
 - `/alumno/solicitud` sin sesión redirige a login (HTTP 302).
-- La suite completa: 35 pruebas pasan; falla `UserRoleMigrationTest`, que
-  intenta insertar la columna retirada `is_coordinator`. No es causada por
-  HU-001 y queda pendiente corregir la prueba/migración histórica.
+- La suite completa pasa después de ajustar `UserRoleMigrationTest` para revertir
+  explícitamente la migración de roles; la prueba usaba `--step=1`, que dejó de
+  apuntar a ella al agregar la migración de solicitudes.
 
 ## Próximo paso
 
