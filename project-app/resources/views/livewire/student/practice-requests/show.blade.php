@@ -12,7 +12,16 @@
         @endif
 
         @if ($practiceRequest && $practiceRequest->status->value === 'approved')
-            <div class="alert alert-success" role="status">Tu solicitud fue aprobada. La carta de presentación estará disponible en el siguiente paso del trámite.</div>
+            @if ($practiceRequest->letter)
+                <div class="alert alert-success" role="status">
+                    <p class="mb-2">Tu solicitud fue aprobada y la carta de presentación está disponible.</p>
+                    <a class="btn btn-primary" href="{{ route('alumno.practice-letters.show', $practiceRequest->letter) }}">Consultar / imprimir o guardar como PDF</a>
+                </div>
+            @else
+                <div class="alert alert-warning" role="alert">
+                    Tu solicitud aparece aprobada, pero no encontramos la carta. Contacta a Coordinación para resolverlo.
+                </div>
+            @endif
         @elseif ($practiceRequest && $practiceRequest->status->value !== 'returned')
             <div class="alert alert-info" role="status">
                 Tu solicitud está en trámite y no se puede editar. Coordinación te avisará si requiere correcciones.

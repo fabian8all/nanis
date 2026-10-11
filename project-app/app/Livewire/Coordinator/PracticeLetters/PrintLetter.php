@@ -36,11 +36,13 @@ class PrintLetter extends Component
             ])
             ->findOrFail($this->practiceLetterId);
 
-        return view('livewire.coordinator.practice-letters.print-letter', [
+        return view('livewire.practice-letters.print-letter', [
             'letter' => $letter,
             'printDate' => now()->locale('es')->translatedFormat('j \d\e F \d\e\l Y'),
             'formattedAccountNumber' => substr($letter->practiceRequest->account_number, 0, 4)
                 .'-'.substr($letter->practiceRequest->account_number, 4),
+            'printButtonText' => 'Imprimir para firma',
+            'returnUrl' => route('coordinacion.practice-requests.index'),
         ])->layout('layouts.app', ['title' => $letter->folio]);
     }
 

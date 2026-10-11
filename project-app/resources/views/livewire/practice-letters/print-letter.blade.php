@@ -1,7 +1,7 @@
 <section>
     <div class="d-print-none mb-3 d-flex flex-wrap gap-2">
-        <button class="btn btn-primary" type="button" onclick="window.print()">Imprimir para firma</button>
-        <a class="btn btn-outline-secondary" href="{{ route('coordinacion.practice-requests.index') }}">Volver a solicitudes</a>
+        <button class="btn btn-primary" type="button" onclick="window.print()">{{ $printButtonText }}</button>
+        <a class="btn btn-outline-secondary" href="{{ $returnUrl }}">Volver</a>
     </div>
 
     <article class="letter-print mx-auto">

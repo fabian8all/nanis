@@ -9,6 +9,7 @@ use App\Livewire\Coordinator\PracticeLetters\PrintLetter as PracticeLetterPrinte
 use App\Livewire\Coordinator\PracticeRequests\Index as CoordinatorPracticeRequests;
 use App\Livewire\Coordinator\PracticeRequests\Review as CoordinatorPracticeRequestReview;
 use App\Livewire\Student\Companies\Index as StudentCompanyCatalog;
+use App\Livewire\Student\PracticeLetters\Show as StudentPracticeLetter;
 use App\Livewire\Student\PracticeRequests\Show as StudentPracticeRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -58,6 +59,7 @@ Route::middleware('auth')
     ->group(function (): void {
         Route::get('/empresas', StudentCompanyCatalog::class)->name('companies.index');
         Route::get('/solicitud', StudentPracticeRequest::class)->name('practice-request.show');
+        Route::get('/cartas/{practiceLetter}', StudentPracticeLetter::class)->name('practice-letters.show');
 
         Route::post('/logout', function (Request $request) {
             abort_unless($request->user()?->role === UserRole::Student, 403);

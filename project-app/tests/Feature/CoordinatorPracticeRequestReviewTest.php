@@ -148,6 +148,7 @@ class CoordinatorPracticeRequestReviewTest extends TestCase
             ->assertSee('CP-2026-0001')
             ->assertSee('0000-0000')
             ->assertSee('00000000000')
+            ->assertSee('Imprimir para firma')
             ->assertSee('240 horas')
             ->assertDontSee('800 horas');
     }

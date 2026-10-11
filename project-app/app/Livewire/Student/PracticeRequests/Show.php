@@ -168,7 +168,7 @@ class Show extends Component
     private function currentRequest(): ?PracticeRequest
     {
         return PracticeRequest::query()
-            ->with('company')
+            ->with(['company', 'letter'])
             ->where('user_id', auth()->id())
             ->whereIn('status', [
                 PracticeRequestStatus::Pending,

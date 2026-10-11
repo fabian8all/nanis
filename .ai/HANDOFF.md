@@ -63,6 +63,13 @@ Iniciar una nueva aplicación y establecer Continuum para descubrir requisitos, 
 ## Continuidad actual — GT-HU-002
 - GT-HU-002 está implementada en `sprint/2-revision-cartas`; Coordinación revisa pendientes, devuelve con comentario e historial o aprueba para generar/imprimir una carta con copia editable y folio anual. NSS y cuenta se mantienen cifrados y fuera de bandeja, revisión e historial.
 - Validación final: 42 pruebas/228 aserciones aprobadas; Pint `--test` pasa para los 12 archivos PHP modificados. Migraciones HU-002 aplicadas al MySQL local.
-- `.ai/tasks/_closed/gt-hu-002-revision-solicitud/handoff.md` contiene el handoff detallado. HU-002 quedó comprometida como `c2dd745` en la rama del sprint; no integrar aún a `develop`, pues HU-003 sigue pendiente.
+- `.ai/tasks/_closed/gt-hu-002-revision-solicitud/handoff.md` contiene el handoff detallado. HU-002 quedó comprometida como `c2dd745` en la rama del sprint; no integrar aún a `develop`.
 - Preservar sin cambios los archivos preexistentes ajenos: `.continuum/tools/continuum`, `.githooks/pre-commit`, `tools/continuum`, fuentes de `docs/formatos/` y archivos `Zone.Identifier`.
 - Siguiente historia: GT-HU-003, consulta/descarga de la carta por el alumno.
+
+## Continuidad actual — GT-HU-003
+- GT-HU-003 está activa en `sprint/2-revision-cartas`, asignada a `backend`. Decisión confirmada: el alumno propietario puede consultar e imprimir/guardar como PDF su carta aprobada; no se registran descargas ni entrega.
+- Implementación lista para revisar/cerrar: enlace desde solicitud aprobada, vista imprimible compartida con Coordinación, autorización por rol/propiedad y 404 para cartas de solicitudes no aprobadas.
+- Validación: suite completa 45 pruebas/246 aserciones; Pint `--test` pasa en 6 archivos PHP. Contenedor de desarrollo reconstruido; rutas estudiantiles protegidas respondieron 302 sin sesión.
+- `.ai/tasks/_closed/gt-hu-003-consulta-carta-alumno/handoff.md` contiene el handoff y las decisiones de HU-003. Comprometer la historia en la rama del sprint; HU-004 sigue pendiente.
+- Se preservan las modificaciones y formatos fuente ya presentes en el worktree, fuera del alcance de GT-HU-003.
