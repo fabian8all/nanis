@@ -3,8 +3,8 @@
 ## Estado de la tarea
 
 Implementación de GT-HU-015 completada y validada en la rama
-`sprint/1-catalogo-solicitud`. La tarea Continuum está archivada; los cambios
-de la historia están listos para el commit. No cambiar de rama antes.
+`sprint/1-catalogo-solicitud`. La tarea está archivada y los cambios quedaron
+en el commit `54c0edf`. No cambiar de rama antes de continuar el Sprint 1.
 
 ## Decisiones confirmadas
 
@@ -44,8 +44,7 @@ de `.env` reportada en una ejecución anterior del runner no se reprodujo en la
 
 ## Siguiente paso
 
-1. Incorporar los cambios descritos en el commit `gt-hu-015-empresas-convenios`.
-2. Abrir la siguiente historia de Sprint 1, asignada por el orquestador.
+1. Abrir la siguiente historia de Sprint 1, asignada por el orquestador.
 
 Las fuentes de `docs/formatos/` siguen sin agregarse: algunas imágenes
 contienen ejemplos diligenciados con datos personales; no versionarlas sin
