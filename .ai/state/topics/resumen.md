@@ -16,4 +16,6 @@
 - **HU-002 completada:** Coordinación aprueba/devuelve con comentario obligatorio e historial; la aprobación genera carta con copia de datos ajustables, folio anual `CP-AAAA-0001` y vista imprimible protegida para firma física. HU-003 permitirá al alumno consultarla/descargarla.
 - **HU-003 completada:** desde la solicitud aprobada, el alumno autenticado consulta e imprime/guarda como PDF la carta de su propio expediente. No se registran consultas, descargas ni entrega.
 - **GT-HU-004 completada en `sprint/3-aceptacion-empresa`:** invitación verificada de supervisor, cartas empresariales aisladas por empresa, carga privada versionada y revisión de Coordinación. El historial de versiones y comentarios sigue accesible para Coordinación después de aprobar. Validación final: 58 pruebas/365 aserciones y Pint para los PHP de la historia.
-- **Sprint 3:** GT-HU-004 cerrada; GT-HU-005 (plan de trabajo) es la siguiente historia. No integrar el sprint a `develop` hasta completarla.
+- **GT-HU-004 completada y comprometida:** `00db4dc` en `sprint/3-aceptacion-empresa`.
+- **GT-HU-005 implementada en Sprint 3:** plan por actividades, con revisión del supervisor que aprobó la aceptación y luego Coordinación. Se conserva historial. Validación: 62 pruebas/422 aserciones y Pint para 14 archivos PHP.
+- **Sprint 3:** HU-004 y HU-005 implementadas; la tarea HU-005 está archivada. Falta su commit y la validación de integración antes de mergear a `develop`.

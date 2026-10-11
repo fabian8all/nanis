@@ -17,6 +17,7 @@
                     <span class="navbar-text me-auto">Coordinación</span>
                     <a class="nav-link me-3" href="{{ route('coordinacion.practice-requests.index') }}">Solicitudes</a>
                     <a class="nav-link me-3" href="{{ route('coordinacion.practice-acceptances.index') }}">Aceptaciones</a>
+                    <a class="nav-link me-3" href="{{ route('coordinacion.practice-plans.index') }}">Planes</a>
                     <form method="POST" action="{{ route('coordinacion.logout') }}">
                         @csrf
                         <button class="btn btn-outline-secondary btn-sm" type="submit">Cerrar sesión</button>
@@ -33,6 +34,7 @@
                     <a class="navbar-brand" href="{{ route('supervisor.practice-letters.index') }}">Nanis</a>
                     <span class="navbar-text me-auto">Supervisor de empresa</span>
                     <a class="nav-link me-3" href="{{ route('supervisor.practice-letters.index') }}">Cartas pendientes</a>
+                    <a class="nav-link me-3" href="{{ route('supervisor.practice-plans.index') }}">Planes de trabajo</a>
                     <form method="POST" action="{{ route('supervisor.logout') }}">
                         @csrf
                         <button class="btn btn-outline-secondary btn-sm" type="submit">Cerrar sesión</button>

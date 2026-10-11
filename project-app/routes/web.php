@@ -12,14 +12,19 @@ use App\Livewire\Coordinator\Companies\InviteSupervisor as CoordinatorInviteSupe
 use App\Livewire\Coordinator\PracticeAcceptances\Index as CoordinatorPracticeAcceptances;
 use App\Livewire\Coordinator\PracticeAcceptances\Review as CoordinatorPracticeAcceptanceReview;
 use App\Livewire\Coordinator\PracticeLetters\PrintLetter as PracticeLetterPrinter;
+use App\Livewire\Coordinator\PracticePlans\Index as CoordinatorPracticePlans;
+use App\Livewire\Coordinator\PracticePlans\Review as CoordinatorPracticePlanReview;
 use App\Livewire\Coordinator\PracticeRequests\Index as CoordinatorPracticeRequests;
 use App\Livewire\Coordinator\PracticeRequests\Review as CoordinatorPracticeRequestReview;
 use App\Livewire\Student\Companies\Index as StudentCompanyCatalog;
 use App\Livewire\Student\PracticeLetters\Show as StudentPracticeLetter;
+use App\Livewire\Student\PracticePlans\Show as StudentPracticePlan;
 use App\Livewire\Student\PracticeRequests\Show as StudentPracticeRequest;
 use App\Livewire\Supervisor\PracticeAcceptances\Upload as SupervisorPracticeAcceptanceUpload;
 use App\Livewire\Supervisor\PracticeLetters\Index as SupervisorPracticeLetters;
 use App\Livewire\Supervisor\PracticeLetters\Show as SupervisorPracticeLetter;
+use App\Livewire\Supervisor\PracticePlans\Index as SupervisorPracticePlans;
+use App\Livewire\Supervisor\PracticePlans\Review as SupervisorPracticePlanReview;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -66,6 +71,9 @@ Route::middleware(['auth', EnsureCoordinator::class])
             ->name('practice-acceptances.review');
         Route::get('/aceptaciones/{practiceAcceptance}/archivo', PracticeAcceptanceFileController::class)
             ->name('practice-acceptances.file');
+        Route::get('/planes-trabajo', CoordinatorPracticePlans::class)->name('practice-plans.index');
+        Route::get('/planes-trabajo/{practicePlanVersion}', CoordinatorPracticePlanReview::class)
+            ->name('practice-plans.review');
 
         Route::post('/logout', function (Request $request) {
             Auth::logout();
@@ -86,6 +94,9 @@ Route::middleware(['auth', EnsureSupervisor::class])
             ->name('practice-acceptances.upload');
         Route::get('/aceptaciones/{practiceAcceptance}/archivo', PracticeAcceptanceFileController::class)
             ->name('practice-acceptances.file');
+        Route::get('/planes-trabajo', SupervisorPracticePlans::class)->name('practice-plans.index');
+        Route::get('/planes-trabajo/{practicePlanVersion}', SupervisorPracticePlanReview::class)
+            ->name('practice-plans.review');
 
         Route::post('/logout', function (Request $request) {
             Auth::logout();
@@ -103,6 +114,8 @@ Route::middleware('auth')
         Route::get('/empresas', StudentCompanyCatalog::class)->name('companies.index');
         Route::get('/solicitud', StudentPracticeRequest::class)->name('practice-request.show');
         Route::get('/cartas/{practiceLetter}', StudentPracticeLetter::class)->name('practice-letters.show');
+        Route::get('/solicitudes/{practiceRequest}/plan-trabajo', StudentPracticePlan::class)
+            ->name('practice-plans.show');
 
         Route::post('/logout', function (Request $request) {
             abort_unless($request->user()?->role === UserRole::Student, 403);

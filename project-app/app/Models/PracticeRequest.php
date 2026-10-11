@@ -67,4 +67,9 @@ class PracticeRequest extends Model
     {
         return $this->hasOne(PracticeAcceptanceSubmission::class)->latestOfMany('version');
     }
+
+    public function practicePlan(): HasOne
+    {
+        return $this->hasOne(PracticePlan::class);
+    }
 }

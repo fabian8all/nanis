@@ -16,6 +16,9 @@
                 <div class="alert alert-success" role="status">
                     <p class="mb-2">Tu solicitud fue aprobada y la carta de presentación está disponible.</p>
                     <a class="btn btn-primary" href="{{ route('alumno.practice-letters.show', $practiceRequest->letter) }}">Consultar / imprimir o guardar como PDF</a>
+                    @if ($practiceRequest->latestAcceptanceSubmission?->status === \App\Enums\PracticeAcceptanceStatus::Accepted)
+                        <a class="btn btn-outline-primary" href="{{ route('alumno.practice-plans.show', $practiceRequest) }}">Registrar o consultar plan de trabajo</a>
+                    @endif
                 </div>
             @else
                 <div class="alert alert-warning" role="alert">

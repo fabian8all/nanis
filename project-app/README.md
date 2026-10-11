@@ -45,6 +45,13 @@ Las cartas de aceptación aceptan PDF, JPG o PNG hasta 20 MB y se guardan en
 almacenamiento privado, accesible solo a Coordinación y al supervisor de la
 empresa correspondiente.
 
+Después de aprobarse la aceptación, el alumno registra el plan de trabajo por
+actividades (descripción, fechas, responsable y resultado esperado). El
+supervisor que aceptó la práctica revisa primero; Coordinación realiza la
+revisión final. Si cualquiera devuelve el plan debe escribir observaciones; el
+alumno puede corregirlo y reenviarlo al supervisor. Se conserva el historial
+de versiones.
+
 ### Acceso institucional SAML2 (alumnos)
 
 El inicio institucional solo se habilita al configurar `SAML2_ENABLED=true`,
