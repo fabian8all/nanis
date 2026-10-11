@@ -6,6 +6,7 @@ use App\Http\Controllers\Auth\SamlSessionController;
 use App\Http\Middleware\EnsureCoordinator;
 use App\Livewire\Companies\Index as CompanyCatalog;
 use App\Livewire\Student\Companies\Index as StudentCompanyCatalog;
+use App\Livewire\Student\PracticeRequests\Show as StudentPracticeRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -48,6 +49,7 @@ Route::middleware('auth')
     ->name('alumno.')
     ->group(function (): void {
         Route::get('/empresas', StudentCompanyCatalog::class)->name('companies.index');
+        Route::get('/solicitud', StudentPracticeRequest::class)->name('practice-request.show');
 
         Route::post('/logout', function (Request $request) {
             abort_unless($request->user()?->role === UserRole::Student, 403);

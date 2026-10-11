@@ -13,6 +13,7 @@
             <h2 class="h5">Empresa seleccionada</h2>
             <p class="mb-1"><strong>{{ $selectedCompany->name }}</strong></p>
             <p class="mb-0">La selección se conserva en tu sesión para el flujo de solicitud.</p>
+            <a class="btn btn-primary btn-sm mt-2" href="{{ route('alumno.practice-request.show') }}">Continuar con la solicitud</a>
         </div>
     @endif
 

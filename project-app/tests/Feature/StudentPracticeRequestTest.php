@@ -1,0 +1,211 @@
+<?php
+
+namespace Tests\Feature;
+
+use App\Enums\PracticeRequestStatus;
+use App\Enums\UserRole;
+use App\Livewire\Student\PracticeRequests\Show as StudentPracticeRequest;
+use App\Models\Company;
+use App\Models\PracticeRequest;
+use App\Models\User;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Livewire\Livewire;
+use Tests\TestCase;
+
+class StudentPracticeRequestTest extends TestCase
+{
+    use RefreshDatabase;
+
+    public function test_student_can_submit_request_for_selected_active_company_and_accept_non_responsiva(): void
+    {
+        $student = User::factory()->create(['role' => UserRole::Student]);
+        $company = Company::query()->create(['name' => 'Hotel Uno']);
+        $this->actingAs($student);
+        session()->put('practice.selected_company_id', $company->id);
+
+        Livewire::test(StudentPracticeRequest::class)
+            ->set('gradeGroup', '8A')
+            ->set('startDate', '2026-11-01')
+            ->set('endDate', '2027-01-31')
+            ->set('practiceLocation', 'Colima')
+            ->set('letterRecipient', 'Dirección')
+            ->set('position', 'Auxiliar')
+            ->set('acceptNonResponsiva', true)
+            ->call('submit')
+            ->assertHasNoErrors()
+            ->assertRedirect(route('alumno.practice-request.show'));
+
+        $this->assertDatabaseHas('practice_requests', [
+            'user_id' => $student->id,
+            'company_id' => $company->id,
+            'ucol_email' => $student->email,
+            'status' => PracticeRequestStatus::Pending->value,
+        ]);
+        $this->assertNotNull(PracticeRequest::query()->firstOrFail()->non_responsiva_accepted_at);
+        $this->assertNull(session('practice.selected_company_id'));
+    }
+
+    public function test_request_requires_all_fields_valid_dates_active_selection_and_explicit_acceptance(): void
+    {
+        $this->actingAs(User::factory()->create(['role' => UserRole::Student]));
+
+        Livewire::test(StudentPracticeRequest::class)
+            ->set('ucolEmail', '')
+            ->call('submit')
+            ->assertHasErrors([
+                'ucolEmail' => 'required',
+                'gradeGroup' => 'required',
+                'startDate' => 'required',
+                'practiceLocation' => 'required',
+                'letterRecipient' => 'required',
+                'position' => 'required',
+                'endDate' => 'required',
+                'acceptNonResponsiva' => 'accepted',
+            ]);
+
+        $company = Company::query()->create(['name' => 'Hotel Activo']);
+        session()->put('practice.selected_company_id', $company->id);
+
+        Livewire::test(StudentPracticeRequest::class)
+            ->set('gradeGroup', '8A')
+            ->set('startDate', '2026-11-01')
+            ->set('endDate', '2026-11-01')
+            ->set('practiceLocation', 'Colima')
+            ->set('letterRecipient', 'Dirección')
+            ->set('position', 'Auxiliar')
+            ->set('acceptNonResponsiva', true)
+            ->call('submit')
+            ->assertHasErrors(['endDate' => 'after']);
+
+        $this->assertDatabaseCount('practice_requests', 0);
+    }
+
+    public function test_selected_company_must_still_be_active_when_request_is_submitted(): void
+    {
+        $this->actingAs(User::factory()->create(['role' => UserRole::Student]));
+        $company = Company::query()->create(['name' => 'Hotel Temporal']);
+        session()->put('practice.selected_company_id', $company->id);
+        $component = Livewire::test(StudentPracticeRequest::class);
+        $company->is_active = false;
+        $company->save();
+
+        $component
+            ->set('gradeGroup', '8A')
+            ->set('startDate', '2026-11-01')
+            ->set('endDate', '2027-01-31')
+            ->set('practiceLocation', 'Colima')
+            ->set('letterRecipient', 'Dirección')
+            ->set('position', 'Auxiliar')
+            ->set('acceptNonResponsiva', true)
+            ->call('submit')
+            ->assertHasErrors('company');
+
+        $this->assertDatabaseCount('practice_requests', 0);
+    }
+
+    public function test_student_cannot_submit_a_second_request_while_one_is_pending(): void
+    {
+        $student = User::factory()->create(['role' => UserRole::Student]);
+        $company = Company::query()->create(['name' => 'Hotel Uno']);
+        $existingRequest = $student->practiceRequests()->create([
+            'company_id' => $company->id,
+            'ucol_email' => $student->email,
+            'grade_group' => '8A',
+            'start_date' => '2026-10-01',
+            'practice_location' => 'Colima',
+            'letter_recipient' => 'Dirección',
+            'position' => 'Auxiliar',
+            'end_date' => '2026-12-01',
+            'status' => PracticeRequestStatus::Pending,
+            'non_responsiva_accepted_at' => now(),
+        ]);
+        $this->actingAs($student);
+        session()->put('practice.selected_company_id', $company->id);
+
+        Livewire::test(StudentPracticeRequest::class)
+            ->set('gradeGroup', '8A')
+            ->set('startDate', '2026-11-01')
+            ->set('endDate', '2027-01-31')
+            ->set('practiceLocation', 'Colima')
+            ->set('letterRecipient', 'Dirección')
+            ->set('position', 'Auxiliar')
+            ->set('acceptNonResponsiva', true)
+            ->call('submit')
+            ->assertHasErrors('request');
+
+        $this->assertSame($existingRequest->id, PracticeRequest::query()->sole()->id);
+    }
+
+    public function test_submitted_request_is_read_only_and_letter_print_uses_current_date(): void
+    {
+        $student = User::factory()->create(['role' => UserRole::Student]);
+        $company = Company::query()->create(['name' => 'Hotel Uno']);
+        $student->practiceRequests()->create([
+            'company_id' => $company->id,
+            'ucol_email' => $student->email,
+            'grade_group' => '8A',
+            'start_date' => '2026-10-01',
+            'practice_location' => 'Colima',
+            'letter_recipient' => 'Dirección',
+            'position' => 'Auxiliar',
+            'end_date' => '2026-12-01',
+            'status' => PracticeRequestStatus::Pending,
+            'non_responsiva_accepted_at' => now(),
+        ]);
+        $this->actingAs($student);
+
+        $this->get(route('alumno.practice-request.show'))
+            ->assertOk()
+            ->assertSee('Tu solicitud está en trámite y no se puede editar.')
+            ->assertSee('Imprimir carta de no responsiva')
+            ->assertSee(now()->locale('es')->translatedFormat('j \d\e F \d\e\l Y'));
+    }
+
+    public function test_student_can_edit_a_request_only_after_it_is_returned(): void
+    {
+        $student = User::factory()->create(['role' => UserRole::Student]);
+        $company = Company::query()->create(['name' => 'Hotel Devuelto']);
+        $request = $student->practiceRequests()->create([
+            'company_id' => $company->id,
+            'ucol_email' => $student->email,
+            'grade_group' => '8A',
+            'start_date' => '2026-10-01',
+            'practice_location' => 'Colima',
+            'letter_recipient' => 'Dirección',
+            'position' => 'Auxiliar',
+            'end_date' => '2026-12-01',
+            'status' => PracticeRequestStatus::Returned,
+            'non_responsiva_accepted_at' => now(),
+        ]);
+        $this->actingAs($student);
+
+        Livewire::test(StudentPracticeRequest::class)
+            ->set('gradeGroup', '8B')
+            ->call('submit')
+            ->assertHasNoErrors()
+            ->assertRedirect(route('alumno.practice-request.show'));
+
+        $this->assertDatabaseHas('practice_requests', [
+            'id' => $request->id,
+            'grade_group' => '8B',
+            'status' => PracticeRequestStatus::Pending->value,
+        ]);
+
+        Livewire::test(StudentPracticeRequest::class)
+            ->set('gradeGroup', '9C')
+            ->call('submit')
+            ->assertHasErrors();
+
+        $this->assertDatabaseHas('practice_requests', [
+            'id' => $request->id,
+            'grade_group' => '8B',
+        ]);
+    }
+
+    public function test_non_students_cannot_access_the_request(): void
+    {
+        $this->actingAs(User::factory()->create(['role' => UserRole::Coordinator]))
+            ->get(route('alumno.practice-request.show'))
+            ->assertForbidden();
+    }
+}
