@@ -11,14 +11,21 @@
             <a class="btn btn-outline-primary mb-3" href="{{ route('alumno.companies.index') }}">Elegir empresa</a>
         @endif
 
-        @if ($practiceRequest && $practiceRequest->status->value !== 'returned')
+        @if ($practiceRequest && $practiceRequest->status->value === 'approved')
+            <div class="alert alert-success" role="status">Tu solicitud fue aprobada. La carta de presentación estará disponible en el siguiente paso del trámite.</div>
+        @elseif ($practiceRequest && $practiceRequest->status->value !== 'returned')
             <div class="alert alert-info" role="status">
                 Tu solicitud está en trámite y no se puede editar. Coordinación te avisará si requiere correcciones.
             </div>
             <button class="btn btn-outline-primary" type="button" onclick="window.print()">Imprimir carta de no responsiva</button>
         @elseif ($selectedCompany)
             @if ($practiceRequest)
-                <div class="alert alert-warning" role="status">Coordinación devolvió tu solicitud. Corrige los datos y vuelve a enviarla.</div>
+                <div class="alert alert-warning" role="status">
+                    <strong>Coordinación devolvió tu solicitud.</strong> Corrige los datos y vuelve a enviarla.
+                    @if ($latestReview?->comment)
+                        <p class="mb-0 mt-2">Comentario: {{ $latestReview->comment }}</p>
+                    @endif
+                </div>
             @endif
             <p class="text-secondary">Empresa seleccionada: <strong>{{ $selectedCompany->name }}</strong></p>
 
@@ -29,6 +36,16 @@
                     <label class="form-label" for="ucolEmail">Correo UCOL</label>
                     <input class="form-control @error('ucolEmail') is-invalid @enderror" id="ucolEmail" type="email" wire:model="ucolEmail" maxlength="255" required>
                     @error('ucolEmail') <div class="invalid-feedback">{{ $message }}</div> @enderror
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label" for="nss">Número de IMSS (NSS)</label>
+                    <input class="form-control @error('nss') is-invalid @enderror" id="nss" type="text" inputmode="numeric" pattern="[0-9]{11}" wire:model="nss" maxlength="11" required>
+                    @error('nss') <div class="invalid-feedback">{{ $message }}</div> @enderror
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label" for="accountNumber">Número de cuenta UCOL</label>
+                    <input class="form-control @error('accountNumber') is-invalid @enderror" id="accountNumber" type="text" inputmode="numeric" pattern="[0-9]{8}" wire:model="accountNumber" maxlength="8" required>
+                    @error('accountNumber') <div class="invalid-feedback">{{ $message }}</div> @enderror
                 </div>
                 <div class="col-md-6">
                     <label class="form-label" for="gradeGroup">Grado y grupo</label>

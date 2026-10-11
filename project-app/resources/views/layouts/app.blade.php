@@ -15,6 +15,7 @@
                 @if ($role === 'coordinator')
                     <a class="navbar-brand" href="{{ route('coordinacion.companies.index') }}">Nanis</a>
                     <span class="navbar-text me-auto">Coordinación</span>
+                    <a class="nav-link me-3" href="{{ route('coordinacion.practice-requests.index') }}">Solicitudes</a>
                     <form method="POST" action="{{ route('coordinacion.logout') }}">
                         @csrf
                         <button class="btn btn-outline-secondary btn-sm" type="submit">Cerrar sesión</button>

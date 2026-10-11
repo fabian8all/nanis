@@ -6,11 +6,15 @@ use App\Enums\PracticeRequestStatus;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 #[Fillable([
     'user_id',
     'company_id',
     'ucol_email',
+    'nss',
+    'account_number',
     'grade_group',
     'start_date',
     'practice_location',
@@ -29,6 +33,8 @@ class PracticeRequest extends Model
             'end_date' => 'date',
             'status' => PracticeRequestStatus::class,
             'non_responsiva_accepted_at' => 'datetime',
+            'nss' => 'encrypted',
+            'account_number' => 'encrypted',
         ];
     }
 
@@ -40,5 +46,15 @@ class PracticeRequest extends Model
     public function company(): BelongsTo
     {
         return $this->belongsTo(Company::class);
+    }
+
+    public function reviews(): HasMany
+    {
+        return $this->hasMany(PracticeRequestReview::class);
+    }
+
+    public function letter(): HasOne
+    {
+        return $this->hasOne(PracticeLetter::class);
     }
 }

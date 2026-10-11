@@ -5,6 +5,9 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\SamlSessionController;
 use App\Http\Middleware\EnsureCoordinator;
 use App\Livewire\Companies\Index as CompanyCatalog;
+use App\Livewire\Coordinator\PracticeLetters\PrintLetter as PracticeLetterPrinter;
+use App\Livewire\Coordinator\PracticeRequests\Index as CoordinatorPracticeRequests;
+use App\Livewire\Coordinator\PracticeRequests\Review as CoordinatorPracticeRequestReview;
 use App\Livewire\Student\Companies\Index as StudentCompanyCatalog;
 use App\Livewire\Student\PracticeRequests\Show as StudentPracticeRequest;
 use Illuminate\Http\Request;
@@ -34,6 +37,11 @@ Route::middleware(['auth', EnsureCoordinator::class])
     ->name('coordinacion.')
     ->group(function (): void {
         Route::get('/empresas', CompanyCatalog::class)->name('companies.index');
+        Route::get('/solicitudes', CoordinatorPracticeRequests::class)->name('practice-requests.index');
+        Route::get('/solicitudes/{practiceRequest}', CoordinatorPracticeRequestReview::class)
+            ->name('practice-requests.review');
+        Route::get('/cartas/{practiceLetter}/imprimir', PracticeLetterPrinter::class)
+            ->name('practice-letters.print');
 
         Route::post('/logout', function (Request $request) {
             Auth::logout();

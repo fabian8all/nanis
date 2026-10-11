@@ -21,9 +21,14 @@
                             <a class="btn btn-primary mt-4" href="{{ route('login') }}">Iniciar sesión</a>
                         @else
                             @if (auth()->user()->isCoordinator())
-                                <a class="btn btn-primary mt-4" href="{{ route('coordinacion.companies.index') }}">
-                                    Abrir catálogo de Coordinación
-                                </a>
+                                <div class="d-flex flex-wrap gap-2 mt-4">
+                                    <a class="btn btn-primary" href="{{ route('coordinacion.companies.index') }}">
+                                        Abrir catálogo de Coordinación
+                                    </a>
+                                    <a class="btn btn-outline-primary" href="{{ route('coordinacion.practice-requests.index') }}">
+                                        Revisar solicitudes
+                                    </a>
+                                </div>
                             @elseif (auth()->user()->role->value === 'student')
                                 <a class="btn btn-primary mt-4" href="{{ route('alumno.companies.index') }}">
                                     Consultar empresas con convenio

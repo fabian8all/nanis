@@ -9,6 +9,7 @@ use App\Models\Company;
 use App\Models\PracticeRequest;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\DB;
 use Livewire\Livewire;
 use Tests\TestCase;
 
@@ -24,6 +25,8 @@ class StudentPracticeRequestTest extends TestCase
         session()->put('practice.selected_company_id', $company->id);
 
         Livewire::test(StudentPracticeRequest::class)
+            ->set('nss', '00000000000')
+            ->set('accountNumber', '00000000')
             ->set('gradeGroup', '8A')
             ->set('startDate', '2026-11-01')
             ->set('endDate', '2027-01-31')
@@ -42,6 +45,10 @@ class StudentPracticeRequestTest extends TestCase
             'status' => PracticeRequestStatus::Pending->value,
         ]);
         $this->assertNotNull(PracticeRequest::query()->firstOrFail()->non_responsiva_accepted_at);
+        $this->assertSame('00000000000', PracticeRequest::query()->firstOrFail()->nss);
+        $this->assertNotSame('00000000000', DB::table('practice_requests')->value('nss'));
+        $this->assertSame('00000000', PracticeRequest::query()->firstOrFail()->account_number);
+        $this->assertNotSame('00000000', DB::table('practice_requests')->value('account_number'));
         $this->assertNull(session('practice.selected_company_id'));
     }
 
@@ -54,6 +61,8 @@ class StudentPracticeRequestTest extends TestCase
             ->call('submit')
             ->assertHasErrors([
                 'ucolEmail' => 'required',
+                'nss' => 'required',
+                'accountNumber' => 'required',
                 'gradeGroup' => 'required',
                 'startDate' => 'required',
                 'practiceLocation' => 'required',
@@ -67,6 +76,8 @@ class StudentPracticeRequestTest extends TestCase
         session()->put('practice.selected_company_id', $company->id);
 
         Livewire::test(StudentPracticeRequest::class)
+            ->set('nss', '00000000000')
+            ->set('accountNumber', '00000000')
             ->set('gradeGroup', '8A')
             ->set('startDate', '2026-11-01')
             ->set('endDate', '2026-11-01')
@@ -78,6 +89,19 @@ class StudentPracticeRequestTest extends TestCase
             ->assertHasErrors(['endDate' => 'after']);
 
         $this->assertDatabaseCount('practice_requests', 0);
+
+        Livewire::test(StudentPracticeRequest::class)
+            ->set('nss', '00000')
+            ->set('accountNumber', '0000')
+            ->set('gradeGroup', '8A')
+            ->set('startDate', '2026-11-01')
+            ->set('endDate', '2027-01-31')
+            ->set('practiceLocation', 'Colima')
+            ->set('letterRecipient', 'Dirección')
+            ->set('position', 'Auxiliar')
+            ->set('acceptNonResponsiva', true)
+            ->call('submit')
+            ->assertHasErrors(['nss' => 'digits', 'accountNumber' => 'digits']);
     }
 
     public function test_selected_company_must_still_be_active_when_request_is_submitted(): void
@@ -90,6 +114,8 @@ class StudentPracticeRequestTest extends TestCase
         $company->save();
 
         $component
+            ->set('nss', '00000000000')
+            ->set('accountNumber', '00000000')
             ->set('gradeGroup', '8A')
             ->set('startDate', '2026-11-01')
             ->set('endDate', '2027-01-31')
@@ -110,6 +136,8 @@ class StudentPracticeRequestTest extends TestCase
         $existingRequest = $student->practiceRequests()->create([
             'company_id' => $company->id,
             'ucol_email' => $student->email,
+            'nss' => '00000000000',
+            'account_number' => '00000000',
             'grade_group' => '8A',
             'start_date' => '2026-10-01',
             'practice_location' => 'Colima',
@@ -123,6 +151,8 @@ class StudentPracticeRequestTest extends TestCase
         session()->put('practice.selected_company_id', $company->id);
 
         Livewire::test(StudentPracticeRequest::class)
+            ->set('nss', '00000000000')
+            ->set('accountNumber', '00000000')
             ->set('gradeGroup', '8A')
             ->set('startDate', '2026-11-01')
             ->set('endDate', '2027-01-31')
@@ -143,6 +173,8 @@ class StudentPracticeRequestTest extends TestCase
         $student->practiceRequests()->create([
             'company_id' => $company->id,
             'ucol_email' => $student->email,
+            'nss' => '00000000000',
+            'account_number' => '00000000',
             'grade_group' => '8A',
             'start_date' => '2026-10-01',
             'practice_location' => 'Colima',
@@ -168,6 +200,8 @@ class StudentPracticeRequestTest extends TestCase
         $request = $student->practiceRequests()->create([
             'company_id' => $company->id,
             'ucol_email' => $student->email,
+            'nss' => '00000000000',
+            'account_number' => '00000000',
             'grade_group' => '8A',
             'start_date' => '2026-10-01',
             'practice_location' => 'Colima',
@@ -180,6 +214,8 @@ class StudentPracticeRequestTest extends TestCase
         $this->actingAs($student);
 
         Livewire::test(StudentPracticeRequest::class)
+            ->set('nss', '00000000000')
+            ->set('accountNumber', '00000000')
             ->set('gradeGroup', '8B')
             ->call('submit')
             ->assertHasNoErrors()

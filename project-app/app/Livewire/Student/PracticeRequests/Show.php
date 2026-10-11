@@ -15,6 +15,10 @@ class Show extends Component
 {
     public string $ucolEmail = '';
 
+    public string $nss = '';
+
+    public string $accountNumber = '';
+
     public string $gradeGroup = '';
 
     public string $startDate = '';
@@ -37,6 +41,8 @@ class Show extends Component
         $request = $this->currentRequest();
         if ($request?->status === PracticeRequestStatus::Returned) {
             $this->ucolEmail = $request->ucol_email;
+            $this->nss = $request->nss ?? '';
+            $this->accountNumber = $request->account_number ?? '';
             $this->gradeGroup = $request->grade_group;
             $this->startDate = $request->start_date->toDateString();
             $this->practiceLocation = $request->practice_location;
@@ -53,6 +59,8 @@ class Show extends Component
 
         $data = $this->validate([
             'ucolEmail' => ['required', 'email', 'max:255'],
+            'nss' => ['required', 'digits:11'],
+            'accountNumber' => ['required', 'digits:8'],
             'gradeGroup' => ['required', 'string', 'max:255'],
             'startDate' => ['required', 'date'],
             'practiceLocation' => ['required', 'string', 'max:255'],
@@ -105,6 +113,8 @@ class Show extends Component
             $attributes = [
                 'company_id' => $lockedCompany->id,
                 'ucol_email' => $data['ucolEmail'],
+                'nss' => $data['nss'],
+                'account_number' => $data['accountNumber'],
                 'grade_group' => $data['gradeGroup'],
                 'start_date' => $data['startDate'],
                 'practice_location' => $data['practiceLocation'],
@@ -149,6 +159,7 @@ class Show extends Component
 
         return view('livewire.student.practice-requests.show', [
             'practiceRequest' => $request,
+            'latestReview' => $request?->reviews()->latest('reviewed_at')->first(),
             'selectedCompany' => $company,
             'printDate' => now()->locale('es')->translatedFormat('j \d\e F \d\e\l Y'),
         ])->layout('layouts.app', ['title' => 'Solicitud de práctica']);
