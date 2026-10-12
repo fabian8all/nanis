@@ -3,7 +3,7 @@
 **Fecha:** 2026-10-12 · **Rol:** software/backend · **Rama:** `develop`
 
 ## Objetivo de la sesión
-Sprint 5 implementado, con historias cerradas, validadas y comprometidas por separado; integrado por fast-forward en `develop` hasta `a11bd76`.
+Sprint 5 implementado, con historias cerradas, validadas y comprometidas por separado; integrado por fast-forward en `develop`. GitHub ya usa `develop` como rama predeterminada.
 
 ## Estado
 - HU-010 implementada y comprometida como `e40197e`; las pruebas dirigidas dieron 4 pruebas/27 aserciones y Pint pasó en 3 PHP.
@@ -12,9 +12,11 @@ Sprint 5 implementado, con historias cerradas, validadas y comprometidas por sep
 - Migración HU-009 `2026_10_12_000015` quedó aplicada en la nueva base MySQL local. `.env` tiene una `APP_KEY` nueva; conservarla mientras la base contenga datos cifrados.
 
 ## Próximo paso
-Sprint 5 está integrado y publicado en `origin/develop`; la rama
-`origin/sprint/5-cierre-expediente-encuesta` quedó sincronizada. No integrar a
-`main` hasta completar la validación institucional pendiente.
+La suite Laravel completa pasa (100 pruebas/748 aserciones). Antes de integrar
+`develop` a `main`, completar la validación institucional de rúbricas, carta,
+permisos, privacidad y resguardo de HU-012/HU-013. El árbol local conserva dos
+worktrees: `develop` en `..\nanis-develop-integration` y la rama Sprint 5 en el
+directorio original; ambos están al día con su remoto.
 
 ## Cambios ajenos que deben preservarse
 No incluir ni revertir los cambios preexistentes en `.continuum/tools/continuum`, `.githooks/pre-commit`, `tools/continuum` ni archivos `Zone.Identifier`. `docs/formatos/` ahora contiene copias saneadas de los documentos fuente; revisar su `README.md` antes de usarlas. Los originales con datos personales se mantienen fuera del repositorio.
