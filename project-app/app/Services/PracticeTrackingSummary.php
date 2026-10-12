@@ -48,7 +48,54 @@ class PracticeTrackingSummary
                 UserRole::Tutor,
             ),
             $this->terminationStage($request, $terminationLetter),
-            $this->closureStage($request, $terminationLetter, $latestReport),
+            $this->closureStage($request),
+        ];
+    }
+
+    /**
+     * @return array<int, array{label: string, complete: bool, status: string}>
+     */
+    public function closureRequirements(PracticeRequest $request): array
+    {
+        $terminationLetter = $request->terminationLetter;
+        $approvedReport = $request->practiceReport?->approvedVersion;
+        $tutorEvaluation = $request->practiceEvaluation;
+        $supervisorEvaluation = $request->practiceSupervisorEvaluation;
+
+        return [
+            [
+                'label' => 'Carta de término aceptada',
+                'complete' => $terminationLetter?->status === PracticeTerminationLetterStatus::Accepted,
+                'status' => match ($terminationLetter?->status) {
+                    PracticeTerminationLetterStatus::Accepted => 'Aceptada',
+                    PracticeTerminationLetterStatus::Returned => 'Devuelta',
+                    PracticeTerminationLetterStatus::PendingReview => 'En revisión',
+                    default => 'Pendiente',
+                },
+            ],
+            [
+                'label' => 'Reporte final aprobado',
+                'complete' => $approvedReport?->status === PracticeReportStatus::Approved,
+                'status' => $approvedReport?->status === PracticeReportStatus::Approved ? 'Aprobado' : 'Pendiente',
+            ],
+            [
+                'label' => 'Evaluación terminal del Tutor enviada',
+                'complete' => $tutorEvaluation?->status === PracticeEvaluationStatus::Submitted,
+                'status' => match ($tutorEvaluation?->status) {
+                    PracticeEvaluationStatus::Submitted => 'Enviada',
+                    PracticeEvaluationStatus::Draft => 'Borrador',
+                    default => 'Pendiente',
+                },
+            ],
+            [
+                'label' => 'Evaluación terminal del Supervisor enviada',
+                'complete' => $supervisorEvaluation?->status === PracticeEvaluationStatus::Submitted,
+                'status' => match ($supervisorEvaluation?->status) {
+                    PracticeEvaluationStatus::Submitted => 'Enviada',
+                    PracticeEvaluationStatus::Draft => 'Borrador',
+                    default => 'Pendiente',
+                },
+            ],
         ];
     }
 
@@ -164,17 +211,18 @@ class PracticeTrackingSummary
         };
     }
 
-    private function closureStage(PracticeRequest $request, mixed $letter, mixed $report): array
+    private function closureStage(PracticeRequest $request): array
     {
-        $complete = $letter?->status === PracticeTerminationLetterStatus::Accepted
-            && $report?->status === PracticeReportStatus::Approved
-            && $request->practiceEvaluation?->status === PracticeEvaluationStatus::Submitted
-            && $request->practiceSupervisorEvaluation?->status === PracticeEvaluationStatus::Submitted;
+        $requirements = $this->closureRequirements($request);
+        $pending = collect($requirements)->reject(fn (array $item): bool => $item['complete']);
+        $complete = $pending->isEmpty();
 
         return $this->stage(
             'Cierre',
             $complete ? 'Completo' : 'Pendiente',
-            $complete ? 'Los documentos y evaluaciones terminales requeridos están completos.' : 'Pendiente de completar carta, reporte y ambas evaluaciones terminales.',
+            $complete
+                ? 'Los documentos y evaluaciones terminales requeridos están completos.'
+                : 'Pendiente: '.$pending->pluck('label')->implode(', ').'.',
             null,
             null,
         );

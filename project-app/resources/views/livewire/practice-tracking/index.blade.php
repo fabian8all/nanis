@@ -49,6 +49,9 @@
                     @if ($row['request']->letter)
                         <span class="small text-secondary">{{ $row['request']->letter->folio }}</span>
                     @endif
+                    @if ($row['recordRoute'])
+                        <a class="btn btn-sm btn-outline-primary" href="{{ $row['recordRoute'] }}">Abrir expediente</a>
+                    @endif
                 </div>
                 <div class="table-responsive">
                     <table class="table table-sm table-striped align-middle mb-0">

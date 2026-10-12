@@ -26,6 +26,7 @@ use App\Livewire\Coordinator\PracticeTerminationLetters\Index as CoordinatorPrac
 use App\Livewire\Coordinator\PracticeTerminationLetters\Review as CoordinatorPracticeTerminationLetterReview;
 use App\Livewire\Coordinator\Rubrics\Manage as CoordinatorRubrics;
 use App\Livewire\PracticeEvaluations\Show as PracticeEvaluationShow;
+use App\Livewire\PracticeRecords\Show as PracticeRecordShow;
 use App\Livewire\PracticeSupervisorEvaluations\Show as PracticeSupervisorEvaluationShow;
 use App\Livewire\PracticeTracking\Index as PracticeTrackingIndex;
 use App\Livewire\Student\Companies\Index as StudentCompanyCatalog;
@@ -108,6 +109,8 @@ Route::middleware(['auth', EnsureCoordinator::class])
         Route::get('/cartas-termino/{practiceTerminationLetter}/archivo', PracticeTerminationLetterFileController::class)
             ->name('practice-termination-letters.file');
         Route::get('/seguimiento', PracticeTrackingIndex::class)->name('practice-tracking.index');
+        Route::get('/expedientes/{practiceRequest}', PracticeRecordShow::class)
+            ->name('practice-records.show');
         Route::get('/rubricas', CoordinatorRubrics::class)->name('rubrics.manage');
 
         Route::post('/logout', function (Request $request) {
@@ -193,6 +196,8 @@ Route::middleware('auth')
         Route::get('/evaluaciones-supervisor/{practiceSupervisorEvaluation}', PracticeSupervisorEvaluationShow::class)
             ->name('practice-supervisor-evaluations.show');
         Route::get('/seguimiento', PracticeTrackingIndex::class)->name('practice-tracking.index');
+        Route::get('/solicitudes/{practiceRequest}/expediente', PracticeRecordShow::class)
+            ->name('practice-records.show');
 
         Route::post('/logout', function (Request $request) {
             abort_unless($request->user()?->role === UserRole::Student, 403);

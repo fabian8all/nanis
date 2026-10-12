@@ -71,7 +71,7 @@ class PracticeTrackingTest extends TestCase
             ->assertDontSee('Hotel Ajeno')
             ->assertDontSee('Alumno Ajeno')
             ->assertSee('El alumno debe registrar el plan de trabajo')
-            ->assertSee('acción pendiente');
+            ->assertSee('acciones pendientes');
 
         $this->actingAs($coordinator)
             ->get(route('coordinacion.practice-tracking.index'))

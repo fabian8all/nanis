@@ -3,25 +3,29 @@
 **Fecha:** 2026-10-12 · **Rol:** software/backend · **Rama:** `sprint/5-cierre-expediente-encuesta`
 
 ## Objetivo de la sesión
-Continuar Sprint 5 hasta completarlo, cerrando cada historia por separado con tarea Continuum, validación y commit en la rama del sprint. HU-010 terminó; HU-012 quedó iniciada cuando el usuario pidió pausar.
+Continuar Sprint 5 hasta completarlo, cerrando cada historia por separado con tarea Continuum, validación y commit en la rama del sprint. HU-012 está implementada; HU-013 queda pendiente.
 
 ## Estado
 - HU-010 implementada y comprometida como `e40197e`; las pruebas dirigidas dieron 4 pruebas/27 aserciones y Pint pasó en 3 PHP.
-- HU-012 activa y reclamada por Copilot: `.ai/tasks/gt-hu-012-expediente-practicas/`. Su código de aplicación aún no se ha modificado. El plan está en el paso 1 (investigar permisos/modelos).
-- HU-013 sigue sin tarea de implementación. La escala elegida por el usuario para la encuesta es de 1 a 5; falta incorporarla formalmente al alcance/backlog al iniciar HU-013.
-- Migración HU-009 `2026_10_12_000015` todavía no se ha aplicado al MySQL local. No desplegar ni recrear la app al retomar sin preservar `.env` y APP_KEY runtime.
-
-## Investigación de HU-012 ya realizada
-- `PracticeRequest` relaciona `terminationLetter`, `practiceReport`, `practiceEvaluation` y `practiceSupervisorEvaluation`.
-- `PracticeTerminationLetterFileController` autoriza descarga solo a Coordinación y alumno propietario.
-- `PracticeReportAttachmentController` autoriza Coordinación, alumno propietario y Tutor asignado. No cambiar este permiso existente; la vista consolidada se limita a Coordinación y alumno propietario.
-- Las evaluaciones tienen rutas de resultado separadas por rol. El reporte aprobado está en `practiceReport.approvedVersion` y sus anexos en `attachments`.
-- Criterio de completitud acordado: carta de término aceptada + reporte final aprobado + evaluaciones terminales de Tutor y Supervisor enviadas. HU-013 no bloquea el cierre.
+- HU-012 implementada en la rama actual; expediente disponible para Coordinación y alumno propietario. Pruebas dirigidas: 23/212; Pint pasa. Handoff en `.ai/tasks/gt-hu-012-expediente-practicas/handoff.md`.
+- HU-013 activa en `.ai/tasks/gt-hu-013-encuesta-satisfaccion/`. La escala confirmada para la encuesta es de 1 a 5.
+- Migración HU-009 `2026_10_12_000015` quedó aplicada en la nueva base MySQL local. `.env` tiene una `APP_KEY` nueva; conservarla mientras la base contenga datos cifrados.
 
 ## Próximo paso
-Retomar leyendo `.ai/HANDOFF.md`, `.ai/state/estado-dev.md` y `.ai/tasks/gt-hu-012-expediente-practicas/`. Completar el análisis puntual de estados/rutas y luego implementar la vista consolidada, accesible solo por Coordinación y alumno propietario, con documentos/resultados, elementos pendientes y estado completo/incompleto. Enlazar desde seguimiento y la vista de solicitud del alumno. Probar estado incompleto/completo, propiedad del alumno, acceso de Coordinación y denegación a Tutor/Supervisor; actualizar handoff, cerrar la tarea y comprometerla.
-
-Después iniciar HU-013 como tarea independiente, registrar escala 1–5 y terminar Sprint 5 antes de integrarlo en `develop`.
+Comprometer HU-012. Continuar la tarea independiente HU-013, registrar la
+escala 1–5 en el alcance, implementar/configurar la encuesta con sus permisos
+y pruebas, y terminar Sprint 5 antes de integrarlo en `develop`.
 
 ## Cambios ajenos que deben preservarse
 No incluir ni revertir los cambios preexistentes en `.continuum/tools/continuum`, `.githooks/pre-commit`, `tools/continuum` ni archivos `Zone.Identifier`. `docs/formatos/` ahora contiene copias saneadas de los documentos fuente; revisar su `README.md` antes de usarlas. Los originales con datos personales se mantienen fuera del repositorio.
+
+## Entorno local
+Se agregó `project-app/docker-compose.override.yml` (ignorado por Git) para
+evitar los puertos ocupados por otros contenedores: `nginx-proxy` compartido
+sirve `nanis.net` por el puerto 80; el proxy local de diagnóstico escucha en
+`8000`, el acceso directo a la app en `8001` y MySQL en `3307`. La app se une a
+la red Docker externa `proxy` y se registra con `VIRTUAL_HOST=nanis.net`.
+`project-app/.env` conserva credenciales aleatorias y su `APP_KEY` nueva; está
+ignorado por Git. El stack está iniciado, la base quedó migrada y
+`http://nanis.net/login` responde HTTP 200. No se ha creado una cuenta de
+Coordinación.

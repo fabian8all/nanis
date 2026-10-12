@@ -27,6 +27,7 @@ No editar fuera de esta lista sin actualizarla primero. Evita refactors oportuni
 - `project-app/resources/views/livewire/student/practice-requests/show.blade.php`
 - `project-app/resources/views/layouts/app.blade.php`
 - `project-app/tests/Feature/PracticeRecordTest.php`
+- `project-app/tests/Feature/PracticeTrackingTest.php`
 - `docs/backlog/candidatos-iniciales.md`
 - `.ai/tasks/gt-hu-012-expediente-practicas/task.md`
 - `.ai/tasks/gt-hu-012-expediente-practicas/execution-plan.md`

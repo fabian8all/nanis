@@ -57,6 +57,7 @@ class Index extends Component
                 'acceptanceSubmissions:id,practice_request_id,supervisor_id,status',
                 'practicePlan.latestVersion',
                 'practiceReport.latestVersion',
+                'practiceReport.approvedVersion',
                 'practiceEvaluation:id,practice_request_id,status',
                 'practiceSupervisorEvaluation:id,practice_request_id,supervisor_id,status',
                 'terminationLetter',
@@ -91,6 +92,11 @@ class Index extends Component
             return [
                 'request' => $request,
                 'stages' => $stages,
+                'recordRoute' => match ($user->role) {
+                    UserRole::Coordinator => route('coordinacion.practice-records.show', $request),
+                    UserRole::Student => route('alumno.practice-records.show', $request),
+                    default => null,
+                },
                 'pending' => collect($stages)->filter(fn (array $stage): bool => $stage['responsible'] === $user->role->value
                     && ($stage['responsible_id'] === null || $stage['responsible_id'] === $user->id))->values(),
             ];

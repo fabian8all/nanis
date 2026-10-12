@@ -84,6 +84,7 @@ class Show extends Component
                     PracticeRequestStatus::Pending,
                     PracticeRequestStatus::Returned,
                     PracticeRequestStatus::Approved,
+                    PracticeRequestStatus::Completed,
                 ])
                 ->lockForUpdate()
                 ->first();
@@ -181,6 +182,7 @@ class Show extends Component
                 PracticeRequestStatus::Pending,
                 PracticeRequestStatus::Returned,
                 PracticeRequestStatus::Approved,
+                PracticeRequestStatus::Completed,
             ])
             ->latest('id')
             ->first();

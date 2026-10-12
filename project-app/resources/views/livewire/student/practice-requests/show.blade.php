@@ -11,7 +11,7 @@
             <a class="btn btn-outline-primary mb-3" href="{{ route('alumno.companies.index') }}">Elegir empresa</a>
         @endif
 
-        @if ($practiceRequest && $practiceRequest->status->value === 'approved')
+        @if ($practiceRequest && in_array($practiceRequest->status, [\App\Enums\PracticeRequestStatus::Approved, \App\Enums\PracticeRequestStatus::Completed], true))
             @if ($practiceRequest->letter)
                 <div class="alert alert-success" role="status">
                     <p class="mb-2">Tu solicitud fue aprobada y la carta de presentación está disponible.</p>
@@ -25,6 +25,7 @@
                             {{ $practiceRequest->terminationLetter ? 'Consultar carta de término' : 'Cargar carta de término' }}
                         </a>
                     @endif
+                    <a class="btn btn-outline-primary" href="{{ route('alumno.practice-records.show', $practiceRequest) }}">Consultar expediente de práctica</a>
                 </div>
             @else
                 <div class="alert alert-warning" role="alert">

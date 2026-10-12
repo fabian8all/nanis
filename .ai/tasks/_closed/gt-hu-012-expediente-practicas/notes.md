@@ -15,7 +15,9 @@ pasa a `handoff.md` o a un ADR — este archivo se archiva junto con la tarea.
 - `PracticeReportAttachmentController` permite Coordinación/alumno propietario y tutor asignado; excluir Tutor de la vista de expediente no requiere cambiar este acceso existente para anexos.
 - Las rutas de resultado de evaluaciones ya están separadas por rol en `project-app/routes/web.php`.
 - La versión aprobada del reporte se obtiene por `practiceReport.approvedVersion`; incluye anexos mediante `attachments`.
-- La tarea HU-012 se creó y reclamó; aún no se editó código de aplicación.
+- La tarea HU-012 se creó y reclamó; su implementación y pruebas ya terminaron.
+- El `PracticeTrackingSummary` ya calcula el cierre con los cuatro criterios acordados. Se reutilizará/extenderá para exponerlos individualmente en el expediente, evitando una segunda regla de negocio.
+- El `nginx-proxy` compartido ya sirve `http://nanis.net`; la base de desarrollo nueva está migrada y el `.env` local conserva su APP_KEY.
 
 ## Callejones sin salida (para no repetirlos)
 - No reutilizar las páginas de seguimiento o carga de documentos como si fueran el expediente consolidado.
