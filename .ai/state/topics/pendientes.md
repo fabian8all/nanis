@@ -4,6 +4,7 @@
 - Conciliar canales del prototipo frente a Drive/correo/Classroom/papel descritos en el procedimiento institucional 2025.
 - HU-006, HU-007, HU-016 y HU-017 están implementadas y desplegadas en Sprint 4. La rúbrica de Tutor publicada en desarrollo es temporal/ficticia para demostración; falta que Coordinación publique las rúbricas institucionales. La rúbrica Supervisor continúa como borrador, por lo que HU-006 no inicia aún en demo. La práctica sintética recorre aceptación, plan y reporte aprobados.
 - Sprint 5 en curso en `sprint/5-cierre-expediente-encuesta`: HU-008/009/010 implementadas o refinadas; HU-012/013 pendientes. La migración HU-009 000015 aún debe aplicarse al MySQL de desarrollo al desplegar.
+- HU-012 está activa/reclamada por Copilot en `.ai/tasks/gt-hu-012-expediente-practicas/`; falta implementar y probar la vista consolidada restringida a Coordinación y alumno propietario. HU-013 aún no está iniciada como tarea; registrar que la escala elegida para la encuesta es 1–5.
 - Validar permisos/tareas de coordinador, asesor, alumno y empresa, además de estados/plazos.
 - El NSS (11 dígitos) y número de cuenta (8 dígitos) son obligatorios y cifrados en el expediente: alumno propietario y Coordinación acceden al expediente; un supervisor solo los ve dentro de la carta oficial emitida para su propia empresa.
 - Revisar con la autora la observación de R5 sobre el enfoque de Capacidades Humanas y definir su impacto en objetivos/indicadores.
