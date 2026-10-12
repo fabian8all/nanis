@@ -131,15 +131,16 @@ class CoordinatorPracticeRequestReviewTest extends TestCase
 
         $letter = PracticeLetter::query()->sole();
         $this->assertSame('CP-2026-0001', $letter->folio);
-        $this->assertSame(PracticeRequestStatus::Approved, $request->fresh()->status);
+        $originalRequest = $request->fresh();
+        $this->assertSame(PracticeRequestStatus::Approved, $originalRequest->status);
         $this->assertDatabaseHas('practice_requests', [
             'id' => $request->id,
             'letter_recipient' => 'Dirección original',
             'position' => 'Puesto solicitado',
             'practice_location' => 'Lugar solicitado',
-            'start_date' => '2026-10-01',
-            'end_date' => '2026-12-01',
         ]);
+        $this->assertSame('2026-10-01', $originalRequest->start_date->toDateString());
+        $this->assertSame('2026-12-01', $originalRequest->end_date->toDateString());
         $this->assertSame('Gerencia', $letter->letter_recipient);
         $this->assertSame('Sucursal Centro', $letter->practice_location);
 
