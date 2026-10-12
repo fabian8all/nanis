@@ -21,6 +21,9 @@
                         @if ($practiceRequest->practicePlan?->latestVersion?->status === \App\Enums\PracticePlanStatus::Approved)
                             <a class="btn btn-outline-primary" href="{{ route('alumno.practice-reports.show', $practiceRequest) }}">Registrar o consultar reporte final</a>
                         @endif
+                        <a class="btn btn-outline-primary" href="{{ route('alumno.practice-termination-letters.upload', $practiceRequest) }}">
+                            {{ $practiceRequest->terminationLetter ? 'Consultar carta de término' : 'Cargar carta de término' }}
+                        </a>
                     @endif
                 </div>
             @else

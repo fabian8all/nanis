@@ -174,6 +174,7 @@ class Show extends Component
                 'latestAcceptanceSubmission',
                 'practicePlan.latestVersion',
                 'practiceReport.approvedVersion',
+                'terminationLetter',
             ])
             ->where('user_id', auth()->id())
             ->whereIn('status', [

@@ -17,6 +17,7 @@
                     <span class="navbar-text me-auto">Coordinación</span>
                     <a class="nav-link me-3" href="{{ route('coordinacion.practice-requests.index') }}">Solicitudes</a>
                     <a class="nav-link me-3" href="{{ route('coordinacion.practice-acceptances.index') }}">Aceptaciones</a>
+                    <a class="nav-link me-3" href="{{ route('coordinacion.practice-termination-letters.index') }}">Cartas de término</a>
                     <a class="nav-link me-3" href="{{ route('coordinacion.practice-plans.index') }}">Planes</a>
                     <a class="nav-link me-3" href="{{ route('coordinacion.practice-reports.index') }}">Reportes</a>
                     <a class="nav-link me-3" href="{{ route('coordinacion.practice-evaluations.index') }}">Eval. tutor</a>
