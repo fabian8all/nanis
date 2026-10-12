@@ -79,4 +79,4 @@ Iniciar una nueva aplicación y establecer Continuum para descubrir requisitos, 
 - La gestión de rúbricas Coordinator quedó implementada en `sprint/4-evaluaciones-reporte`: versiones separadas por supervisor/tutor, borradores editables, historial, publicación validada e inmutabilidad; el calculator normaliza puntajes según escalas y pesos.
 - Seeder idempotente deja dos borradores incompletos: supervisor con cuatro criterios legibles aprobados y tutor vacío. No se guardaron documentos ni imágenes fuente.
 - Pruebas enfocadas: 7/29; suite completa: 69/451; Pint pasó para 12 PHP. Se ejecutaron en copia aislada de la fuente actual dentro del contenedor porque `project-app` no está bind-mounted en el container activo. `continuum doctor` tras archivar reportó 0 críticos y una advertencia por costo de contexto.
-- La tarea Continuum quedó archivada. Crear commit selectivo de la historia y preservar el resto del worktree previamente sucio y los formatos de usuario fuera del alcance.
+- La tarea Continuum quedó archivada. La historia se versiona de forma selectiva; el resto del worktree previamente sucio y los formatos de usuario permanecen fuera del commit.

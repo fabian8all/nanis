@@ -31,4 +31,4 @@ Se agregó el enlace “Rúbricas” a la navegación de Coordinación para desc
 - Las versiones se inicializan mediante `db:seed` (el setup existente solo migra); ejecutar el seeder en instalación/despliegue nueva.
 - Como se aprobó, el primer borrador es estructuralmente incompleto, no copia fiel de formatos institucionales. Coordinación debe completar escalas/pesos/criterios antes de publicar.
 - HU-006/HU-016 y la fijación de versión por evaluaciones permanecen fuera de alcance.
-- Tarea archivada. Crear commit selectivo de la historia en la rama Sprint 4 y preservar los otros cambios del worktree.
+- Tarea archivada. Los otros cambios del worktree y los formatos de usuario quedan fuera del commit de esta historia.
