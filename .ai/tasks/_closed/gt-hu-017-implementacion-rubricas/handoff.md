@@ -24,11 +24,13 @@ Se agregó el enlace “Rúbricas” a la navegación de Coordinación para desc
 - Suite completa: 69 pruebas, 451 aserciones aprobadas.
 - Pint `--test` pasó para los 12 PHP modificados.
 - Las pruebas se ejecutaron con una copia del código actual en `/tmp/nanis-rubric-validation` dentro del contenedor app, junto con sus dependencias Composer. El contenedor activo no monta el worktree WSL y su `/var/www/html` no tiene los archivos nuevos; correr las pruebas ahí directamente devolvía “No tests found”.
+- Se eliminó la copia temporal de validación al terminar las pruebas.
 - `git diff --check` pasó para los cambios de esta tarea respetando finales CRLF preexistentes.
 - `continuum doctor` tras archivar reportó 0 problemas críticos y una advertencia por costo del contexto inicial.
 
 ## Pendientes y riesgos
 - Las versiones se inicializan mediante `db:seed` (el setup existente solo migra); ejecutar el seeder en instalación/despliegue nueva.
+- El contenedor de desarrollo activo aún no contiene esta versión del código, y la base activa aún no tiene confirmada la migración 000011 ni el seeding inicial. Para habilitar la interfaz real, reconstruir la imagen desde el entorno Windows/Docker compatible con el contexto WSL, aplicar migraciones y ejecutar `php artisan db:seed`; después revisar los dos borradores y completar/publicar las rúbricas antes de iniciar las evaluaciones.
 - Como se aprobó, el primer borrador es estructuralmente incompleto, no copia fiel de formatos institucionales. Coordinación debe completar escalas/pesos/criterios antes de publicar.
 - HU-006/HU-016 y la fijación de versión por evaluaciones permanecen fuera de alcance.
 - Tarea archivada. Los otros cambios del worktree y los formatos de usuario quedan fuera del commit de esta historia.
