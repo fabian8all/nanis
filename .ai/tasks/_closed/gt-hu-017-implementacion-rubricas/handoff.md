@@ -30,7 +30,9 @@ Se agregó el enlace “Rúbricas” a la navegación de Coordinación para desc
 
 ## Pendientes y riesgos
 - Las versiones se inicializan mediante `db:seed` (el setup existente solo migra); ejecutar el seeder en instalación/despliegue nueva.
-- El contenedor de desarrollo activo aún no contiene esta versión del código, y la base activa aún no tiene confirmada la migración 000011 ni el seeding inicial. Para habilitar la interfaz real, reconstruir la imagen desde el entorno Windows/Docker compatible con el contexto WSL, aplicar migraciones y ejecutar `php artisan db:seed`; después revisar los dos borradores y completar/publicar las rúbricas antes de iniciar las evaluaciones.
+- El contenedor de desarrollo se reconstruyó desde contexto temporal compatible con Docker Desktop; el `.env` runtime existente se preservó, junto con su APP_KEY. `nanis.net` respondió HTTP 200; la migración 000011 figura aplicada y el seeder dejó 2 rúbricas, 2 borradores y 4 criterios legibles en la base activa.
+- La APP_KEY preservada reside en el filesystem efímero del contenedor. Antes de cualquier recreación futura del servicio app, preservar/restaurar su `.env` para no cambiar la clave que protege los campos cifrados; idealmente persistir APP_KEY fuera del contenedor en una mejora de infraestructura.
+- Coordinación debe completar/validar los dos borradores de rúbrica y publicarlos antes de usar HU-006/HU-016.
 - Como se aprobó, el primer borrador es estructuralmente incompleto, no copia fiel de formatos institucionales. Coordinación debe completar escalas/pesos/criterios antes de publicar.
 - HU-006/HU-016 y la fijación de versión por evaluaciones permanecen fuera de alcance.
 - Tarea archivada. Los otros cambios del worktree y los formatos de usuario quedan fuera del commit de esta historia.
