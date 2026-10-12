@@ -37,10 +37,11 @@ privada para Coordinación.
 ## Riesgos / pendientes
 - La validación institucional del cuestionario, resguardo y permisos sigue
   pendiente.
-- El clone solo tiene la rama remota `sprint/5-cierre-expediente-encuesta`; no
-  existen refs locales/remotas de `develop` o `main` para integrar el sprint.
+- HU-013 está integrada en `develop` por fast-forward junto con el resto del
+  Sprint 5, y ambas ramas están publicadas en `origin`. La integración a
+  `main` queda pendiente de validación institucional.
 
 ## Siguiente paso
 La tarea quedó cerrada y HU-013 comprometida con el slug de tarea en la rama
-del Sprint 5. Coordinar la integración a `develop` cuando exista la rama de
-destino.
+del Sprint 5. Sprint 5 se integró por fast-forward a `develop` hasta `a11bd76`
+y ambas ramas quedaron sincronizadas en `origin`.

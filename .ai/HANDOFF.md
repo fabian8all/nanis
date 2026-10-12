@@ -1,20 +1,20 @@
 # Handoff
 
-**Fecha:** 2026-10-12 · **Rol:** software/backend · **Rama:** `sprint/5-cierre-expediente-encuesta`
+**Fecha:** 2026-10-12 · **Rol:** software/backend · **Rama:** `develop`
 
 ## Objetivo de la sesión
-Sprint 5 implementado, con historias cerradas, validadas y comprometidas por separado en la rama del sprint. Falta integrar a `develop` cuando exista la rama destino.
+Sprint 5 implementado, con historias cerradas, validadas y comprometidas por separado; integrado por fast-forward en `develop` hasta `a11bd76`.
 
 ## Estado
 - HU-010 implementada y comprometida como `e40197e`; las pruebas dirigidas dieron 4 pruebas/27 aserciones y Pint pasó en 3 PHP.
-- HU-012 implementada en la rama actual; expediente disponible para Coordinación y alumno propietario. Pruebas dirigidas: 23/212; Pint pasa. Handoff en `.ai/tasks/gt-hu-012-expediente-practicas/handoff.md`.
+- HU-012 implementada; expediente disponible para Coordinación y alumno propietario. Pruebas dirigidas: 23/212; Pint pasa. Handoff en `.ai/tasks/_closed/gt-hu-012-expediente-practicas/handoff.md`.
 - HU-013 implementada, validada, cerrada y comprometida. Cuestionario versionado, escala 1–5, y respuestas consultables solo por Coordinación. Handoff en `.ai/tasks/_closed/gt-hu-013-encuesta-satisfaccion/handoff.md`.
 - Migración HU-009 `2026_10_12_000015` quedó aplicada en la nueva base MySQL local. `.env` tiene una `APP_KEY` nueva; conservarla mientras la base contenga datos cifrados.
 
 ## Próximo paso
-El clone solo incluye la rama remota del sprint; no tiene refs locales/remotas
-de `develop` o `main`. Coordinar la integración del Sprint 5 cuando exista la
-rama destino.
+Sprint 5 está integrado y publicado en `origin/develop`; la rama
+`origin/sprint/5-cierre-expediente-encuesta` quedó sincronizada. No integrar a
+`main` hasta completar la validación institucional pendiente.
 
 ## Cambios ajenos que deben preservarse
 No incluir ni revertir los cambios preexistentes en `.continuum/tools/continuum`, `.githooks/pre-commit`, `tools/continuum` ni archivos `Zone.Identifier`. `docs/formatos/` ahora contiene copias saneadas de los documentos fuente; revisar su `README.md` antes de usarlas. Los originales con datos personales se mantienen fuera del repositorio.
