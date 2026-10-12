@@ -6,4 +6,4 @@
 - [x] Paso 4 — Agregar pruebas, validar en contenedor y desplegar.
 
 ## Estado actual
-Implementación, pruebas dirigidas, migración y verificación en el entorno local completadas. Falta archivar/cerrar la tarea Continuum y crear el commit de historia.
+Implementación, pruebas dirigidas, migración, verificación en el entorno local, cierre Continuum y commit `77d7a55` completados.

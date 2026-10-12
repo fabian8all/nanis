@@ -90,4 +90,4 @@ Iniciar una nueva aplicación y establecer Continuum para descubrir requisitos, 
 - Se añadieron nombres cortos explícitos para las claves foráneas de ambas tablas HU-006 para cumplir el límite MySQL; se corrigió la relación `practice_acceptance_submission_id` y se agregó la ruta del resultado para el alumno.
 - Validación: `PracticeSupervisorEvaluationWorkflowTest` 4/33 en SQLite en memoria; Pint PASS en 11 PHP. Migración `2026_10_11_000014` aplicada a MySQL de desarrollo; `http://nanis.net` responde HTTP 200. Se preservó `.env`/APP_KEY runtime al recrear el contenedor.
 - Una ejecución de prueba inicial usó por error la base MySQL y dejó dos tablas parciales vacías. Se verificó que ambas tenían cero filas, se retiraron esas tablas temporales y la migración completa se aplicó correctamente después.
-- La tarea `gt-hu-006-implementacion-evaluacion-supervisor` se cerró/archivó; queda crear el commit selectivo de la historia en `sprint/4-evaluaciones-reporte`.
+- `gt-hu-006-implementacion-evaluacion-supervisor` quedó cerrada/archivada y comprometida en `77d7a55` sobre `sprint/4-evaluaciones-reporte`.
