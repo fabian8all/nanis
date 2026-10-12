@@ -24,4 +24,4 @@ Retomar leyendo `.ai/HANDOFF.md`, `.ai/state/estado-dev.md` y `.ai/tasks/gt-hu-0
 Después iniciar HU-013 como tarea independiente, registrar escala 1–5 y terminar Sprint 5 antes de integrarlo en `develop`.
 
 ## Cambios ajenos que deben preservarse
-No incluir ni revertir los cambios preexistentes en `.continuum/tools/continuum`, `.githooks/pre-commit`, `tools/continuum`, `docs/formatos/` ni archivos `Zone.Identifier`. Las fuentes de `docs/formatos/` pueden contener datos personales.
+No incluir ni revertir los cambios preexistentes en `.continuum/tools/continuum`, `.githooks/pre-commit`, `tools/continuum` ni archivos `Zone.Identifier`. `docs/formatos/` ahora contiene copias saneadas de los documentos fuente; revisar su `README.md` antes de usarlas. Los originales con datos personales se mantienen fuera del repositorio.
