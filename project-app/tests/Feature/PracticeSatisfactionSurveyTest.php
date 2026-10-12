@@ -81,7 +81,7 @@ class PracticeSatisfactionSurveyTest extends TestCase
         ]);
     }
 
-    public function test_only_the_assigned_verified_supervisor_can_submit_one_immutable_response_and_only_coordinator_can_read_it(): void
+    public function test_assigned_supervisor_can_review_only_their_own_final_response_and_coordinator_can_review_all(): void
     {
         [, $coordinator, $supervisor, $otherSupervisor, $practiceRequest] = $this->createPractice();
         $this->actingAs($coordinator);
@@ -136,11 +136,28 @@ class PracticeSatisfactionSurveyTest extends TestCase
         ]);
         $this->assertDatabaseCount('practice_survey_answers', 2);
 
-        $this->get(route('supervisor.practice-surveys.answer', $surveyRequest))->assertNotFound();
+        $this->get(route('supervisor.practice-surveys.answer', $surveyRequest))
+            ->assertOk()
+            ->assertSee('Respuesta final e inmutable')
+            ->assertSee('Atención oportuna')
+            ->assertDontSee('Enviar respuesta final');
         $this->get(route('supervisor.practice-surveys.index'))
             ->assertOk()
-            ->assertDontSee('Atención oportuna')
-            ->assertSee('No tienes encuestas de satisfacción pendientes');
+            ->assertSee('Consultar mi respuesta');
+
+        Livewire::test(Answer::class, ['practiceSurveyRequest' => $surveyRequest])
+            ->set("answers.{$questions[0]->id}.rating", 1)
+            ->call('submit')
+            ->assertHasErrors('survey');
+        $this->assertDatabaseHas('practice_survey_answers', [
+            'practice_survey_request_id' => $surveyRequest->id,
+            'practice_survey_question_id' => $questions[0]->id,
+            'rating' => 5,
+        ]);
+
+        $this->actingAs($otherSupervisor)
+            ->get(route('supervisor.practice-surveys.answer', $surveyRequest))
+            ->assertNotFound();
 
         $this->actingAs($coordinator)
             ->get(route('coordinacion.practice-surveys.manage'))

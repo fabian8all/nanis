@@ -7,7 +7,6 @@ use App\Enums\PracticeEvaluationStatus;
 use App\Enums\PracticePlanStatus;
 use App\Enums\PracticeReportStatus;
 use App\Enums\PracticeRequestStatus;
-use App\Enums\PracticeTerminationLetterStatus;
 use App\Enums\UserRole;
 use App\Models\PracticeRequest;
 use Illuminate\Support\Facades\Route;
@@ -24,7 +23,7 @@ class PracticeTrackingSummary
         $latestReport = $request->practiceReport?->latestVersion;
         $supervisorEvaluation = $request->practiceSupervisorEvaluation;
         $tutorEvaluation = $request->practiceEvaluation;
-        $terminationLetter = $request->terminationLetter;
+        $terminationLetter = $request->terminationLetterIssuance;
 
         return [
             $this->requestStage($request),
@@ -57,21 +56,16 @@ class PracticeTrackingSummary
      */
     public function closureRequirements(PracticeRequest $request): array
     {
-        $terminationLetter = $request->terminationLetter;
+        $terminationLetter = $request->terminationLetterIssuance;
         $approvedReport = $request->practiceReport?->approvedVersion;
         $tutorEvaluation = $request->practiceEvaluation;
         $supervisorEvaluation = $request->practiceSupervisorEvaluation;
 
         return [
             [
-                'label' => 'Carta de término aceptada',
-                'complete' => $terminationLetter?->status === PracticeTerminationLetterStatus::Accepted,
-                'status' => match ($terminationLetter?->status) {
-                    PracticeTerminationLetterStatus::Accepted => 'Aceptada',
-                    PracticeTerminationLetterStatus::Returned => 'Devuelta',
-                    PracticeTerminationLetterStatus::PendingReview => 'En revisión',
-                    default => 'Pendiente',
-                },
+                'label' => 'Carta de término emitida',
+                'complete' => $terminationLetter !== null,
+                'status' => $terminationLetter ? 'Emitida' : 'Pendiente',
             ],
             [
                 'label' => 'Reporte final aprobado',
@@ -104,7 +98,8 @@ class PracticeTrackingSummary
         return match ($request->status) {
             PracticeRequestStatus::Pending => $this->stage('Solicitud', 'Pendiente', 'Coordinación debe revisar la solicitud.', UserRole::Coordinator, 'coordinacion.practice-requests.review', [$request]),
             PracticeRequestStatus::Returned => $this->stage('Solicitud', 'Devuelta', 'El alumno debe corregir y reenviar la solicitud.', UserRole::Student, 'alumno.practice-request.show'),
-            PracticeRequestStatus::Approved, PracticeRequestStatus::Completed => $this->stage('Solicitud', 'Aprobada', 'Solicitud aprobada.', null, 'alumno.practice-request.show'),
+            PracticeRequestStatus::Approved => $this->stage('Solicitud', 'Aprobada', 'Solicitud aprobada.', null, 'alumno.practice-request.show'),
+            PracticeRequestStatus::Completed => $this->stage('Solicitud', 'Completada', 'Práctica concluida.', null, null),
         };
     }
 
@@ -196,19 +191,18 @@ class PracticeTrackingSummary
 
     private function terminationStage(PracticeRequest $request, mixed $letter): array
     {
-        if ($request->status !== PracticeRequestStatus::Approved && $request->status !== PracticeRequestStatus::Completed) {
-            return $this->stage('Carta de término', 'Bloqueada', 'Pendiente de aprobación de la solicitud.', null, null);
-        }
-
         if (! $letter) {
-            return $this->stage('Carta de término', 'Pendiente', 'El alumno debe cargar la carta empresarial.', UserRole::Student, 'alumno.practice-termination-letters.upload', [$request]);
+            $requirements = collect($this->closureRequirements($request))
+                ->reject(fn (array $item): bool => $item['label'] === 'Carta de término emitida');
+            $canIssue = $request->status === PracticeRequestStatus::Approved
+                && $requirements->every(fn (array $item): bool => $item['complete']);
+
+            return $canIssue
+                ? $this->stage('Carta de término', 'Pendiente', 'Coordinación debe emitir la carta de término.', UserRole::Coordinator, 'coordinacion.practice-records.show', [$request])
+                : $this->stage('Carta de término', 'Bloqueada', 'Pendiente de reporte aprobado y de ambas evaluaciones enviadas.', null, null);
         }
 
-        return match ($letter->status) {
-            PracticeTerminationLetterStatus::PendingReview => $this->stage('Carta de término', 'Pendiente', 'Coordinación debe revisar la carta.', UserRole::Coordinator, 'coordinacion.practice-termination-letters.review', [$letter]),
-            PracticeTerminationLetterStatus::Returned => $this->stage('Carta de término', 'Devuelta', 'El alumno debe corregir y reenviar la carta.', UserRole::Student, 'alumno.practice-termination-letters.upload', [$request]),
-            PracticeTerminationLetterStatus::Accepted => $this->stage('Carta de término', 'Aceptada', 'Carta de término aceptada.', null, 'alumno.practice-termination-letters.upload', [$request]),
-        };
+        return $this->stage('Carta de término', 'Emitida', 'Coordinación emitió la carta de término.', null, null);
     }
 
     private function closureStage(PracticeRequest $request): array

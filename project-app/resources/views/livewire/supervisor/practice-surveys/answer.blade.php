@@ -8,6 +8,20 @@
         </div>
     @endif
 
+    @if ($isReadOnly)
+        @foreach ($surveyRequest->version->questions as $question)
+            <section class="card mb-3">
+                <div class="card-body">
+                    <h2 class="h6">{{ $loop->iteration }}. {{ $question->question }}</h2>
+                    <p class="mb-1">Calificación: {{ $storedAnswers->get($question->id)?->rating }} / 5</p>
+                    @if ($question->allow_comment && $storedAnswers->get($question->id)?->comment)
+                        <p class="mb-0">Comentario: {{ $storedAnswers->get($question->id)->comment }}</p>
+                    @endif
+                </div>
+            </section>
+        @endforeach
+        <p class="text-secondary">Respuesta final e inmutable. Solo tú y Coordinación pueden consultarla.</p>
+    @else
     <form wire:submit="submit">
         @foreach ($surveyRequest->version->questions as $question)
             <fieldset class="card mb-3" wire:key="answer-question-{{ $question->id }}">
@@ -31,7 +45,8 @@
             </fieldset>
         @endforeach
 
-        <p class="text-secondary">Al enviar, la respuesta será final e inmutable. Solo Coordinación podrá consultarla.</p>
+        <p class="text-secondary">Al enviar, la respuesta será final e inmutable. Solo tú y Coordinación podrán consultarla.</p>
         <button class="btn btn-primary" type="submit" wire:loading.attr="disabled">Enviar respuesta final</button>
     </form>
+    @endif
 </section>

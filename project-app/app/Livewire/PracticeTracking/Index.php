@@ -2,6 +2,7 @@
 
 namespace App\Livewire\PracticeTracking;
 
+use App\Enums\PracticeAcceptanceStatus;
 use App\Enums\UserRole;
 use App\Models\PracticeRequest;
 use App\Services\PracticeTrackingSummary;
@@ -60,7 +61,7 @@ class Index extends Component
                 'practiceReport.approvedVersion',
                 'practiceEvaluation:id,practice_request_id,status',
                 'practiceSupervisorEvaluation:id,practice_request_id,supervisor_id,status',
-                'terminationLetter',
+                'terminationLetterIssuance',
             ])
             ->when($user->role === UserRole::Student, fn (Builder $builder) => $builder->where('user_id', $user->id))
             ->when($user->role === UserRole::Tutor, fn (Builder $builder) => $builder->where('tutor_id', $user->id))
@@ -95,7 +96,11 @@ class Index extends Component
                 'recordRoute' => match ($user->role) {
                     UserRole::Coordinator => route('coordinacion.practice-records.show', $request),
                     UserRole::Student => route('alumno.practice-records.show', $request),
-                    default => null,
+                    UserRole::Tutor => route('tutor.practice-records.show', $request),
+                    UserRole::Supervisor => $request->acceptanceSubmissions->contains(
+                        fn ($submission): bool => $submission->supervisor_id === $user->id
+                            && $submission->status === PracticeAcceptanceStatus::Accepted,
+                    ) ? route('supervisor.practice-records.show', $request) : null,
                 },
                 'pending' => collect($stages)->filter(fn (array $stage): bool => $stage['responsible'] === $user->role->value
                     && ($stage['responsible_id'] === null || $stage['responsible_id'] === $user->id))->values(),

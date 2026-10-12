@@ -17,7 +17,10 @@ class Index extends Component
         return view('livewire.supervisor.practice-surveys.index', [
             'requests' => PracticeSurveyRequest::query()
                 ->where('supervisor_id', auth()->id())
-                ->where('status', PracticeSurveyRequestStatus::Requested)
+                ->whereIn('status', [
+                    PracticeSurveyRequestStatus::Requested,
+                    PracticeSurveyRequestStatus::Responded,
+                ])
                 ->with(['practiceRequest.student:id,name', 'practiceRequest.company:id,name'])
                 ->orderByDesc('requested_at')
                 ->get(),

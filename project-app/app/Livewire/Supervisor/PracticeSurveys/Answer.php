@@ -20,14 +20,25 @@ class Answer extends Component
     {
         $this->surveyRequestId = $practiceSurveyRequest->id;
         $surveyRequest = $this->authorizedRequest();
-        foreach ($surveyRequest->version->questions as $question) {
-            $this->answers[$question->id] = ['rating' => '', 'comment' => ''];
-        }
+        $existingAnswers = $surveyRequest->answers->keyBy('practice_survey_question_id');
+        $this->answers = $surveyRequest->version->questions
+            ->mapWithKeys(fn ($question): array => [
+                $question->id => [
+                    'rating' => $existingAnswers->get($question->id)?->rating ?? '',
+                    'comment' => $existingAnswers->get($question->id)?->comment ?? '',
+                ],
+            ])
+            ->all();
     }
 
     public function submit(): void
     {
         $surveyRequest = $this->authorizedRequest();
+        if ($surveyRequest->status !== PracticeSurveyRequestStatus::Requested) {
+            throw ValidationException::withMessages([
+                'survey' => 'Esta respuesta ya fue enviada y no se puede modificar.',
+            ]);
+        }
         $questions = $surveyRequest->version->questions;
         $rules = ['answers' => ['required', 'array']];
         foreach ($questions as $question) {
@@ -89,16 +100,21 @@ class Answer extends Component
 
         return view('livewire.supervisor.practice-surveys.answer', [
             'surveyRequest' => $surveyRequest,
+            'isReadOnly' => $surveyRequest->status === PracticeSurveyRequestStatus::Responded,
+            'storedAnswers' => $surveyRequest->answers->keyBy('practice_survey_question_id'),
         ])->layout('layouts.app', ['title' => 'Responder encuesta de satisfacción']);
     }
 
     private function authorizedRequest(): PracticeSurveyRequest
     {
         $surveyRequest = PracticeSurveyRequest::query()
-            ->with(['practiceRequest.company:id,name', 'version.questions'])
+            ->with(['practiceRequest.company:id,name', 'version.questions', 'answers'])
             ->findOrFail($this->surveyRequestId);
         $this->authorizeRequest($surveyRequest);
-        abort_unless($surveyRequest->status === PracticeSurveyRequestStatus::Requested, 404);
+        abort_unless(in_array($surveyRequest->status, [
+            PracticeSurveyRequestStatus::Requested,
+            PracticeSurveyRequestStatus::Responded,
+        ], true), 404);
 
         return $surveyRequest;
     }

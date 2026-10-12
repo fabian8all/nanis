@@ -2,8 +2,11 @@
 
 namespace App\Livewire\Coordinator\PracticeTerminationLetters;
 
+use App\Enums\PracticeEvaluationStatus;
+use App\Enums\PracticeReportStatus;
+use App\Enums\PracticeRequestStatus;
 use App\Enums\UserRole;
-use App\Models\PracticeTerminationLetter;
+use App\Models\PracticeRequest;
 use Illuminate\View\View;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -17,12 +20,20 @@ class Index extends Component
         $this->authorizeCoordinator();
 
         return view('livewire.coordinator.practice-termination-letters.index', [
-            'letters' => PracticeTerminationLetter::query()
+            'practices' => PracticeRequest::query()
+                ->where('status', PracticeRequestStatus::Approved)
+                ->whereHas('practiceReport.approvedVersion', fn ($query) => $query
+                    ->where('status', PracticeReportStatus::Approved))
+                ->whereHas('practiceEvaluation', fn ($query) => $query
+                    ->where('status', PracticeEvaluationStatus::Submitted))
+                ->whereHas('practiceSupervisorEvaluation', fn ($query) => $query
+                    ->where('status', PracticeEvaluationStatus::Submitted))
+                ->whereDoesntHave('terminationLetterIssuance')
                 ->with([
-                    'practiceRequest.student:id,name',
-                    'practiceRequest.company:id,name',
+                    'student:id,name',
+                    'company:id,name',
                 ])
-                ->latest('submitted_at')
+                ->latest('id')
                 ->paginate(20),
         ])->layout('layouts.app', ['title' => 'Cartas de término']);
     }

@@ -52,6 +52,10 @@ class Show extends Component
                 ->whereKey($evaluation->practice_request_id)
                 ->where('user_id', $user->id)
                 ->exists(),
+            UserRole::Tutor => PracticeRequest::query()
+                ->whereKey($evaluation->practice_request_id)
+                ->where('tutor_id', $user->id)
+                ->exists(),
             default => false,
         };
         abort_unless($canView, 404);

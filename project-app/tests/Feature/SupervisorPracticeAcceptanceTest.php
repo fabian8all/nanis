@@ -142,7 +142,9 @@ class SupervisorPracticeAcceptanceTest extends TestCase
         $latest->update(['status' => PracticeAcceptanceStatus::Accepted]);
 
         $this->get(route('supervisor.practice-letters.show', $letter))
-            ->assertNotFound();
+            ->assertOk()
+            ->assertSee('Carta de presentación')
+            ->assertDontSee(route('supervisor.practice-acceptances.upload', $letter));
         $this->get(route('supervisor.practice-acceptances.upload', $letter))
             ->assertNotFound();
         $this->assertDatabaseCount('practice_acceptance_submissions', 1);

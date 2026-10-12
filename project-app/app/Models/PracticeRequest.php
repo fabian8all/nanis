@@ -84,9 +84,9 @@ class PracticeRequest extends Model
         return $this->hasOne(PracticeReport::class);
     }
 
-    public function terminationLetter(): HasOne
+    public function terminationLetterIssuance(): HasOne
     {
-        return $this->hasOne(PracticeTerminationLetter::class);
+        return $this->hasOne(PracticeTerminationLetterIssuance::class);
     }
 
     public function practiceEvaluation(): HasOne

@@ -3,31 +3,52 @@
 **Fecha:** 2026-10-12 · **Rol:** software/backend · **Rama:** `develop`
 
 ## Objetivo de la sesión
-Sprint 5 implementado, con historias cerradas, validadas y comprometidas por separado; integrado por fast-forward en `develop`. GitHub ya usa `develop` como rama predeterminada.
+Terminar los ajustes confirmados para el cierre del expediente, la carta de
+término, el acceso por rol y la consulta de respuestas de satisfacción.
 
-## Estado
-- HU-010 implementada y comprometida como `e40197e`; las pruebas dirigidas dieron 4 pruebas/27 aserciones y Pint pasó en 3 PHP.
-- HU-012 implementada; expediente disponible para Coordinación y alumno propietario. Pruebas dirigidas: 23/212; Pint pasa. Handoff en `.ai/tasks/_closed/gt-hu-012-expediente-practicas/handoff.md`.
-- HU-013 implementada, validada, cerrada y comprometida. Cuestionario versionado, escala 1–5, y respuestas consultables solo por Coordinación. Handoff en `.ai/tasks/_closed/gt-hu-013-encuesta-satisfaccion/handoff.md`.
-- Migración HU-009 `2026_10_12_000015` quedó aplicada en la nueva base MySQL local. `.env` tiene una `APP_KEY` nueva; conservarla mientras la base contenga datos cifrados.
+## Resultado
+- Coordinación emite e imprime una carta de término con 240 horas y espacios
+  para proyecto, firma y sello de la unidad receptora. La emisión exige reporte
+  aprobado y evaluaciones terminales de Tutor y Supervisor enviadas, registra
+  responsable/fecha y cambia la práctica a `completed`. No se carga ni conserva
+  copia firmada.
+- La migración aditiva `2026_10_12_000017` registra emisiones inmutables y no
+  elimina la tabla ni los datos históricos de HU-009.
+- Coordinación, alumno propietario y Tutor asignado consultan el expediente
+  completo. El Supervisor asignado ve carta de presentación, aceptación,
+  reporte aprobado y su evaluación; los anexos de reportes no aprobados y los
+  expedientes de otras prácticas quedan bloqueados.
+- Coordinación consulta todas las encuestas y el Supervisor destinatario solo
+  su propia respuesta final en modo lectura.
+- Backlog, flujo de caso de uso, plan del Sprint 5 y temas Continuum reflejan
+  las decisiones. Rúbricas y preguntas siguen siendo editables por Coordinación;
+  se dejan los datos ficticios. La carga de datos de prueba queda diferida.
+- Se generaron los PDF del backlog y del plan de sprints, en orientación
+  horizontal, dentro de `docs/entregables/`.
 
-## Próximo paso
-La suite Laravel completa pasa (100 pruebas/748 aserciones). Antes de integrar
-`develop` a `main`, completar la validación institucional de rúbricas, carta,
-permisos, privacidad y resguardo de HU-012/HU-013. El árbol local conserva dos
-worktrees: `develop` en `..\nanis-develop-integration` y la rama Sprint 5 en el
-directorio original; ambos están al día con su remoto.
+## Validación
+- Suite Laravel completa: **95 pruebas, 758 aserciones**.
+- Pint: **21 archivos PHP** aprobados.
+- El test suite migró la base SQLite temporal, incluida la migración 000017.
+- `python3 -m unittest discover -s tests -t .` no aplica: este worktree no
+  contiene directorio raíz `tests/`.
+- `python3 tools/continuum doctor` reportó como problemas preexistentes que
+  `AI_COLLABORATION.md`, `AGENTS.md` y `.github/copilot-instructions.md` no
+  están en Git, además de una advertencia de tamaño del paquete inicial. No se
+  modificaron esos archivos de configuración ajenos a la tarea.
 
-## Cambios ajenos que deben preservarse
-No incluir ni revertir los cambios preexistentes en `.continuum/tools/continuum`, `.githooks/pre-commit`, `tools/continuum` ni archivos `Zone.Identifier`. `docs/formatos/` ahora contiene copias saneadas de los documentos fuente; revisar su `README.md` antes de usarlas. Los originales con datos personales se mantienen fuera del repositorio.
+## Estado de Git y entorno
+- Cambios de implementación y documentación sin commit en el worktree local
+  `develop`; no se hizo push ni merge a `main`.
+- Preservar los cambios preexistentes de `.continuum/tools/continuum`,
+  `.githooks/pre-commit` y `tools/continuum`.
+- El contenedor de desarrollo en ejecución se construyó con el árbol anterior y
+  no monta este worktree; los cambios aún no aparecen en `http://nanis.net`.
+  Para probarlos visualmente habrá que reconstruir/levantar desde este árbol.
+- La prueba se hizo en un contenedor Docker desechable con el código de este
+  worktree; el `.env` marcador temporal para evitar warnings se retiró y no se
+  copiaron credenciales.
 
-## Entorno local
-Se agregó `project-app/docker-compose.override.yml` (ignorado por Git) para
-evitar los puertos ocupados por otros contenedores: `nginx-proxy` compartido
-sirve `nanis.net` por el puerto 80; el proxy local de diagnóstico escucha en
-`8000`, el acceso directo a la app en `8001` y MySQL en `3307`. La app se une a
-la red Docker externa `proxy` y se registra con `VIRTUAL_HOST=nanis.net`.
-`project-app/.env` conserva credenciales aleatorias y su `APP_KEY` nueva; está
-ignorado por Git. El stack está iniciado, la base quedó migrada y
-`http://nanis.net/login` responde HTTP 200. No se ha creado una cuenta de
-Coordinación.
+## Pendiente
+Esperar validación humana/institucional y la carga de datos de prueba solicitada
+para después. La integración de `develop` a `main` sigue pendiente de decisión.

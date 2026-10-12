@@ -5,7 +5,6 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\SamlSessionController;
 use App\Http\Controllers\Coordinator\PracticeAcceptanceFileController;
 use App\Http\Controllers\PracticeReportAttachmentController;
-use App\Http\Controllers\PracticeTerminationLetterFileController;
 use App\Http\Controllers\Supervisor\InvitationController;
 use App\Http\Middleware\EnsureCoordinator;
 use App\Http\Middleware\EnsureSupervisor;
@@ -24,18 +23,17 @@ use App\Livewire\Coordinator\PracticeRequests\Review as CoordinatorPracticeReque
 use App\Livewire\Coordinator\PracticeSupervisorEvaluations\Index as CoordinatorPracticeSupervisorEvaluations;
 use App\Livewire\Coordinator\PracticeSurveys\Manage as CoordinatorPracticeSurveys;
 use App\Livewire\Coordinator\PracticeTerminationLetters\Index as CoordinatorPracticeTerminationLetters;
-use App\Livewire\Coordinator\PracticeTerminationLetters\Review as CoordinatorPracticeTerminationLetterReview;
 use App\Livewire\Coordinator\Rubrics\Manage as CoordinatorRubrics;
 use App\Livewire\PracticeEvaluations\Show as PracticeEvaluationShow;
 use App\Livewire\PracticeRecords\Show as PracticeRecordShow;
 use App\Livewire\PracticeSupervisorEvaluations\Show as PracticeSupervisorEvaluationShow;
+use App\Livewire\PracticeTerminationLetters\PrintIssued as PracticeTerminationLetterPrint;
 use App\Livewire\PracticeTracking\Index as PracticeTrackingIndex;
 use App\Livewire\Student\Companies\Index as StudentCompanyCatalog;
 use App\Livewire\Student\PracticeLetters\Show as StudentPracticeLetter;
 use App\Livewire\Student\PracticePlans\Show as StudentPracticePlan;
 use App\Livewire\Student\PracticeReports\Show as StudentPracticeReport;
 use App\Livewire\Student\PracticeRequests\Show as StudentPracticeRequest;
-use App\Livewire\Student\PracticeTerminationLetters\Upload as StudentPracticeTerminationLetterUpload;
 use App\Livewire\Supervisor\PracticeAcceptances\Upload as SupervisorPracticeAcceptanceUpload;
 use App\Livewire\Supervisor\PracticeEvaluations\Index as SupervisorPracticeEvaluations;
 use App\Livewire\Supervisor\PracticeEvaluations\Manage as SupervisorPracticeEvaluationManage;
@@ -107,10 +105,6 @@ Route::middleware(['auth', EnsureCoordinator::class])
             ->name('practice-supervisor-evaluations.show');
         Route::get('/cartas-termino', CoordinatorPracticeTerminationLetters::class)
             ->name('practice-termination-letters.index');
-        Route::get('/cartas-termino/{practiceTerminationLetter}', CoordinatorPracticeTerminationLetterReview::class)
-            ->name('practice-termination-letters.review');
-        Route::get('/cartas-termino/{practiceTerminationLetter}/archivo', PracticeTerminationLetterFileController::class)
-            ->name('practice-termination-letters.file');
         Route::get('/seguimiento', PracticeTrackingIndex::class)->name('practice-tracking.index');
         Route::get('/expedientes/{practiceRequest}', PracticeRecordShow::class)
             ->name('practice-records.show');
@@ -145,9 +139,9 @@ Route::middleware(['auth', EnsureSupervisor::class])
             ->name('practice-supervisor-evaluations.manage');
         Route::get('/evaluaciones/{practiceSupervisorEvaluation}', PracticeSupervisorEvaluationShow::class)
             ->name('practice-supervisor-evaluations.show');
-        Route::get('/cartas-termino/{practiceTerminationLetter}/archivo', PracticeTerminationLetterFileController::class)
-            ->name('practice-termination-letters.file');
         Route::get('/seguimiento', PracticeTrackingIndex::class)->name('practice-tracking.index');
+        Route::get('/expedientes/{practiceRequest}', PracticeRecordShow::class)
+            ->name('practice-records.show');
         Route::get('/encuestas', SupervisorPracticeSurveys::class)->name('practice-surveys.index');
         Route::get('/encuestas/{practiceSurveyRequest}/responder', SupervisorPracticeSurveyAnswer::class)
             ->name('practice-surveys.answer');
@@ -173,7 +167,14 @@ Route::middleware(['auth', EnsureTutor::class])
             ->name('practice-evaluations.manage');
         Route::get('/evaluaciones/{practiceEvaluation}', PracticeEvaluationShow::class)
             ->name('practice-evaluations.show');
+        Route::get('/evaluaciones-supervisor/{practiceSupervisorEvaluation}', PracticeSupervisorEvaluationShow::class)
+            ->name('practice-supervisor-evaluations.show');
         Route::get('/seguimiento', PracticeTrackingIndex::class)->name('practice-tracking.index');
+        Route::get('/expedientes/{practiceRequest}', PracticeRecordShow::class)
+            ->name('practice-records.show');
+        Route::get('/cartas/{practiceLetter}', SupervisorPracticeLetter::class)->name('practice-letters.show');
+        Route::get('/aceptaciones/{practiceAcceptance}/archivo', PracticeAcceptanceFileController::class)
+            ->name('practice-acceptances.file');
         Route::post('/logout', function (Request $request) {
             Auth::logout();
             $request->session()->invalidate();
@@ -182,6 +183,10 @@ Route::middleware(['auth', EnsureTutor::class])
             return redirect()->route('login');
         })->name('logout');
     });
+
+Route::middleware('auth')
+    ->get('/cartas-termino/{issuance}/imprimir', PracticeTerminationLetterPrint::class)
+    ->name('practice-termination-letters.print');
 
 Route::middleware('auth')
     ->prefix('alumno')
@@ -194,14 +199,12 @@ Route::middleware('auth')
             ->name('practice-plans.show');
         Route::get('/solicitudes/{practiceRequest}/reporte-final', StudentPracticeReport::class)
             ->name('practice-reports.show');
-        Route::get('/solicitudes/{practiceRequest}/carta-termino', StudentPracticeTerminationLetterUpload::class)
-            ->name('practice-termination-letters.upload');
-        Route::get('/cartas-termino/{practiceTerminationLetter}/archivo', PracticeTerminationLetterFileController::class)
-            ->name('practice-termination-letters.file');
         Route::get('/evaluaciones/{practiceEvaluation}', PracticeEvaluationShow::class)
             ->name('practice-evaluations.show');
         Route::get('/evaluaciones-supervisor/{practiceSupervisorEvaluation}', PracticeSupervisorEvaluationShow::class)
             ->name('practice-supervisor-evaluations.show');
+        Route::get('/aceptaciones/{practiceAcceptance}/archivo', PracticeAcceptanceFileController::class)
+            ->name('practice-acceptances.file');
         Route::get('/seguimiento', PracticeTrackingIndex::class)->name('practice-tracking.index');
         Route::get('/solicitudes/{practiceRequest}/expediente', PracticeRecordShow::class)
             ->name('practice-records.show');

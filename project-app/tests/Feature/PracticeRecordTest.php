@@ -5,11 +5,11 @@ namespace Tests\Feature;
 use App\Enums\PracticeEvaluationStatus;
 use App\Enums\PracticeReportStatus;
 use App\Enums\PracticeRequestStatus;
-use App\Enums\PracticeTerminationLetterStatus;
 use App\Enums\RubricType;
 use App\Enums\UserRole;
 use App\Models\Company;
 use App\Models\PracticeEvaluation;
+use App\Models\PracticeLetter;
 use App\Models\PracticeSupervisorEvaluation;
 use App\Models\Rubric;
 use App\Models\User;
@@ -38,7 +38,7 @@ class PracticeRecordTest extends TestCase
             ->assertOk()
             ->assertSee('Expediente de práctica')
             ->assertSee('Incompleto')
-            ->assertSee('Carta de término aceptada')
+            ->assertSee('Carta de término emitida')
             ->assertSee('Reporte final aprobado')
             ->assertSee('Evaluación terminal del Tutor enviada')
             ->assertSee('Evaluación terminal del Supervisor enviada');
@@ -59,17 +59,21 @@ class PracticeRecordTest extends TestCase
             ->assertSee(route('coordinacion.practice-records.show', $request));
     }
 
-    public function test_only_the_owner_student_and_coordinator_can_open_a_record(): void
+    public function test_only_the_owner_student_assigned_tutor_and_coordinator_can_open_a_record(): void
     {
         [$student, $tutor, $supervisor, $coordinator, $request] = $this->createPractice();
         $otherStudent = User::factory()->create(['role' => UserRole::Student]);
+        $otherTutor = User::factory()->create(['role' => UserRole::Tutor]);
 
         $this->actingAs($otherStudent)
             ->get(route('alumno.practice-records.show', $request))
             ->assertNotFound();
 
         $this->actingAs($tutor)
-            ->get(route('alumno.practice-records.show', $request))
+            ->get(route('tutor.practice-records.show', $request))
+            ->assertOk();
+        $this->actingAs($otherTutor)
+            ->get(route('tutor.practice-records.show', $request))
             ->assertNotFound();
 
         $this->actingAs($supervisor)
@@ -89,27 +93,37 @@ class PracticeRecordTest extends TestCase
     {
         Storage::fake('local');
         [$student, $tutor, $supervisor, $coordinator, $request] = $this->createPractice();
+        $acceptancePath = "practice-acceptances/{$request->id}/acceptance.pdf";
+        Storage::disk('local')->put($acceptancePath, 'accepted letter');
         $acceptance = $request->acceptanceSubmissions()->create([
             'supervisor_id' => $supervisor->id,
             'version' => 1,
-            'file_path' => "practice-acceptances/{$request->id}/acceptance.pdf",
+            'file_path' => $acceptancePath,
             'file_extension' => 'pdf',
             'mime_type' => 'application/pdf',
             'file_size' => 10,
             'status' => 'accepted',
             'submitted_at' => now(),
         ]);
-
-        $letterPath = "practice-termination-letters/{$request->id}/cierre.pdf";
-        Storage::disk('local')->put($letterPath, 'carta');
-        $letter = $request->terminationLetter()->create([
-            'file_path' => $letterPath,
-            'original_name' => 'cierre.pdf',
-            'mime_type' => 'application/pdf',
-            'file_size' => 5,
-            'status' => PracticeTerminationLetterStatus::Accepted,
-            'submitted_at' => now(),
+        $practiceLetter = PracticeLetter::query()->create([
+            'practice_request_id' => $request->id,
+            'coordinator_id' => $coordinator->id,
+            'folio_year' => 2026,
+            'folio_number' => $request->id,
+            'folio' => "CP-2026-{$request->id}",
+            'letter_recipient' => 'Dirección',
+            'position' => 'Auxiliar',
+            'practice_location' => 'Colima',
+            'start_date' => $request->start_date,
+            'end_date' => $request->end_date,
+            'issued_at' => now(),
         ]);
+
+        $issuance = $request->terminationLetterIssuance()->create([
+            'issued_by' => $coordinator->id,
+            'issued_at' => now(),
+        ]);
+        $request->update(['status' => PracticeRequestStatus::Completed]);
 
         $report = $request->practiceReport()->create([]);
         $reportVersion = $report->versions()->create([
@@ -163,14 +177,15 @@ class PracticeRecordTest extends TestCase
             ->get(route('alumno.practice-records.show', $request))
             ->assertOk()
             ->assertSee('Completo')
+            ->assertSee(route('practice-termination-letters.print', $issuance))
             ->assertSee('Objetivo documentado')
-            ->assertSee('cierre.pdf')
             ->assertSee('evidencia.pdf')
             ->assertSee(route('alumno.practice-evaluations.show', $tutorEvaluation))
             ->assertSee(route('alumno.practice-supervisor-evaluations.show', $supervisorEvaluation));
 
-        $this->get(route('alumno.practice-termination-letters.file', $letter))->assertOk();
+        $this->get(route('practice-termination-letters.print', $issuance))->assertOk();
         $this->get(route('practice-reports.attachments.download', $attachment))->assertOk();
+        $this->get(route('alumno.practice-acceptances.file', $acceptance))->assertOk();
 
         $this->actingAs($coordinator)
             ->get(route('coordinacion.practice-records.show', $request))
@@ -178,6 +193,131 @@ class PracticeRecordTest extends TestCase
             ->assertSee('Completo')
             ->assertSee(route('coordinacion.practice-evaluations.show', $tutorEvaluation))
             ->assertSee(route('coordinacion.practice-supervisor-evaluations.show', $supervisorEvaluation));
+        $this->get(route('coordinacion.practice-acceptances.file', $acceptance))->assertOk();
+
+        $this->actingAs($tutor)
+            ->get(route('tutor.practice-records.show', $request))
+            ->assertOk()
+            ->assertSee('Completo')
+            ->assertSee('Carta de presentación')
+            ->assertSee('Carta de aceptación')
+            ->assertSee(route('tutor.practice-letters.show', $request->letter))
+            ->assertSee(route('tutor.practice-acceptances.file', $acceptance))
+            ->assertSee(route('practice-termination-letters.print', $issuance))
+            ->assertSee(route('tutor.practice-supervisor-evaluations.show', $supervisorEvaluation));
+        $this->get(route('tutor.practice-acceptances.file', $acceptance))->assertOk();
+    }
+
+    public function test_assigned_supervisor_sees_only_their_four_allowed_documents(): void
+    {
+        Storage::fake('local');
+        [$student, $tutor, $supervisor, $coordinator, $request] = $this->createPractice();
+        $acceptancePath = "practice-acceptances/{$request->id}/acceptance.pdf";
+        Storage::disk('local')->put($acceptancePath, 'acceptance');
+        $acceptance = $request->acceptanceSubmissions()->create([
+            'supervisor_id' => $supervisor->id,
+            'version' => 1,
+            'file_path' => $acceptancePath,
+            'file_extension' => 'pdf',
+            'mime_type' => 'application/pdf',
+            'file_size' => 10,
+            'status' => 'accepted',
+            'submitted_at' => now(),
+        ]);
+        $practiceLetter = PracticeLetter::query()->create([
+            'practice_request_id' => $request->id,
+            'coordinator_id' => $coordinator->id,
+            'folio_year' => 2026,
+            'folio_number' => $request->id,
+            'folio' => "CP-2026-{$request->id}",
+            'letter_recipient' => 'Dirección',
+            'position' => 'Auxiliar',
+            'practice_location' => 'Colima',
+            'start_date' => $request->start_date,
+            'end_date' => $request->end_date,
+            'issued_at' => now(),
+        ]);
+        $report = $request->practiceReport()->create([]);
+        $approvedVersion = $report->versions()->create([
+            'version' => 1,
+            'status' => PracticeReportStatus::Approved,
+            'company_name' => $request->company->name,
+            'area' => 'Operaciones',
+            'period' => 'Periodo de prueba',
+            'objectives' => 'Objetivo compartido',
+            'activities' => 'Actividades compartidas',
+            'outcomes' => 'Resultados compartidos',
+            'conclusions' => 'Conclusiones compartidas',
+            'recommendations' => 'Recomendaciones compartidas',
+            'submitted_at' => now(),
+            'reviewed_by' => $tutor->id,
+            'reviewed_at' => now(),
+        ]);
+        $report->update(['approved_version_id' => $approvedVersion->id]);
+        $attachmentPath = "practice-reports/{$request->id}/approved.pdf";
+        Storage::disk('local')->put($attachmentPath, 'approved report attachment');
+        $attachment = $approvedVersion->attachments()->create([
+            'file_path' => $attachmentPath,
+            'original_name' => 'reporte.pdf',
+            'mime_type' => 'application/pdf',
+            'file_size' => 10,
+        ]);
+        $supervisorRubric = Rubric::query()->where('type', RubricType::Supervisor->value)->firstOrFail()->versions()->firstOrFail();
+        $evaluation = $request->practiceSupervisorEvaluation()->create([
+            'practice_acceptance_submission_id' => $acceptance->id,
+            'supervisor_id' => $supervisor->id,
+            'rubric_version_id' => $supervisorRubric->id,
+            'status' => PracticeEvaluationStatus::Submitted,
+            'score_total' => 91,
+            'submitted_at' => now(),
+        ]);
+
+        $this->actingAs($supervisor)
+            ->get(route('supervisor.practice-records.show', $request))
+            ->assertOk()
+            ->assertSee('Carta de presentación')
+            ->assertSee('Carta de aceptación')
+            ->assertSee('Reporte final del alumno')
+            ->assertSee('Objetivo compartido')
+            ->assertSee('Tu evaluación')
+            ->assertDontSee('Requisitos de cierre')
+            ->assertDontSee('Evaluación terminal del Tutor')
+            ->assertDontSee('Carta de término');
+
+        $this->get(route('supervisor.practice-letters.show', $practiceLetter))->assertOk();
+        $this->get(route('supervisor.practice-acceptances.file', $acceptance))->assertOk();
+        $this->get(route('practice-reports.attachments.download', $attachment))->assertOk();
+        $this->get(route('supervisor.practice-supervisor-evaluations.show', $evaluation))->assertOk();
+
+        $otherSupervisor = User::factory()->create([
+            'role' => UserRole::Supervisor,
+            'company_id' => $request->company_id,
+            'email_verified_at' => now(),
+        ]);
+        $this->actingAs($otherSupervisor)
+            ->get(route('supervisor.practice-records.show', $request))
+            ->assertNotFound();
+        $this->get(route('supervisor.practice-acceptances.file', $acceptance))->assertForbidden();
+        $this->get(route('practice-reports.attachments.download', $attachment))->assertForbidden();
+
+        $misassignedSupervisor = User::factory()->create([
+            'role' => UserRole::Supervisor,
+            'company_id' => Company::query()->create(['name' => 'Empresa no asignada'])->id,
+            'email_verified_at' => now(),
+        ]);
+        $request->acceptanceSubmissions()->create([
+            'supervisor_id' => $misassignedSupervisor->id,
+            'version' => 2,
+            'file_path' => "practice-acceptances/{$request->id}/misassigned.pdf",
+            'file_extension' => 'pdf',
+            'mime_type' => 'application/pdf',
+            'file_size' => 10,
+            'status' => 'accepted',
+            'submitted_at' => now(),
+        ]);
+        $this->actingAs($misassignedSupervisor)
+            ->get(route('supervisor.practice-records.show', $request))
+            ->assertNotFound();
     }
 
     private function createPractice(): array
@@ -189,6 +329,7 @@ class PracticeRecordTest extends TestCase
         $supervisor = User::factory()->create([
             'role' => UserRole::Supervisor,
             'company_id' => $company->id,
+            'email_verified_at' => now(),
         ]);
         $request = $student->practiceRequests()->create([
             'tutor_id' => $tutor->id,

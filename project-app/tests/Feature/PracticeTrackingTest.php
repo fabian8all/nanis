@@ -2,8 +2,8 @@
 
 namespace Tests\Feature;
 
-use App\Enums\PracticeRequestStatus;
 use App\Enums\PracticeAcceptanceStatus;
+use App\Enums\PracticeRequestStatus;
 use App\Enums\UserRole;
 use App\Livewire\PracticeTracking\Index;
 use App\Models\Company;
@@ -71,7 +71,7 @@ class PracticeTrackingTest extends TestCase
             ->assertDontSee('Hotel Ajeno')
             ->assertDontSee('Alumno Ajeno')
             ->assertSee('El alumno debe registrar el plan de trabajo')
-            ->assertSee('acciones pendientes');
+            ->assertSee('Tienes 1 acción pendiente');
 
         $this->actingAs($coordinator)
             ->get(route('coordinacion.practice-tracking.index'))
