@@ -29,6 +29,7 @@ class DemoDataSeederTest extends TestCase
             'alumno@nanis.test',
         ])->count());
         $this->assertSame(UserRole::Tutor, User::query()->where('email', 'asesor@nanis.test')->firstOrFail()->role);
+        $this->assertNotNull(User::query()->where('email', 'supervisor@nanis.test')->firstOrFail()->email_verified_at);
         $this->assertDatabaseCount('practice_requests', 1);
         $request = PracticeRequest::query()->sole();
         $this->assertSame('approved', $request->status->value);

@@ -45,6 +45,9 @@ class DemoDataSeeder extends Seeder
                 ]);
                 $created[] = $email;
             }
+            if ($role === UserRole::Supervisor && $user->email_verified_at === null) {
+                $user->forceFill(['email_verified_at' => now()])->save();
+            }
         }
 
         $coordinator = User::query()->where('email', 'coordinacion@nanis.test')->firstOrFail();
@@ -169,11 +172,17 @@ class DemoDataSeeder extends Seeder
 
         $this->command?->info('Datos demo listos. No se generó una evaluación porque la rúbrica Tutor no está publicada.');
         if ($created !== []) {
-            $this->command?->info('Contraseña temporal de las cuentas nuevas: '.$password);
+            $passwordAccounts = array_values(array_diff($created, ['alumno@nanis.test']));
+            if ($passwordAccounts !== []) {
+                $this->command?->info('Contraseña temporal para las cuentas con acceso local: '.$password);
+            }
             $this->command?->table(['Perfil', 'Correo'], array_map(
                 fn (string $email): array => [$accounts[$email][0], $email],
                 $created,
             ));
+            if (in_array('alumno@nanis.test', $created, true)) {
+                $this->command?->info('El alumno ingresa mediante el simulador SAML local; no tiene acceso por contraseña.');
+            }
             $this->command?->warn('Guarda la contraseña ahora: no se muestra de nuevo en ejecuciones posteriores.');
         } else {
             $this->command?->info('Las cuentas demo ya existían; se conservaron sus contraseñas actuales.');
