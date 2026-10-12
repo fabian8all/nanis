@@ -6,6 +6,7 @@ use App\Enums\PracticeAcceptanceStatus;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 #[Fillable([
     'practice_request_id',
@@ -47,5 +48,10 @@ class PracticeAcceptanceSubmission extends Model
     public function reviewer(): BelongsTo
     {
         return $this->belongsTo(User::class, 'reviewed_by');
+    }
+
+    public function practiceSupervisorEvaluation(): HasOne
+    {
+        return $this->hasOne(PracticeSupervisorEvaluation::class);
     }
 }

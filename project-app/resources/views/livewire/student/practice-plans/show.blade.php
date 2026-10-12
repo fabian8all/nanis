@@ -12,6 +12,9 @@
         <div class="alert alert-info" role="status">El supervisor aprobó tu plan; está pendiente de revisión por Coordinación.</div>
     @elseif ($latestVersion?->status === \App\Enums\PracticePlanStatus::Approved)
         <div class="alert alert-success" role="status">Coordinación aprobó tu plan de trabajo.</div>
+        @if ($request->practiceSupervisorEvaluation?->isSubmitted())
+            <a class="btn btn-outline-primary" href="{{ route('alumno.practice-supervisor-evaluations.show', $request->practiceSupervisorEvaluation) }}">Consultar evaluación final del supervisor</a>
+        @endif
     @elseif ($latestVersion?->status === \App\Enums\PracticePlanStatus::ReturnedBySupervisor)
         <div class="alert alert-warning" role="alert">El supervisor devolvió el plan: {{ $latestVersion->supervisor_review_comment }}</div>
     @elseif ($latestVersion?->status === \App\Enums\PracticePlanStatus::ReturnedByCoordinator)

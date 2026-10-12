@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 
 #[Fillable([
     'user_id',
+    'tutor_id',
     'company_id',
     'ucol_email',
     'nss',
@@ -43,6 +44,11 @@ class PracticeRequest extends Model
         return $this->belongsTo(User::class, 'user_id');
     }
 
+    public function tutor(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'tutor_id');
+    }
+
     public function company(): BelongsTo
     {
         return $this->belongsTo(Company::class);
@@ -71,5 +77,20 @@ class PracticeRequest extends Model
     public function practicePlan(): HasOne
     {
         return $this->hasOne(PracticePlan::class);
+    }
+
+    public function practiceReport(): HasOne
+    {
+        return $this->hasOne(PracticeReport::class);
+    }
+
+    public function practiceEvaluation(): HasOne
+    {
+        return $this->hasOne(PracticeEvaluation::class);
+    }
+
+    public function practiceSupervisorEvaluation(): HasOne
+    {
+        return $this->hasOne(PracticeSupervisorEvaluation::class);
     }
 }
