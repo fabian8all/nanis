@@ -20,14 +20,18 @@ use App\Livewire\Coordinator\PracticePlans\Review as CoordinatorPracticePlanRevi
 use App\Livewire\Coordinator\PracticeReports\Index as CoordinatorPracticeReports;
 use App\Livewire\Coordinator\PracticeRequests\Index as CoordinatorPracticeRequests;
 use App\Livewire\Coordinator\PracticeRequests\Review as CoordinatorPracticeRequestReview;
+use App\Livewire\Coordinator\PracticeSupervisorEvaluations\Index as CoordinatorPracticeSupervisorEvaluations;
 use App\Livewire\Coordinator\Rubrics\Manage as CoordinatorRubrics;
 use App\Livewire\PracticeEvaluations\Show as PracticeEvaluationShow;
+use App\Livewire\PracticeSupervisorEvaluations\Show as PracticeSupervisorEvaluationShow;
 use App\Livewire\Student\Companies\Index as StudentCompanyCatalog;
 use App\Livewire\Student\PracticeLetters\Show as StudentPracticeLetter;
 use App\Livewire\Student\PracticePlans\Show as StudentPracticePlan;
 use App\Livewire\Student\PracticeReports\Show as StudentPracticeReport;
 use App\Livewire\Student\PracticeRequests\Show as StudentPracticeRequest;
 use App\Livewire\Supervisor\PracticeAcceptances\Upload as SupervisorPracticeAcceptanceUpload;
+use App\Livewire\Supervisor\PracticeEvaluations\Index as SupervisorPracticeEvaluations;
+use App\Livewire\Supervisor\PracticeEvaluations\Manage as SupervisorPracticeEvaluationManage;
 use App\Livewire\Supervisor\PracticeLetters\Index as SupervisorPracticeLetters;
 use App\Livewire\Supervisor\PracticeLetters\Show as SupervisorPracticeLetter;
 use App\Livewire\Supervisor\PracticePlans\Index as SupervisorPracticePlans;
@@ -88,6 +92,10 @@ Route::middleware(['auth', EnsureCoordinator::class])
         Route::get('/reportes-finales', CoordinatorPracticeReports::class)->name('practice-reports.index');
         Route::get('/evaluaciones-tutor', CoordinatorPracticeEvaluations::class)->name('practice-evaluations.index');
         Route::get('/evaluaciones-tutor/{practiceEvaluation}', PracticeEvaluationShow::class)->name('practice-evaluations.show');
+        Route::get('/evaluaciones-supervisor', CoordinatorPracticeSupervisorEvaluations::class)
+            ->name('practice-supervisor-evaluations.index');
+        Route::get('/evaluaciones-supervisor/{practiceSupervisorEvaluation}', PracticeSupervisorEvaluationShow::class)
+            ->name('practice-supervisor-evaluations.show');
         Route::get('/rubricas', CoordinatorRubrics::class)->name('rubrics.manage');
 
         Route::post('/logout', function (Request $request) {
@@ -112,6 +120,12 @@ Route::middleware(['auth', EnsureSupervisor::class])
         Route::get('/planes-trabajo', SupervisorPracticePlans::class)->name('practice-plans.index');
         Route::get('/planes-trabajo/{practicePlanVersion}', SupervisorPracticePlanReview::class)
             ->name('practice-plans.review');
+        Route::get('/evaluaciones', SupervisorPracticeEvaluations::class)
+            ->name('practice-supervisor-evaluations.index');
+        Route::get('/evaluaciones/{practiceRequest}/gestionar', SupervisorPracticeEvaluationManage::class)
+            ->name('practice-supervisor-evaluations.manage');
+        Route::get('/evaluaciones/{practiceSupervisorEvaluation}', PracticeSupervisorEvaluationShow::class)
+            ->name('practice-supervisor-evaluations.show');
 
         Route::post('/logout', function (Request $request) {
             Auth::logout();
@@ -134,7 +148,6 @@ Route::middleware(['auth', EnsureTutor::class])
             ->name('practice-evaluations.manage');
         Route::get('/evaluaciones/{practiceEvaluation}', PracticeEvaluationShow::class)
             ->name('practice-evaluations.show');
-
         Route::post('/logout', function (Request $request) {
             Auth::logout();
             $request->session()->invalidate();
@@ -157,6 +170,8 @@ Route::middleware('auth')
             ->name('practice-reports.show');
         Route::get('/evaluaciones/{practiceEvaluation}', PracticeEvaluationShow::class)
             ->name('practice-evaluations.show');
+        Route::get('/evaluaciones-supervisor/{practiceSupervisorEvaluation}', PracticeSupervisorEvaluationShow::class)
+            ->name('practice-supervisor-evaluations.show');
 
         Route::post('/logout', function (Request $request) {
             abort_unless($request->user()?->role === UserRole::Student, 403);

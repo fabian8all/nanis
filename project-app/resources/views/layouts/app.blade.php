@@ -19,7 +19,8 @@
                     <a class="nav-link me-3" href="{{ route('coordinacion.practice-acceptances.index') }}">Aceptaciones</a>
                     <a class="nav-link me-3" href="{{ route('coordinacion.practice-plans.index') }}">Planes</a>
                     <a class="nav-link me-3" href="{{ route('coordinacion.practice-reports.index') }}">Reportes</a>
-                    <a class="nav-link me-3" href="{{ route('coordinacion.practice-evaluations.index') }}">Evaluaciones</a>
+                    <a class="nav-link me-3" href="{{ route('coordinacion.practice-evaluations.index') }}">Eval. tutor</a>
+                    <a class="nav-link me-3" href="{{ route('coordinacion.practice-supervisor-evaluations.index') }}">Eval. supervisor</a>
                     <a class="nav-link me-3" href="{{ route('coordinacion.rubrics.manage') }}">Rúbricas</a>
                     <form method="POST" action="{{ route('coordinacion.logout') }}">
                         @csrf
@@ -38,6 +39,7 @@
                     <span class="navbar-text me-auto">Supervisor de empresa</span>
                     <a class="nav-link me-3" href="{{ route('supervisor.practice-letters.index') }}">Cartas pendientes</a>
                     <a class="nav-link me-3" href="{{ route('supervisor.practice-plans.index') }}">Planes de trabajo</a>
+                    <a class="nav-link me-3" href="{{ route('supervisor.practice-supervisor-evaluations.index') }}">Evaluaciones</a>
                     <form method="POST" action="{{ route('supervisor.logout') }}">
                         @csrf
                         <button class="btn btn-outline-secondary btn-sm" type="submit">Cerrar sesión</button>

@@ -88,4 +88,9 @@ class PracticeRequest extends Model
     {
         return $this->hasOne(PracticeEvaluation::class);
     }
+
+    public function practiceSupervisorEvaluation(): HasOne
+    {
+        return $this->hasOne(PracticeSupervisorEvaluation::class);
+    }
 }
