@@ -3,8 +3,8 @@
 - El catálogo muestra nombre, dirección, teléfono, email y persona de contacto; Coordinación da altas/bajas manualmente. La baja oculta a la empresa en nuevas solicitudes, pero conserva referencias existentes y no afecta prácticas iniciadas.
 - Conciliar canales del prototipo frente a Drive/correo/Classroom/papel descritos en el procedimiento institucional 2025.
 - HU-006, HU-007, HU-016 y HU-017 están implementadas y desplegadas en Sprint 4. La rúbrica de Tutor publicada en desarrollo es temporal/ficticia para demostración; falta que Coordinación publique las rúbricas institucionales. La rúbrica Supervisor continúa como borrador, por lo que HU-006 no inicia aún en demo. La práctica sintética recorre aceptación, plan y reporte aprobados.
-- Sprint 5 en curso en `sprint/5-cierre-expediente-encuesta`: HU-008/009/010/012 implementadas; HU-013 pendiente. La migración HU-009 000015 está aplicada en MySQL local.
-- HU-012 implementada y validada: vista consolidada restringida a Coordinación y alumno propietario, con pendientes y cierre por carta aceptada, reporte aprobado y dos evaluaciones enviadas. Continuar HU-013 en tarea independiente; escala de encuesta confirmada: 1–5.
+- Sprint 5 HU-008/009/010/012/013 implementado y comprometido en `sprint/5-cierre-expediente-encuesta`; 000015/000016 aplicadas a MySQL local. Coordinar integración porque este clone no tiene refs `develop` ni `main`.
+- HU-012 entrega el expediente restringido a Coordinación/alumno propietario; HU-013 usa preguntas institucionales versionadas (escala 1–5), respuesta privada para Coordinación y no bloquea el cierre. Validar institucionalmente resguardo y permisos de ambas historias.
 - Validar permisos/tareas de coordinador, asesor, alumno y empresa, además de estados/plazos.
 - El NSS (11 dígitos) y número de cuenta (8 dígitos) son obligatorios y cifrados en el expediente: alumno propietario y Coordinación acceden al expediente; un supervisor solo los ve dentro de la carta oficial emitida para su propia empresa.
 - Revisar con la autora la observación de R5 sobre el enfoque de Capacidades Humanas y definir su impacto en objetivos/indicadores.

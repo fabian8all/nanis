@@ -24,6 +24,7 @@
                     <a class="nav-link me-3" href="{{ route('coordinacion.practice-evaluations.index') }}">Eval. tutor</a>
                     <a class="nav-link me-3" href="{{ route('coordinacion.practice-supervisor-evaluations.index') }}">Eval. supervisor</a>
                     <a class="nav-link me-3" href="{{ route('coordinacion.rubrics.manage') }}">Rúbricas</a>
+                    <a class="nav-link me-3" href="{{ route('coordinacion.practice-surveys.manage') }}">Encuestas</a>
                     <form method="POST" action="{{ route('coordinacion.logout') }}">
                         @csrf
                         <button class="btn btn-outline-secondary btn-sm" type="submit">Cerrar sesión</button>
@@ -44,6 +45,7 @@
                     <a class="nav-link me-3" href="{{ route('supervisor.practice-letters.index') }}">Cartas pendientes</a>
                     <a class="nav-link me-3" href="{{ route('supervisor.practice-plans.index') }}">Planes de trabajo</a>
                     <a class="nav-link me-3" href="{{ route('supervisor.practice-supervisor-evaluations.index') }}">Evaluaciones</a>
+                    <a class="nav-link me-3" href="{{ route('supervisor.practice-surveys.index') }}">Encuestas</a>
                     <form method="POST" action="{{ route('supervisor.logout') }}">
                         @csrf
                         <button class="btn btn-outline-secondary btn-sm" type="submit">Cerrar sesión</button>

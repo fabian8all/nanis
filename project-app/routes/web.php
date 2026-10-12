@@ -22,6 +22,7 @@ use App\Livewire\Coordinator\PracticeReports\Index as CoordinatorPracticeReports
 use App\Livewire\Coordinator\PracticeRequests\Index as CoordinatorPracticeRequests;
 use App\Livewire\Coordinator\PracticeRequests\Review as CoordinatorPracticeRequestReview;
 use App\Livewire\Coordinator\PracticeSupervisorEvaluations\Index as CoordinatorPracticeSupervisorEvaluations;
+use App\Livewire\Coordinator\PracticeSurveys\Manage as CoordinatorPracticeSurveys;
 use App\Livewire\Coordinator\PracticeTerminationLetters\Index as CoordinatorPracticeTerminationLetters;
 use App\Livewire\Coordinator\PracticeTerminationLetters\Review as CoordinatorPracticeTerminationLetterReview;
 use App\Livewire\Coordinator\Rubrics\Manage as CoordinatorRubrics;
@@ -42,6 +43,8 @@ use App\Livewire\Supervisor\PracticeLetters\Index as SupervisorPracticeLetters;
 use App\Livewire\Supervisor\PracticeLetters\Show as SupervisorPracticeLetter;
 use App\Livewire\Supervisor\PracticePlans\Index as SupervisorPracticePlans;
 use App\Livewire\Supervisor\PracticePlans\Review as SupervisorPracticePlanReview;
+use App\Livewire\Supervisor\PracticeSurveys\Answer as SupervisorPracticeSurveyAnswer;
+use App\Livewire\Supervisor\PracticeSurveys\Index as SupervisorPracticeSurveys;
 use App\Livewire\Tutor\PracticeEvaluations\Index as TutorPracticeEvaluations;
 use App\Livewire\Tutor\PracticeEvaluations\Manage as TutorPracticeEvaluationManage;
 use App\Livewire\Tutor\PracticeReports\Index as TutorPracticeReports;
@@ -112,6 +115,7 @@ Route::middleware(['auth', EnsureCoordinator::class])
         Route::get('/expedientes/{practiceRequest}', PracticeRecordShow::class)
             ->name('practice-records.show');
         Route::get('/rubricas', CoordinatorRubrics::class)->name('rubrics.manage');
+        Route::get('/encuestas', CoordinatorPracticeSurveys::class)->name('practice-surveys.manage');
 
         Route::post('/logout', function (Request $request) {
             Auth::logout();
@@ -144,6 +148,9 @@ Route::middleware(['auth', EnsureSupervisor::class])
         Route::get('/cartas-termino/{practiceTerminationLetter}/archivo', PracticeTerminationLetterFileController::class)
             ->name('practice-termination-letters.file');
         Route::get('/seguimiento', PracticeTrackingIndex::class)->name('practice-tracking.index');
+        Route::get('/encuestas', SupervisorPracticeSurveys::class)->name('practice-surveys.index');
+        Route::get('/encuestas/{practiceSurveyRequest}/responder', SupervisorPracticeSurveyAnswer::class)
+            ->name('practice-surveys.answer');
 
         Route::post('/logout', function (Request $request) {
             Auth::logout();
