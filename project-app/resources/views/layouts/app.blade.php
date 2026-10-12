@@ -15,6 +15,7 @@
                 @if ($role === 'coordinator')
                     <a class="navbar-brand" href="{{ route('coordinacion.companies.index') }}">Nanis</a>
                     <span class="navbar-text me-auto">Coordinación</span>
+                    <a class="nav-link me-3" href="{{ route('coordinacion.practice-tracking.index') }}">Seguimiento</a>
                     <a class="nav-link me-3" href="{{ route('coordinacion.practice-requests.index') }}">Solicitudes</a>
                     <a class="nav-link me-3" href="{{ route('coordinacion.practice-acceptances.index') }}">Aceptaciones</a>
                     <a class="nav-link me-3" href="{{ route('coordinacion.practice-termination-letters.index') }}">Cartas de término</a>
@@ -30,6 +31,7 @@
                 @elseif ($role === 'student')
                     <a class="navbar-brand" href="{{ route('alumno.companies.index') }}">Nanis</a>
                     <span class="navbar-text me-auto">Alumno</span>
+                    <a class="nav-link me-3" href="{{ route('alumno.practice-tracking.index') }}">Seguimiento</a>
                     <a class="nav-link me-3" href="{{ route('alumno.practice-request.show') }}">Solicitud de práctica</a>
                     <form method="POST" action="{{ route('alumno.logout') }}">
                         @csrf
@@ -38,6 +40,7 @@
                 @elseif ($role === 'supervisor')
                     <a class="navbar-brand" href="{{ route('supervisor.practice-letters.index') }}">Nanis</a>
                     <span class="navbar-text me-auto">Supervisor de empresa</span>
+                    <a class="nav-link me-3" href="{{ route('supervisor.practice-tracking.index') }}">Seguimiento</a>
                     <a class="nav-link me-3" href="{{ route('supervisor.practice-letters.index') }}">Cartas pendientes</a>
                     <a class="nav-link me-3" href="{{ route('supervisor.practice-plans.index') }}">Planes de trabajo</a>
                     <a class="nav-link me-3" href="{{ route('supervisor.practice-supervisor-evaluations.index') }}">Evaluaciones</a>
@@ -48,6 +51,7 @@
                 @elseif ($role === 'tutor')
                     <a class="navbar-brand" href="{{ route('tutor.practice-reports.index') }}">Nanis</a>
                     <span class="navbar-text me-auto">Tutor</span>
+                    <a class="nav-link me-3" href="{{ route('tutor.practice-tracking.index') }}">Seguimiento</a>
                     <a class="nav-link me-3" href="{{ route('tutor.practice-reports.index') }}">Reportes finales</a>
                     <a class="nav-link me-3" href="{{ route('tutor.practice-evaluations.index') }}">Evaluaciones</a>
                     <form method="POST" action="{{ route('tutor.logout') }}">
