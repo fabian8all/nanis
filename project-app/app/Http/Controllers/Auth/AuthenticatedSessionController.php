@@ -39,6 +39,7 @@ class AuthenticatedSessionController extends Controller
             UserRole::Supervisor => $user->email_verified_at && $user->company_id !== null
                     ? 'supervisor.practice-letters.index'
                     : null,
+            UserRole::Tutor => 'tutor.practice-reports.index',
             default => null,
         };
 

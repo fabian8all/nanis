@@ -54,4 +54,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(PracticeRequest::class);
     }
+
+    public function assignedPracticeRequests(): HasMany
+    {
+        return $this->hasMany(PracticeRequest::class, 'tutor_id');
+    }
 }

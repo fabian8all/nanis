@@ -18,6 +18,9 @@
                     <a class="btn btn-primary" href="{{ route('alumno.practice-letters.show', $practiceRequest->letter) }}">Consultar / imprimir o guardar como PDF</a>
                     @if ($practiceRequest->latestAcceptanceSubmission?->status === \App\Enums\PracticeAcceptanceStatus::Accepted)
                         <a class="btn btn-outline-primary" href="{{ route('alumno.practice-plans.show', $practiceRequest) }}">Registrar o consultar plan de trabajo</a>
+                        @if ($practiceRequest->practicePlan?->latestVersion?->status === \App\Enums\PracticePlanStatus::Approved)
+                            <a class="btn btn-outline-primary" href="{{ route('alumno.practice-reports.show', $practiceRequest) }}">Registrar o consultar reporte final</a>
+                        @endif
                     @endif
                 </div>
             @else
