@@ -53,4 +53,9 @@ class PracticeReportVersion extends Model
     {
         return $this->hasMany(PracticeReportAttachment::class, 'practice_report_version_id');
     }
+
+    public function practiceEvaluations(): HasMany
+    {
+        return $this->hasMany(PracticeEvaluation::class);
+    }
 }

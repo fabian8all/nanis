@@ -13,6 +13,7 @@ use App\Livewire\Companies\Index as CompanyCatalog;
 use App\Livewire\Coordinator\Companies\InviteSupervisor as CoordinatorInviteSupervisor;
 use App\Livewire\Coordinator\PracticeAcceptances\Index as CoordinatorPracticeAcceptances;
 use App\Livewire\Coordinator\PracticeAcceptances\Review as CoordinatorPracticeAcceptanceReview;
+use App\Livewire\Coordinator\PracticeEvaluations\Index as CoordinatorPracticeEvaluations;
 use App\Livewire\Coordinator\PracticeLetters\PrintLetter as PracticeLetterPrinter;
 use App\Livewire\Coordinator\PracticePlans\Index as CoordinatorPracticePlans;
 use App\Livewire\Coordinator\PracticePlans\Review as CoordinatorPracticePlanReview;
@@ -20,6 +21,7 @@ use App\Livewire\Coordinator\PracticeReports\Index as CoordinatorPracticeReports
 use App\Livewire\Coordinator\PracticeRequests\Index as CoordinatorPracticeRequests;
 use App\Livewire\Coordinator\PracticeRequests\Review as CoordinatorPracticeRequestReview;
 use App\Livewire\Coordinator\Rubrics\Manage as CoordinatorRubrics;
+use App\Livewire\PracticeEvaluations\Show as PracticeEvaluationShow;
 use App\Livewire\Student\Companies\Index as StudentCompanyCatalog;
 use App\Livewire\Student\PracticeLetters\Show as StudentPracticeLetter;
 use App\Livewire\Student\PracticePlans\Show as StudentPracticePlan;
@@ -30,6 +32,8 @@ use App\Livewire\Supervisor\PracticeLetters\Index as SupervisorPracticeLetters;
 use App\Livewire\Supervisor\PracticeLetters\Show as SupervisorPracticeLetter;
 use App\Livewire\Supervisor\PracticePlans\Index as SupervisorPracticePlans;
 use App\Livewire\Supervisor\PracticePlans\Review as SupervisorPracticePlanReview;
+use App\Livewire\Tutor\PracticeEvaluations\Index as TutorPracticeEvaluations;
+use App\Livewire\Tutor\PracticeEvaluations\Manage as TutorPracticeEvaluationManage;
 use App\Livewire\Tutor\PracticeReports\Index as TutorPracticeReports;
 use App\Livewire\Tutor\PracticeReports\Review as TutorPracticeReportReview;
 use Illuminate\Http\Request;
@@ -82,6 +86,8 @@ Route::middleware(['auth', EnsureCoordinator::class])
         Route::get('/planes-trabajo/{practicePlanVersion}', CoordinatorPracticePlanReview::class)
             ->name('practice-plans.review');
         Route::get('/reportes-finales', CoordinatorPracticeReports::class)->name('practice-reports.index');
+        Route::get('/evaluaciones-tutor', CoordinatorPracticeEvaluations::class)->name('practice-evaluations.index');
+        Route::get('/evaluaciones-tutor/{practiceEvaluation}', PracticeEvaluationShow::class)->name('practice-evaluations.show');
         Route::get('/rubricas', CoordinatorRubrics::class)->name('rubrics.manage');
 
         Route::post('/logout', function (Request $request) {
@@ -123,6 +129,11 @@ Route::middleware(['auth', EnsureTutor::class])
         Route::get('/reportes-finales', TutorPracticeReports::class)->name('practice-reports.index');
         Route::get('/reportes-finales/{practiceReportVersion}', TutorPracticeReportReview::class)
             ->name('practice-reports.review');
+        Route::get('/evaluaciones', TutorPracticeEvaluations::class)->name('practice-evaluations.index');
+        Route::get('/evaluaciones/{practiceRequest}/gestionar', TutorPracticeEvaluationManage::class)
+            ->name('practice-evaluations.manage');
+        Route::get('/evaluaciones/{practiceEvaluation}', PracticeEvaluationShow::class)
+            ->name('practice-evaluations.show');
 
         Route::post('/logout', function (Request $request) {
             Auth::logout();
@@ -144,6 +155,8 @@ Route::middleware('auth')
             ->name('practice-plans.show');
         Route::get('/solicitudes/{practiceRequest}/reporte-final', StudentPracticeReport::class)
             ->name('practice-reports.show');
+        Route::get('/evaluaciones/{practiceEvaluation}', PracticeEvaluationShow::class)
+            ->name('practice-evaluations.show');
 
         Route::post('/logout', function (Request $request) {
             abort_unless($request->user()?->role === UserRole::Student, 403);

@@ -17,6 +17,9 @@
     @if ($approved)
         <h2 class="h5">Versión aprobada: {{ $approved->version }}</h2>
         @include('livewire.student.practice-reports.partials.version', ['version' => $approved])
+        @if ($report->practiceRequest->practiceEvaluation?->isSubmitted())
+            <a class="btn btn-outline-primary mt-2" href="{{ route('alumno.practice-evaluations.show', $report->practiceRequest->practiceEvaluation) }}">Consultar evaluación final del tutor</a>
+        @endif
     @endif
 
     @if ($report)
