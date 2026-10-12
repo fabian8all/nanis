@@ -16,6 +16,7 @@ use App\Livewire\Coordinator\PracticePlans\Index as CoordinatorPracticePlans;
 use App\Livewire\Coordinator\PracticePlans\Review as CoordinatorPracticePlanReview;
 use App\Livewire\Coordinator\PracticeRequests\Index as CoordinatorPracticeRequests;
 use App\Livewire\Coordinator\PracticeRequests\Review as CoordinatorPracticeRequestReview;
+use App\Livewire\Coordinator\Rubrics\Manage as CoordinatorRubrics;
 use App\Livewire\Student\Companies\Index as StudentCompanyCatalog;
 use App\Livewire\Student\PracticeLetters\Show as StudentPracticeLetter;
 use App\Livewire\Student\PracticePlans\Show as StudentPracticePlan;
@@ -74,6 +75,7 @@ Route::middleware(['auth', EnsureCoordinator::class])
         Route::get('/planes-trabajo', CoordinatorPracticePlans::class)->name('practice-plans.index');
         Route::get('/planes-trabajo/{practicePlanVersion}', CoordinatorPracticePlanReview::class)
             ->name('practice-plans.review');
+        Route::get('/rubricas', CoordinatorRubrics::class)->name('rubrics.manage');
 
         Route::post('/logout', function (Request $request) {
             Auth::logout();

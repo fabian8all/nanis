@@ -18,6 +18,7 @@
                     <a class="nav-link me-3" href="{{ route('coordinacion.practice-requests.index') }}">Solicitudes</a>
                     <a class="nav-link me-3" href="{{ route('coordinacion.practice-acceptances.index') }}">Aceptaciones</a>
                     <a class="nav-link me-3" href="{{ route('coordinacion.practice-plans.index') }}">Planes</a>
+                    <a class="nav-link me-3" href="{{ route('coordinacion.rubrics.manage') }}">Rúbricas</a>
                     <form method="POST" action="{{ route('coordinacion.logout') }}">
                         @csrf
                         <button class="btn btn-outline-secondary btn-sm" type="submit">Cerrar sesión</button>
