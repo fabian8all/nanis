@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 #[Fillable(['practice_request_id', 'approved_version_id'])]
 class PracticeReport extends Model
@@ -18,6 +19,11 @@ class PracticeReport extends Model
     public function versions(): HasMany
     {
         return $this->hasMany(PracticeReportVersion::class);
+    }
+
+    public function latestVersion(): HasOne
+    {
+        return $this->hasOne(PracticeReportVersion::class)->latestOfMany('version');
     }
 
     public function approvedVersion(): BelongsTo

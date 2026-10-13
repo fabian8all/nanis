@@ -9,10 +9,10 @@
 - El NSS (11 dígitos) y número de cuenta (8 dígitos) son obligatorios y cifrados en el expediente: alumno propietario y Coordinación acceden al expediente; un supervisor solo los ve dentro de la carta oficial emitida para su propia empresa.
 - Revisar con la autora la observación de R5 sobre el enfoque de Capacidades Humanas y definir su impacto en objetivos/indicadores.
 - Confirmar privacidad, acceso, retención, uso de indicadores, cargas de trabajo y participación de los actores; los documentos los plantean como criterios, no como políticas ya acordadas.
-- Refinar criterios de aceptación/dependencias antes de dimensionar historias; la persona solicitante aceptó como base los grupos P0/P1/P2 de `docs/sprints/plan-sprints-candidato.md`.
+- Refinar criterios de aceptación/dependencias antes de dimensionar historias; la persona solicitante aceptó como base los grupos P0/P1/P2 de `docs/v1.0/sprints/plan-sprints-candidato.md`.
 - El seeder de desarrollo creó 20 empresas, 5 asesores, 1 supervisor, 50 alumnos y prácticas en varias etapas; está publicado en `origin/develop` como `ce38b44`. Una cuenta de Coordinación preexistente se preservó además de la cuenta demo configurada localmente; la base contiene 2 coordinadores en total. Las direcciones y la contraseña demo viven solo en el `.env` ignorado.
 - No fijar duración/fechas: la persona solicitante indicó no establecer duración de sprint por ahora.
 
-Alcance confirmado del primer prototipo: Gestión Turística solamente. Backlog candidato: `docs/backlog/candidatos-iniciales.md`.
+Alcance confirmado del primer prototipo: Gestión Turística solamente. Backlog candidato: `docs/v1.0/backlog/candidatos-iniciales.md`.
 
 Seguimiento detallado: `.ai/tasks/inicio-requerimientos-backlog/`.

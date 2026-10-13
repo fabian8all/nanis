@@ -25,10 +25,19 @@ local un seeder de datos ficticios para desarrollo.
 - Compose pasa `APP_KEY` y `DEMO_*` desde el `.env` local al contenedor en
   tiempo de ejecución; `docker compose exec ... db:seed` se repitió con éxito
   sin duplicar datos ni perder acceso a los campos cifrados.
+- Se agregó `PracticeReport::latestVersion()` para que Seguimiento pueda cargar
+  reportes y se añadió una regresión con dos versiones del reporte.
+- Las fichas de Seguimiento ahora son acordeones Bootstrap: inician colapsadas,
+  resumen alumno/empresa/etapa actual y conservan visible el acceso al
+  expediente; al expandir, muestran las etapas y estados completos.
+- La app se reconstruyó y se comprobó por HTTP el acceso de Coordinación a
+  `/coordinacion/seguimiento`: login y página respondieron 200 con 15 acordeones
+  colapsados en la primera página.
 
 ## Validación
-- Suite Laravel completa: **99 pruebas, 802 aserciones**.
-- Pint: **6 archivos PHP** aprobados.
+- Suite completa previa al ajuste: **99 pruebas, 802 aserciones**; pruebas
+  dirigidas de Seguimiento: **5 pruebas, 36 aserciones**.
+- Pint: **3 archivos PHP** aprobados.
 - Migración 000017 ejecutada en MySQL 8.4; el seeder se repitió en MySQL sin
   duplicar registros (20 empresas, 50 solicitudes, 25 aceptaciones, 20 planes,
   10 reportes).
@@ -44,10 +53,13 @@ local un seeder de datos ficticios para desarrollo.
   `4409f4a`; `main` recibió ese historial por fast-forward hasta `6bce8e9`.
 - Los cambios de datos demo se publicaron en `origin/develop` como `ce38b44`;
   `main` permanece en `6bce8e9`. No integrar a `main` sin autorización nueva.
+- La corrección de `latestVersion` y el cambio de acordeones están solo en el
+  worktree `develop`; aún no se comprometieron ni publicaron.
 - Preservar los cambios preexistentes de `.continuum/tools/continuum`,
   `.githooks/pre-commit` y `tools/continuum`.
 
 ## Pendiente
-La tarea de datos está publicada y cerrada. Falta la validación
-humana/institucional de los flujos y rúbricas; no hay más cambios autorizados
-para `main`.
+La corrección y el acordeón de Seguimiento están validados localmente; aún no
+se comprometieron ni publicaron. También falta la validación
+humana/institucional de flujos y rúbricas; no hay más cambios autorizados para
+`main`.

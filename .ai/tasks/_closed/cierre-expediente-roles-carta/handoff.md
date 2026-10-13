@@ -29,8 +29,8 @@
 
 ## Pendiente
 - Validación humana/institucional y datos de prueba quedan diferidos.
-- Commit `4409f4a` publicado en `origin/develop`; la integración a `main` se
-  autorizó después y está en curso en una tarea separada. No se reconstruyó el
+- Commit `4409f4a` publicado en `origin/develop`; la rama se integró por
+  fast-forward en `main` hasta `6bce8e9` el 2026-10-13. No se reconstruyó el
   contenedor web.
 - No incluir los cambios preexistentes en `.continuum/tools/continuum`,
   `.githooks/pre-commit` y `tools/continuum`.

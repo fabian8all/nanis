@@ -39,52 +39,79 @@
     @if ($rows->isEmpty())
         <div class="alert alert-info">No hay prácticas que coincidan con la consulta.</div>
     @else
-        @foreach ($rows as $row)
-            <article class="card mb-4">
-                <div class="card-header d-flex flex-wrap justify-content-between gap-2">
-                    <div>
-                        <strong>{{ $row['request']->student->name }}</strong>
-                        <span class="text-secondary">— {{ $row['request']->company->name }}</span>
+        <div class="accordion" id="practiceTrackingAccordion">
+            @foreach ($rows as $row)
+                @php($collapseId = 'practiceTrackingDetails-'.$row['request']->id)
+                @php($headingId = 'practiceTrackingHeading-'.$row['request']->id)
+                <article class="accordion-item mb-3" wire:key="practice-tracking-{{ $row['request']->id }}">
+                    <div class="d-flex flex-wrap align-items-stretch">
+                        <h2 class="accordion-header flex-grow-1" id="{{ $headingId }}">
+                            <button
+                                class="accordion-button collapsed flex-wrap gap-2"
+                                type="button"
+                                data-bs-toggle="collapse"
+                                data-bs-target="#{{ $collapseId }}"
+                                aria-expanded="false"
+                                aria-controls="{{ $collapseId }}"
+                            >
+                                <strong>{{ $row['request']->student->name }}</strong>
+                                <span class="text-secondary">— {{ $row['request']->company->name }}</span>
+                                <span class="badge text-bg-primary">
+                                    {{ $row['headlineStage']['label'] }} · {{ $row['headlineStage']['status'] }}
+                                </span>
+                                @if ($row['request']->letter)
+                                    <span class="small text-secondary">{{ $row['request']->letter->folio }}</span>
+                                @endif
+                            </button>
+                        </h2>
+                        @if ($row['recordRoute'])
+                            <div class="d-flex align-items-center p-2">
+                                <a class="btn btn-sm btn-outline-primary" href="{{ $row['recordRoute'] }}">Abrir expediente</a>
+                            </div>
+                        @endif
                     </div>
-                    @if ($row['request']->letter)
-                        <span class="small text-secondary">{{ $row['request']->letter->folio }}</span>
-                    @endif
-                    @if ($row['recordRoute'])
-                        <a class="btn btn-sm btn-outline-primary" href="{{ $row['recordRoute'] }}">Abrir expediente</a>
-                    @endif
-                </div>
-                <div class="table-responsive">
-                    <table class="table table-sm table-striped align-middle mb-0">
-                        <thead>
-                            <tr>
-                                <th>Etapa</th>
-                                <th>Estado</th>
-                                <th>Detalle</th>
-                                <th>Responsable</th>
-                                <th><span class="visually-hidden">Acción</span></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($row['stages'] as $stage)
-                                <tr>
-                                    <td>{{ $stage['label'] }}</td>
-                                    <td>{{ $stage['status'] }}</td>
-                                    <td>{{ $stage['detail'] }}</td>
-                                    <td>{{ $stage['responsible'] ? ucfirst($stage['responsible']) : '—' }}</td>
-                                    <td>
-                                        @if ($stage['route'])
-                                            <a class="btn btn-sm btn-outline-primary" href="{{ $stage['route'] }}">Abrir práctica</a>
-                                        @else
-                                            <span class="text-secondary">—</span>
-                                        @endif
-                                    </td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
-            </article>
-        @endforeach
+                    <div
+                        id="{{ $collapseId }}"
+                        class="accordion-collapse collapse"
+                        data-bs-parent="#practiceTrackingAccordion"
+                        aria-labelledby="{{ $headingId }}"
+                    >
+                        <div class="accordion-body p-0">
+                            <div class="table-responsive">
+                                <table class="table table-sm table-striped align-middle mb-0">
+                                    <thead>
+                                        <tr>
+                                            <th>Etapa</th>
+                                            <th>Estado</th>
+                                            <th>Detalle</th>
+                                            <th>Responsable</th>
+                                            <th><span class="visually-hidden">Acción</span></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($row['stages'] as $stage)
+                                            <tr>
+                                                <td>{{ $stage['label'] }}</td>
+                                                <td>{{ $stage['status'] }}</td>
+                                                <td>{{ $stage['detail'] }}</td>
+                                                <td>{{ $stage['responsible'] ? ucfirst($stage['responsible']) : '—' }}</td>
+                                                <td>
+                                                    @if ($stage['route'])
+                                                        <a class="btn btn-sm btn-outline-primary" href="{{ $stage['route'] }}">Abrir práctica</a>
+                                                    @else
+                                                        <span class="text-secondary">—</span>
+                                                    @endif
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            @endforeach
+        </div>
         {{ $rows->links() }}
     @endif
 </section>

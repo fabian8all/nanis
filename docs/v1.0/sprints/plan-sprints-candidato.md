@@ -1,7 +1,7 @@
 # Propuesta candidata de organización de sprints
 
 **Estado:** la persona solicitante aprobó como base de refinamiento la secuencia de cinco sprints, el esquema de apoyo por roles y el agrupamiento de prioridades P0/P1/P2. Sin fechas, duración fija, estimaciones ni compromisos de entrega.
-**Base:** `docs/backlog/candidatos-iniciales.md`.
+**Base:** `docs/v1.0/backlog/candidatos-iniciales.md`.
 
 ## Capacidad y límites confirmados
 

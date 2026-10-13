@@ -20,7 +20,7 @@ Hay dos evaluaciones al término: una del supervisor de la empresa y otra del tu
 
 ## Referencia documental fuera del alcance de este prototipo
 
-La cédula `docs/planeacion/Cedula_de_proceso_enero_2025.drawio.pdf` y el procedimiento `docs/planeacion/1738086627_Procedimiento-Enero_2025_Atte_a_Obs_27012025.docx` corresponden a estancias profesionales y describen un procedimiento institucional distinto. Sirven de referencia, no de requisitos para este prototipo:
+La cédula `docs/v1.0/planeacion/Cedula_de_proceso_enero_2025.drawio.pdf` y el procedimiento `docs/v1.0/planeacion/1738086627_Procedimiento-Enero_2025_Atte_a_Obs_27012025.docx` corresponden a estancias profesionales y describen un procedimiento institucional distinto. Sirven de referencia, no de requisitos para este prototipo:
 
 1. Coordinación explica la estancia a estudiantes de octavo semestre, comparte convenios vigentes y proporciona formatos (solicitud de carta y carta de no responsiva).
 2. El estudiante elige empresa y solicita espacio. La empresa evalúa la solicitud y da una aceptación verbal antes de requerir la carta de presentación; si no acepta dentro de 30 días naturales, el estudiante busca otra empresa.
@@ -59,7 +59,7 @@ Los documentos señalan que las entregas pueden ocurrir por Drive, correo instit
 - **Evaluaciones finales:** los formatos entregados distinguen evaluación de supervisor y evaluación de tutor; ambas ocurren al cierre y no sustituyen ni generan reportes intermedios. Coordinación administra las rúbricas desde el módulo existente; se conservan rúbricas ficticias hasta que se configuren las oficiales.
 - **Carta de no responsiva:** el alumno acepta e imprime el formato durante la solicitud para firmarlo físicamente; el sistema no conserva copia firmada.
 - Acordar ciclo de solicitud devuelta: estados/comentarios, número de reenvíos y trazabilidad de cambios.
-- Para el cierre (GT-HU-008/009/010/012/013), carta, documentos, permisos, estados y reglas de completitud se actualizaron según la decisión de la persona solicitante; revisar `docs/backlog/candidatos-iniciales.md`. La carga de datos de prueba se hará después de completar el trabajo restante.
+- Para el cierre (GT-HU-008/009/010/012/013), carta, documentos, permisos, estados y reglas de completitud se actualizaron según la decisión de la persona solicitante; revisar `docs/v1.0/backlog/candidatos-iniciales.md`. La carga de datos de prueba se hará después de completar el trabajo restante.
 - Confirmar finalidad, acceso y conservación del NSS antes de tratarlo como campo obligatorio.
 - Las 800 horas y métricas institucionales del procedimiento se refieren a estancias y no aplican a este prototipo. La práctica objeto del prototipo concluye a las 240 horas.
 - El procedimiento pasa de la actividad 27 a la 33; revisar si faltan actividades 28–32 o si la numeración es intencional antes de usarlo como traza completa.

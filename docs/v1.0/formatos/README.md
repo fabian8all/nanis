@@ -10,6 +10,9 @@ proyecto. Antes de versionarlos se sanearon los datos personales:
 - Se retiraron metadatos de autoría, correos y números de identificación de
   los documentos de Office. El nombre de la persona firmante en la carta de
   presentación se sustituyó por un texto genérico.
+- `Carta de terminacion de PP.pdf` se conserva como ejemplo con campos en
+  blanco; indica 400 horas, por lo que no sustituye el criterio de 240 horas
+  definido para el prototipo.
 
 Por ello, estos archivos no sustituyen los originales institucionales ni deben
 usarse como documentos oficiales. Los originales con datos personales deben

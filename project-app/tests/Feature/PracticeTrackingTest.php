@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Enums\PracticeAcceptanceStatus;
+use App\Enums\PracticeReportStatus;
 use App\Enums\PracticeRequestStatus;
 use App\Enums\UserRole;
 use App\Livewire\PracticeTracking\Index;
@@ -27,7 +28,11 @@ class PracticeTrackingTest extends TestCase
             ->assertSee('Evaluación de Supervisor')
             ->assertSee('Evaluación de Tutor')
             ->assertSee('Ana Alumna')
-            ->assertSee('Hotel Faro');
+            ->assertSee('Hotel Faro')
+            ->assertSee('Solicitud · Pendiente')
+            ->assertSee('Abrir expediente')
+            ->assertSee('class="accordion-collapse collapse"', false)
+            ->assertSee('aria-expanded="false"', false);
 
         Livewire::test(Index::class)
             ->set('search', 'Hotel Faro')
@@ -41,6 +46,33 @@ class PracticeTrackingTest extends TestCase
             ->assertSee('Coordinación debe revisar la solicitud');
 
         $this->assertSame(PracticeRequestStatus::Pending, $request->fresh()->status);
+    }
+
+    public function test_coordinator_tracking_loads_the_latest_practice_report_version(): void
+    {
+        [$coordinator, , $request] = $this->createPractice('Hotel Faro', 'Ana Alumna');
+        $report = $request->practiceReport()->create([]);
+        $versionData = [
+            'status' => PracticeReportStatus::Draft,
+            'company_name' => $request->company->name,
+            'area' => 'Área de prueba',
+            'period' => 'Periodo de prueba',
+            'objectives' => 'Objetivos ficticios',
+            'activities' => 'Actividades ficticias',
+            'outcomes' => 'Resultados ficticios',
+            'conclusions' => 'Conclusiones ficticias',
+            'recommendations' => 'Recomendaciones ficticias',
+        ];
+        $report->versions()->create(['version' => 1, ...$versionData]);
+        $latestVersion = $report->versions()->create(['version' => 2, ...$versionData]);
+
+        $this->actingAs($coordinator)
+            ->get(route('coordinacion.practice-tracking.index'))
+            ->assertOk()
+            ->assertSee('Seguimiento de prácticas')
+            ->assertSee('Ana Alumna');
+
+        $this->assertSame($latestVersion->id, $report->fresh()->latestVersion->id);
     }
 
     public function test_students_only_see_their_own_practices_and_their_pending_actions(): void

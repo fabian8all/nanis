@@ -2,7 +2,7 @@
 
 **Estado:** alcance base del prototipo confirmado; requisitos y funciones aún por validar.
 
-**Fuentes:** persona solicitante y `docs/planeacion/Ochoa_Ileana_R4_U2.pdf`, con consideraciones de `docs/planeacion/Ochoa_Ileana_R5_U2- observaciones.pdf`.
+**Fuentes:** persona solicitante y `docs/v1.0/planeacion/Ochoa_Ileana_R4_U2.pdf`, con consideraciones de `docs/v1.0/planeacion/Ochoa_Ileana_R5_U2- observaciones.pdf`.
 
 ## Propósito y alcance
 
@@ -21,7 +21,7 @@ Los nombres, responsabilidades, permisos y acciones por actor necesitan confirma
 
 ## Áreas candidatas del prototipo
 
-El Reto 4 presenta las áreas Datos, Documentos, Evaluación, Reporte, Normativa, Formatos y Contacto. También muestra perfiles diferenciados, captura/consulta de información, estados y alertas, seguimiento y exportación. Para este prototipo se contemplan evaluaciones finales separadas del supervisor y el tutor, además de un reporte final; las evaluaciones y reportes intermedios de las estancias quedan fuera. Las historias propuestas están en `docs/backlog/candidatos-iniciales.md`; salvo las decisiones de alcance expresas, siguen pendientes de validación.
+El Reto 4 presenta las áreas Datos, Documentos, Evaluación, Reporte, Normativa, Formatos y Contacto. También muestra perfiles diferenciados, captura/consulta de información, estados y alertas, seguimiento y exportación. Para este prototipo se contemplan evaluaciones finales separadas del supervisor y el tutor, además de un reporte final; las evaluaciones y reportes intermedios de las estancias quedan fuera. Las historias propuestas están en `docs/v1.0/backlog/candidatos-iniciales.md`; salvo las decisiones de alcance expresas, siguen pendientes de validación.
 
 ## Pendientes de descubrimiento
 

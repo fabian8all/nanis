@@ -89,10 +89,14 @@ class Index extends Component
         $requests = $query->get();
         $rows = $requests->map(function (PracticeRequest $request) use ($summary, $user): array {
             $stages = $summary->stages($request);
+            $stageCollection = collect($stages);
 
             return [
                 'request' => $request,
                 'stages' => $stages,
+                'headlineStage' => $stageCollection->first(
+                    fn (array $stage): bool => $stage['responsible'] !== null,
+                ) ?? $stageCollection->last(),
                 'recordRoute' => match ($user->role) {
                     UserRole::Coordinator => route('coordinacion.practice-records.show', $request),
                     UserRole::Student => route('alumno.practice-records.show', $request),

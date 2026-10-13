@@ -17,7 +17,7 @@ Dar seguimiento a las prácticas operativas y de mandos medios de estudiantes de
 
 El orden de refinamiento de criterios es una propuesta. Los grupos de prioridad P0/P1/P2 se aceptaron como base; no implican cadencia ni calendario aprobados.
 
-La distribución candidata de historias en sprints y grupos de prioridad P0/P1/P2 aceptados como base está en `docs/sprints/plan-sprints-candidato.md`; aún no tiene fechas, duraciones ni estimaciones comprometidas.
+La distribución candidata de historias en sprints y grupos de prioridad P0/P1/P2 aceptados como base está en `docs/v1.0/sprints/plan-sprints-candidato.md`; aún no tiene fechas, duraciones ni estimaciones comprometidas.
 
 ## Épica GT-EP-01 — Solicitud e inicio de práctica
 
