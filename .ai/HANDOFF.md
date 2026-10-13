@@ -38,8 +38,8 @@ término, el acceso por rol y la consulta de respuestas de satisfacción.
   modificaron esos archivos de configuración ajenos a la tarea.
 
 ## Estado de Git y entorno
-- Cambios de implementación y documentación sin commit en el worktree local
-  `develop`; no se hizo push ni merge a `main`.
+- Los cambios de implementación/carta/permisos se publicaron en
+  `origin/develop` como `4409f4a`; `main` todavía no contiene ese commit.
 - Preservar los cambios preexistentes de `.continuum/tools/continuum`,
   `.githooks/pre-commit` y `tools/continuum`.
 - El contenedor de desarrollo en ejecución se construyó con el árbol anterior y
@@ -50,5 +50,5 @@ término, el acceso por rol y la consulta de respuestas de satisfacción.
   copiaron credenciales.
 
 ## Pendiente
-Esperar validación humana/institucional y la carga de datos de prueba solicitada
-para después. La integración de `develop` a `main` sigue pendiente de decisión.
+La persona solicitante autorizó integrar `develop` a `main` y después crear
+seeders con datos de prueba. La validación humana/institucional sigue pendiente.

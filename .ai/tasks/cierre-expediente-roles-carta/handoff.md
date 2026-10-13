@@ -29,6 +29,8 @@
 
 ## Pendiente
 - Validación humana/institucional y datos de prueba quedan diferidos.
-- No hubo commit, push, merge a `main` ni reconstrucción del contenedor web.
+- Commit `4409f4a` publicado en `origin/develop`; la integración a `main` se
+  autorizó después y está en curso en una tarea separada. No se reconstruyó el
+  contenedor web.
 - No incluir los cambios preexistentes en `.continuum/tools/continuum`,
   `.githooks/pre-commit` y `tools/continuum`.

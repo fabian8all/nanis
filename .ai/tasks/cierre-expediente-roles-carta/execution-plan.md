@@ -12,6 +12,7 @@ exactamente dónde retomar sin releer todo desde cero.
 - [x] Paso 6 — Actualizar handoffs/temas Continuum y cerrar la tarea; dejar la validación humana y carga de datos diferidas.
 
 ## Estado actual
-Implementación terminada en el worktree `develop`, sin commit ni merge a
-`main`. Quedan para otra etapa la validación humana/institucional y carga de
-datos de prueba.
+Implementación terminada y publicada en `origin/develop` como `4409f4a`, sin
+merge a `main` en ese momento. La integración se autorizó después y continúa
+en `.ai/tasks/integracion-main-datos-demo/`. La carga de datos de prueba es el
+siguiente bloque de esa tarea.
