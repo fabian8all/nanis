@@ -1,65 +1,42 @@
 # Handoff
 
-**Fecha:** 2026-10-13 · **Rol:** software/backend · **Rama:** `develop`
+**Fecha:** 2026-10-13 · **Rol:** backend · **Rama:** `develop`
 
-## Objetivo de la sesión
-Integrar `develop` en `main` por fast-forward y preparar, probar y ejecutar en
-local un seeder de datos ficticios para desarrollo.
+## Objetivo
+Cerrar v1.0, integrar `develop` en `main`, organizar la documentación por
+versión y preparar la tarea de backlog para v1.1.
 
 ## Resultado
-- `main` avanzó por fast-forward a `6bce8e9`, el mismo commit que `develop`.
-- `DevelopmentDatasetSeeder` genera 20 empresas, 5 asesores, 1 supervisor, 50
-  alumnos y prácticas en varias etapas; actualiza sus registros sin duplicarlos
-  y solo se permite en `local`/`testing`.
-- El acceso de alumnos por contraseña queda habilitado exclusivamente en
-  `local`/`testing`; fuera de esos entornos se mantiene SAML.
-- Los correos y la contraseña demo exactos están solo en `.env` local ignorado.
-  Los valores versionados son genéricos y usan `example.test`.
-- MySQL local se migró y sembró. Se respetó la cuenta de Coordinación previa,
-  distinta de la demo: hay 2 coordinadores en total, 1 previo y 1 demo.
-- Se corrigió la migración 000017 para que los nombres de claves foráneas e
-  índices respeten el límite de MySQL. `storage` se monta en un volumen Docker
-  persistente y queda excluido del contexto de build.
-- Se reconstruyó la app desde `develop`; `http://nanis.net/` responde 200 y
-  los 25 archivos ficticios de aceptación están en el almacenamiento privado.
-- Compose pasa `APP_KEY` y `DEMO_*` desde el `.env` local al contenedor en
-  tiempo de ejecución; `docker compose exec ... db:seed` se repitió con éxito
-  sin duplicar datos ni perder acceso a los campos cifrados.
-- Se agregó `PracticeReport::latestVersion()` para que Seguimiento pueda cargar
-  reportes y se añadió una regresión con dos versiones del reporte.
-- Las fichas de Seguimiento ahora son acordeones Bootstrap: inician colapsadas,
-  resumen alumno/empresa/etapa actual y conservan visible el acceso al
-  expediente; al expandir, muestran las etapas y estados completos.
-- La app se reconstruyó y se comprobó por HTTP el acceso de Coordinación a
-  `/coordinacion/seguimiento`: login y página respondieron 200 con 15 acordeones
-  colapsados en la primera página.
+- Se corrigió la relación `PracticeReport::latestVersion()` que impedía cargar
+  Seguimiento y se añadieron pruebas de regresión.
+- Las fichas de Seguimiento se convirtieron en acordeones Bootstrap, colapsados
+  inicialmente, con resumen de alumno, empresa y etapa, acceso al expediente y
+  detalle de etapas al expandir.
+- La documentación y entregables quedaron bajo `docs/v1.0/`. La planeación
+  siguiente está en `docs/v1.1/Planeacion/modificaciones.md`; su PDF de
+  referencia indica 400 horas, distinto del criterio de 240 horas del prototipo.
+- `cierre-expediente-roles-carta` se archivó en `.ai/tasks/_closed/`.
+- Commit `8a6b9f0` se integró por fast-forward en `main` y se publicó en
+  `origin/develop` y `origin/main`.
 
 ## Validación
-- Suite completa previa al ajuste: **99 pruebas, 802 aserciones**; pruebas
-  dirigidas de Seguimiento: **5 pruebas, 36 aserciones**.
+- Seguimiento: **5 pruebas, 36 aserciones** aprobadas.
 - Pint: **3 archivos PHP** aprobados.
-- Migración 000017 ejecutada en MySQL 8.4; el seeder se repitió en MySQL sin
-  duplicar registros (20 empresas, 50 solicitudes, 25 aceptaciones, 20 planes,
-  10 reportes).
-- `.env` y `docker-compose.override.yml` están ignorados; no se incluyeron
-  correos ni contraseñas demo en archivos versionados.
-- `python3 tools/continuum doctor` conserva 3 errores previos porque
-  `AI_COLLABORATION.md`, `AGENTS.md` y `.github/copilot-instructions.md` no
-  están en Git, además de una advertencia por tamaño del paquete de arranque;
-  esos archivos no se modificaron.
+- Se verificó previamente por HTTP que Coordinación obtiene 200 en
+  `/coordinacion/seguimiento` y que la primera página muestra 15 acordeones
+  colapsados.
+- Los PDFs entregables se conservaron dentro de `docs/v1.0/entregables/`.
 
-## Estado de Git y entorno
-- Los cambios de carta/permisos se publicaron en `origin/develop` como
-  `4409f4a`; `main` recibió ese historial por fast-forward hasta `6bce8e9`.
-- Los cambios de datos demo se publicaron en `origin/develop` como `ce38b44`;
-  `main` permanece en `6bce8e9`. No integrar a `main` sin autorización nueva.
-- La corrección de `latestVersion` y el cambio de acordeones están solo en el
-  worktree `develop`; aún no se comprometieron ni publicaron.
-- Preservar los cambios preexistentes de `.continuum/tools/continuum`,
-  `.githooks/pre-commit` y `tools/continuum`.
+## Continuidad
+- La sesión de Continuum se cerró y archivó el handoff anterior. El comando
+  informó `Pint: command not found` y dejó un borrador truncado; este handoff se
+  completó manualmente.
+- Preservar las modificaciones locales preexistentes en
+  `.continuum/tools/continuum`, `.githooks/pre-commit` y `tools/continuum`, así
+  como los cambios no integrados que permanecen en el worktree del Sprint 5.
 
-## Pendiente
-La corrección y el acordeón de Seguimiento están validados localmente; aún no
-se comprometieron ni publicaron. También falta la validación
-humana/institucional de flujos y rúbricas; no hay más cambios autorizados para
-`main`.
+## Siguiente paso
+Iniciar una nueva sesión de Continuum y crear `backlog-v1-1`, asignada al rol
+`gestion-proyecto`, para convertir `docs/v1.1/Planeacion/modificaciones.md` en
+el backlog de la siguiente versión. La validación humana/institucional de
+flujos y rúbricas continúa pendiente.
