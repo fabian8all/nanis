@@ -7,13 +7,15 @@ services:
     command: >-
       sh -c "composer install &&
       if [ ! -f .env ]; then cp .env.example .env; fi &&
-      if ! grep -q '^APP_KEY=base64:' .env; then php artisan key:generate --force; fi &&
+      if [ -z \"$$APP_KEY\" ] && ! grep -q '^APP_KEY=base64:' .env; then php artisan key:generate --force; fi &&
+      if [ -z \"$$APP_KEY\" ]; then export APP_KEY=\"$$(grep '^APP_KEY=' .env | cut -d= -f2-)\"; fi &&
       apache2-foreground"
     ports:
       - "127.0.0.1:8000:80"
     environment:
       APP_ENV: local
       APP_DEBUG: "true"
+      APP_KEY: ${APP_KEY:-}
       APP_URL: http://nanis.net
       DB_CONNECTION: mysql
       DB_HOST: db
@@ -21,6 +23,10 @@ services:
       DB_DATABASE: ${DB_DATABASE:?Set DB_DATABASE in project-app/.env}
       DB_USERNAME: ${DB_USERNAME:?Set DB_USERNAME in project-app/.env}
       DB_PASSWORD: ${DB_PASSWORD:?Set DB_PASSWORD in project-app/.env}
+      DEMO_PASSWORD: ${DEMO_PASSWORD:-}
+      DEMO_COORDINATOR_EMAIL: ${DEMO_COORDINATOR_EMAIL:-coordinacion@example.test}
+      DEMO_SUPERVISOR_EMAIL: ${DEMO_SUPERVISOR_EMAIL:-supervisor1@example.test}
+      DEMO_USER_EMAIL_DOMAIN: ${DEMO_USER_EMAIL_DOMAIN:-example.test}
       SESSION_DRIVER: file
       CACHE_STORE: file
       QUEUE_CONNECTION: sync

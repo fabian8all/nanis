@@ -22,6 +22,9 @@ local un seeder de datos ficticios para desarrollo.
   persistente y queda excluido del contexto de build.
 - Se reconstruyó la app desde `develop`; `http://nanis.net/` responde 200 y
   los 25 archivos ficticios de aceptación están en el almacenamiento privado.
+- Compose pasa `APP_KEY` y `DEMO_*` desde el `.env` local al contenedor en
+  tiempo de ejecución; `docker compose exec ... db:seed` se repitió con éxito
+  sin duplicar datos ni perder acceso a los campos cifrados.
 
 ## Validación
 - Suite Laravel completa: **99 pruebas, 802 aserciones**.
