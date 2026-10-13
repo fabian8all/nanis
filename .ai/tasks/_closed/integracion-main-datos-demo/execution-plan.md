@@ -9,10 +9,11 @@ exactamente dónde retomar sin releer todo desde cero.
 - [x] Paso 3 — Volver a `develop` y definir dataset, entidades/etapas y protección de credenciales.
 - [x] Paso 4 — Implementar un seeder idempotente para 20 empresas, 1 coordinador, 5 tutores, 1 supervisor y 50 alumnos, con prácticas ficticias variadas.
 - [x] Paso 5 — Probar distribución, relaciones, repetición del seeder y documentar la ejecución.
-- [ ] Paso 6 — Actualizar handoff, cerrar tarea y publicar el trabajo en `develop`; no integrar el seeder a `main` sin nueva autorización.
+- [x] Paso 6 — Actualizar handoff, cerrar tarea y publicar el trabajo en `develop`; no integrar el seeder a `main` sin nueva autorización.
 
 ## Estado actual
-Paso 6. Seeder probado en SQLite y MySQL local; se repitió sin duplicar
+Completado. Commit `ce38b44` publicado en `origin/develop`; `main` permanece en
+`6bce8e9` hasta nueva autorización. Seeder probado en SQLite y MySQL local; se repitió sin duplicar
 registros. Base resultante: 20 empresas, 50 prácticas, 5 tutores, 1 supervisor
 y 50 alumnos demo; se preservó una cuenta coordinadora previa además de la
 cuenta demo. La migración 000017 se corrigió para limitar nombres de índices

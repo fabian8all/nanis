@@ -35,12 +35,12 @@ local un seeder de datos ficticios para desarrollo.
 ## Estado de Git y entorno
 - Los cambios de carta/permisos se publicaron en `origin/develop` como
   `4409f4a`; `main` recibió ese historial por fast-forward hasta `6bce8e9`.
-- Los cambios de datos demo siguen locales en `develop`; publicar en `develop`
-  después de revisar el diff. No integrar a `main` sin autorización nueva.
+- Los cambios de datos demo se publicaron en `origin/develop` como `ce38b44`;
+  `main` permanece en `6bce8e9`. No integrar a `main` sin autorización nueva.
 - Preservar los cambios preexistentes de `.continuum/tools/continuum`,
   `.githooks/pre-commit` y `tools/continuum`.
 
 ## Pendiente
-Publicar en `develop` solo los cambios de esta tarea. Falta la validación
+La tarea de datos está publicada y cerrada. Falta la validación
 humana/institucional de los flujos y rúbricas; no hay más cambios autorizados
 para `main`.
