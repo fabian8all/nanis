@@ -16,8 +16,10 @@ versión y preparar la tarea de backlog para v1.1.
   siguiente está en `docs/v1.1/Planeacion/modificaciones.md`; su PDF de
   referencia indica 400 horas, distinto del criterio de 240 horas del prototipo.
 - `cierre-expediente-roles-carta` se archivó en `.ai/tasks/_closed/`.
-- Commit `8a6b9f0` se integró por fast-forward en `main` y se publicó en
-  `origin/develop` y `origin/main`.
+- El cierre v1.0 se integró por fast-forward y quedó publicado en
+  `main`/`origin/main` en `cb5365d`; el commit de release es `8a6b9f0`.
+- `develop`/`origin/develop` está en `e86097f` e incluye la tarea activa de
+  backlog para v1.1, que no forma parte de la rama de release.
 
 ## Validación
 - Seguimiento: **5 pruebas, 36 aserciones** aprobadas.
@@ -31,13 +33,15 @@ versión y preparar la tarea de backlog para v1.1.
 - La sesión de Continuum se cerró y archivó el handoff anterior. El comando
   informó `Pint: command not found` y dejó un borrador truncado; este handoff se
   completó manualmente.
+- La sesión nueva está pausada para continuar mañana. No se empezó a elaborar
+  el backlog.
 - Preservar las modificaciones locales preexistentes en
   `.continuum/tools/continuum`, `.githooks/pre-commit` y `tools/continuum`, así
   como los cambios no integrados que permanecen en el worktree del Sprint 5.
 
 ## Siguiente paso
-La nueva sesión de Continuum está iniciada. La tarea activa
-`.ai/tasks/backlog-v1-1/task.md` está asignada al rol `gestion-proyecto`; aún no
-se ha empezado a redactar el backlog de
-`docs/v1.1/Planeacion/modificaciones.md`. La validación humana/institucional de
-flujos y rúbricas continúa pendiente.
+Mañana, iniciar leyendo este handoff, `.ai/state/estado-dev.md` y
+`.ai/tasks/backlog-v1-1/task.md`. La tarea está asignada al rol
+`gestion-proyecto`; comenzar por el paso 1 del plan: revisar las fuentes y
+mapear las solicitudes de `docs/v1.1/Planeacion/modificaciones.md`. La
+validación humana/institucional de flujos y rúbricas continúa pendiente.
