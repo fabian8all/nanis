@@ -26,6 +26,7 @@ services:
       QUEUE_CONNECTION: sync
     volumes:
       - vendor:/var/www/html/vendor
+      - storage-data:/var/www/html/storage
     depends_on:
       db:
         condition: service_healthy
@@ -59,3 +60,4 @@ services:
 volumes:
   mysql-data:
   vendor:
+  storage-data:

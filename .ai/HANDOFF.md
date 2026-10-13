@@ -1,54 +1,46 @@
 # Handoff
 
-**Fecha:** 2026-10-12 · **Rol:** software/backend · **Rama:** `develop`
+**Fecha:** 2026-10-13 · **Rol:** software/backend · **Rama:** `develop`
 
 ## Objetivo de la sesión
-Terminar los ajustes confirmados para el cierre del expediente, la carta de
-término, el acceso por rol y la consulta de respuestas de satisfacción.
+Integrar `develop` en `main` por fast-forward y preparar, probar y ejecutar en
+local un seeder de datos ficticios para desarrollo.
 
 ## Resultado
-- Coordinación emite e imprime una carta de término con 240 horas y espacios
-  para proyecto, firma y sello de la unidad receptora. La emisión exige reporte
-  aprobado y evaluaciones terminales de Tutor y Supervisor enviadas, registra
-  responsable/fecha y cambia la práctica a `completed`. No se carga ni conserva
-  copia firmada.
-- La migración aditiva `2026_10_12_000017` registra emisiones inmutables y no
-  elimina la tabla ni los datos históricos de HU-009.
-- Coordinación, alumno propietario y Tutor asignado consultan el expediente
-  completo. El Supervisor asignado ve carta de presentación, aceptación,
-  reporte aprobado y su evaluación; los anexos de reportes no aprobados y los
-  expedientes de otras prácticas quedan bloqueados.
-- Coordinación consulta todas las encuestas y el Supervisor destinatario solo
-  su propia respuesta final en modo lectura.
-- Backlog, flujo de caso de uso, plan del Sprint 5 y temas Continuum reflejan
-  las decisiones. Rúbricas y preguntas siguen siendo editables por Coordinación;
-  se dejan los datos ficticios. La carga de datos de prueba queda diferida.
-- Se generaron los PDF del backlog y del plan de sprints, en orientación
-  horizontal, dentro de `docs/entregables/`.
+- `main` avanzó por fast-forward a `6bce8e9`, el mismo commit que `develop`.
+- `DevelopmentDatasetSeeder` genera 20 empresas, 5 asesores, 1 supervisor, 50
+  alumnos y prácticas en varias etapas; actualiza sus registros sin duplicarlos
+  y solo se permite en `local`/`testing`.
+- El acceso de alumnos por contraseña queda habilitado exclusivamente en
+  `local`/`testing`; fuera de esos entornos se mantiene SAML.
+- Los correos y la contraseña demo exactos están solo en `.env` local ignorado.
+  Los valores versionados son genéricos y usan `example.test`.
+- MySQL local se migró y sembró. Se respetó la cuenta de Coordinación previa,
+  distinta de la demo: hay 2 coordinadores en total, 1 previo y 1 demo.
+- Se corrigió la migración 000017 para que los nombres de claves foráneas e
+  índices respeten el límite de MySQL. `storage` se monta en un volumen Docker
+  persistente y queda excluido del contexto de build.
+- Se reconstruyó la app desde `develop`; `http://nanis.net/` responde 200 y
+  los 25 archivos ficticios de aceptación están en el almacenamiento privado.
 
 ## Validación
-- Suite Laravel completa: **95 pruebas, 758 aserciones**.
-- Pint: **21 archivos PHP** aprobados.
-- El test suite migró la base SQLite temporal, incluida la migración 000017.
-- `python3 -m unittest discover -s tests -t .` no aplica: este worktree no
-  contiene directorio raíz `tests/`.
-- `python3 tools/continuum doctor` reportó como problemas preexistentes que
-  `AI_COLLABORATION.md`, `AGENTS.md` y `.github/copilot-instructions.md` no
-  están en Git, además de una advertencia de tamaño del paquete inicial. No se
-  modificaron esos archivos de configuración ajenos a la tarea.
+- Suite Laravel completa: **99 pruebas, 802 aserciones**.
+- Pint: **6 archivos PHP** aprobados.
+- Migración 000017 ejecutada en MySQL 8.4; el seeder se repitió en MySQL sin
+  duplicar registros (20 empresas, 50 solicitudes, 25 aceptaciones, 20 planes,
+  10 reportes).
+- `.env` y `docker-compose.override.yml` están ignorados; no se incluyeron
+  correos ni contraseñas demo en archivos versionados.
 
 ## Estado de Git y entorno
-- Los cambios de implementación/carta/permisos se publicaron en
-  `origin/develop` como `4409f4a`; `main` todavía no contiene ese commit.
+- Los cambios de carta/permisos se publicaron en `origin/develop` como
+  `4409f4a`; `main` recibió ese historial por fast-forward hasta `6bce8e9`.
+- Los cambios de datos demo siguen locales en `develop`; publicar en `develop`
+  después de revisar el diff. No integrar a `main` sin autorización nueva.
 - Preservar los cambios preexistentes de `.continuum/tools/continuum`,
   `.githooks/pre-commit` y `tools/continuum`.
-- El contenedor de desarrollo en ejecución se construyó con el árbol anterior y
-  no monta este worktree; los cambios aún no aparecen en `http://nanis.net`.
-  Para probarlos visualmente habrá que reconstruir/levantar desde este árbol.
-- La prueba se hizo en un contenedor Docker desechable con el código de este
-  worktree; el `.env` marcador temporal para evitar warnings se retiró y no se
-  copiaron credenciales.
 
 ## Pendiente
-La persona solicitante autorizó integrar `develop` a `main` y después crear
-seeders con datos de prueba. La validación humana/institucional sigue pendiente.
+Publicar en `develop` solo los cambios de esta tarea. Falta la validación
+humana/institucional de los flujos y rúbricas; no hay más cambios autorizados
+para `main`.

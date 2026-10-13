@@ -31,18 +31,54 @@ class CoordinatorAuthenticationTest extends TestCase
         $this->assertAuthenticatedAs($coordinator);
     }
 
-    public function test_non_coordinator_cannot_sign_in(): void
+    public function test_user_with_an_invalid_password_cannot_sign_in(): void
     {
         $this->withoutMiddleware(PreventRequestForgery::class);
 
         $user = User::factory()->create([
-            'role' => UserRole::Student,
+            'role' => UserRole::Tutor,
             'password' => 'CorrectHorseBattery1!',
         ]);
 
         $this->from(route('login'))
             ->post(route('login.store'), [
                 'email' => $user->email,
+                'password' => 'IncorrectPassword1!',
+            ])
+            ->assertRedirect(route('login'))
+            ->assertSessionHasErrors('email');
+
+        $this->assertGuest();
+    }
+
+    public function test_student_can_sign_in_with_password_only_in_local_and_testing_environments(): void
+    {
+        $this->withoutMiddleware(PreventRequestForgery::class);
+        $student = User::factory()->create([
+            'role' => UserRole::Student,
+            'password' => 'CorrectHorseBattery1!',
+        ]);
+
+        $this->post(route('login.store'), [
+            'email' => $student->email,
+            'password' => 'CorrectHorseBattery1!',
+        ])->assertRedirect(route('alumno.companies.index'));
+
+        $this->assertAuthenticatedAs($student);
+    }
+
+    public function test_student_password_sign_in_is_rejected_in_production(): void
+    {
+        $this->withoutMiddleware(PreventRequestForgery::class);
+        $student = User::factory()->create([
+            'role' => UserRole::Student,
+            'password' => 'CorrectHorseBattery1!',
+        ]);
+        $this->app->instance('env', 'production');
+
+        $this->from(route('login'))
+            ->post(route('login.store'), [
+                'email' => $student->email,
                 'password' => 'CorrectHorseBattery1!',
             ])
             ->assertRedirect(route('login'))

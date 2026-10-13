@@ -40,6 +40,9 @@ class AuthenticatedSessionController extends Controller
                     ? 'supervisor.practice-letters.index'
                     : null,
             UserRole::Tutor => 'tutor.practice-reports.index',
+            UserRole::Student => app()->environment(['local', 'testing'])
+                ? 'alumno.companies.index'
+                : null,
             default => null,
         };
 

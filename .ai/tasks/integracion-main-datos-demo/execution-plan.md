@@ -5,15 +5,18 @@ al avanzar para que, si la sesión se corta a medio camino, la siguiente sepa
 exactamente dónde retomar sin releer todo desde cero.
 
 - [x] Paso 1 — Verificar que `origin/main` sea ancestro de `origin/develop` y revisar worktrees/cambios locales.
-- [ ] Paso 2 — Registrar continuidad correcta, adelantar `main` por fast-forward y verificar el push.
-- [ ] Paso 3 — Volver a `develop` y definir dataset, entidades/etapas y protección de credenciales.
-- [ ] Paso 4 — Implementar un seeder idempotente para 20 empresas, 1 coordinador, 5 tutores, 1 supervisor y 50 alumnos, con prácticas ficticias variadas.
-- [ ] Paso 5 — Probar distribución, relaciones, repetición del seeder y documentar la ejecución.
+- [x] Paso 2 — Registrar continuidad correcta, adelantar `main` por fast-forward y verificar el push.
+- [x] Paso 3 — Volver a `develop` y definir dataset, entidades/etapas y protección de credenciales.
+- [x] Paso 4 — Implementar un seeder idempotente para 20 empresas, 1 coordinador, 5 tutores, 1 supervisor y 50 alumnos, con prácticas ficticias variadas.
+- [x] Paso 5 — Probar distribución, relaciones, repetición del seeder y documentar la ejecución.
 - [ ] Paso 6 — Actualizar handoff, cerrar tarea y publicar el trabajo en `develop`; no integrar el seeder a `main` sin nueva autorización.
 
 ## Estado actual
-Paso 2. `origin/main` está 43 commits detrás de `origin/develop` y es su
-ancestro. La memoria quedó alineada con el commit `4409f4a`; falta guardar ese
-handoff corregido, hacer el fast-forward/push de `main` y volver al worktree
-`develop`. Los cambios ajenos en los tres scripts de Continuum/hooks deben
-preservarse.
+Paso 6. Seeder probado en SQLite y MySQL local; se repitió sin duplicar
+registros. Base resultante: 20 empresas, 50 prácticas, 5 tutores, 1 supervisor
+y 50 alumnos demo; se preservó una cuenta coordinadora previa además de la
+cuenta demo. La migración 000017 se corrigió para limitar nombres de índices
+MySQL. `http://nanis.net` responde 200 desde el contenedor reconstruido con el
+worktree `develop`; 25 cartas de aceptación están en el volumen privado.
+Credenciales y correos acordados permanecen solo en `.env` ignorado; no integrar
+el seeder a `main` sin nueva autorización. Preservar cambios ajenos de Continuum.

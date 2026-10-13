@@ -36,6 +36,25 @@ Después de ejecutar las migraciones, crea la primera cuenta de Coordinación co
 terminal; no hay cuentas predeterminadas ni credenciales guardadas en el
 repositorio. El acceso administrativo se realiza por `/login`.
 
+Para poblar una instalación local con datos completamente ficticios, define
+`DEMO_PASSWORD` en `.env` y ejecuta:
+
+```sh
+docker compose exec app php artisan db:seed --class=DevelopmentDatasetSeeder
+```
+
+El seeder crea 20 empresas, 1 Coordinación, 5 asesores, 1 supervisor y 50
+alumnos, con solicitudes desde revisión inicial hasta reporte final aprobado.
+Los usuarios usan el valor local de `DEMO_PASSWORD`; las cuentas de alumno
+pueden iniciar sesión por contraseña solo en `local`/`testing` y siguen usando
+SAML fuera de esos entornos. El seeder rechaza cualquier entorno distinto de
+`local`/`testing`; no uses contraseñas demo en producción. Los correos de
+Coordinación y Supervisor se ajustan con `DEMO_COORDINATOR_EMAIL` y
+`DEMO_SUPERVISOR_EMAIL`; `DEMO_USER_EMAIL_DOMAIN` configura el dominio de las
+cuentas `asesorN` y `alumnoN`. Los valores de ejemplo usan `example.test`;
+mantén cualquier dirección institucional o contraseña real solo en el `.env`
+local ignorado por Git.
+
 Coordinación puede invitar supervisores desde el catálogo de empresas. La
 invitación verifica el correo mediante un enlace de un solo uso (vence en siete
 días) y permite establecer una contraseña. En el entorno local, el mailer
