@@ -31,6 +31,10 @@ local un seeder de datos ficticios para desarrollo.
   10 reportes).
 - `.env` y `docker-compose.override.yml` están ignorados; no se incluyeron
   correos ni contraseñas demo en archivos versionados.
+- `python3 tools/continuum doctor` conserva 3 errores previos porque
+  `AI_COLLABORATION.md`, `AGENTS.md` y `.github/copilot-instructions.md` no
+  están en Git, además de una advertencia por tamaño del paquete de arranque;
+  esos archivos no se modificaron.
 
 ## Estado de Git y entorno
 - Los cambios de carta/permisos se publicaron en `origin/develop` como
