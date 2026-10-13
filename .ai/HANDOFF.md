@@ -36,7 +36,8 @@ versión y preparar la tarea de backlog para v1.1.
   como los cambios no integrados que permanecen en el worktree del Sprint 5.
 
 ## Siguiente paso
-Iniciar una nueva sesión de Continuum y crear `backlog-v1-1`, asignada al rol
-`gestion-proyecto`, para convertir `docs/v1.1/Planeacion/modificaciones.md` en
-el backlog de la siguiente versión. La validación humana/institucional de
+La nueva sesión de Continuum está iniciada. La tarea activa
+`.ai/tasks/backlog-v1-1/task.md` está asignada al rol `gestion-proyecto`; aún no
+se ha empezado a redactar el backlog de
+`docs/v1.1/Planeacion/modificaciones.md`. La validación humana/institucional de
 flujos y rúbricas continúa pendiente.
