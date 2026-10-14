@@ -25,9 +25,9 @@ supervisores antes de implementar HU-014.
 ## Write-set (archivos que se espera tocar)
 No editar fuera de esta lista sin actualizarla primero. Evita refactors oportunistas.
 
-- `docs/backlog/candidatos-iniciales.md`
-- `docs/sprints/plan-sprints-candidato.md`
-- `docs/casos-de-uso/flujo-candidato-practica.md`
+- `../../../../docs/v1.0/backlog/candidatos-iniciales.md`
+- `../../../../docs/v1.0/sprints/plan-sprints-candidato.md`
+- `../../../../docs/v1.0/casos-de-uso/flujo-candidato-practica.md`
 - `.ai/HANDOFF.md`
 - `.ai/state/topics/resumen.md`
 - `.ai/tasks/definir-identidad-y-gestion-usuarios/**`
@@ -35,9 +35,9 @@ No editar fuera de esta lista sin actualizarla primero. Evita refactors oportuni
 
 ## Fuentes de verdad a leer antes de empezar
 - `.ai/state/estado-dev.md`
-- `docs/backlog/candidatos-iniciales.md` (actores, permisos y épicas)
-- `docs/sprints/plan-sprints-candidato.md` (Sprint 1 y dependencias)
-- `docs/casos-de-uso/flujo-candidato-practica.md`
+- `../../../../docs/v1.0/backlog/candidatos-iniciales.md` (actores, permisos y épicas)
+- `../../../../docs/v1.0/sprints/plan-sprints-candidato.md` (Sprint 1 y dependencias)
+- `../../../../docs/v1.0/casos-de-uso/flujo-candidato-practica.md`
 - `.ai/tasks/gt-hu-014-consulta-seleccion-empresa/handoff.md`
 - `/home/fabian/code/redi/redi-app/app/Http/Middleware/VerifyAuthSaml.php`
 - `/home/fabian/code/redi/redi-app/app/Listeners/LoginListener.php`

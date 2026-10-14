@@ -46,9 +46,9 @@ No editar fuera de esta lista sin actualizarla primero. Evita refactors oportuni
 - `project-app/tests/Feature/**`
 - `project-app/README.md`
 - `project-app/composer.json` y `project-app/composer.lock` (solo si la integración requiere una dependencia compatible)
-- `docs/backlog/candidatos-iniciales.md`
-- `docs/casos-de-uso/flujo-candidato-practica.md`
-- `docs/sprints/plan-sprints-candidato.md`
+- `../../../../docs/v1.0/backlog/candidatos-iniciales.md`
+- `../../../../docs/v1.0/casos-de-uso/flujo-candidato-practica.md`
+- `../../../../docs/v1.0/sprints/plan-sprints-candidato.md`
 - `.ai/tasks/_closed/definir-identidad-y-gestion-usuarios/**` (para reflejar decisiones posteriores)
 - `.ai/HANDOFF.md`
 - `.ai/state/topics/resumen.md`
@@ -57,8 +57,8 @@ No editar fuera de esta lista sin actualizarla primero. Evita refactors oportuni
 
 ## Fuentes de verdad a leer antes de empezar
 - `.ai/state/estado-dev.md`
-- `docs/backlog/candidatos-iniciales.md` (GT-HU-019)
-- `docs/sprints/plan-sprints-candidato.md` (dependencia HU-019 → HU-014)
+- `../../../../docs/v1.0/backlog/candidatos-iniciales.md` (GT-HU-019)
+- `../../../../docs/v1.0/sprints/plan-sprints-candidato.md` (dependencia HU-019 → HU-014)
 - `project-app/composer.json`
 - `project-app/app/Models/User.php`
 - `project-app/app/Http/Controllers/Auth/AuthenticatedSessionController.php`

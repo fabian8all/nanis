@@ -52,9 +52,9 @@ No editar fuera de esta lista sin actualizarla primero. Evita refactors oportuni
 - `project-app/resources/views/livewire/supervisor/practice-plans/**`
 - `project-app/resources/views/livewire/coordinator/practice-plans/**`
 - `project-app/tests/Feature/PracticePlanWorkflowTest.php`
-- `docs/backlog/candidatos-iniciales.md`
-- `docs/casos-de-uso/flujo-candidato-practica.md`
-- `docs/sprints/plan-sprints-candidato.md`
+- `../../../../docs/v1.0/backlog/candidatos-iniciales.md`
+- `../../../../docs/v1.0/casos-de-uso/flujo-candidato-practica.md`
+- `../../../../docs/v1.0/sprints/plan-sprints-candidato.md`
 - `.ai/HANDOFF.md`
 - `.ai/state/topics/resumen.md`
 - `.ai/tasks/gt-hu-005-plan-trabajo/**`
@@ -63,9 +63,9 @@ No editar fuera de esta lista sin actualizarla primero. Evita refactors oportuni
 - `.ai/state/estado-dev.md`
 - `.ai/state/topics/resumen.md`
 - `.ai/tasks/_closed/gt-hu-004-aceptacion-empresa/handoff.md`
-- `docs/backlog/candidatos-iniciales.md` (GT-HU-005)
-- `docs/sprints/plan-sprints-candidato.md` (Sprint 3)
-- `docs/casos-de-uso/flujo-candidato-practica.md`
+- `../../../../docs/v1.0/backlog/candidatos-iniciales.md` (GT-HU-005)
+- `../../../../docs/v1.0/sprints/plan-sprints-candidato.md` (Sprint 3)
+- `../../../../docs/v1.0/casos-de-uso/flujo-candidato-practica.md`
 
 ## Decisiones pendientes
 - No hay decisiones funcionales bloqueantes; los criterios confirmados están

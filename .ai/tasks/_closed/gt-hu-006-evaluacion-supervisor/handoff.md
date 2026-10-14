@@ -14,8 +14,8 @@ Refinar GT-HU-006 con la persona solicitante y registrar criterios suficientes p
 - Dependencias: plan aprobado de GT-HU-005 y rúbrica publicada de GT-HU-017.
 
 ## Archivos actualizados
-- `docs/backlog/candidatos-iniciales.md`: criterios refinados de GT-HU-006.
-- `docs/sprints/plan-sprints-candidato.md`: dependencias y ciclo de evaluación del Sprint 4.
+- `../../../../docs/v1.0/backlog/candidatos-iniciales.md`: criterios refinados de GT-HU-006.
+- `../../../../docs/v1.0/sprints/plan-sprints-candidato.md`: dependencias y ciclo de evaluación del Sprint 4.
 - `.ai/state/topics/pendientes.md` y `.ai/state/topics/resumen.md`: pendientes y estado refinado.
 - `.ai/HANDOFF.md`: continuidad actualizada.
 

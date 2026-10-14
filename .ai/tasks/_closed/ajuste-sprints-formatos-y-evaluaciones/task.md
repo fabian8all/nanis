@@ -6,7 +6,7 @@
 Actualizar el backlog y la secuencia de sprints con los formatos compartidos, que identifican evaluaciones separadas de supervisor y tutor, además de una carta de no responsiva para la solicitud. Mantener las decisiones confirmadas y las incógnitas de implementación claramente separadas.
 
 ## Incluido en el alcance
-- Revisar los formatos entregados en `docs/formatos/` como fuentes de requisitos.
+- Revisar los formatos entregados en `../../../../docs/v1.0/formatos/` como fuentes de requisitos.
 - Desglosar en historias las dos evaluaciones y la configuración de rúbricas por Coordinación.
 - Añadir al flujo de solicitud la aceptación e impresión de la carta de no responsiva.
 - Actualizar backlog, plan candidato y continuidad de Continuum con dependencias y preguntas pendientes.
@@ -19,10 +19,10 @@ Actualizar el backlog y la secuencia de sprints con los formatos compartidos, qu
 ## Write-set (archivos que se espera tocar)
 No editar fuera de esta lista sin actualizarla primero. Evita refactors oportunistas.
 
-- `docs/backlog/candidatos-iniciales.md`
-- `docs/sprints/plan-sprints-candidato.md`
-- `docs/casos-de-uso/flujo-candidato-practica.md`
-- `docs/requerimientos/vision-inicial.md`
+- `../../../../docs/v1.0/backlog/candidatos-iniciales.md`
+- `../../../../docs/v1.0/sprints/plan-sprints-candidato.md`
+- `../../../../docs/v1.0/casos-de-uso/flujo-candidato-practica.md`
+- `../../../../docs/v1.0/requerimientos/vision-inicial.md`
 - `.ai/HANDOFF.md`
 - `.ai/state/topics/resumen.md`
 - `.ai/state/topics/pendientes.md`
@@ -32,10 +32,10 @@ No editar fuera de esta lista sin actualizarla primero. Evita refactors oportuni
 ## Fuentes de verdad a leer antes de empezar
 - `.ai/state/estado-dev.md`
 - `.ai/state/topics/resumen.md` y `.ai/state/topics/pendientes.md`
-- `docs/backlog/candidatos-iniciales.md`
-- `docs/sprints/plan-sprints-candidato.md`
-- `docs/casos-de-uso/flujo-candidato-practica.md`
-- Los formatos de solicitud, carta de no responsiva, reporte y evaluación en `docs/formatos/`
+- `../../../../docs/v1.0/backlog/candidatos-iniciales.md`
+- `../../../../docs/v1.0/sprints/plan-sprints-candidato.md`
+- `../../../../docs/v1.0/casos-de-uso/flujo-candidato-practica.md`
+- Los formatos de solicitud, carta de no responsiva, reporte y evaluación en `../../../../docs/v1.0/formatos/`
 
 ## Contexto mínimo sugerido
 Según el tamaño declarado arriba, no cargues más de lo necesario:

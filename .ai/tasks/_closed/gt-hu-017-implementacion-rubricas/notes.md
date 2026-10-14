@@ -10,7 +10,7 @@ pasa a `handoff.md` o a un ADR — este archivo se archiva junto con la tarea.
 
 ## Evidencia recopilada
 - Búsqueda previa reportó patrones de Coordinator Livewire/middleware, rutas y migraciones con restricciones únicas en la aplicación Laravel.
-- Inspección local sanitizada de `docs/formatos/EVAL_SUPERVISOREMPRESA.docx`: “Capacidad de aprendizaje de habilidades para el área”, “Actitud hacia el trabajo”, “Actitud y conducta” y “Responsabilidad”. No se versiona el DOCX ni se conservaron datos personales.
+- Inspección local sanitizada de `../../../../docs/v1.0/formatos/EVAL_SUPERVISOREMPRESA.docx`: “Capacidad de aprendizaje de habilidades para el área”, “Actitud hacia el trabajo”, “Actitud y conducta” y “Responsabilidad”. No se versiona el DOCX ni se conservaron datos personales.
 - Inspección estructural de `EVAL_TUTORDEPRACTICAS.docx`: no se detectó texto útil legible; no se inspeccionaron sus imágenes.
 
 ## Callejones sin salida (para no repetirlos)

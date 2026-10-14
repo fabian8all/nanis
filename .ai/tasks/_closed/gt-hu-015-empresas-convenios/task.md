@@ -34,10 +34,10 @@ No editar fuera de esta lista sin actualizarla primero. Evita refactors oportuni
 - `project-app/README.md`
 - `project-app/routes/web.php`
 - `project-app/tests/Feature/**`
-- `docs/backlog/candidatos-iniciales.md`
-- `docs/sprints/plan-sprints-candidato.md`
-- `docs/casos-de-uso/flujo-candidato-practica.md`
-- `docs/formatos/**` (fuente de lectura; no versionar formatos con datos personales sin sanear)
+- `../../../../docs/v1.0/backlog/candidatos-iniciales.md`
+- `../../../../docs/v1.0/sprints/plan-sprints-candidato.md`
+- `../../../../docs/v1.0/casos-de-uso/flujo-candidato-practica.md`
+- `../../../../docs/v1.0/formatos/**` (fuente de lectura; no versionar formatos con datos personales sin sanear)
 - `.ai/HANDOFF.md`
 - `.ai/state/topics/pendientes.md`
 - `.ai/tasks/gt-hu-015-empresas-convenios/**`
@@ -46,8 +46,8 @@ No editar fuera de esta lista sin actualizarla primero. Evita refactors oportuni
 ## Fuentes de verdad a leer antes de empezar
 - `.ai/state/estado-dev.md`
 - `.ai/state/topics/resumen.md`
-- `docs/backlog/candidatos-iniciales.md` (GT-HU-015)
-- `docs/sprints/plan-sprints-candidato.md` (Sprint 1 y dependencias)
+- `../../../../docs/v1.0/backlog/candidatos-iniciales.md` (GT-HU-015)
+- `../../../../docs/v1.0/sprints/plan-sprints-candidato.md` (Sprint 1 y dependencias)
 - `project-app/` (estructura Laravel existente, sin asumir campos)
 
 ## Contexto mínimo sugerido

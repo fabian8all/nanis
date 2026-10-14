@@ -23,8 +23,8 @@ No editar fuera de esta lista sin actualizarla primero. Evita refactors oportuni
 - `.ai/tasks/gt-hu-016-evaluacion-tutor/notes.md`
 - `.ai/tasks/gt-hu-016-evaluacion-tutor/execution-plan.md`
 - `.ai/tasks/gt-hu-016-evaluacion-tutor/handoff.md`
-- `docs/backlog/candidatos-iniciales.md`
-- `docs/sprints/plan-sprints-candidato.md`
+- `../../../../docs/v1.0/backlog/candidatos-iniciales.md`
+- `../../../../docs/v1.0/sprints/plan-sprints-candidato.md`
 - `.ai/HANDOFF.md`
 - `.ai/state/topics/resumen.md`
 - `.ai/state/topics/pendientes.md`
@@ -43,8 +43,8 @@ No editar fuera de esta lista sin actualizarla primero. Evita refactors oportuni
 - `.ai/state/estado-dev.md`
 - `.ai/state/topics/resumen.md`
 - `.ai/state/topics/pendientes.md`
-- `docs/backlog/candidatos-iniciales.md`
-- `docs/sprints/plan-sprints-candidato.md`
+- `../../../../docs/v1.0/backlog/candidatos-iniciales.md`
+- `../../../../docs/v1.0/sprints/plan-sprints-candidato.md`
 - `.ai/tasks/_closed/gt-hu-006-evaluacion-supervisor/handoff.md`
 - `.ai/tasks/_closed/gt-hu-007-reporte-final/handoff.md`
 - `.ai/tasks/_closed/gt-hu-017-rubricas-evaluacion/handoff.md`

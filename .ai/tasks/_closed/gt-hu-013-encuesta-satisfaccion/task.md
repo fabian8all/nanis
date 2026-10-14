@@ -49,7 +49,7 @@ No editar fuera de esta lista sin actualizarla primero. Evita refactors oportuni
 - `project-app/resources/views/livewire/supervisor/practice-surveys/index.blade.php`
 - `project-app/resources/views/livewire/supervisor/practice-surveys/answer.blade.php`
 - `project-app/tests/Feature/PracticeSatisfactionSurveyTest.php`
-- `docs/backlog/candidatos-iniciales.md`
+- `../../../../docs/v1.0/backlog/candidatos-iniciales.md`
 - `.ai/tasks/gt-hu-013-encuesta-satisfaccion/task.md`
 - `.ai/tasks/gt-hu-013-encuesta-satisfaccion/execution-plan.md`
 - `.ai/tasks/gt-hu-013-encuesta-satisfaccion/notes.md`
@@ -61,7 +61,7 @@ No editar fuera de esta lista sin actualizarla primero. Evita refactors oportuni
 ## Fuentes de verdad a leer antes de empezar
 - `.ai/state/estado-dev.md`
 - `.ai/tasks/_closed/gt-sprint-5-refinamiento-cierre-expediente-encuesta/handoff.md`
-- `docs/backlog/candidatos-iniciales.md` (GT-HU-013; escala 1–5 confirmada)
+- `../../../../docs/v1.0/backlog/candidatos-iniciales.md` (GT-HU-013; escala 1–5 confirmada)
 - `project-app/app/Models/PracticeRequest.php` y `PracticeAcceptanceSubmission.php`
 - `project-app/app/Livewire/Coordinator/Rubrics/Manage.php`
 - `project-app/app/Livewire/Supervisor/PracticeEvaluations/Index.php`

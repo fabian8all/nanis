@@ -15,7 +15,7 @@ para Coordinación y el alumno propietario.
 - Seguimiento y vista de solicitud estudiantil: enlaces al expediente.
 - `project-app/tests/Feature/PracticeRecordTest.php` y
   `PracticeTrackingTest.php`: privacidad, cierre, enlaces y acceso por rol.
-- `docs/backlog/candidatos-iniciales.md`: criterios de consulta y evidencia.
+- `../../../../docs/v1.0/backlog/candidatos-iniciales.md`: criterios de consulta y evidencia.
 
 ## Decisiones
 - Completo únicamente con carta aceptada, reporte aprobado y ambas evaluaciones

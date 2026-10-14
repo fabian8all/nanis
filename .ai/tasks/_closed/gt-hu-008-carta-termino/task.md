@@ -23,13 +23,13 @@ No editar fuera de esta lista sin actualizarla primero. Evita refactors oportuni
 - `.ai/tasks/gt-hu-008-carta-termino/notes.md`
 - `.ai/tasks/gt-hu-008-carta-termino/handoff.md`
 - `.ai/HANDOFF.md`
-- `docs/backlog/candidatos-iniciales.md`
+- `../../../../docs/v1.0/backlog/candidatos-iniciales.md`
 
 ## Fuentes de verdad a leer antes de empezar
 - `.ai/state/estado-dev.md`
 - `.ai/tasks/_closed/gt-sprint-5-refinamiento-cierre-expediente-encuesta/handoff.md`
-- `docs/backlog/candidatos-iniciales.md` (GT-HU-008/009)
-- `docs/casos-de-uso/flujo-candidato-practica.md` (carta de término)
+- `../../../../docs/v1.0/backlog/candidatos-iniciales.md` (GT-HU-008/009)
+- `../../../../docs/v1.0/casos-de-uso/flujo-candidato-practica.md` (carta de término)
 
 ## Contexto mínimo sugerido
 Según el tamaño declarado arriba, no cargues más de lo necesario:

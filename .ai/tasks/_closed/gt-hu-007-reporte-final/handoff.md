@@ -15,8 +15,8 @@ Refinar GT-HU-007 con la persona solicitante y documentar los criterios del repo
 - No se incorporan reportes de avance.
 
 ## Archivos actualizados
-- `docs/backlog/candidatos-iniciales.md`: criterios de HU-007 y dependencia de HU-016.
-- `docs/sprints/plan-sprints-candidato.md`: captura, revisión y secuencia de cierre.
+- `../../../../docs/v1.0/backlog/candidatos-iniciales.md`: criterios de HU-007 y dependencia de HU-016.
+- `../../../../docs/v1.0/sprints/plan-sprints-candidato.md`: captura, revisión y secuencia de cierre.
 - `.ai/state/topics/pendientes.md` y `.ai/state/topics/resumen.md`: estado y pendientes.
 - `.ai/HANDOFF.md`: continuidad de la tarea y siguiente historia pendiente.
 

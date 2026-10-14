@@ -9,7 +9,7 @@ Organizar el backlog candidato en sprints y proponer su asignación a los roles/
 - Refinar criterios, prioridades y dependencias de las historias del backlog candidato.
 - Proponer objetivos, alcance y secuencia de sprints según capacidad y cadencia acordadas.
 - Asignar las historias y responsabilidades a los roles/agentes pertinentes disponibles en `.ai/roles/`, indicando dependencias y revisiones cruzadas.
-- Documentar el plan candidato en `docs/sprints/` y enlazarlo desde el backlog.
+- Documentar el plan candidato en `../../../../docs/v1.0/sprints/` y enlazarlo desde el backlog.
 - Consultar a la persona solicitante cuando se necesite confirmar capacidad, duración o asignaciones.
 - Mantener el alcance actualizado: prácticas operativas y de mandos medios, 240 horas, una evaluación al término y un reporte final; sin actividades intermedias.
 
@@ -23,10 +23,10 @@ No editar fuera de esta lista sin actualizarla primero. Evita refactors oportuni
 
 - `AI_COLLABORATION.md`
 - `.github/copilot-instructions.md` (solo sincronizar huella canónica, si cambia)
-- `docs/backlog/candidatos-iniciales.md`
-- `docs/casos-de-uso/flujo-candidato-practica.md`
-- `docs/requerimientos/vision-inicial.md`
-- `docs/sprints/**`
+- `../../../../docs/v1.0/backlog/candidatos-iniciales.md`
+- `../../../../docs/v1.0/casos-de-uso/flujo-candidato-practica.md`
+- `../../../../docs/v1.0/requerimientos/vision-inicial.md`
+- `../../../../docs/v1.0/sprints/**`
 - `.ai/HANDOFF.md`
 - `.ai/tasks/planificacion-sprints-agentes/**`
 - `.ai/state/topics/pendientes.md`
@@ -36,9 +36,9 @@ No editar fuera de esta lista sin actualizarla primero. Evita refactors oportuni
 - `.ai/state/estado-dev.md`
 - `.ai/state/topics/resumen.md`
 - `.ai/state/topics/pendientes.md`
-- `docs/requerimientos/vision-inicial.md`
-- `docs/casos-de-uso/flujo-candidato-practica.md`
-- `docs/backlog/candidatos-iniciales.md`
+- `../../../../docs/v1.0/requerimientos/vision-inicial.md`
+- `../../../../docs/v1.0/casos-de-uso/flujo-candidato-practica.md`
+- `../../../../docs/v1.0/backlog/candidatos-iniciales.md`
 - `tools/continuum roles list` y las definiciones de los roles/agentes aplicables del catálogo activo.
 
 ## Contexto mínimo sugerido

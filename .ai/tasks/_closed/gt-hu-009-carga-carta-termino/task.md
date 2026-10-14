@@ -39,7 +39,7 @@ No editar fuera de esta lista sin actualizarla primero. Evita refactors oportuni
 - `project-app/routes/web.php`
 - `project-app/tests/Feature/StudentPracticeTerminationLetterTest.php`
 - `project-app/tests/Feature/CoordinatorPracticeTerminationLetterTest.php`
-- `docs/backlog/candidatos-iniciales.md`
+- `../../../../docs/v1.0/backlog/candidatos-iniciales.md`
 - `.ai/tasks/gt-hu-009-carga-carta-termino/task.md`
 - `.ai/tasks/gt-hu-009-carga-carta-termino/execution-plan.md`
 - `.ai/tasks/gt-hu-009-carga-carta-termino/notes.md`
@@ -52,8 +52,8 @@ No editar fuera de esta lista sin actualizarla primero. Evita refactors oportuni
 - `.ai/state/estado-dev.md`
 - `.ai/tasks/_closed/gt-sprint-5-refinamiento-cierre-expediente-encuesta/handoff.md`
 - `.ai/tasks/_closed/gt-hu-008-carta-termino/handoff.md`
-- `docs/backlog/candidatos-iniciales.md` (GT-HU-008/009)
-- `docs/casos-de-uso/flujo-candidato-practica.md` (carta de término y cierre)
+- `../../../../docs/v1.0/backlog/candidatos-iniciales.md` (GT-HU-008/009)
+- `../../../../docs/v1.0/casos-de-uso/flujo-candidato-practica.md` (carta de término y cierre)
 - `project-app/app/Livewire/Supervisor/PracticeAcceptances/Upload.php`
 - `project-app/app/Livewire/Coordinator/PracticeAcceptances/Review.php`
 - `project-app/app/Http/Controllers/Coordinator/PracticeAcceptanceFileController.php`

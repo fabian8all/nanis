@@ -15,7 +15,7 @@ Permitir que Coordinación revise las solicitudes enviadas por estudiantes, las 
 - Carta con copia propia de datos; la solicitud original del alumno no se modifica.
 - Coordinación puede ajustar para la carta únicamente destinatario, puesto, lugar y fechas; los datos de alumno/empresa permanecen fijos.
 - Generar una vista imprimible para que Coordinación firme físicamente la carta. HU-003 se encargará de que el alumno la consulte/descargue.
-- Usar el formato oficial de `docs/formatos/CARTA DE PRESENTACIÓN FORMATO EP.docx` como referencia, sin versionar el archivo fuente ni incorporar valores de ejemplo.
+- Usar el formato oficial de `../../../../docs/v1.0/formatos/CARTA DE PRESENTACIÓN FORMATO EP.docx` como referencia, sin versionar el archivo fuente ni incorporar valores de ejemplo.
 - Proteger por rol y validar decisiones, comentario, folio y campos; pruebas para acceso, aprobación/devolución, reenvío, historial, datos no mutados y concurrencia/consistencia del folio.
 
 ## Explícitamente fuera de alcance
@@ -57,17 +57,17 @@ No editar fuera de esta lista sin actualizarla primero. Evita refactors oportuni
 - `project-app/tests/Feature/CoordinatorPracticeRequestReviewTest.php`
 - `project-app/tests/Feature/StudentPracticeRequestTest.php`
 - `project-app/tests/Feature/CoordinatorPracticeRequestReviewTest.php`
-- `docs/backlog/candidatos-iniciales.md`
-- `docs/sprints/plan-sprints-candidato.md`
+- `../../../../docs/v1.0/backlog/candidatos-iniciales.md`
+- `../../../../docs/v1.0/sprints/plan-sprints-candidato.md`
 - `.ai/HANDOFF.md`
 - `.ai/state/topics/resumen.md`
 - `.ai/tasks/gt-hu-002-revision-solicitud/**`
 
 ## Fuentes de verdad a leer antes de empezar
 - `.ai/state/estado-dev.md`
-- `docs/backlog/candidatos-iniciales.md` (GT-HU-001/002/003)
-- `docs/casos-de-uso/flujo-candidato-practica.md`
-- `docs/sprints/plan-sprints-candidato.md`
+- `../../../../docs/v1.0/backlog/candidatos-iniciales.md` (GT-HU-001/002/003)
+- `../../../../docs/v1.0/casos-de-uso/flujo-candidato-practica.md`
+- `../../../../docs/v1.0/sprints/plan-sprints-candidato.md`
 - `.ai/tasks/_closed/gt-hu-001-solicitud-practica/handoff.md`
 - `project-app/app/Models/PracticeRequest.php`
 - `project-app/app/Enums/PracticeRequestStatus.php`

@@ -1,40 +1,44 @@
 # Handoff
 
-**Fecha:** 2026-10-14 · **Rol:** gestion-proyecto · **Rama:** `develop`
+**Fecha:** 2026-10-14 · **Rol:** integración/documentación · **Rama:** `develop`
 
-## Objetivo de la sesión
-Retomar y completar la tarea Continuum `backlog-v1-1`: convertir las solicitudes
-de v1.1 en un backlog candidato trazable.
+## Objetivo
+Consolidar el trabajo en `~/code/nanis` y dejar el checkout principal en
+`develop`, conservando `main` como cierre de v1.0 y `develop` como base de v1.1.
 
-## Resultado
-- Se creó `docs/v1.1/backlog/backlog-candidato.md` con 17 historias, IDs
-  `GT-HU-022`–`GT-HU-038`, prioridades candidatas, criterios de aceptación,
-  dependencias y preguntas abiertas.
-- Se enlazó el backlog y su fuente desde `docs/README.md`; las referencias
-  resuelven a archivos existentes.
-- La tarea se cerró y archivó en `.ai/tasks/_closed/backlog-v1-1/`.
-- `main`/`origin/main` conserva el cierre v1.0 en `cb5365d`. `develop` contiene
-  el trabajo de backlog v1.1; no integrar a `main` hasta que se revise y
-  apruebe el alcance.
+## Estado
+- El checkout `~/code/nanis` está en `develop` (`64925ed`), alineado con
+  `origin/develop`; contiene el backlog candidato v1.1 de 17 historias
+  (`GT-HU-022`–`GT-HU-038`).
+- `main` y `origin/main` permanecen en `cb5365d`, con el cierre de v1.0.
+  Sprint 5 (`a11bd76`) y el cierre v1.0 son ancestros de `develop`.
+- La fuente original `docs/v1.1/Planeacion/Modificaciones.txt` se conserva junto
+  con su versión formateada `modificaciones.md`.
+- Se actualizaron 171 referencias en 52 documentos de tareas archivadas para
+  que apunten a `docs/v1.0/`.
+- Se preservó `project-app/.env` del checkout principal y se añadieron las
+  cuatro variables locales de demo que faltaban, sin cambiar `APP_KEY` ni
+  registrar valores en memoria versionada. `docker-compose.override.yml`
+  permanece en el checkout principal y está ignorado por Git.
+
+## Worktrees y limpieza
+- Git registra únicamente `~/code/nanis` como worktree.
+- Los worktrees auxiliares de `main` y `develop` se retiraron; se conservaron
+  sus ramas.
+- La limpieza física de `nanis-develop-integration` quedó incompleta: Windows
+  denegó acceso a `project-app/storage/framework/testing/disks`. El inventario
+  previo no encontró archivos únicos: el resto eran copias idénticas o
+  artefactos generados. No se forzó el cambio de permisos.
 
 ## Validación
-- 17 historias únicas; se confirmó que no reutilizan los IDs v1.0
-  `GT-HU-001`–`GT-HU-021`.
-- Cada historia incluye prioridad, criterios de aceptación y dependencias.
-- Se comprobó cobertura de todos los grupos de solicitudes, con trazabilidad
-  explícita para orden, búsqueda y paginación de listas.
-- Los enlaces del README y del backlog resuelven; `git diff --check` pasó con
-  reconocimiento de CRLF.
-- No se ejecutaron pruebas de aplicación por ser un cambio exclusivamente
-  documental.
+- `main` y Sprint 5 son ancestros de `develop`.
+- Las referencias antiguas `docs/{backlog,casos-de-uso,formatos,planeacion,requerimientos,sprints}/`
+  ya no aparecen en `.ai/tasks`; existen los directorios destino de v1.0.
+- Las 171 referencias actualizadas resuelven a rutas existentes; `git diff
+  --check` pasó usando `core.whitespace=cr-at-eol` para respetar CRLF.
 
 ## Pendiente
-Revisar las preguntas abiertas de `.ai/tasks/_closed/backlog-v1-1/handoff.md`
-con Coordinación y la persona solicitante antes de aprobar prioridades,
-comprometer sprints o iniciar implementación. Continúa pendiente la validación
-humana/institucional de flujos y rúbricas de v1.0.
-
-## Cambios locales que deben preservarse
-No incluir ni revertir las modificaciones preexistentes en
-`.continuum/tools/continuum`, `.githooks/pre-commit` y `tools/continuum`, ni
-los cambios aún no integrados del worktree `sprint/5-cierre-expediente-encuesta`.
+- Terminar la limpieza del directorio residual si se concede acceso a la ruta
+  protegida.
+- Revisar y aprobar el backlog candidato antes de iniciar historias v1.1 o
+  integrarlo en `main`.

@@ -6,16 +6,16 @@
 Preparar y validar con la persona solicitante un backlog candidato para el prototipo de prácticas de Gestión Turística.
 
 ## Archivos revisados
-- `docs/planeacion/` — Retos 4 y 5, cédula y procedimiento institucional 2025.
-- `docs/requerimientos/vision-inicial.md`
-- `docs/casos-de-uso/flujo-candidato-practica.md`
-- `docs/backlog/candidatos-iniciales.md`
+- `../../../../docs/v1.0/planeacion/` — Retos 4 y 5, cédula y procedimiento institucional 2025.
+- `../../../../docs/v1.0/requerimientos/vision-inicial.md`
+- `../../../../docs/v1.0/casos-de-uso/flujo-candidato-practica.md`
+- `../../../../docs/v1.0/backlog/candidatos-iniciales.md`
 - `.ai/tasks/inicio-requerimientos-backlog/` y estado Continuum relacionado.
 
 ## Archivos modificados
-- `docs/requerimientos/vision-inicial.md`
-- `docs/casos-de-uso/flujo-candidato-practica.md`
-- `docs/backlog/candidatos-iniciales.md`
+- `../../../../docs/v1.0/requerimientos/vision-inicial.md`
+- `../../../../docs/v1.0/casos-de-uso/flujo-candidato-practica.md`
+- `../../../../docs/v1.0/backlog/candidatos-iniciales.md`
 - `.ai/state/topics/`, `.ai/tasks/inicio-requerimientos-backlog/` y `.ai/HANDOFF.md`
 
 ## Decisión(es) tomada(s)

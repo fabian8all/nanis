@@ -1,0 +1,37 @@
+*Login:
+	-Cambiar el titulo del botón de "Acceder como alumno de prueba" por "Acceso federado UCOL" y moverlo para abajo del botón "Iniciar sesión".
+
+*Alumno:
+	-Si no ha llenado solicitud, es correcto que entre a la lista de empresas con convenio. Pero si ya hay una solicitud elaborada o ya está realizando la práctica, que ingrese directo a Seguimiento.
+	-En la barra, agregar el enlace para ver la lista de empresas con convenio, pero desactivar el botón de seleccionar desde que hay una solicitud en trámite.
+	-No puedo ver la solicitud, muestra "error 403 - Forbidden."
+	--Expediente
+		-En expediente, Ordenar los elementos que se muestran de acuerdo con el proceso (1.-Carta de presentación. 2.- Carta de aceptación. 3.-Requisitos de cierre. 4.- Reporte final aprobado. 5.-Evaluaciones. 6.-Carta de término).
+		-Si no existe el documento no poner un botón de "Consultar" o ponerlo desactivado para evitar enlaces rotos.
+
+*Coordinador:
+	-Al ingresar que entre a seguimiento.
+	-Agregar el enlace al catálogo de empresas a la barra superior.
+	-Agrupar los enlaces de Solicitudes,Aceptaciones,Cartas de término,Planes,Reportes,Eval. tutor,Eval. supervisor y encuestas en un dropdown llamado "Documentos".
+	-Enlace Rúbricas manda "error 404 - Not Found"
+
+	--Catálogo de empresa
+		-Ocultar el formulario, que se muestre al hacer clic en un boton para "Agregar nueva empresa" o cuando se edita la información de una empresa.
+		-Agregar paginación y búsqueda por nombre de la empresa.
+
+	--Seguimiento
+		-Rotular cada botón con la acción y el documento al que lleva. Ejemplo: Botón para revisar solicitud dice "Abrir práctica", cambiarlo por "Revisar solicitud".
+
+*Supervisor:
+	Al igual que con el coordinador, poner los enlaces de Cartas pendientes,Planes de trabajo, Evaluaciones y Encuestas en un Dropdown (Documentos).
+	--Seguimiento
+		-En la etapa de aceptación tener los botones (posiblemente dropdown) para acceder directamente a consultar la carta de presentación o cargar la carta de aceptación del alumno, sin tener que pasar al catálogo de cartas pendientes de aceptación.
+		-De´pués de consultar la carta de presentación, si hago clic en volver, trata de cargar el expediente, por lo que marca "error 403 - Forbidden". Que regrese a Seguimiento.
+	* Títulos asignados automáticamente, están en inglés. Ej. "Versión 1 - pending_supervisor_review". Cambiar a español.
+
+*Asesor/tutor:
+	--Reporte final
+		Ocultar los campos de observaciones particulares y ponerlos debajo del campo al que están relacionados. Y poner un botón para abrirlos en caso de querer dejar alguna observación sobre ese campo. Solo dejar abajo el area de texto de "Comentario general"
+
+**Todas las listas ordenar por fecha de modificación ->El cambio más reciente primero.
+**Todas las listas agregar paginación y búsqueda las que no tengan.

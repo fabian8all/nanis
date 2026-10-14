@@ -13,8 +13,8 @@ Refinar GT-HU-017 con la persona solicitante y documentar reglas suficientes par
 - Las ponderaciones de una versión deben sumar 100%. El total se calcula en escala de 0 a 100: para cada criterio, se divide el puntaje por el máximo de su escala y se aplica la ponderación; luego se suman los resultados ponderados.
 
 ## Archivos actualizados
-- `docs/backlog/candidatos-iniciales.md`: criterios de GT-HU-017.
-- `docs/sprints/plan-sprints-candidato.md`: reglas de rúbricas y dependencias.
+- `../../../../docs/v1.0/backlog/candidatos-iniciales.md`: criterios de GT-HU-017.
+- `../../../../docs/v1.0/sprints/plan-sprints-candidato.md`: reglas de rúbricas y dependencias.
 - `.ai/state/topics/pendientes.md` y `.ai/state/topics/resumen.md`: estado de HU-017 y pendientes.
 - `.ai/HANDOFF.md`: continuidad actualizada.
 

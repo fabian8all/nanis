@@ -21,10 +21,10 @@ pasa a `handoff.md` o a un ADR — este archivo se archiva junto con la tarea.
 
 ## Evidencia recopilada
 
-- GT-HU-005 aparece en `docs/backlog/candidatos-iniciales.md` con el formato,
+- GT-HU-005 aparece en `../../../../docs/v1.0/backlog/candidatos-iniciales.md` con el formato,
   revisión, fecha límite y permisos todavía por definir.
 - GT-HU-005 está en Sprint 3, después de la aceptación de empresa
-  (`docs/sprints/plan-sprints-candidato.md`).
+  (`../../../../docs/v1.0/sprints/plan-sprints-candidato.md`).
 - GT-HU-004 quedó comprometida en `00db4dc` sobre
   `sprint/3-aceptacion-empresa`.
 

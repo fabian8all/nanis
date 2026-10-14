@@ -27,7 +27,7 @@ pasa a `handoff.md` o a un ADR — este archivo se archiva junto con la tarea.
   consultar respuestas enviadas; Coordinación es el único rol lector.
 
 ## Evidencia
-- Los criterios confirmados están en `docs/backlog/candidatos-iniciales.md` y
+- Los criterios confirmados están en `../../../../docs/v1.0/backlog/candidatos-iniciales.md` y
   `.ai/tasks/_closed/gt-sprint-5-refinamiento-cierre-expediente-encuesta/handoff.md`.
 - HU-012 ya dispone de una ruta independiente de cierre; la encuesta no forma
   parte de sus cuatro requisitos.

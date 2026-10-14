@@ -32,4 +32,4 @@ Implementar entrega, versionado, revisión por tutor y cierre del reporte final 
 ## Pendiente
 - Aplicar migración `2026_10_11_000012_create_practice_reports_tables.php` mediante despliegue/reconstrucción controlada.
 - HU-016 queda fuera de esta tarea; podrá consumir `PracticeReport.approved_version_id`.
-- No incorporar la plantilla fuente de `docs/formatos/`, que puede contener ejemplos con datos personales.
+- No incorporar la plantilla fuente de `../../../../docs/v1.0/formatos/`, que puede contener ejemplos con datos personales.

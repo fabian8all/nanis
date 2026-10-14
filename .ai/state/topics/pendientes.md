@@ -1,5 +1,12 @@
 # Pendientes
 
+- Al 2026-10-14, el checkout principal `~/code/nanis` trabaja en `develop`
+  (`64925ed`); `main` permanece en `cb5365d` con el cierre de v1.0. Sprint 5 y
+  el cierre v1.0 son ancestros de `develop`. El backlog de v1.1 sigue siendo
+  candidato y no debe integrarse en `main` hasta su revisión y aprobación.
+- La fuente original de solicitudes para v1.1 se conserva en
+  `../../../docs/v1.1/Planeacion/Modificaciones.txt`, junto con su versión
+  formateada `../../../docs/v1.1/Planeacion/modificaciones.md`.
 - El catálogo muestra nombre, dirección, teléfono, email y persona de contacto; Coordinación da altas/bajas manualmente. La baja oculta a la empresa en nuevas solicitudes, pero conserva referencias existentes y no afecta prácticas iniciadas.
 - Conciliar canales del prototipo frente a Drive/correo/Classroom/papel descritos en el procedimiento institucional 2025.
 - HU-006, HU-007, HU-016 y HU-017 están implementadas y desplegadas en Sprint 4. La rúbrica de Tutor publicada en desarrollo es temporal/ficticia para demostración; falta que Coordinación publique las rúbricas institucionales. La rúbrica Supervisor continúa como borrador, por lo que HU-006 no inicia aún en demo. La práctica sintética recorre aceptación, plan y reporte aprobados.

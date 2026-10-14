@@ -2,7 +2,7 @@
 
 ## Objetivo y resultado
 
-Se revisaron los formatos entregados en `docs/formatos/` y se ajustaron el
+Se revisaron los formatos entregados en `../../../../docs/v1.0/formatos/` y se ajustaron el
 backlog, la visión, el flujo de usuario y la propuesta de sprints. Sprint 1
 incorpora aceptación e impresión de la carta de no responsiva; Sprint 4
 incorpora evaluaciones independientes de supervisor y tutor, más la
@@ -21,18 +21,18 @@ administración de ambas rúbricas por Coordinación.
 - El catálogo muestra nombre, dirección, teléfono, email y persona de
   contacto. Coordinación hace altas y bajas manuales; una baja oculta a la
   empresa de nuevas solicitudes y conserva referencias existentes.
-- `docs/sprints/plan-sprints-candidato.md` sigue siendo una propuesta por
+- `../../../../docs/v1.0/sprints/plan-sprints-candidato.md` sigue siendo una propuesta por
   resultados, sin fechas, duración ni estimaciones comprometidas.
 
 ## Archivos actualizados
 
-- `docs/backlog/candidatos-iniciales.md`: GT-HU-016 evaluación del tutor,
+- `../../../../docs/v1.0/backlog/candidatos-iniciales.md`: GT-HU-016 evaluación del tutor,
   GT-HU-017 administración versionada de rúbricas y GT-HU-018 carta de no
   responsiva.
-- `docs/sprints/plan-sprints-candidato.md`: Sprint 1 y Sprint 4, dependencias
+- `../../../../docs/v1.0/sprints/plan-sprints-candidato.md`: Sprint 1 y Sprint 4, dependencias
   y prioridades.
-- `docs/casos-de-uso/flujo-candidato-practica.md` y
-  `docs/requerimientos/vision-inicial.md`.
+- `../../../../docs/v1.0/casos-de-uso/flujo-candidato-practica.md` y
+  `../../../../docs/v1.0/requerimientos/vision-inicial.md`.
 - `.ai/state/topics/resumen.md`, `.ai/state/topics/pendientes.md` y
   `.ai/HANDOFF.md`.
 - `.ai/tasks/gt-hu-015-empresas-convenios/`: campos y regla de baja

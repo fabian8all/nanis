@@ -28,7 +28,7 @@ No editar fuera de esta lista sin actualizarla primero. Evita refactors oportuni
 - `.ai/HANDOFF.md`
 - `.ai/state/topics/resumen.md`
 - `.ai/state/topics/pendientes.md`
-- `docs/backlog/candidatos-iniciales.md`
+- `../../../../docs/v1.0/backlog/candidatos-iniciales.md`
 - `project-app/app/Enums/`
 - `project-app/app/Models/`
 - `project-app/app/Livewire/Student/`
@@ -49,7 +49,7 @@ No editar fuera de esta lista sin actualizarla primero. Evita refactors oportuni
 - `.ai/tasks/_closed/gt-hu-007-reporte-final/handoff.md`
 - `.ai/tasks/_closed/gt-hu-016-evaluacion-tutor/handoff.md`
 - `.ai/tasks/_closed/gt-hu-017-implementacion-rubricas/handoff.md`
-- `docs/backlog/candidatos-iniciales.md`
+- `../../../../docs/v1.0/backlog/candidatos-iniciales.md`
 - `project-app/app/Models/PracticeRequest.php`
 - `project-app/app/Enums/UserRole.php`
 - `AI_COLLABORATION.md`

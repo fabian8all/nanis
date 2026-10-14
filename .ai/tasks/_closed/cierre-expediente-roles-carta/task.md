@@ -30,7 +30,7 @@ No editar fuera de esta lista sin actualizarla primero. Evita refactors oportuni
 - `project-app/database/migrations/2026_10_12_000017_create_practice_termination_letter_issuances_table.php`.
 - `project-app/routes/web.php`, `project-app/resources/views/layouts/app.blade.php` y vistas de expediente, carta imprimible, bandeja de Coordinación y encuesta.
 - Pruebas existentes de expediente, seguimiento, encuesta y carga/revisión de carta de término; nuevas pruebas de emisión/impresión.
-- `docs/backlog/candidatos-iniciales.md`, `docs/sprints/plan-sprints-candidato.md` y `docs/casos-de-uso/flujo-candidato-practica.md` para mantener la fuente de requisitos actualizada.
+- `../../../../docs/v1.0/backlog/candidatos-iniciales.md`, `../../../../docs/v1.0/sprints/plan-sprints-candidato.md` y `../../../../docs/v1.0/casos-de-uso/flujo-candidato-practica.md` para mantener la fuente de requisitos actualizada.
 
 ## Fuentes de verdad a leer antes de empezar
 - `.ai/state/estado-dev.md`
@@ -38,7 +38,7 @@ No editar fuera de esta lista sin actualizarla primero. Evita refactors oportuni
 - `.ai/tasks/_closed/gt-hu-013-encuesta-satisfaccion/handoff.md`
 - `.ai/tasks/_closed/gt-hu-008-carta-termino/handoff.md`
 - `.ai/tasks/_closed/gt-hu-009-carga-carta-termino/handoff.md`
-- `docs/formatos/README.md` y el PDF local de referencia (no versionarlo).
+- `../../../../docs/v1.0/formatos/README.md` y el PDF local de referencia (no versionarlo).
 - `PracticeRecords/Show`, `PracticeTrackingSummary`, controladores de archivos, rutas y pruebas correspondientes.
 
 ## Contexto mínimo sugerido

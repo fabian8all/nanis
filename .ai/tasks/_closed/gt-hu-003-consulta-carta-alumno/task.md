@@ -33,7 +33,7 @@ No editar fuera de esta lista sin actualizarla primero. Evita refactors oportuni
 - `project-app/tests/Feature/StudentPracticeLetterTest.php`
 - `project-app/tests/Feature/StudentPracticeRequestTest.php`
 - `project-app/tests/Feature/CoordinatorPracticeRequestReviewTest.php`
-- `docs/backlog/candidatos-iniciales.md`
+- `../../../../docs/v1.0/backlog/candidatos-iniciales.md`
 - `.ai/HANDOFF.md`
 - `.ai/state/topics/resumen.md`
 - `.ai/tasks/gt-hu-003-consulta-carta-alumno/**`
@@ -41,8 +41,8 @@ No editar fuera de esta lista sin actualizarla primero. Evita refactors oportuni
 ## Fuentes de verdad a leer antes de empezar
 - `.ai/state/estado-dev.md`
 - `.ai/tasks/_closed/gt-hu-002-revision-solicitud/handoff.md`
-- `docs/backlog/candidatos-iniciales.md` (GT-HU-003)
-- `docs/sprints/plan-sprints-candidato.md`
+- `../../../../docs/v1.0/backlog/candidatos-iniciales.md` (GT-HU-003)
+- `../../../../docs/v1.0/sprints/plan-sprints-candidato.md`
 - `project-app/routes/web.php`
 - `project-app/app/Livewire/Coordinator/PracticeLetters/PrintLetter.php`
 - `project-app/app/Models/PracticeLetter.php`

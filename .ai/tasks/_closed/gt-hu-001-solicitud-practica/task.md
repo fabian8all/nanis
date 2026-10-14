@@ -21,7 +21,7 @@ Permitir al alumno enviar una solicitud de práctica a una empresa elegida para 
 - Carta de presentación y folio.
 - Cargar o conservar copia firmada de la no responsiva.
 - Agregar NSS u otros campos no confirmados.
-- Modificar o incluir los documentos fuente de `docs/formatos/`.
+- Modificar o incluir los documentos fuente de `../../../../docs/v1.0/formatos/`.
 
 ## Criterios confirmados
 - Todos los campos acordados son obligatorios.
@@ -44,16 +44,16 @@ No editar fuera de esta lista sin actualizarla primero. Evita refactors oportuni
 - `project-app/resources/views/livewire/student/companies/index.blade.php`
 - `project-app/tests/Feature/StudentPracticeRequestTest.php`
 - `project-app/tests/Feature/UserRoleMigrationTest.php` (ajuste de regresión por orden de migraciones)
-- `docs/backlog/candidatos-iniciales.md`
+- `../../../../docs/v1.0/backlog/candidatos-iniciales.md`
 - `.ai/HANDOFF.md`
 - `.ai/state/topics/resumen.md`
 - `.ai/tasks/gt-hu-001-solicitud-practica/**`
 
 ## Fuentes de verdad a leer antes de empezar
 - `.ai/state/estado-dev.md`
-- `docs/backlog/candidatos-iniciales.md`
-- `docs/casos-de-uso/flujo-candidato-practica.md`
-- `docs/sprints/plan-sprints-candidato.md`
+- `../../../../docs/v1.0/backlog/candidatos-iniciales.md`
+- `../../../../docs/v1.0/casos-de-uso/flujo-candidato-practica.md`
+- `../../../../docs/v1.0/sprints/plan-sprints-candidato.md`
 - `.ai/tasks/_closed/gt-hu-014-consulta-seleccion-empresa/handoff.md`
 - `project-app/routes/web.php`
 - `project-app/app/Models/Company.php`

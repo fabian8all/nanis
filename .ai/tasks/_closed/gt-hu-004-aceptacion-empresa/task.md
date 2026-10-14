@@ -62,9 +62,9 @@ No editar fuera de esta lista sin actualizarla primero. Evita refactors oportuni
 - `project-app/tests/Feature/SupervisorPracticeAcceptanceTest.php`
 - `project-app/tests/Feature/CoordinatorPracticeAcceptanceTest.php`
 - `project-app/tests/Feature/CoordinatorAuthenticationTest.php`
-- `docs/backlog/candidatos-iniciales.md`
-- `docs/casos-de-uso/flujo-candidato-practica.md`
-- `docs/sprints/plan-sprints-candidato.md`
+- `../../../../docs/v1.0/backlog/candidatos-iniciales.md`
+- `../../../../docs/v1.0/casos-de-uso/flujo-candidato-practica.md`
+- `../../../../docs/v1.0/sprints/plan-sprints-candidato.md`
 - `.ai/HANDOFF.md`
 - `.ai/state/topics/pendientes.md`
 - `.ai/state/topics/resumen.md`
@@ -74,9 +74,9 @@ No editar fuera de esta lista sin actualizarla primero. Evita refactors oportuni
 - `.ai/state/estado-dev.md`
 - `.ai/tasks/_closed/gt-hu-002-revision-solicitud/handoff.md`
 - `.ai/tasks/_closed/gt-hu-003-consulta-carta-alumno/handoff.md`
-- `docs/backlog/candidatos-iniciales.md` (GT-HU-004 y GT-HU-020)
-- `docs/casos-de-uso/flujo-candidato-practica.md`
-- `docs/sprints/plan-sprints-candidato.md`
+- `../../../../docs/v1.0/backlog/candidatos-iniciales.md` (GT-HU-004 y GT-HU-020)
+- `../../../../docs/v1.0/casos-de-uso/flujo-candidato-practica.md`
+- `../../../../docs/v1.0/sprints/plan-sprints-candidato.md`
 - `project-app/routes/web.php`
 - `project-app/app/Http/Controllers/Auth/AuthenticatedSessionController.php`
 - `project-app/app/Enums/UserRole.php`

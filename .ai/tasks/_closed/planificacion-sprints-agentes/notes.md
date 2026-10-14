@@ -14,7 +14,7 @@ pasa a `handoff.md` o a un ADR — este archivo se archiva junto con la tarea.
 ## Evidencia recopilada
 - La persona solicitante pidió cerrar `inicio-requerimientos-backlog` con el backlog, hacer un commit y abrir esta tarea para organizar sprints y asignarlos a agentes.
 - Decisiones vigentes del backlog: prácticas operativas y de mandos medios, término a las 240 horas, una evaluación final y un reporte final; no incluir evaluaciones ni reportes intermedios de las estancias.
-- El backlog candidato vive en `docs/backlog/candidatos-iniciales.md`; el flujo, en `docs/casos-de-uso/flujo-candidato-practica.md`.
+- El backlog candidato vive en `../../../../docs/v1.0/backlog/candidatos-iniciales.md`; el flujo, en `../../../../docs/v1.0/casos-de-uso/flujo-candidato-practica.md`.
 - El catálogo activo se consulta mediante `tools/continuum roles list`; asignar roles disponibles de acuerdo con sus definiciones, no inferir personas ejecutoras adicionales.
 - La persona solicitante inició la tarea. Inventario de roles disponible mediante `tools/continuum roles list`; incluye gestión de proyecto, backend, frontend, DevOps/infraestructura, QA, UX, privacidad, seguridad y accesibilidad.
 - Decisión de la persona solicitante: no fijar una duración estándar para los sprints por ahora. El plan debe proponer una secuencia sin comprometer semanas/calendario hasta validar capacidad y cadencia.

@@ -46,7 +46,7 @@ de `.env` reportada en una ejecución anterior del runner no se reprodujo en la
 
 1. Abrir la siguiente historia de Sprint 1, asignada por el orquestador.
 
-Las fuentes de `docs/formatos/` siguen sin agregarse: algunas imágenes
+Las fuentes de `../../../../docs/v1.0/formatos/` siguen sin agregarse: algunas imágenes
 contienen ejemplos diligenciados con datos personales; no versionarlas sin
 saneamiento. HU-014, HU-001 y HU-018 siguen pendientes para tareas posteriores
 del Sprint 1, asignadas por el orquestador según sus necesidades.

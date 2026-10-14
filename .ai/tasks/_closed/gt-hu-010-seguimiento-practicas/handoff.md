@@ -19,7 +19,7 @@
 - Componente y vista: `project-app/app/Livewire/PracticeTracking/Index.php`, `project-app/resources/views/livewire/practice-tracking/index.blade.php`.
 - Navegación y ruta: `project-app/resources/views/layouts/app.blade.php`, `project-app/routes/web.php`.
 - Pruebas: `project-app/tests/Feature/PracticeTrackingTest.php`.
-- Criterios/backlog: `docs/backlog/candidatos-iniciales.md`.
+- Criterios/backlog: `../../../../docs/v1.0/backlog/candidatos-iniciales.md`.
 
 ## Pendiente del sprint
 - Implementar HU-012 (expediente) y HU-013 (encuesta); validar Sprint 5 completo antes de integrar a `develop`.

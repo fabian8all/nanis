@@ -23,8 +23,8 @@ No editar fuera de esta lista sin actualizarla primero. Evita refactors oportuni
 - `.ai/tasks/gt-hu-017-rubricas-evaluacion/notes.md`
 - `.ai/tasks/gt-hu-017-rubricas-evaluacion/execution-plan.md`
 - `.ai/tasks/gt-hu-017-rubricas-evaluacion/handoff.md`
-- `docs/backlog/candidatos-iniciales.md`
-- `docs/sprints/plan-sprints-candidato.md`
+- `../../../../docs/v1.0/backlog/candidatos-iniciales.md`
+- `../../../../docs/v1.0/sprints/plan-sprints-candidato.md`
 - `.ai/HANDOFF.md`
 - `.ai/state/topics/resumen.md`
 - `.ai/state/topics/pendientes.md`
@@ -42,8 +42,8 @@ No editar fuera de esta lista sin actualizarla primero. Evita refactors oportuni
 - `.ai/state/estado-dev.md`
 - `.ai/state/topics/resumen.md`
 - `.ai/state/topics/pendientes.md`
-- `docs/backlog/candidatos-iniciales.md`
-- `docs/sprints/plan-sprints-candidato.md`
+- `../../../../docs/v1.0/backlog/candidatos-iniciales.md`
+- `../../../../docs/v1.0/sprints/plan-sprints-candidato.md`
 - `.ai/tasks/_closed/gt-hu-006-evaluacion-supervisor/handoff.md`
 - `AI_COLLABORATION.md`
 

@@ -43,5 +43,5 @@ GT-HU-005.
 ## Siguiente paso
 
 Iniciar GT-HU-005, plan de trabajo de la práctica, en la rama del Sprint 3.
-Mantener fuera del commit `docs/formatos/`, los archivos `Zone.Identifier` y
+Mantener fuera del commit `../../../../docs/v1.0/formatos/`, los archivos `Zone.Identifier` y
 las modificaciones preexistentes a hooks y herramientas de Continuum.

@@ -45,7 +45,7 @@ La lista puede precisarse con rutas concretas antes de editar si la estructura e
 - `.ai/tasks/_closed/gt-hu-017-rubricas-evaluacion/handoff.md`
 - `.ai/tasks/_closed/gt-hu-006-evaluacion-supervisor/handoff.md`
 - `.ai/tasks/_closed/gt-hu-016-evaluacion-tutor/handoff.md`
-- `docs/backlog/candidatos-iniciales.md`
+- `../../../../docs/v1.0/backlog/candidatos-iniciales.md`
 - `AI_COLLABORATION.md`
 - `project-app/`
 

@@ -17,6 +17,9 @@ conservar el alcance y los entregables de cada etapa.
 | [`v1.1/Planeacion/modificaciones.md`](v1.1/Planeacion/modificaciones.md) | Solicitudes que sirven de entrada para el backlog de v1.1 |
 | [`v1.1/backlog/backlog-candidato.md`](v1.1/backlog/backlog-candidato.md) | Backlog candidato de historias y criterios de aceptación para revisión |
 
+También se conserva la fuente original de solicitudes en
+[`v1.1/Planeacion/Modificaciones.txt`](v1.1/Planeacion/Modificaciones.txt).
+
 `v1.0/` conserva la documentación del prototipo cerrado. Las modificaciones
 para la siguiente versión se refinan en la tarea Continuum
 `.ai/tasks/backlog-v1-1/`; el backlog de v1.1 sigue siendo candidato hasta su

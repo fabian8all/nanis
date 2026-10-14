@@ -27,7 +27,7 @@ No editar fuera de esta lista sin actualizarla primero. Evita refactors oportuni
 - `project-app/resources/views/layouts/app.blade.php`
 - `project-app/routes/web.php`
 - `project-app/tests/Feature/PracticeTrackingTest.php`
-- `docs/backlog/candidatos-iniciales.md`
+- `../../../../docs/v1.0/backlog/candidatos-iniciales.md`
 - `.ai/tasks/gt-hu-010-seguimiento-practicas/task.md`
 - `.ai/tasks/gt-hu-010-seguimiento-practicas/execution-plan.md`
 - `.ai/tasks/gt-hu-010-seguimiento-practicas/notes.md`
@@ -39,8 +39,8 @@ No editar fuera de esta lista sin actualizarla primero. Evita refactors oportuni
 ## Fuentes de verdad a leer antes de empezar
 - `.ai/state/estado-dev.md`
 - `.ai/tasks/_closed/gt-sprint-5-refinamiento-cierre-expediente-encuesta/handoff.md`
-- `docs/backlog/candidatos-iniciales.md` (GT-HU-010)
-- `docs/casos-de-uso/flujo-candidato-practica.md`
+- `../../../../docs/v1.0/backlog/candidatos-iniciales.md` (GT-HU-010)
+- `../../../../docs/v1.0/casos-de-uso/flujo-candidato-practica.md`
 - `project-app/app/Enums/PracticeRequestStatus.php`
 - `project-app/app/Enums/PracticeAcceptanceStatus.php`
 - `project-app/app/Enums/PracticePlanStatus.php`

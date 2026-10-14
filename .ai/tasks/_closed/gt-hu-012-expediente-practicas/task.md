@@ -28,7 +28,7 @@ No editar fuera de esta lista sin actualizarla primero. Evita refactors oportuni
 - `project-app/resources/views/layouts/app.blade.php`
 - `project-app/tests/Feature/PracticeRecordTest.php`
 - `project-app/tests/Feature/PracticeTrackingTest.php`
-- `docs/backlog/candidatos-iniciales.md`
+- `../../../../docs/v1.0/backlog/candidatos-iniciales.md`
 - `.ai/tasks/gt-hu-012-expediente-practicas/task.md`
 - `.ai/tasks/gt-hu-012-expediente-practicas/execution-plan.md`
 - `.ai/tasks/gt-hu-012-expediente-practicas/notes.md`
@@ -40,7 +40,7 @@ No editar fuera de esta lista sin actualizarla primero. Evita refactors oportuni
 ## Fuentes de verdad a leer antes de empezar
 - `.ai/state/estado-dev.md`
 - `.ai/tasks/_closed/gt-sprint-5-refinamiento-cierre-expediente-encuesta/handoff.md`
-- `docs/backlog/candidatos-iniciales.md` (GT-HU-012)
+- `../../../../docs/v1.0/backlog/candidatos-iniciales.md` (GT-HU-012)
 - `project-app/app/Models/PracticeRequest.php` y relaciones terminales
 - `project-app/routes/web.php` (perfiles y archivos privados)
 - Controladores privados de carta de término y anexos de reporte

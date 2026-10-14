@@ -27,7 +27,7 @@ No editar fuera de esta lista sin actualizarla primero. Evita refactors oportuni
 - `.ai/HANDOFF.md`
 - `.ai/state/topics/resumen.md`
 - `.ai/state/topics/pendientes.md`
-- `docs/backlog/candidatos-iniciales.md`
+- `../../../../docs/v1.0/backlog/candidatos-iniciales.md`
 - `project-app/app/Enums/PracticeEvaluationStatus.php`
 - `project-app/app/Models/PracticeEvaluation.php`
 - `project-app/app/Models/PracticeEvaluationCriterion.php`

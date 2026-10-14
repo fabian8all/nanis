@@ -9,7 +9,7 @@ pasa a `handoff.md` o a un ADR — este archivo se archiva junto con la tarea.
 - No quedan decisiones funcionales pendientes para el alcance de HU-017; las confirmaciones se registran en `task.md`.
 
 ## Evidencia recopilada
-- Backlog de evaluación y dependencias del Sprint 4: `docs/backlog/candidatos-iniciales.md`, `docs/sprints/plan-sprints-candidato.md`.
+- Backlog de evaluación y dependencias del Sprint 4: `../../../../docs/v1.0/backlog/candidatos-iniciales.md`, `../../../../docs/v1.0/sprints/plan-sprints-candidato.md`.
 - HU-006 fija al crear la evaluación la versión publicada vigente; los cambios posteriores no alteran evaluaciones o borradores existentes: `.ai/tasks/_closed/gt-hu-006-evaluacion-supervisor/handoff.md`.
 - La persona solicitante confirmó permisos exclusivos de Coordinación, independencia de rúbricas, borradores editables, publicaciones inmutables, vigencia inmediata, conservación histórica y cálculo ponderado normalizado.
 

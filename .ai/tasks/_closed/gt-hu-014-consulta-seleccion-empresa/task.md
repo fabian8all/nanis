@@ -29,16 +29,16 @@ No editar fuera de esta lista sin actualizarla primero. Evita refactors oportuni
 - `project-app/resources/views/layouts/**` (solo si hace falta enlazar el catálogo)
 - `project-app/resources/views/home.blade.php` (enlace contextual para alumno)
 - `project-app/tests/Feature/StudentCompanyCatalogTest.php`
-- `docs/backlog/candidatos-iniciales.md` (criterios HU-014 confirmados)
+- `../../../../docs/v1.0/backlog/candidatos-iniciales.md` (criterios HU-014 confirmados)
 - `.ai/HANDOFF.md`
 - `.ai/state/topics/resumen.md`
 - `.ai/tasks/gt-hu-014-consulta-seleccion-empresa/**`
 
 ## Fuentes de verdad a leer antes de empezar
 - `.ai/state/estado-dev.md`
-- `docs/backlog/candidatos-iniciales.md` (GT-HU-014)
-- `docs/casos-de-uso/flujo-candidato-practica.md`
-- `docs/sprints/plan-sprints-candidato.md` (Sprint 1 y dependencias)
+- `../../../../docs/v1.0/backlog/candidatos-iniciales.md` (GT-HU-014)
+- `../../../../docs/v1.0/casos-de-uso/flujo-candidato-practica.md`
+- `../../../../docs/v1.0/sprints/plan-sprints-candidato.md` (Sprint 1 y dependencias)
 - `project-app/routes/web.php`
 - `project-app/app/Models/Company.php`
 - `project-app/app/Livewire/Companies/Index.php`

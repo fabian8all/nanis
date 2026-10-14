@@ -16,7 +16,7 @@ Refinar con la persona solicitante las historias de Sprint 5 para que el cierre 
 ## Explícitamente fuera de alcance
 - Implementar pantallas, flujos, modelos, migraciones, almacenamiento o integraciones de Sprint 5.
 - Cambiar el umbral confirmado de 240 horas o introducir el flujo de 800 horas de estancias profesionales.
-- Incorporar los documentos fuente de `docs/formatos/` o copiar datos personales de formatos/documentos institucionales a memoria versionada.
+- Incorporar los documentos fuente de `../../../../docs/v1.0/formatos/` o copiar datos personales de formatos/documentos institucionales a memoria versionada.
 - Refinar o reabrir las historias ya cerradas de Sprint 1–4, salvo actualizar referencias de estado necesarias.
 
 ## Write-set (archivos que se espera tocar)
@@ -29,17 +29,17 @@ No editar fuera de esta lista sin actualizarla primero. Evita refactors oportuni
 - `.ai/HANDOFF.md`
 - `.ai/state/topics/pendientes.md`
 - `.ai/state/topics/resumen.md`
-- `docs/backlog/candidatos-iniciales.md`
-- `docs/sprints/plan-sprints-candidato.md`
-- `docs/casos-de-uso/flujo-candidato-practica.md`
+- `../../../../docs/v1.0/backlog/candidatos-iniciales.md`
+- `../../../../docs/v1.0/sprints/plan-sprints-candidato.md`
+- `../../../../docs/v1.0/casos-de-uso/flujo-candidato-practica.md`
 
 ## Fuentes de verdad a leer antes de empezar
 - `.ai/state/estado-dev.md`
 - `.ai/HANDOFF.md`
 - `.ai/state/topics/pendientes.md`
-- `docs/backlog/candidatos-iniciales.md` (GT-HU-008, GT-HU-009, GT-HU-010, GT-HU-012, GT-HU-013)
-- `docs/sprints/plan-sprints-candidato.md` (Sprint 5 candidato)
-- `docs/casos-de-uso/flujo-candidato-practica.md`
+- `../../../../docs/v1.0/backlog/candidatos-iniciales.md` (GT-HU-008, GT-HU-009, GT-HU-010, GT-HU-012, GT-HU-013)
+- `../../../../docs/v1.0/sprints/plan-sprints-candidato.md` (Sprint 5 candidato)
+- `../../../../docs/v1.0/casos-de-uso/flujo-candidato-practica.md`
 - `.ai/tasks/_closed/gt-hu-007-reporte-final/handoff.md`
 - `.ai/tasks/_closed/gt-hu-006-implementacion-evaluacion-supervisor/handoff.md`
 

@@ -39,7 +39,7 @@ sprint a `develop` solo después de cerrar y validar también GT-HU-003.
 - Las migraciones HU-002 se aplicaron al MySQL local; la ruta administrativa
   protegida redirige sin sesión.
 - Se actualizaron pruebas para verificar el formato de NSS/cuenta con datos
-  ficticios. Las fuentes con información personal de `docs/formatos/` siguen
+  ficticios. Las fuentes con información personal de `../../../../docs/v1.0/formatos/` siguen
   fuera del commit.
 
 ## Siguiente paso

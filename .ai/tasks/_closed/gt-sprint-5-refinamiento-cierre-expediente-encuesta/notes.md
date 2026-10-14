@@ -30,9 +30,9 @@ pasa a `handoff.md` o a un ADR — este archivo se archiva junto con la tarea.
 - Al devolver la carta de término, Coordinación debe incluir comentario obligatorio; el alumno puede corregir y reenviar sin límite.
 
 ## Evidencia recopilada
-- La propuesta Sprint 5 agrupa GT-HU-008, GT-HU-009, GT-HU-010, GT-HU-012 y GT-HU-013. La definición de HU-008/009/010/012/013 aún tiene campos por acordar en `docs/backlog/candidatos-iniciales.md`.
+- La propuesta Sprint 5 agrupa GT-HU-008, GT-HU-009, GT-HU-010, GT-HU-012 y GT-HU-013. La definición de HU-008/009/010/012/013 aún tiene campos por acordar en `../../../../docs/v1.0/backlog/candidatos-iniciales.md`.
 - El flujo candidato confirma carta empresarial → alumno → carga digital; el sistema no tendrá contador independiente de horas.
 - Rúbrica HU-006/HU-016 y reporte HU-007 están implementados. Los resultados y el reporte final deben figurar en el expediente; no agregar evaluaciones/reportes intermedios.
 
 ## Callejones sin salida (para no repetirlos)
-- No usar `docs/formatos/` como fuente versionable ni incluir archivos con ejemplos personales.
+- No usar `../../../../docs/v1.0/formatos/` como fuente versionable ni incluir archivos con ejemplos personales.

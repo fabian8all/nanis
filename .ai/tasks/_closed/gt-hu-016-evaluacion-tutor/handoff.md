@@ -14,8 +14,8 @@ Refinar GT-HU-016 con la persona solicitante y documentar criterios de la evalua
 - La información se conserva indefinidamente en el expediente, sin borrado automático.
 
 ## Archivos actualizados
-- `docs/backlog/candidatos-iniciales.md`: criterios de HU-016 y dependencia de HU-007/HU-017.
-- `docs/sprints/plan-sprints-candidato.md`: dependencias y ciclo de evaluación.
+- `../../../../docs/v1.0/backlog/candidatos-iniciales.md`: criterios de HU-016 y dependencia de HU-007/HU-017.
+- `../../../../docs/v1.0/sprints/plan-sprints-candidato.md`: dependencias y ciclo de evaluación.
 - `.ai/state/topics/pendientes.md` y `.ai/state/topics/resumen.md`: estado actualizado; no quedan HU del Sprint 4 pendientes de refinamiento.
 - `.ai/HANDOFF.md`: continuidad y siguiente paso.
 

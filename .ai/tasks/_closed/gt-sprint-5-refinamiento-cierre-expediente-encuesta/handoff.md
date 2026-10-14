@@ -6,9 +6,9 @@
 Refinar criterios candidatos de Sprint 5 con confirmación de la persona solicitante, sin implementar historias.
 
 ## Archivos modificados
-- `docs/backlog/candidatos-iniciales.md`: criterios de GT-HU-008/009/010/012/013.
-- `docs/sprints/plan-sprints-candidato.md`: resultado candidato de Sprint 5 y pendientes de validación.
-- `docs/casos-de-uso/flujo-candidato-practica.md`: secuencia de término/expediente, seguimiento y encuesta.
+- `../../../../docs/v1.0/backlog/candidatos-iniciales.md`: criterios de GT-HU-008/009/010/012/013.
+- `../../../../docs/v1.0/sprints/plan-sprints-candidato.md`: resultado candidato de Sprint 5 y pendientes de validación.
+- `../../../../docs/v1.0/casos-de-uso/flujo-candidato-practica.md`: secuencia de término/expediente, seguimiento y encuesta.
 - `.ai/state/topics/resumen.md` y `.ai/state/topics/pendientes.md`: continuidad actualizada.
 
 ## Decisiones confirmadas
@@ -25,7 +25,7 @@ Refinar criterios candidatos de Sprint 5 con confirmación de la persona solicit
 
 ## Riesgos / pendientes
 - Los criterios son base del prototipo, no sustituyen validación institucional. Confirmar permisos y resguardo con actores y precisar comportamiento técnico de alertas al refinar implementación.
-- No se modificaron ni copiaron los formatos fuente de `docs/formatos/`, que pueden contener datos personales. No trasladar los requisitos de 800 horas de estancias profesionales.
+- No se modificaron ni copiaron los formatos fuente de `../../../../docs/v1.0/formatos/`, que pueden contener datos personales. No trasladar los requisitos de 800 horas de estancias profesionales.
 - No se implementaron historias de Sprint 5 ni se comprometió fecha/duración/estimación.
 
 ## Siguiente paso

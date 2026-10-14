@@ -42,10 +42,10 @@ no como criterios ya aprobados.
 
 ## Archivos principales
 
-- `docs/sprints/plan-sprints-candidato.md`
-- `docs/backlog/candidatos-iniciales.md`
-- `docs/casos-de-uso/flujo-candidato-practica.md`
-- `docs/requerimientos/vision-inicial.md`
+- `../../../../docs/v1.0/sprints/plan-sprints-candidato.md`
+- `../../../../docs/v1.0/backlog/candidatos-iniciales.md`
+- `../../../../docs/v1.0/casos-de-uso/flujo-candidato-practica.md`
+- `../../../../docs/v1.0/requerimientos/vision-inicial.md`
 - `.ai/state/topics/resumen.md` y `.ai/state/topics/pendientes.md`
 - `AI_COLLABORATION.md`
 
