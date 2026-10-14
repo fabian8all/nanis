@@ -1,14 +1,26 @@
 # Handoff
 
-**Fecha:** 2026-10-14 · **Rol:** gestion-proyecto · **Rama:** `develop`
+**Fecha:** 2026-10-14 · **Rol:** gestion-proyecto · **Rama:** `sprint/5-experiencia-transversal-listas`
 
 ## Objetivo
-Cerrar Sprint 4 de v1.1, integrado en `develop` y publicado en `origin`.
+Completar Sprint 5 de v1.1, iniciado desde `develop`.
 
 ## Estado
-- El checkout sigue dentro de `~/code/nanis`; la rama activa es `develop`.
-- Sprint 4 se integró desde `sprint/4-catalogo-administracion-empresas`
-  mediante el merge `bfaed9d`; se publica junto con este cierre documental.
+- El checkout sigue dentro de `~/code/nanis`; la rama activa es
+  `sprint/5-experiencia-transversal-listas`, creada desde `develop`.
+- Sprint 4 se integró mediante el merge `bfaed9d`; su cierre documental
+  `d3f3449` está publicado y `develop` coincide con `origin/develop`.
+- Sprint 5 contiene GT-HU-037 y GT-HU-038. Las tareas Continuum se crearon en
+  esta rama, asignadas al rol `backend`, ambas clasificadas como `large`.
+- Para GT-HU-037 se confirmó ordenar por la modificación de la versión/revisión
+  mostrada cuando el registro padre no cambia, y desempatar de forma estable
+  por identificador.
+- Para GT-HU-038 se confirmó incluir listas principales, historiales de
+  versiones, listas administrativas de rúbricas y opciones de selección, sin
+  duplicar controles ya existentes.
+- No se ha implementado código de Sprint 5. El siguiente paso es completar el
+  inventario de listas y sus fechas/campos de búsqueda, actualizar los
+  write-sets exactos y trabajar en serie comenzando por GT-HU-037.
 - Sprint 3 se integró desde `sprint/3-expediente-versiones-revision-reporte`
   mediante el merge `c367237`; el cierre documental quedó publicado en
   `origin/develop` hasta `76a3896`.
@@ -157,7 +169,9 @@ Cerrar Sprint 4 de v1.1, integrado en `develop` y publicado en `origin`.
   `http://nanis.net` respondieron `HTTP 200`, este último por el proxy compartido.
 
 ## Pendiente
-- Iniciar Sprint 5 después de resolver las preguntas abiertas de sus historias
-  y crear/asignar una tarea Continuum por historia.
+- Inventariar listas, revisar criterios específicos y completar el write-set
+  antes de cada implementación; implementar GT-HU-037 y después GT-HU-038.
+- Integrar Sprint 5 en `develop` y publicar el merge a `origin/develop` al
+  terminar y validar ambas historias.
 - Decidir cuándo incluir en un commit el cambio previo de
   `project-app/README.md`; se preserva fuera de los commits del sprint.
