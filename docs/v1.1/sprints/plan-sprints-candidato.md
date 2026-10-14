@@ -24,9 +24,10 @@ cerradas. Sprint 3 se integró en `develop` mediante el merge `c367237`; su
 publicación en `origin/develop` forma parte del cierre.
 Sprint 4 se completó en `sprint/4-catalogo-administracion-empresas`; GT-HU-029
 se asignó a `frontend` y GT-HU-030 a `backend`. Ambas historias están
-implementadas, validadas y con sus tareas cerradas. Falta integrar el sprint
-en `develop`. Se decidió buscar solo empresas disponibles, conservando las
-ocultas en la lista sin filtro para reactivarlas.
+implementadas, validadas y con sus tareas cerradas. El sprint se integró en
+`develop` mediante el merge `bfaed9d` y se publica a `origin/develop` con este
+cierre. Se decidió buscar solo empresas disponibles, conservando las ocultas
+en la lista sin filtro para reactivarlas.
 **Base:** [backlog v1.1](../backlog/backlog-candidato.md).
 
 ## Criterios de organización
@@ -154,4 +155,5 @@ las tres tareas de Sprint 3 se crearon al iniciar
 `sprint/3-expediente-versiones-revision-reporte`; las dos tareas de Sprint 4
 se crearon al iniciar `sprint/4-catalogo-administracion-empresas`. Las de
 Sprint 5 se crearán al iniciar ese sprint. Las ramas de Sprints 1–3 permanecen
-disponibles y están integradas en `develop`.
+disponibles y están integradas en `develop`; también está integrada la rama de
+Sprint 4.

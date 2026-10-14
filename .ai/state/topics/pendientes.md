@@ -1,9 +1,9 @@
 # Pendientes
 
-- Al 2026-10-14, el checkout principal `~/code/nanis` trabaja en
-  `sprint/4-catalogo-administracion-empresas`, creada desde `develop`.
-  Sprint 3 (`c367237`) y su cierre documental están publicados en
-  `origin/develop` hasta `76a3896`. `main` permanece en
+- Al 2026-10-14, el checkout principal `~/code/nanis` trabaja en `develop`.
+  Sprint 4 se integró con el merge `bfaed9d` y se publica junto con el cierre
+  documental. Antes del merge, `origin/develop` estaba en `76a3896`; `main`
+  permanece en
   `cb5365d` con el cierre de v1.0. Sprint 5 y el cierre v1.0 son ancestros de
   `develop`. La persona solicitante aprobó el backlog
   v1.1 como base de planificación y la secuencia de cinco sprints; v1.1 aún no
@@ -19,9 +19,8 @@
   Continuum están archivadas.
   Para GT-HU-026 se confirmó que el tercer punto del expediente sea Plan de
   trabajo y que cada documento tenga una insignia de estado según su flujo.
-- Sprint 4 está implementado y validado; las tareas GT-HU-029 (`frontend`) y
-  GT-HU-030 (`backend`) están archivadas. Falta integrar la rama en `develop`
-  y publicarla en `origin/develop`. La
+- Sprint 4 está implementado, validado e integrado en `develop`; las tareas
+  GT-HU-029 (`frontend`) y GT-HU-030 (`backend`) están archivadas. La
   búsqueda se refinó para mostrar solo empresas disponibles, conservando las
   ocultas en la lista sin filtro para permitir su reactivación. Se trabajaron
   en serie. La regresión conjunta pasó con 13 tests y 83 assertions.

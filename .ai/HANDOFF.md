@@ -1,13 +1,14 @@
 # Handoff
 
-**Fecha:** 2026-10-14 · **Rol:** gestion-proyecto · **Rama:** `sprint/4-catalogo-administracion-empresas`
+**Fecha:** 2026-10-14 · **Rol:** gestion-proyecto · **Rama:** `develop`
 
 ## Objetivo
-Completar Sprint 4 de v1.1 y luego integrarlo y publicarlo en `develop`.
+Cerrar Sprint 4 de v1.1, integrado en `develop` y publicado en `origin`.
 
 ## Estado
-- El checkout sigue dentro de `~/code/nanis`; la rama activa es
-  `sprint/4-catalogo-administracion-empresas`, creada desde `develop`.
+- El checkout sigue dentro de `~/code/nanis`; la rama activa es `develop`.
+- Sprint 4 se integró desde `sprint/4-catalogo-administracion-empresas`
+  mediante el merge `bfaed9d`; se publica junto con este cierre documental.
 - Sprint 3 se integró desde `sprint/3-expediente-versiones-revision-reporte`
   mediante el merge `c367237`; el cierre documental quedó publicado en
   `origin/develop` hasta `76a3896`.
@@ -103,8 +104,8 @@ Completar Sprint 4 de v1.1 y luego integrarlo y publicarlo en `develop`.
   ejecutándolas en paralelo.
 - `main` y `origin/main` permanecen en `cb5365d`, con el cierre de v1.0.
   Sprint 5 (`a11bd76`) y el cierre v1.0 son ancestros de `develop`.
-- `develop` y `origin/develop` están sincronizadas en `76a3896`; incluyen el
-  merge de Sprint 3 y su cierre documental.
+- Antes de integrar Sprint 4, `develop` y `origin/develop` estaban
+  sincronizadas en `76a3896`; `main` permanece en `cb5365d`.
 - La fuente original `docs/v1.1/Planeacion/Modificaciones.txt` se conserva junto
   con su versión formateada `modificaciones.md`.
 - Se actualizaron 171 referencias en 52 documentos de tareas archivadas para
@@ -156,6 +157,7 @@ Completar Sprint 4 de v1.1 y luego integrarlo y publicarlo en `develop`.
   `http://nanis.net` respondieron `HTTP 200`, este último por el proxy compartido.
 
 ## Pendiente
-- Integrar Sprint 4 en `develop` y publicar el merge a `origin/develop`.
+- Iniciar Sprint 5 después de resolver las preguntas abiertas de sus historias
+  y crear/asignar una tarea Continuum por historia.
 - Decidir cuándo incluir en un commit el cambio previo de
   `project-app/README.md`; se preserva fuera de los commits del sprint.
