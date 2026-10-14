@@ -6,7 +6,8 @@ de comprometer cada sprint. El Sprint 1 está iniciado en la rama
 `sprint/1-acceso-confiable-destinos-rol`; se crearon sus cinco tareas
 Continuum, asignadas a los roles `frontend` y `backend`. GT-HU-023 queda
 pendiente de refinamiento antes de su implementación. GT-HU-022 está
-implementada y validada; las otras historias del sprint siguen pendientes.
+implementada y validada; GT-HU-025 fue verificada y quedó cubierta por pruebas
+de acceso y aislamiento sin requerir un cambio en la lógica de aplicación.
 **Base:** [backlog v1.1](../backlog/backlog-candidato.md).
 
 ## Criterios de organización

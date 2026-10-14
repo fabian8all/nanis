@@ -19,6 +19,11 @@ Continuum por historia y asignación explícita del rol implementador.
   `frontend` y las demás a `backend`.
 - GT-HU-022 quedó implementada y validada; su tarea se cerró y archivó en
   `.ai/tasks/_closed/gt-hu-022-acceso-federado/` tras registrar su handoff.
+- GT-HU-025 fue verificada: la ruta y consulta actuales ya permiten al alumno
+  ver su solicitud propia y aíslan las de otros; se añadieron pruebas
+  explícitas de aislamiento y de denegación para otros roles, sin cambio de
+  lógica de aplicación. Su tarea se cerró y archivó en
+  `.ai/tasks/_closed/gt-hu-025-consultar-solicitud-propia/`.
 - GT-HU-023 está bloqueada para implementación hasta acordar el destino de
   solicitudes devueltas, canceladas, rechazadas (si ese estado se permite) y
   prácticas completadas. No se asumirá ese comportamiento.

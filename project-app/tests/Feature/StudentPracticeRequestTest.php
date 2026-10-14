@@ -166,6 +166,37 @@ class StudentPracticeRequestTest extends TestCase
         $this->assertSame($existingRequest->id, PracticeRequest::query()->sole()->id);
     }
 
+    public function test_student_can_consult_only_their_own_practice_request(): void
+    {
+        $student = User::factory()->create(['role' => UserRole::Student]);
+        $otherStudent = User::factory()->create(['role' => UserRole::Student]);
+        $ownCompany = Company::query()->create(['name' => 'Empresa Propia']);
+        $otherCompany = Company::query()->create(['name' => 'Empresa Ajena']);
+
+        foreach ([[$student, $ownCompany], [$otherStudent, $otherCompany]] as [$owner, $company]) {
+            $owner->practiceRequests()->create([
+                'company_id' => $company->id,
+                'ucol_email' => $owner->email,
+                'nss' => '00000000000',
+                'account_number' => '00000000',
+                'grade_group' => '8A',
+                'start_date' => '2026-10-01',
+                'practice_location' => 'Colima',
+                'letter_recipient' => 'Dirección',
+                'position' => 'Auxiliar',
+                'end_date' => '2026-12-01',
+                'status' => PracticeRequestStatus::Returned,
+                'non_responsiva_accepted_at' => now(),
+            ]);
+        }
+
+        $this->actingAs($student)
+            ->get(route('alumno.practice-request.show'))
+            ->assertOk()
+            ->assertSee('Empresa Propia')
+            ->assertDontSee('Empresa Ajena');
+    }
+
     public function test_submitted_request_is_read_only_and_letter_print_uses_current_date(): void
     {
         $student = User::factory()->create(['role' => UserRole::Student]);
@@ -238,10 +269,12 @@ class StudentPracticeRequestTest extends TestCase
         ]);
     }
 
-    public function test_non_students_cannot_access_the_request(): void
+    public function test_users_without_student_role_cannot_access_the_request(): void
     {
-        $this->actingAs(User::factory()->create(['role' => UserRole::Coordinator]))
-            ->get(route('alumno.practice-request.show'))
-            ->assertForbidden();
+        foreach ([UserRole::Coordinator, UserRole::Supervisor, UserRole::Tutor] as $role) {
+            $this->actingAs(User::factory()->create(['role' => $role]))
+                ->get(route('alumno.practice-request.show'))
+                ->assertForbidden();
+        }
     }
 }
