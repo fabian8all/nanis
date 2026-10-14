@@ -31,9 +31,12 @@ Continuum por historia y asignación explícita del rol implementador.
 - GT-HU-034 fija el regreso de Supervisión desde la carta de presentación a
   Seguimiento y conserva el destino de Tutoría. Su tarea se cerró y archivó en
   `.ai/tasks/_closed/gt-hu-034-regreso-seguro-seguimiento/`.
-- GT-HU-023 está bloqueada para implementación hasta acordar el destino de
-  solicitudes devueltas, canceladas, rechazadas (si ese estado se permite) y
-  prácticas completadas. No se asumirá ese comportamiento.
+- GT-HU-023 usa el estado vigente de la solicitud del alumno en login local y
+  SAML: sin solicitud va al catálogo; devuelta, al formulario de corrección;
+  pendiente, aprobada o completada, a Seguimiento. Se ignorará y limpiará
+  `url.intended` para el alumno. Los estados cancelado y rechazado no existen
+  en el enum y quedan fuera de esta historia. La tarea se cerró y archivó en
+  `.ai/tasks/_closed/gt-hu-023-destino-alumno-estado-practica/`.
 - Las ramas y tareas de Sprints 2–5 se crearán al iniciar cada sprint.
 - No se crearon worktrees adicionales: por la decisión de mantener el trabajo
   en este checkout, las cinco historias se atenderán en serie; no hay agentes
@@ -87,10 +90,8 @@ Continuum por historia y asignación explícita del rol implementador.
   segunda respuesta pasó por el proxy compartido.
 
 ## Pendiente
-- Resolver el refinamiento de GT-HU-023 antes de iniciar su implementación.
-- Continuar implementando y cerrando las tareas no bloqueadas de Sprint 1 con
-  sus pruebas y commits en la rama del sprint; integrar el sprint a `develop`
-  una vez validado.
+- Integrar el Sprint 1 a `develop`; la rama contiene un commit por historia
+  cerrada.
 - Iniciar los Sprints 2–5 solo después de cerrar el sprint anterior y crear
   para cada HU su tarea asignada por el orquestador.
 - Decidir cuándo incluir en un commit el cambio previo de

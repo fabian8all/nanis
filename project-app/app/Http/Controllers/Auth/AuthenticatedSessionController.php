@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Auth;
 
 use App\Enums\UserRole;
 use App\Http\Controllers\Controller;
+use App\Models\User;
+use App\Services\StudentPracticeDestination;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -17,7 +19,7 @@ class AuthenticatedSessionController extends Controller
         return view('auth.login');
     }
 
-    public function store(Request $request): RedirectResponse
+    public function store(Request $request, StudentPracticeDestination $studentPracticeDestination): RedirectResponse
     {
         $credentials = $request->validate([
             'email' => ['required', 'email'],
@@ -40,8 +42,8 @@ class AuthenticatedSessionController extends Controller
                     ? 'supervisor.practice-letters.index'
                     : null,
             UserRole::Tutor => 'tutor.practice-reports.index',
-            UserRole::Student => app()->environment(['local', 'testing'])
-                ? 'alumno.companies.index'
+            UserRole::Student => app()->environment(['local', 'testing']) && $user instanceof User
+                ? $studentPracticeDestination->routeFor($user)
                 : null,
             default => null,
         };
@@ -51,6 +53,10 @@ class AuthenticatedSessionController extends Controller
             throw ValidationException::withMessages([
                 'email' => 'Las credenciales no son válidas.',
             ]);
+        }
+
+        if ($user instanceof User && $user->role === UserRole::Student) {
+            $request->session()->forget('url.intended');
         }
 
         $request->session()->regenerate();

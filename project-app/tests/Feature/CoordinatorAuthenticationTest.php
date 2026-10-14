@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Enums\PracticeRequestStatus;
 use App\Enums\UserRole;
 use App\Models\Company;
 use App\Models\User;
@@ -74,6 +75,49 @@ class CoordinatorAuthenticationTest extends TestCase
         ])->assertRedirect(route('alumno.companies.index'));
 
         $this->assertAuthenticatedAs($student);
+    }
+
+    public function test_student_login_destination_uses_the_latest_request_status(): void
+    {
+        $this->withoutMiddleware(PreventRequestForgery::class);
+        $destinations = [
+            [PracticeRequestStatus::Pending, 'alumno.practice-tracking.index'],
+            [PracticeRequestStatus::Returned, 'alumno.practice-request.show'],
+            [PracticeRequestStatus::Approved, 'alumno.practice-tracking.index'],
+            [PracticeRequestStatus::Completed, 'alumno.practice-tracking.index'],
+        ];
+
+        foreach ($destinations as [$status, $route]) {
+            $student = User::factory()->create([
+                'role' => UserRole::Student,
+                'password' => 'CorrectHorseBattery1!',
+            ]);
+            $this->createPracticeRequest($student, $status);
+
+            $this->withSession(['url.intended' => route('alumno.companies.index')])
+                ->post(route('login.store'), [
+                    'email' => $student->email,
+                    'password' => 'CorrectHorseBattery1!',
+                ])
+                ->assertRedirect(route($route))
+                ->assertSessionMissing('url.intended');
+        }
+    }
+
+    public function test_student_login_ignores_another_students_request_state(): void
+    {
+        $this->withoutMiddleware(PreventRequestForgery::class);
+        $student = User::factory()->create([
+            'role' => UserRole::Student,
+            'password' => 'CorrectHorseBattery1!',
+        ]);
+        $otherStudent = User::factory()->create(['role' => UserRole::Student]);
+        $this->createPracticeRequest($otherStudent, PracticeRequestStatus::Pending);
+
+        $this->post(route('login.store'), [
+            'email' => $student->email,
+            'password' => 'CorrectHorseBattery1!',
+        ])->assertRedirect(route('alumno.companies.index'));
     }
 
     public function test_student_password_sign_in_is_rejected_in_production(): void
@@ -165,5 +209,24 @@ class CoordinatorAuthenticationTest extends TestCase
 
         $this->get(route('coordinacion.practice-tracking.index'))
             ->assertForbidden();
+    }
+
+    private function createPracticeRequest(User $student, PracticeRequestStatus $status): void
+    {
+        $company = Company::query()->create(['name' => 'Hotel '.$student->id]);
+        $student->practiceRequests()->create([
+            'company_id' => $company->id,
+            'ucol_email' => $student->email,
+            'nss' => '00000000000',
+            'account_number' => '00000000',
+            'grade_group' => '8A',
+            'start_date' => '2026-11-01',
+            'practice_location' => 'Colima',
+            'letter_recipient' => 'Dirección',
+            'position' => 'Auxiliar',
+            'end_date' => '2027-01-31',
+            'status' => $status,
+            'non_responsiva_accepted_at' => now(),
+        ]);
     }
 }
