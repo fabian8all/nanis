@@ -28,6 +28,9 @@ Continuum por historia y asignación explícita del rol implementador.
   autenticación y autorización del destino, y que los destinos existentes de
   Alumno, Supervisión y Tutoría se conservan. Su tarea se cerró y archivó en
   `.ai/tasks/_closed/gt-hu-027-destino-coordinacion-seguimiento/`.
+- GT-HU-034 fija el regreso de Supervisión desde la carta de presentación a
+  Seguimiento y conserva el destino de Tutoría. Su tarea se cerró y archivó en
+  `.ai/tasks/_closed/gt-hu-034-regreso-seguro-seguimiento/`.
 - GT-HU-023 está bloqueada para implementación hasta acordar el destino de
   solicitudes devueltas, canceladas, rechazadas (si ese estado se permite) y
   prácticas completadas. No se asumirá ese comportamiento.
