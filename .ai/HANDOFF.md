@@ -1,17 +1,16 @@
 # Handoff
 
-**Fecha:** 2026-10-14 · **Rol:** gestion-proyecto · **Rama:** `develop`
+**Fecha:** 2026-10-14 · **Rol:** gestion-proyecto · **Rama:** `sprint/4-catalogo-administracion-empresas`
 
 ## Objetivo
-Cerrar Sprint 3 de v1.1, integrado y validado en `develop`.
+Completar Sprint 4 de v1.1 y luego integrarlo y publicarlo en `develop`.
 
 ## Estado
-- El checkout sigue dentro de `~/code/nanis`; la rama activa es `develop`.
+- El checkout sigue dentro de `~/code/nanis`; la rama activa es
+  `sprint/4-catalogo-administracion-empresas`, creada desde `develop`.
 - Sprint 3 se integró desde `sprint/3-expediente-versiones-revision-reporte`
-  mediante el merge `c367237`. Su publicación en `origin/develop` se realiza
-  como parte de este cierre.
-- Sprint 2 y su cierre documental están publicados en `origin/develop` hasta
-  `bea2c2e`.
+  mediante el merge `c367237`; el cierre documental quedó publicado en
+  `origin/develop` hasta `76a3896`.
 - Sprint 1 se integró en `develop` mediante el merge `b345549`; el cierre
   documental `d1cc268` y los cambios de Sprint 1 se publicaron en `origin`.
 - El backlog v1.1 contiene 17 historias (`GT-HU-022`–`GT-HU-038`), aprobado
@@ -80,16 +79,25 @@ Cerrar Sprint 3 de v1.1, integrado y validado en `develop`.
 - GT-HU-036 implementó observaciones por sección inicialmente ocultas con
   controles accesibles; el comentario general sigue visible y obligatorio al
   devolver. La tarea Continuum quedó cerrada y archivada.
+- Sprint 4 contiene GT-HU-029 y GT-HU-030. Las tareas se asignaron a
+  `frontend` y `backend`, respectivamente; GT-HU-029 está implementada,
+  validada y archivada, y GT-HU-030 está pendiente de implementación.
+- Para GT-HU-030 se resolvió que la búsqueda incluya solo empresas disponibles
+  (`is_active = true`), mientras la lista sin búsqueda conserva las ocultas
+  para permitir su reactivación. Se documentó en el backlog y el plan.
+- GT-HU-029 oculta el formulario hasta iniciar un alta o edición y conserva
+  campos, validaciones, permisos y cancelación sin guardar. La regresión del
+  catálogo pasó con 12 tests y 74 assertions; Pint pasó para el componente.
 - Las tareas del sprint se trabajan en serie dentro de este único checkout;
   no se crearon worktrees ni se inició ejecución paralela.
-- Las ramas y tareas de Sprints 4–5 se crearán al iniciar cada sprint.
+- Sprint 5 y sus tareas se crearán al iniciar ese sprint.
 - No se crearon worktrees adicionales: por la decisión de mantener el trabajo
   en este checkout, las cinco historias se atenderán en serie; no hay agentes
   ejecutándolas en paralelo.
 - `main` y `origin/main` permanecen en `cb5365d`, con el cierre de v1.0.
   Sprint 5 (`a11bd76`) y el cierre v1.0 son ancestros de `develop`.
-- `origin/develop` incluye `bea2c2e`; el merge de Sprint 2 y su cierre
-  documental están publicados.
+- `develop` y `origin/develop` están sincronizadas en `76a3896`; incluyen el
+  merge de Sprint 3 y su cierre documental.
 - La fuente original `docs/v1.1/Planeacion/Modificaciones.txt` se conserva junto
   con su versión formateada `modificaciones.md`.
 - Se actualizaron 171 referencias en 52 documentos de tareas archivadas para
@@ -141,7 +149,8 @@ Cerrar Sprint 3 de v1.1, integrado y validado en `develop`.
   `http://nanis.net` respondieron `HTTP 200`, este último por el proxy compartido.
 
 ## Pendiente
-- Sprint 3 está integrado y validado en `develop`; publicar el merge y el
-  cierre documental en `origin/develop` como último paso.
+- Completar GT-HU-029, después GT-HU-030, validar Sprint 4, cerrar y archivar
+  sus tareas Continuum, integrar el sprint en `develop` y publicar a
+  `origin/develop`.
 - Decidir cuándo incluir en un commit el cambio previo de
   `project-app/README.md`; se preserva fuera de los commits del sprint.

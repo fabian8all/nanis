@@ -19,6 +19,9 @@ class CompanyCatalogTest extends TestCase
         $this->actingAs(User::factory()->create(['role' => UserRole::Coordinator]));
 
         Livewire::test(Index::class)
+            ->assertDontSee('id="name"', false)
+            ->call('startCreate')
+            ->assertSee('id="name"', false)
             ->set('name', 'Hotel Ejemplo')
             ->set('address', 'Av. Central 123')
             ->set('phone', '3125550100')
@@ -34,6 +37,7 @@ class CompanyCatalogTest extends TestCase
 
         Livewire::test(Index::class)
             ->call('edit', $company->id)
+            ->assertSee('Editar empresa')
             ->set('name', 'Hotel Actualizado')
             ->call('save')
             ->assertHasNoErrors();
@@ -41,6 +45,30 @@ class CompanyCatalogTest extends TestCase
         $this->assertDatabaseHas('companies', [
             'id' => $company->id,
             'name' => 'Hotel Actualizado',
+        ]);
+    }
+
+    public function test_coordinator_can_cancel_creation_and_editing_without_saving_changes(): void
+    {
+        $this->actingAs(User::factory()->create(['role' => UserRole::Coordinator]));
+        $company = Company::query()->create(['name' => 'Hotel Ejemplo']);
+
+        Livewire::test(Index::class)
+            ->call('startCreate')
+            ->set('name', 'Hotel no guardado')
+            ->call('cancelEdit')
+            ->assertSet('showForm', false)
+            ->assertDontSee('id="name"', false)
+            ->call('edit', $company->id)
+            ->set('name', 'Cambio no guardado')
+            ->call('cancelEdit')
+            ->assertSet('showForm', false)
+            ->assertDontSee('id="name"', false);
+
+        $this->assertDatabaseCount('companies', 1);
+        $this->assertDatabaseHas('companies', [
+            'id' => $company->id,
+            'name' => 'Hotel Ejemplo',
         ]);
     }
 

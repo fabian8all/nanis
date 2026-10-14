@@ -10,6 +10,8 @@ class Index extends Component
 {
     public ?int $editingId = null;
 
+    public bool $showForm = false;
+
     public string $name = '';
 
     public string $address = '';
@@ -56,12 +58,21 @@ class Index extends Component
         $this->resetForm();
     }
 
+    public function startCreate(): void
+    {
+        $this->authorizeCoordinator();
+        $this->resetForm();
+        $this->showForm = true;
+    }
+
     public function edit(int $companyId): void
     {
         $this->authorizeCoordinator();
 
+        $this->resetForm();
         $company = Company::query()->findOrFail($companyId);
         $this->editingId = $company->id;
+        $this->showForm = true;
         $this->name = $company->name;
         $this->address = $company->address ?? '';
         $this->phone = $company->phone ?? '';
@@ -110,6 +121,7 @@ class Index extends Component
     private function resetForm(): void
     {
         $this->editingId = null;
+        $this->showForm = false;
         $this->name = '';
         $this->address = '';
         $this->phone = '';
