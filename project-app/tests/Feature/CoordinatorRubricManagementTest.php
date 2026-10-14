@@ -108,6 +108,16 @@ class CoordinatorRubricManagementTest extends TestCase
         Livewire::actingAs($student)->test(Manage::class)->assertForbidden();
     }
 
+    public function test_coordinator_can_open_the_rubrics_management_route(): void
+    {
+        $coordinator = User::factory()->create(['role' => UserRole::Coordinator]);
+
+        $this->actingAs($coordinator)
+            ->get(route('coordinacion.rubrics.manage'))
+            ->assertOk()
+            ->assertSee('Rúbricas de evaluación');
+    }
+
     public function test_new_drafts_keep_version_sequences_and_criteria_separate_by_rubric_type(): void
     {
         $coordinator = User::factory()->create(['role' => UserRole::Coordinator]);

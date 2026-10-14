@@ -42,6 +42,10 @@ asignada por el orquestador.
 - Sprint 2 incluye GT-HU-024, GT-HU-028, GT-HU-031, GT-HU-032 y GT-HU-033.
   Sus tareas Continuum están activas: GT-HU-024 se asignó a `backend`; las
   demás a `frontend`, según el alcance de cada historia.
+- GT-HU-028 quedó implementada y validada: Coordinación tiene acceso visible
+  al catálogo y un menú Documentos con las rutas existentes; Rúbricas conserva
+  su enlace operativo. Su tarea se cerró y archivó en
+  `.ai/tasks/_closed/gt-hu-028-navegacion-coordinacion/`.
 - GT-HU-024 requiere confirmar si una solicitud completada permite una nueva
   selección, además del estado devuelto. GT-HU-033 requiere elegir botones
   separados o un menú desplegable. No se implementarán estas dos historias
@@ -106,7 +110,8 @@ asignada por el orquestador.
 ## Pendiente
 - Resolver las dos preguntas de refinamiento de Sprint 2 antes de implementar
   GT-HU-024 y GT-HU-033.
-- Completar las cinco historias de Sprint 2 con un commit por tarea; después
-  integrar la rama a `develop` y validar el sprint.
+- Continuar en serie con GT-HU-031 y GT-HU-032; completar las cinco historias
+  con un commit por tarea, luego integrar la rama a `develop` y validar el
+  sprint.
 - Decidir cuándo incluir en un commit el cambio previo de
   `project-app/README.md`; el override local está ignorado y no se publica.
