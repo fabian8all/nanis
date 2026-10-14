@@ -11,5 +11,5 @@ continuidad.
   ausencia de fechas/duraciones/estimaciones, y completar el handoff.
 
 ## Estado actual
-Propuesta validada y handoff listo. Queda pendiente la revisión de la persona
-solicitante; no se crearon ramas ni tareas de implementación.
+Propuesta validada y aprobada por la persona solicitante el 2026-10-14. No se
+crearon ramas ni tareas de implementación; se crearán al iniciar cada sprint.

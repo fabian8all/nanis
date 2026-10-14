@@ -1,22 +1,22 @@
 # Propuesta de sprints para v1.1
 
-**Estado:** propuesta para revisión. El backlog fue aprobado como base de
-planificación por la persona solicitante el 2026-10-14; la asignación de
-historias a sprints todavía requiere su revisión.
+**Estado:** secuencia aprobada por la persona solicitante el 2026-10-14. Las
+preguntas abiertas del backlog se conservan como puntos de refinamiento antes
+de comprometer cada sprint.
 **Base:** [backlog v1.1](../backlog/backlog-candidato.md).
 
 ## Criterios de organización
 
 - Agrupar historias por resultado de usuario y dependencias del flujo.
 - Resolver primero los errores de acceso que bloquean acciones autorizadas.
-- Mantener cada historia dentro de un único sprint candidato.
+- Mantener cada historia dentro de un único sprint.
 - Conservar los límites de autorización y los controles v1.0 que ya existen;
   no duplicar funciones disponibles.
 - Usar las preguntas abiertas del backlog como puntos de refinamiento previos
   al compromiso del sprint correspondiente.
 - No establecer fechas, duración, estimaciones, capacidad ni velocidad.
 
-## Secuencia candidata
+## Secuencia aprobada
 
 | Sprint | Objetivo | Historias | Resultado esperado |
 |---|---|---|---|

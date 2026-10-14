@@ -10,10 +10,10 @@ calendario ni duración.
 - El checkout `~/code/nanis` está en `develop`; contiene el backlog v1.1 de
   17 historias (`GT-HU-022`–`GT-HU-038`), aprobado como base de planificación
   por la persona solicitante el 2026-10-14.
-- La tarea `.ai/tasks/_closed/planificacion-sprints-v1-1/` cerró la propuesta
-  de cinco sprints candidatos en `docs/v1.1/sprints/plan-sprints-candidato.md`.
-- La distribución aún requiere revisión. No se han creado ramas sprint ni
-  tareas de implementación por historia.
+- La tarea `.ai/tasks/_closed/planificacion-sprints-v1-1/` cerró la secuencia
+  aprobada de cinco sprints en `docs/v1.1/sprints/plan-sprints-candidato.md`.
+- No se han creado ramas sprint ni tareas de implementación por historia;
+  estas se crean al iniciar cada sprint.
 - `main` y `origin/main` permanecen en `cb5365d`, con el cierre de v1.0.
   Sprint 5 (`a11bd76`) y el cierre v1.0 son ancestros de `develop`.
 - El `develop` local contiene commits documentales no publicados por delante
@@ -46,7 +46,7 @@ calendario ni duración.
   calendario, duración, estimaciones ni capacidad.
 
 ## Pendiente
-- Revisar y aprobar o ajustar la asignación de historias a sprints; resolver
-  los puntos de refinamiento antes de comprometer cada sprint.
-- Crear tarea Continuum por historia y su rama de sprint desde `develop` al
-  comenzar implementación.
+- Iniciar Sprint 1 cuando se solicite, creando su rama desde `develop` y
+  tareas Continuum por cada historia a implementar.
+- Resolver los puntos de refinamiento antes de comprometer los sprints
+  afectados.

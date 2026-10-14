@@ -4,14 +4,14 @@
   con commits documentales locales por delante de `origin/develop` (`64925ed`);
   `main` permanece en `cb5365d` con el cierre de v1.0. Sprint 5 y el cierre
   v1.0 son ancestros de `develop`. La persona solicitante aprobó el backlog
-  v1.1 como base de planificación; la propuesta de sprints está pendiente de
-  revisión y no se ha integrado a `main`.
+  v1.1 como base de planificación y la secuencia de cinco sprints; v1.1 aún no
+  se ha integrado a `main`.
 - La fuente original de solicitudes para v1.1 se conserva en
   `../../../docs/v1.1/Planeacion/Modificaciones.txt`, junto con su versión
   formateada `../../../docs/v1.1/Planeacion/modificaciones.md`.
-- Tarea archivada: `.ai/tasks/_closed/planificacion-sprints-v1-1/`. Revisar y
-  aprobar o ajustar la propuesta antes de comprometer sprints; no establecer
-  fechas, duración, estimaciones ni capacidad.
+- Tarea archivada: `.ai/tasks/_closed/planificacion-sprints-v1-1/`. Antes de
+  comprometer cada sprint, resolver las preguntas abiertas correspondientes;
+  no establecer fechas, duración, estimaciones ni capacidad.
 - El catálogo muestra nombre, dirección, teléfono, email y persona de contacto; Coordinación da altas/bajas manualmente. La baja oculta a la empresa en nuevas solicitudes, pero conserva referencias existentes y no afecta prácticas iniciadas.
 - Conciliar canales del prototipo frente a Drive/correo/Classroom/papel descritos en el procedimiento institucional 2025.
 - HU-006, HU-007, HU-016 y HU-017 están implementadas y desplegadas en Sprint 4. La rúbrica de Tutor publicada en desarrollo es temporal/ficticia para demostración; falta que Coordinación publique las rúbricas institucionales. La rúbrica Supervisor continúa como borrador, por lo que HU-006 no inicia aún en demo. La práctica sintética recorre aceptación, plan y reporte aprobados.

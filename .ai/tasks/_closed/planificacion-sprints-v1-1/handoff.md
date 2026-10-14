@@ -1,7 +1,7 @@
 # Handoff: planificacion-sprints-v1-1
 
-**Fecha:** 2026-10-14 · **Rol:** gestion-proyecto · **Estado:** propuesta
-validada; pendiente revisión de la persona solicitante
+**Fecha:** 2026-10-14 · **Rol:** gestion-proyecto · **Estado:** secuencia
+aprobada por la persona solicitante
 
 ## Resultado
 - Se registró que el backlog v1.1 fue aprobado como base de planificación.
@@ -11,6 +11,7 @@ validada; pendiente revisión de la persona solicitante
   `docs/v1.1/sprints/plan-sprints-candidato.md`.
 - No se añadieron fechas, duración, estimaciones ni capacidad y no se crearon
   ramas sprint.
+- La persona solicitante aprobó la agrupación de cinco sprints el 2026-10-14.
 
 ## Validación
 - Las 17 historias están asignadas exactamente una vez a los cinco sprints.
@@ -23,6 +24,5 @@ validada; pendiente revisión de la persona solicitante
 - No se ejecutaron pruebas de aplicación; los cambios son documentales.
 
 ## Próximo paso
-Revisar y ajustar la secuencia de sprints con la persona solicitante. Al
-comenzar implementación, crear una tarea Continuum por historia y la rama del
-sprint correspondiente desde `develop`.
+Al comenzar Sprint 1, crear su rama desde `develop` y una tarea Continuum por
+cada historia que vaya a implementarse, según el protocolo del repositorio.
