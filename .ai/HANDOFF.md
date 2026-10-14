@@ -1,14 +1,15 @@
 # Handoff
 
-**Fecha:** 2026-10-14 · **Rol:** gestion-proyecto · **Rama:** `develop`
+**Fecha:** 2026-10-14 · **Rol:** gestion-proyecto · **Rama:** `sprint/3-expediente-versiones-revision-reporte`
 
 ## Objetivo
-Cerrar Sprint 2 de v1.1 y preparar el refinamiento de Sprint 3.
+Completar Sprint 3 de v1.1 con los refinamientos confirmados.
 
 ## Estado
-- El checkout sigue dentro de `~/code/nanis`; la rama activa es `develop`.
-  Sprint 2 se integró desde `sprint/2-navegacion-acciones-operativas` mediante
-  el merge local `d90ae3a`.
+- El checkout sigue dentro de `~/code/nanis`; la rama activa es
+  `sprint/3-expediente-versiones-revision-reporte`, creada desde `develop`.
+- Sprint 2 y su cierre documental están publicados en `origin/develop` hasta
+  `bea2c2e`.
 - Sprint 1 se integró en `develop` mediante el merge `b345549`; el cierre
   documental `d1cc268` y los cambios de Sprint 1 se publicaron en `origin`.
 - El backlog v1.1 contiene 17 historias (`GT-HU-022`–`GT-HU-038`), aprobado
@@ -63,15 +64,21 @@ Cerrar Sprint 2 de v1.1 y preparar el refinamiento de Sprint 3.
   etapa de aceptación con los alcances existentes por Supervisor/empresa. Su
   tarea se cerró y archivó en
   `.ai/tasks/_closed/gt-hu-033-acciones-presentacion-aceptacion/`.
+- Sprint 3 contiene GT-HU-026, GT-HU-035 y GT-HU-036. Se crearon tres tareas
+  Continuum en serie y se asignaron al rol `frontend`.
+- Para GT-HU-026, la persona solicitante confirmó reemplazar “requisitos de
+  cierre” por “Plan de trabajo” como tercer punto y mostrar una insignia con
+  el estado de entrega/aprobación de cada documento. El resumen agregado de
+  requisitos de cierre conserva su función actual.
 - Las tareas del sprint se trabajan en serie dentro de este único checkout;
   no se crearon worktrees ni se inició ejecución paralela.
-- Las ramas y tareas de Sprints 3–5 se crearán al iniciar cada sprint.
+- Las ramas y tareas de Sprints 4–5 se crearán al iniciar cada sprint.
 - No se crearon worktrees adicionales: por la decisión de mantener el trabajo
   en este checkout, las cinco historias se atenderán en serie; no hay agentes
   ejecutándolas en paralelo.
 - `main` y `origin/main` permanecen en `cb5365d`, con el cierre de v1.0.
   Sprint 5 (`a11bd76`) y el cierre v1.0 son ancestros de `develop`.
-- `origin/develop` incluye `848161f`; el merge de Sprint 2 y su cierre
+- `origin/develop` incluye `bea2c2e`; el merge de Sprint 2 y su cierre
   documental están publicados.
 - La fuente original `docs/v1.1/Planeacion/Modificaciones.txt` se conserva junto
   con su versión formateada `modificaciones.md`.
@@ -122,7 +129,7 @@ Cerrar Sprint 2 de v1.1 y preparar el refinamiento de Sprint 3.
   `http://nanis.net` respondieron `HTTP 200`, este último por el proxy compartido.
 
 ## Pendiente
-- Antes de iniciar Sprint 3, acordar qué comprende “requisitos de cierre” en
-  GT-HU-026 y si se presenta como sección o como documentos individuales.
+- Completar en serie las tres tareas activas de Sprint 3; cerrar e integrar el
+  sprint en `develop` solo tras validar las tres historias.
 - Decidir cuándo incluir en un commit el cambio previo de
   `project-app/README.md`; se preserva fuera de los commits del sprint.

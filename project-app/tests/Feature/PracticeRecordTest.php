@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Enums\PracticeEvaluationStatus;
+use App\Enums\PracticePlanStatus;
 use App\Enums\PracticeReportStatus;
 use App\Enums\PracticeRequestStatus;
 use App\Enums\RubricType;
@@ -41,12 +42,26 @@ class PracticeRecordTest extends TestCase
             ->assertSee('Carta de término emitida')
             ->assertSee('Reporte final aprobado')
             ->assertSee('Evaluación terminal del Tutor enviada')
-            ->assertSee('Evaluación terminal del Supervisor enviada');
+            ->assertSee('Evaluación terminal del Supervisor enviada')
+            ->assertSeeInOrder([
+                'id="presentation-letter-heading"',
+                'id="acceptance-letter-heading"',
+                'id="practice-plan-heading"',
+                'id="approved-report-heading"',
+                'id="supervisor-evaluation-heading"',
+                'id="tutor-evaluation-heading"',
+                'id="termination-letter-heading"',
+            ], false)
+            ->assertSee('data-document-status="No emitida"', false)
+            ->assertSee('data-document-status="No entregada"', false)
+            ->assertSee('data-document-status="No entregado"', false)
+            ->assertSee('Registrar plan de trabajo');
 
         $this->actingAs($coordinator)
             ->get(route('coordinacion.practice-records.show', $request))
             ->assertOk()
-            ->assertSee('Incompleto');
+            ->assertSee('Incompleto')
+            ->assertDontSee(route('alumno.practice-reports.show', $request));
 
         $this->actingAs($student)
             ->get(route('alumno.practice-tracking.index'))
@@ -57,6 +72,51 @@ class PracticeRecordTest extends TestCase
             ->get(route('coordinacion.practice-tracking.index'))
             ->assertOk()
             ->assertSee(route('coordinacion.practice-records.show', $request));
+    }
+
+    public function test_pending_documents_show_delivery_and_review_badges(): void
+    {
+        [$student, , $supervisor, , $request] = $this->createPractice();
+        $request->acceptanceSubmissions()->create([
+            'supervisor_id' => $supervisor->id,
+            'version' => 1,
+            'file_path' => "practice-acceptances/{$request->id}/pending.pdf",
+            'file_extension' => 'pdf',
+            'mime_type' => 'application/pdf',
+            'file_size' => 10,
+            'status' => 'pending_review',
+            'submitted_at' => now(),
+        ]);
+        $plan = $request->practicePlan()->create([]);
+        $plan->versions()->create([
+            'version' => 1,
+            'status' => PracticePlanStatus::PendingSupervisorReview,
+            'submitted_at' => now(),
+        ]);
+        $report = $request->practiceReport()->create([]);
+        $report->versions()->create([
+            'version' => 1,
+            'status' => PracticeReportStatus::PendingTutorReview,
+            'company_name' => $request->company->name,
+            'area' => 'Operaciones',
+            'period' => 'Periodo de prueba',
+            'objectives' => 'Objetivo',
+            'activities' => 'Actividades',
+            'outcomes' => 'Resultados',
+            'conclusions' => 'Conclusiones',
+            'recommendations' => 'Recomendaciones',
+            'submitted_at' => now(),
+        ]);
+
+        $response = $this->actingAs($student)
+            ->get(route('alumno.practice-records.show', $request))
+            ->assertOk()
+            ->assertSee('No hay una carta de aceptación aprobada.')
+            ->assertDontSee('Consultar carta de aceptación')
+            ->assertSee('Consultar plan de trabajo')
+            ->assertSee(route('alumno.practice-reports.show', $request));
+
+        $this->assertSame(3, substr_count($response->getContent(), 'data-document-status="En revisión"'));
     }
 
     public function test_only_the_owner_student_assigned_tutor_and_coordinator_can_open_a_record(): void
@@ -125,6 +185,12 @@ class PracticeRecordTest extends TestCase
         ]);
         $request->update(['status' => PracticeRequestStatus::Completed]);
 
+        $plan = $request->practicePlan()->create([]);
+        $plan->versions()->create([
+            'version' => 1,
+            'status' => PracticePlanStatus::Approved,
+            'submitted_at' => now(),
+        ]);
         $report = $request->practiceReport()->create([]);
         $reportVersion = $report->versions()->create([
             'version' => 1,
@@ -177,6 +243,10 @@ class PracticeRecordTest extends TestCase
             ->get(route('alumno.practice-records.show', $request))
             ->assertOk()
             ->assertSee('Completo')
+            ->assertSee('data-document-status="Emitida"', false)
+            ->assertSee('data-document-status="Aprobada"', false)
+            ->assertSee('data-document-status="Aprobado"', false)
+            ->assertSee('data-document-status="Enviada"', false)
             ->assertSee(route('practice-termination-letters.print', $issuance))
             ->assertSee('Objetivo documentado')
             ->assertSee('evidencia.pdf')
@@ -201,6 +271,7 @@ class PracticeRecordTest extends TestCase
             ->assertSee('Completo')
             ->assertSee('Carta de presentación')
             ->assertSee('Carta de aceptación')
+            ->assertSee('Plan de trabajo')
             ->assertSee(route('tutor.practice-letters.show', $request->letter))
             ->assertSee(route('tutor.practice-acceptances.file', $acceptance))
             ->assertSee(route('practice-termination-letters.print', $issuance))
@@ -283,6 +354,10 @@ class PracticeRecordTest extends TestCase
             ->assertSee('Reporte final del alumno')
             ->assertSee('Objetivo compartido')
             ->assertSee('Tu evaluación')
+            ->assertSee('data-document-status="Aprobada"', false)
+            ->assertSee('data-document-status="Aprobado"', false)
+            ->assertSee('data-document-status="Enviada"', false)
+            ->assertDontSee('id="practice-plan-heading"', false)
             ->assertDontSee('Requisitos de cierre')
             ->assertDontSee('Evaluación terminal del Tutor')
             ->assertDontSee('Carta de término');

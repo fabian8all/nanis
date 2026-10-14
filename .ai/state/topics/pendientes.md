@@ -1,7 +1,8 @@
 # Pendientes
 
-- Al 2026-10-14, el checkout principal `~/code/nanis` trabaja en `develop`,
-  sincronizado con `origin/develop` en `848161f`; `main` permanece en
+- Al 2026-10-14, el checkout principal `~/code/nanis` trabaja en
+  `sprint/3-expediente-versiones-revision-reporte`, creada desde `develop`;
+  `origin/develop` está publicado en `bea2c2e` y `main` permanece en
   `cb5365d` con el cierre de v1.0. Sprint 5 y el cierre v1.0 son ancestros de
   `develop`. La persona solicitante aprobó el backlog
   v1.1 como base de planificación y la secuencia de cinco sprints; v1.1 aún no
@@ -12,6 +13,10 @@
 - Tarea archivada: `.ai/tasks/_closed/planificacion-sprints-v1-1/`. Antes de
   comprometer cada sprint, resolver las preguntas abiertas correspondientes;
   no establecer fechas, duración, estimaciones ni capacidad.
+- Sprint 3 se inició en `sprint/3-expediente-versiones-revision-reporte`.
+  GT-HU-026, GT-HU-035 y GT-HU-036 tienen tareas Continuum creadas y asignadas.
+  Para GT-HU-026 se confirmó que el tercer punto del expediente sea Plan de
+  trabajo y que cada documento tenga una insignia de estado según su flujo.
 - El catálogo muestra nombre, dirección, teléfono, email y persona de contacto; Coordinación da altas/bajas manualmente. La baja oculta a la empresa en nuevas solicitudes, pero conserva referencias existentes y no afecta prácticas iniciadas.
 - Conciliar canales del prototipo frente a Drive/correo/Classroom/papel descritos en el procedimiento institucional 2025.
 - HU-006, HU-007, HU-016 y HU-017 están implementadas y desplegadas en Sprint 4. La rúbrica de Tutor publicada en desarrollo es temporal/ficticia para demostración; falta que Coordinación publique las rúbricas institucionales. La rúbrica Supervisor continúa como borrador, por lo que HU-006 no inicia aún en demo. La práctica sintética recorre aceptación, plan y reporte aprobados.

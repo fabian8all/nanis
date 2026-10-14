@@ -3,6 +3,9 @@
 namespace App\Livewire\PracticeRecords;
 
 use App\Enums\PracticeAcceptanceStatus;
+use App\Enums\PracticeEvaluationStatus;
+use App\Enums\PracticePlanStatus;
+use App\Enums\PracticeReportStatus;
 use App\Enums\PracticeRequestStatus;
 use App\Enums\UserRole;
 use App\Models\PracticeRequest;
@@ -31,6 +34,8 @@ class Show extends Component
                 'company:id,name',
                 'letter',
                 'latestAcceptanceSubmission',
+                'practicePlan.latestVersion',
+                'practiceReport.latestVersion',
                 'practiceReport.approvedVersion.attachments',
                 'practiceEvaluation',
                 'practiceSupervisorEvaluation',
@@ -48,14 +53,63 @@ class Show extends Component
             && collect($requirements)
                 ->reject(fn (array $item): bool => $item['label'] === 'Carta de término emitida')
                 ->every(fn (array $item): bool => $item['complete']);
+        $latestAcceptance = $practiceRequest->latestAcceptanceSubmission;
+        $latestPlan = $practiceRequest->practicePlan?->latestVersion;
+        $latestReport = $practiceRequest->practiceReport?->latestVersion;
+        $approvedReport = $practiceRequest->practiceReport?->approvedVersion;
+        $documentStatuses = [
+            'presentation' => $practiceRequest->letter ? 'Emitida' : 'No emitida',
+            'acceptance' => $isSupervisor
+                ? ($latestAcceptance?->status === PracticeAcceptanceStatus::Accepted ? 'Aprobada' : 'No disponible')
+                : match ($latestAcceptance?->status) {
+                    PracticeAcceptanceStatus::PendingReview => 'En revisión',
+                    PracticeAcceptanceStatus::Returned => 'Devuelta',
+                    PracticeAcceptanceStatus::Accepted => 'Aprobada',
+                    default => 'No entregada',
+                },
+            'plan' => match ($latestPlan?->status) {
+                PracticePlanStatus::PendingSupervisorReview,
+                PracticePlanStatus::PendingCoordinatorReview => 'En revisión',
+                PracticePlanStatus::ReturnedBySupervisor,
+                PracticePlanStatus::ReturnedByCoordinator => 'Devuelto',
+                PracticePlanStatus::Approved => 'Aprobado',
+                default => 'No entregado',
+            },
+            'report' => $approvedReport?->status === PracticeReportStatus::Approved
+                ? 'Aprobado'
+                : match ($latestReport?->status) {
+                    PracticeReportStatus::Draft => 'Borrador',
+                    PracticeReportStatus::PendingTutorReview => 'En revisión',
+                    PracticeReportStatus::Returned => 'Devuelto',
+                    PracticeReportStatus::Approved => 'Aprobado',
+                    default => 'No entregado',
+                },
+            'supervisor_report' => $approvedReport?->status === PracticeReportStatus::Approved
+                ? 'Aprobado'
+                : 'No disponible',
+            'supervisor_evaluation' => match ($practiceRequest->practiceSupervisorEvaluation?->status) {
+                PracticeEvaluationStatus::Draft => 'Borrador',
+                PracticeEvaluationStatus::Submitted => 'Enviada',
+                default => 'No entregada',
+            },
+            'tutor_evaluation' => match ($practiceRequest->practiceEvaluation?->status) {
+                PracticeEvaluationStatus::Draft => 'Borrador',
+                PracticeEvaluationStatus::Submitted => 'Enviada',
+                default => 'No entregada',
+            },
+            'termination_letter' => $practiceRequest->terminationLetterIssuance ? 'Emitida' : 'No emitida',
+        ];
 
         return view('livewire.practice-records.show', [
             'practiceRequest' => $practiceRequest,
-            'approvedReport' => $practiceRequest->practiceReport?->approvedVersion,
+            'latestPlan' => $latestPlan,
+            'approvedReport' => $approvedReport,
             'requirements' => $requirements,
+            'documentStatuses' => $documentStatuses,
             'isComplete' => ! $isSupervisor && collect($requirements)->every(fn (array $item): bool => $item['complete']),
             'isCoordinator' => $isCoordinator,
             'isSupervisor' => $isSupervisor,
+            'isStudent' => $user?->role === UserRole::Student,
             'userIsTutor' => $user?->role === UserRole::Tutor,
             'canIssueLetter' => $canIssueLetter,
         ])->layout('layouts.app', ['title' => 'Expediente de práctica']);
