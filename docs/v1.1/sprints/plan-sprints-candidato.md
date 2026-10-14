@@ -2,13 +2,13 @@
 
 **Estado:** secuencia aprobada por la persona solicitante el 2026-10-14. Las
 preguntas abiertas del backlog se conservan como puntos de refinamiento antes
-de comprometer cada sprint. El Sprint 1 está iniciado en la rama
-`sprint/1-acceso-confiable-destinos-rol`; se crearon sus cinco tareas
-Continuum, asignadas a los roles `frontend` y `backend`. GT-HU-023 queda
-refinada, implementada y validada para los estados actuales. GT-HU-022 está
-implementada y validada; GT-HU-025 fue verificada y quedó cubierta por pruebas
-de acceso y aislamiento sin requerir un cambio en la lógica de aplicación.
-GT-HU-027 y GT-HU-034 están implementadas y validadas.
+de comprometer cada sprint. Sprint 1 se completó en
+`sprint/1-acceso-confiable-destinos-rol` y se integró en `develop` mediante el
+merge `b345549`. Se creó una tarea Continuum por HU, con asignación del
+orquestador a `frontend` o `backend`; las cinco tareas están cerradas.
+GT-HU-022, GT-HU-023, GT-HU-027 y GT-HU-034 están implementadas y validadas.
+GT-HU-025 fue verificada y quedó cubierta por pruebas de acceso y aislamiento
+sin requerir un cambio en la lógica de aplicación.
 **Base:** [backlog v1.1](../backlog/backlog-candidato.md).
 
 ## Criterios de organización
@@ -126,4 +126,5 @@ duración, estimaciones, capacidad ni velocidad. Al iniciar cada sprint se crea
 su rama desde `develop` y una tarea Continuum por historia, asignada por el
 orquestador al rol/agente adecuado. Para Sprint 1 ya se crearon la rama y las
 tareas de GT-HU-022, GT-HU-023, GT-HU-025, GT-HU-027 y GT-HU-034. Las tareas de
-los Sprints 2–5 se crearán cuando se inicie cada uno.
+los Sprints 2–5 se crearán cuando se inicie cada uno. La rama de Sprint 1
+permanece disponible y ya está integrada en `develop`.

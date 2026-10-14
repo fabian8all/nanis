@@ -1,15 +1,14 @@
 # Handoff
 
-**Fecha:** 2026-10-14 · **Rol:** gestion-proyecto · **Rama:** `sprint/1-acceso-confiable-destinos-rol`
+**Fecha:** 2026-10-14 · **Rol:** gestion-proyecto · **Rama:** `develop`
 
 ## Objetivo
-Iniciar el Sprint 1 de v1.1 a partir de la secuencia aprobada, con una tarea
-Continuum por historia y asignación explícita del rol implementador.
+Cerrar Sprint 1 de v1.1 e integrar sus historias validadas en `develop`.
 
 ## Estado
-- El checkout sigue dentro de `~/code/nanis`; la rama activa
-  `sprint/1-acceso-confiable-destinos-rol` se creó desde el `develop` local
-  para iniciar Sprint 1.
+- El checkout sigue dentro de `~/code/nanis`; la rama activa es `develop`.
+  Sprint 1 se integró desde `sprint/1-acceso-confiable-destinos-rol` mediante
+  el merge `b345549`.
 - El backlog v1.1 contiene 17 historias (`GT-HU-022`–`GT-HU-038`), aprobado
   como base de planificación por la persona solicitante el 2026-10-14.
 - La tarea `.ai/tasks/_closed/planificacion-sprints-v1-1/` cerró la secuencia
@@ -43,8 +42,7 @@ Continuum por historia y asignación explícita del rol implementador.
   ejecutándolas en paralelo.
 - `main` y `origin/main` permanecen en `cb5365d`, con el cierre de v1.0.
   Sprint 5 (`a11bd76`) y el cierre v1.0 son ancestros de `develop`.
-- El `develop` local contiene commits documentales no publicados por delante
-  de `origin/develop` (`64925ed`); no se publicaron commits.
+- `develop` contiene commits locales pendientes de publicar; no se hizo push.
 - La fuente original `docs/v1.1/Planeacion/Modificaciones.txt` se conserva junto
   con su versión formateada `modificaciones.md`.
 - Se actualizaron 171 referencias en 52 documentos de tareas archivadas para
@@ -58,8 +56,8 @@ Continuum por historia y asignación explícita del rol implementador.
   `standalone`. El stack está iniciado: `app` y `db` están activos y la base
   figura saludable; el proxy propio del proyecto no está iniciado.
 - `project-app/README.md` documenta el uso del proxy compartido y los puertos
-  locales. Este cambio previo sigue pendiente de commit y se conservó al crear
-  la rama Sprint 1; no se publicó ningún commit.
+  locales. Este cambio previo sigue pendiente de commit; se preservó al
+  integrar Sprint 1 y no forma parte del merge.
 
 ## Worktrees y limpieza
 - Git registra únicamente `~/code/nanis` como worktree.
@@ -75,24 +73,27 @@ Continuum por historia y asignación explícita del rol implementador.
   ya no aparecen en `.ai/tasks`; existen los directorios destino de v1.0.
 - Las 171 referencias actualizadas resuelven a rutas existentes; `git diff
   --check` pasó usando `core.whitespace=cr-at-eol` para respetar CRLF.
-- Los commits nuevos están solo en el `develop` local; no se publicaron.
+- Los cinco commits de historia y el merge del sprint están en el `develop`
+  local; no se publicaron.
 - La propuesta asigna las 17 historias una vez, sus enlaces resuelven y no fija
   calendario, duración, estimaciones ni capacidad.
 - Las cinco tareas de Sprint 1 existen, cada una identifica su HU, criterios,
   dependencias, write-set y rol asignado por el orquestador.
-- `tools/continuum doctor` encontró cero problemas críticos y dos advertencias:
-  las tareas activas comparten un solo worktree y el paquete de arranque se
-  estima por encima del umbral de 3500 tokens. La ejecución en serie respeta
-  el checkout único.
+- Las cinco tareas de Sprint 1 están cerradas y archivadas; el doctor encontró
+  cero problemas críticos y una advertencia por el paquete de arranque, que
+  supera el umbral de 3500 tokens.
+- Las pruebas conjuntas de las superficies modificadas pasaron (47 tests,
+  341 assertions); Pint pasó para los nueve archivos PHP revisados.
 - `docker compose config --quiet` pasó con la anulación local; `app` y el
   `nginx-proxy` compartido comparten la red `proxy`.
-- `http://localhost:8001` y `http://nanis.net` respondieron `HTTP 200`; la
-  segunda respuesta pasó por el proxy compartido.
+- Los servicios `app` y `db` están en ejecución; `http://localhost:8001` y
+  `http://nanis.net` respondieron `HTTP 200`, este último por el proxy compartido.
 
 ## Pendiente
-- Integrar el Sprint 1 a `develop`; la rama contiene un commit por historia
-  cerrada.
-- Iniciar los Sprints 2–5 solo después de cerrar el sprint anterior y crear
-  para cada HU su tarea asignada por el orquestador.
+- Iniciar Sprint 2 desde `develop` cuando se solicite, creando una tarea
+  Continuum por HU y asignándola al rol/agente que designe el orquestador.
+- Refinar antes de comprometer las preguntas abiertas de Sprint 2, incluida la
+  elegibilidad para seleccionar empresa (GT-HU-024) y la presentación de las
+  acciones de aceptación del Supervisor (GT-HU-033).
 - Decidir cuándo incluir en un commit el cambio previo de
   `project-app/README.md`; el override local está ignorado y no se publica.
