@@ -96,14 +96,27 @@ class SamlStudentAuthenticationTest extends TestCase
         $this->get(route('auth.saml.simulate'))->assertNotFound();
     }
 
-    public function test_login_page_shows_the_simulator_when_enabled_in_development_environments(): void
+    public function test_login_page_shows_the_simulator_below_local_sign_in_when_enabled(): void
     {
         config(['services.saml2.simulator_enabled' => true]);
 
         $this->get(route('login'))
             ->assertOk()
-            ->assertSee('Acceder como alumno de prueba')
+            ->assertSeeInOrder(['Iniciar sesión', 'Acceso federado UCOL'])
             ->assertSee(route('auth.saml.simulate'));
+    }
+
+    public function test_login_page_shows_the_federated_login_below_local_sign_in_when_enabled(): void
+    {
+        config([
+            'services.saml2.simulator_enabled' => false,
+            'services.saml2.enabled' => true,
+        ]);
+
+        $this->get(route('login'))
+            ->assertOk()
+            ->assertSeeInOrder(['Iniciar sesión', 'Acceso federado UCOL'])
+            ->assertSee(route('auth.saml.login'));
     }
 
     public function test_saml_login_reports_missing_identity_provider_configuration(): void
