@@ -59,8 +59,11 @@ asignada por el orquestador.
   `Completada` bloquean. Una nueva selección en estado devuelto actualiza esa
   misma solicitud. La tarea se cerró y archivó en
   `.ai/tasks/_closed/gt-hu-024-catalogo-sin-seleccion-en-tramite/`.
-- GT-HU-033 aún requiere elegir botones separados o un menú desplegable y no se
-  implementará hasta resolver esa decisión.
+- Para GT-HU-033, la persona solicitante eligió dos botones separados para
+  consultar la presentación y cargar la aceptación. Se implementaron en la
+  etapa de aceptación con los alcances existentes por Supervisor/empresa. Su
+  tarea se cerró y archivó en
+  `.ai/tasks/_closed/gt-hu-033-acciones-presentacion-aceptacion/`.
 - Las tareas del sprint se trabajan en serie dentro de este único checkout;
   no se crearon worktrees ni se inició ejecución paralela.
 - Las ramas y tareas de Sprints 3–5 se crearán al iniciar cada sprint.
@@ -107,21 +110,20 @@ asignada por el orquestador.
   calendario, duración, estimaciones ni capacidad.
 - Las cinco tareas de Sprint 1 existen, cada una identifica su HU, criterios,
   dependencias, write-set y rol asignado por el orquestador.
-- Las cinco tareas de Sprint 1 están cerradas y archivadas. En Sprint 2 solo
-  queda activa GT-HU-033 en este worktree; las demás se cerraron en serie. El
-  último doctor registró cero problemas críticos y advertencias de tareas
-  activas en un worktree y paquete de arranque sobre 3500 tokens.
+- Las cinco tareas de Sprint 1 y las cinco tareas de Sprint 2 están cerradas y
+  archivadas. El último doctor encontró cero problemas críticos y una
+  advertencia: el paquete de arranque supera 3500 tokens.
 - Las pruebas conjuntas de las superficies modificadas pasaron (47 tests,
   341 assertions); Pint pasó para los nueve archivos PHP revisados.
+- La regresión conjunta de Sprint 2 pasó (41 tests, 300 assertions) y Pint pasó
+  para los diez archivos PHP modificados del sprint.
 - `docker compose config --quiet` pasó con la anulación local; `app` y el
   `nginx-proxy` compartido comparten la red `proxy`.
 - Los servicios `app` y `db` están en ejecución; `http://localhost:8001` y
   `http://nanis.net` respondieron `HTTP 200`, este último por el proxy compartido.
 
 ## Pendiente
-- Resolver la presentación pendiente de GT-HU-033, implementarla y cerrarla;
-  después integrar Sprint 2 en `develop` y validar el sprint.
-- Completar las cinco historias con un commit por tarea; luego integrar la rama
-  a `develop` y validar el sprint.
+- Integrar la rama de Sprint 2 en `develop` y validar el estado final. La
+  integración aún no se publica.
 - Decidir cuándo incluir en un commit el cambio previo de
-  `project-app/README.md`; el override local está ignorado y no se publica.
+  `project-app/README.md`; se preserva fuera de los commits del sprint.

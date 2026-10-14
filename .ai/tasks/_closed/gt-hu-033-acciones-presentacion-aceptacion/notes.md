@@ -8,6 +8,7 @@ pasa a `handoff.md` o a un ADR — este archivo se archiva junto con la tarea.
 ## Hipótesis activas
 - Ambas acciones deben apuntar al recurso de la práctica del supervisor
   asignado, nunca a una carta de otra empresa.
+- La persona solicitante eligió botones separados para estas dos acciones.
 
 ## Evidencia recopilada
 - `PracticeTrackingSummary::acceptanceStage` actualmente ofrece una sola ruta

@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 class PracticeTrackingSummary
 {
     /**
-     * @return array<int, array{label: string, status: string, detail: string, responsible: string|null, route: string|null, action: string|null}>
+     * @return array<int, array{label: string, status: string, detail: string, responsible: string|null, route: string|null, action: string|null, actions: array<int, array{label: string, route: string}>}>
      */
     public function stages(PracticeRequest $request): array
     {
@@ -114,11 +114,25 @@ class PracticeTrackingSummary
         }
 
         if ($submission?->status === PracticeAcceptanceStatus::Returned) {
-            return $this->stage('Aceptación', 'Devuelta', 'El supervisor debe corregir y reenviar la carta.', UserRole::Supervisor, 'supervisor.practice-letters.index');
+            return $this->stage(
+                'Aceptación',
+                'Devuelta',
+                'El supervisor debe corregir y reenviar la carta.',
+                UserRole::Supervisor,
+                null,
+                actions: $this->supervisorAcceptanceActions($request),
+            );
         }
 
         return $request->status === PracticeRequestStatus::Approved
-            ? $this->stage('Aceptación', 'Pendiente', 'El supervisor debe cargar la carta de aceptación.', UserRole::Supervisor, 'supervisor.practice-letters.index')
+            ? $this->stage(
+                'Aceptación',
+                'Pendiente',
+                'El supervisor debe cargar la carta de aceptación.',
+                UserRole::Supervisor,
+                null,
+                actions: $this->supervisorAcceptanceActions($request),
+            )
             : $this->stage('Aceptación', 'Bloqueada', 'Pendiente de aprobación de la solicitud.', null, null);
     }
 
@@ -222,6 +236,25 @@ class PracticeTrackingSummary
         );
     }
 
+    private function supervisorAcceptanceActions(PracticeRequest $request): array
+    {
+        $letter = $request->letter;
+        if (! $letter) {
+            return [];
+        }
+
+        return [
+            [
+                'label' => 'Consultar carta de presentación',
+                'route' => route('supervisor.practice-letters.show', $letter),
+            ],
+            [
+                'label' => 'Cargar carta de aceptación',
+                'route' => route('supervisor.practice-acceptances.upload', $letter),
+            ],
+        ];
+    }
+
     private function stage(
         string $label,
         string $status,
@@ -230,6 +263,7 @@ class PracticeTrackingSummary
         ?string $route,
         array $parameters = [],
         ?int $responsibleId = null,
+        array $actions = [],
     ): array {
         $route = $route && Route::has($route) ? $route : null;
 
@@ -241,6 +275,7 @@ class PracticeTrackingSummary
             'responsible_id' => $responsibleId,
             'route' => $route ? route($route, $parameters) : null,
             'action' => $route ? $this->actionLabel($route, $status) : null,
+            'actions' => $actions,
         ];
     }
 

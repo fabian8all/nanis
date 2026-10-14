@@ -41,9 +41,10 @@ No editar fuera de esta lista sin actualizarla primero. Evita refactors oportuni
 - `project-app/tests/Feature/PracticeTrackingTest.php`
 - `project-app/tests/Feature/SupervisorPracticeAcceptanceTest.php`
 
-## Refinamiento pendiente
-Confirmar si las dos acciones se presentan como botones separados o dentro de
-un menú desplegable. No implementar la presentación hasta recibir esa decisión.
+## Refinamiento resuelto
+La persona solicitante eligió dos botones separados: `Consultar carta de
+presentación` y `Cargar carta de aceptación`. La carga solo aparece en los
+estados en los que el flujo existente permite subir o corregir el archivo.
 
 ## Contexto mínimo sugerido
 Según el tamaño declarado arriba, no cargues más de lo necesario:

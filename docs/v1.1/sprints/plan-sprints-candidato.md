@@ -12,8 +12,9 @@ sin requerir un cambio en la lógica de aplicación.
 Sprint 2 está iniciado en `sprint/2-navegacion-acciones-operativas`; sus cinco
 tareas Continuum están asignadas. GT-HU-028, GT-HU-031 y GT-HU-032 están
 implementadas y validadas. GT-HU-024 también está implementada y validada con
-la regla de estados confirmada. GT-HU-033 requiere resolver su presentación
-antes de implementarla.
+la regla de estados confirmada. Para GT-HU-033 se confirmó presentar sus
+acciones como dos botones separados. Las cinco historias están implementadas
+y validadas en la rama del sprint; falta integrarla en `develop`.
 **Base:** [backlog v1.1](../backlog/backlog-candidato.md).
 
 ## Criterios de organización
