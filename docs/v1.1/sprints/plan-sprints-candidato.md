@@ -22,6 +22,11 @@ punto del expediente y mostrar una insignia de estado por documento.
 GT-HU-026, GT-HU-035 y GT-HU-036 están implementadas, validadas y sus tareas
 cerradas. Sprint 3 se integró en `develop` mediante el merge `c367237`; su
 publicación en `origin/develop` forma parte del cierre.
+Sprint 4 se completó en `sprint/4-catalogo-administracion-empresas`; GT-HU-029
+se asignó a `frontend` y GT-HU-030 a `backend`. Ambas historias están
+implementadas, validadas y con sus tareas cerradas. Falta integrar el sprint
+en `develop`. Se decidió buscar solo empresas disponibles, conservando las
+ocultas en la lista sin filtro para reactivarlas.
 **Base:** [backlog v1.1](../backlog/backlog-candidato.md).
 
 ## Criterios de organización
@@ -108,7 +113,9 @@ flujo de creación/edición de GT-HU-029.
 se abre en contexto de creación/edición y la búsqueda/paginación no cambia
 estados ni asociaciones.
 
-**Refinamiento requerido:** decidir si la búsqueda incluye empresas ocultas.
+**Refinamiento resuelto:** la búsqueda solo filtra empresas disponibles
+(`is_active = true`). Sin texto de búsqueda, la lista conserva empresas
+disponibles y ocultas para que Coordinación pueda reactivarlas.
 
 ### Sprint 5 — Experiencia transversal de listas
 
@@ -144,6 +151,7 @@ orquestador al rol/agente adecuado. Para Sprint 1 ya se crearon la rama y las
 tareas de GT-HU-022, GT-HU-023, GT-HU-025, GT-HU-027 y GT-HU-034. Las tareas de
 Sprint 2 se crearon al iniciar la rama `sprint/2-navegacion-acciones-operativas`;
 las tres tareas de Sprint 3 se crearon al iniciar
-`sprint/3-expediente-versiones-revision-reporte`. Las de Sprints 4–5 se crearán
-al iniciar cada uno. Las ramas de Sprints 1–3 permanecen disponibles y están
-integradas en `develop`.
+`sprint/3-expediente-versiones-revision-reporte`; las dos tareas de Sprint 4
+se crearon al iniciar `sprint/4-catalogo-administracion-empresas`. Las de
+Sprint 5 se crearán al iniciar ese sprint. Las ramas de Sprints 1–3 permanecen
+disponibles y están integradas en `develop`.

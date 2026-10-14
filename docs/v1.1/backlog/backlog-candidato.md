@@ -320,8 +320,9 @@ por páginas para gestionar catálogos extensos.
 
 **Dependencias:** catálogo de Coordinación (`GT-HU-015`, `GT-HU-029`).
 
-**Pregunta abierta:** confirmar si la búsqueda debe incluir empresas ocultas
-además de las disponibles.
+**Refinamiento resuelto:** la búsqueda incluye solo empresas disponibles
+(`is_active = true`). Sin una búsqueda activa, el catálogo conserva también
+las empresas ocultas para que Coordinación pueda reactivarlas.
 
 ## Épica GT-EP-09 — Revisión del reporte final por Tutor
 

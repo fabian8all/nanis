@@ -1,8 +1,9 @@
 # Pendientes
 
-- Al 2026-10-14, el checkout principal `~/code/nanis` trabaja en `develop`;
-  el merge de Sprint 3 es `c367237` y se publica a `origin/develop` durante el
-  cierre. `main` permanece en
+- Al 2026-10-14, el checkout principal `~/code/nanis` trabaja en
+  `sprint/4-catalogo-administracion-empresas`, creada desde `develop`.
+  Sprint 3 (`c367237`) y su cierre documental están publicados en
+  `origin/develop` hasta `76a3896`. `main` permanece en
   `cb5365d` con el cierre de v1.0. Sprint 5 y el cierre v1.0 son ancestros de
   `develop`. La persona solicitante aprobó el backlog
   v1.1 como base de planificación y la secuencia de cinco sprints; v1.1 aún no
@@ -18,6 +19,12 @@
   Continuum están archivadas.
   Para GT-HU-026 se confirmó que el tercer punto del expediente sea Plan de
   trabajo y que cada documento tenga una insignia de estado según su flujo.
+- Sprint 4 está implementado y validado; las tareas GT-HU-029 (`frontend`) y
+  GT-HU-030 (`backend`) están archivadas. Falta integrar la rama en `develop`
+  y publicarla en `origin/develop`. La
+  búsqueda se refinó para mostrar solo empresas disponibles, conservando las
+  ocultas en la lista sin filtro para permitir su reactivación. Se trabajaron
+  en serie. La regresión conjunta pasó con 13 tests y 83 assertions.
 - El catálogo muestra nombre, dirección, teléfono, email y persona de contacto; Coordinación da altas/bajas manualmente. La baja oculta a la empresa en nuevas solicitudes, pero conserva referencias existentes y no afecta prácticas iniciadas.
 - Conciliar canales del prototipo frente a Drive/correo/Classroom/papel descritos en el procedimiento institucional 2025.
 - HU-006, HU-007, HU-016 y HU-017 están implementadas y desplegadas en Sprint 4. La rúbrica de Tutor publicada en desarrollo es temporal/ficticia para demostración; falta que Coordinación publique las rúbricas institucionales. La rúbrica Supervisor continúa como borrador, por lo que HU-006 no inicia aún en demo. La práctica sintética recorre aceptación, plan y reporte aprobados.
