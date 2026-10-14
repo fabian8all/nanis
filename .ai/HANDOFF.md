@@ -3,8 +3,7 @@
 **Fecha:** 2026-10-14 · **Rol:** gestion-proyecto · **Rama:** `develop`
 
 ## Objetivo
-Cerrar Sprint 2 de v1.1, integrar sus historias validadas en `develop` y
-registrar las decisiones de refinamiento.
+Cerrar Sprint 2 de v1.1 y preparar el refinamiento de Sprint 3.
 
 ## Estado
 - El checkout sigue dentro de `~/code/nanis`; la rama activa es `develop`.
@@ -72,8 +71,8 @@ registrar las decisiones de refinamiento.
   ejecutándolas en paralelo.
 - `main` y `origin/main` permanecen en `cb5365d`, con el cierre de v1.0.
   Sprint 5 (`a11bd76`) y el cierre v1.0 son ancestros de `develop`.
-- `origin/develop` permanece en `d1cc268`; el merge de Sprint 2 está solo en
-  el `develop` local y no se ha publicado.
+- `origin/develop` incluye `848161f`; el merge de Sprint 2 y su cierre
+  documental están publicados.
 - La fuente original `docs/v1.1/Planeacion/Modificaciones.txt` se conserva junto
   con su versión formateada `modificaciones.md`.
 - Se actualizaron 171 referencias en 52 documentos de tareas archivadas para
@@ -104,9 +103,8 @@ registrar las decisiones de refinamiento.
   ya no aparecen en `.ai/tasks`; existen los directorios destino de v1.0.
 - Las 171 referencias actualizadas resuelven a rutas existentes; `git diff
   --check` pasó usando `core.whitespace=cr-at-eol` para respetar CRLF.
-- Los cinco commits de Sprint 1, su merge y cierre documental están publicados
-  en `origin/develop`. Los cinco commits de Sprint 2 y su merge local aún no
-  se publican.
+- Los commits de Sprint 1 y Sprint 2, sus merges y cierres documentales están
+  publicados en `origin/develop`.
 - La propuesta asigna las 17 historias una vez, sus enlaces resuelven y no fija
   calendario, duración, estimaciones ni capacidad.
 - Las cinco tareas de Sprint 1 existen, cada una identifica su HU, criterios,
@@ -124,7 +122,7 @@ registrar las decisiones de refinamiento.
   `http://nanis.net` respondieron `HTTP 200`, este último por el proxy compartido.
 
 ## Pendiente
-- La integración de Sprint 2 en `develop` ya está validada pero no publicada.
-  `develop` se mantiene localmente adelantada respecto a `origin/develop`.
+- Antes de iniciar Sprint 3, acordar qué comprende “requisitos de cierre” en
+  GT-HU-026 y si se presenta como sección o como documentos individuales.
 - Decidir cuándo incluir en un commit el cambio previo de
   `project-app/README.md`; se preserva fuera de los commits del sprint.

@@ -1,9 +1,9 @@
 # Pendientes
 
 - Al 2026-10-14, el checkout principal `~/code/nanis` trabaja en `develop`,
-  con commits documentales locales por delante de `origin/develop` (`64925ed`);
-  `main` permanece en `cb5365d` con el cierre de v1.0. Sprint 5 y el cierre
-  v1.0 son ancestros de `develop`. La persona solicitante aprobó el backlog
+  sincronizado con `origin/develop` en `848161f`; `main` permanece en
+  `cb5365d` con el cierre de v1.0. Sprint 5 y el cierre v1.0 son ancestros de
+  `develop`. La persona solicitante aprobó el backlog
   v1.1 como base de planificación y la secuencia de cinco sprints; v1.1 aún no
   se ha integrado a `main`.
 - La fuente original de solicitudes para v1.1 se conserva en

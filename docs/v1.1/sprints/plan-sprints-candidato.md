@@ -13,7 +13,8 @@ Sprint 2 se completó en `sprint/2-navegacion-acciones-operativas`; sus cinco
 tareas Continuum están cerradas. Las cinco historias están implementadas,
 validadas e integradas en `develop` mediante el merge local `d90ae3a`. Para
 GT-HU-024 se confirmó la matriz de estados y para GT-HU-033 se eligieron
-botones separados. El merge de Sprint 2 aún no se publica.
+botones separados. El merge `d90ae3a` y el cierre documental están publicados
+en `origin/develop`.
 **Base:** [backlog v1.1](../backlog/backlog-candidato.md).
 
 ## Criterios de organización
