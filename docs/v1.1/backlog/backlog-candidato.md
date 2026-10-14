@@ -64,8 +64,11 @@ continuar el trámite sin buscar manualmente su siguiente etapa.
 **Dependencias:** autenticación institucional y flujo/estados de solicitud v1.0
 (`GT-HU-019`, `GT-HU-001`, `GT-HU-010`).
 
-**Pregunta abierta:** definir el destino para solicitudes devueltas, rechazadas
-si se llegara a permitir ese estado, canceladas y prácticas ya completadas.
+**Refinamiento confirmado:** sin solicitud el alumno va al catálogo; con una
+solicitud devuelta va al formulario de corrección; con estado pendiente,
+aprobado o completado va a Seguimiento. El enum actual no incluye estados
+cancelado ni rechazado; si se agregan en el futuro, se definirá su destino en
+ese momento.
 
 ### GT-HU-024 — Consultar empresas sin duplicar una solicitud en trámite
 
@@ -408,8 +411,9 @@ las bandejas/listas principales de registros.
 
 ## Preguntas para revisión con Coordinación y la persona solicitante
 
-1. ¿Qué estados de solicitud/práctica deben llevar al Alumno a Seguimiento y
-   cuáles permiten volver a seleccionar empresa?
+1. Para GT-HU-023 ya se confirmaron los destinos para los estados existentes.
+   Para GT-HU-024 falta confirmar qué estados permiten volver a seleccionar
+   empresa, además de la solicitud devuelta.
 2. ¿Qué secciones y documentos exactos forman los “requisitos de cierre” del
    expediente?
 3. ¿La búsqueda del catálogo debe incluir empresas ocultas?

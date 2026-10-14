@@ -2,7 +2,13 @@
 
 **Estado:** secuencia aprobada por la persona solicitante el 2026-10-14. Las
 preguntas abiertas del backlog se conservan como puntos de refinamiento antes
-de comprometer cada sprint.
+de comprometer cada sprint. El Sprint 1 está iniciado en la rama
+`sprint/1-acceso-confiable-destinos-rol`; se crearon sus cinco tareas
+Continuum, asignadas a los roles `frontend` y `backend`. GT-HU-023 queda
+refinada, implementada y validada para los estados actuales. GT-HU-022 está
+implementada y validada; GT-HU-025 fue verificada y quedó cubierta por pruebas
+de acceso y aislamiento sin requerir un cambio en la lógica de aplicación.
+GT-HU-027 y GT-HU-034 están implementadas y validadas.
 **Base:** [backlog v1.1](../backlog/backlog-candidato.md).
 
 ## Criterios de organización
@@ -39,10 +45,11 @@ consulta de cartas de v1.0 (`GT-HU-001`, `GT-HU-002`, `GT-HU-003`,
 **Salida:** el alumno, Coordinación y Supervisor pueden continuar el flujo por
 rutas válidas; se preserva el aislamiento de solicitudes y expedientes.
 
-**Refinamiento requerido:** para GT-HU-023, acordar el destino en estados
-devuelto, cancelado o completado y cuándo puede elegirse otra empresa. Cubrir
-acceso permitido y denegado para GT-HU-025 y destinos de retorno seguros para
-GT-HU-034.
+**Refinamiento resuelto:** sin solicitud, el alumno va al catálogo; con una
+solicitud devuelta, al formulario de corrección; con estado pendiente, aprobado
+o completado, a Seguimiento. Los estados cancelado y rechazado no existen en el
+enum actual y quedan fuera de esta historia. La pregunta sobre cuándo puede
+elegirse otra empresa queda para GT-HU-024.
 
 ### Sprint 2 — Navegación y acciones operativas por rol
 
@@ -114,6 +121,9 @@ de implementar.
 | 4 | GT-HU-029, GT-HU-030 |
 | 5 | GT-HU-037, GT-HU-038 |
 
-Las 17 historias del backlog aparecen exactamente una vez. Esta organización
-no crea ramas ni tareas de implementación; al iniciar cada sprint se crearán
-las tareas Continuum por historia y la rama correspondiente desde `develop`.
+Las 17 historias del backlog aparecen exactamente una vez. No se fijan fechas,
+duración, estimaciones, capacidad ni velocidad. Al iniciar cada sprint se crea
+su rama desde `develop` y una tarea Continuum por historia, asignada por el
+orquestador al rol/agente adecuado. Para Sprint 1 ya se crearon la rama y las
+tareas de GT-HU-022, GT-HU-023, GT-HU-025, GT-HU-027 y GT-HU-034. Las tareas de
+los Sprints 2–5 se crearán cuando se inicie cada uno.

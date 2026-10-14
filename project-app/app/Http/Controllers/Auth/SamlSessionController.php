@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Enums\UserRole;
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use App\Services\Saml\InvalidSamlIdentityException;
 use App\Services\Saml\SamlAuthenticationException;
 use App\Services\Saml\SamlAuthService;
 use App\Services\Saml\SamlConfigurationException;
 use App\Services\Saml\SamlUserProvisioner;
+use App\Services\StudentPracticeDestination;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -31,6 +34,7 @@ class SamlSessionController extends Controller
         Request $request,
         SamlAuthService $saml,
         SamlUserProvisioner $provisioner,
+        StudentPracticeDestination $studentPracticeDestination,
     ): RedirectResponse {
         try {
             $attributes = $saml->consumeResponse($request->input('RelayState'));
@@ -52,7 +56,7 @@ class SamlSessionController extends Controller
         Auth::login($user);
         $request->session()->regenerate();
 
-        return redirect()->intended(route('home'));
+        return $this->redirectAfterAuthentication($request, $user, $studentPracticeDestination);
     }
 
     public function metadata(SamlAuthService $saml): Response
@@ -68,8 +72,11 @@ class SamlSessionController extends Controller
         ]);
     }
 
-    public function simulate(Request $request, SamlUserProvisioner $provisioner): RedirectResponse
-    {
+    public function simulate(
+        Request $request,
+        SamlUserProvisioner $provisioner,
+        StudentPracticeDestination $studentPracticeDestination,
+    ): RedirectResponse {
         abort_unless(
             app()->environment(['local', 'testing']) && config('services.saml2.simulator_enabled'),
             404,
@@ -96,6 +103,20 @@ class SamlSessionController extends Controller
 
         Auth::login($user);
         $request->session()->regenerate();
+
+        return $this->redirectAfterAuthentication($request, $user, $studentPracticeDestination);
+    }
+
+    private function redirectAfterAuthentication(
+        Request $request,
+        User $user,
+        StudentPracticeDestination $studentPracticeDestination,
+    ): RedirectResponse {
+        if ($user->role === UserRole::Student) {
+            $request->session()->forget('url.intended');
+
+            return redirect()->route($studentPracticeDestination->routeFor($user));
+        }
 
         return redirect()->intended(route('home'));
     }

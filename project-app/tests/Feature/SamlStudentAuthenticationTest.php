@@ -2,9 +2,13 @@
 
 namespace Tests\Feature;
 
+use App\Enums\PracticeRequestStatus;
 use App\Enums\UserRole;
+use App\Models\Company;
+use App\Models\PracticeRequest;
 use App\Models\User;
 use App\Services\Saml\InvalidSamlIdentityException;
+use App\Services\Saml\SamlAuthService;
 use App\Services\Saml\SamlUserProvisioner;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Cache;
@@ -25,7 +29,7 @@ class SamlStudentAuthenticationTest extends TestCase
         ]);
 
         $this->get(route('auth.saml.simulate'))
-            ->assertRedirect(route('home'));
+            ->assertRedirect(route('alumno.companies.index'));
 
         $user = User::query()->where('email', 'alumno@example.test')->firstOrFail();
 
@@ -60,9 +64,61 @@ class SamlStudentAuthenticationTest extends TestCase
         $this->app->instance(SamlUserProvisioner::class, $provisioner);
 
         $this->get(route('auth.saml.simulate'))
-            ->assertRedirect(route('home'));
+            ->assertRedirect(route('alumno.companies.index'));
 
         $this->assertAuthenticatedAs($user);
+    }
+
+    public function test_simulator_routes_by_current_request_status_and_ignores_stale_intended_url(): void
+    {
+        $student = User::factory()->create(['role' => UserRole::Student]);
+        config([
+            'services.saml2.simulator_enabled' => true,
+            'services.saml2.simulator_email' => $student->email,
+        ]);
+        $request = $this->createPracticeRequest($student, PracticeRequestStatus::Pending);
+
+        $this->withSession(['url.intended' => route('alumno.companies.index')])
+            ->get(route('auth.saml.simulate'))
+            ->assertRedirect(route('alumno.practice-tracking.index'))
+            ->assertSessionMissing('url.intended');
+
+        $request->update(['status' => PracticeRequestStatus::Returned]);
+        $this->withSession(['url.intended' => route('alumno.practice-tracking.index')])
+            ->get(route('auth.saml.simulate'))
+            ->assertRedirect(route('alumno.practice-request.show'))
+            ->assertSessionMissing('url.intended');
+
+        $request->update(['status' => PracticeRequestStatus::Completed]);
+        $this->withSession(['url.intended' => route('alumno.companies.index')])
+            ->get(route('auth.saml.simulate'))
+            ->assertRedirect(route('alumno.practice-tracking.index'))
+            ->assertSessionMissing('url.intended');
+    }
+
+    public function test_acs_routes_authenticated_students_by_their_current_practice_state(): void
+    {
+        $student = User::factory()->create(['role' => UserRole::Student]);
+        $this->createPracticeRequest($student, PracticeRequestStatus::Approved);
+        $saml = \Mockery::mock(SamlAuthService::class);
+        $saml->shouldReceive('consumeResponse')
+            ->once()
+            ->with('relay-state')
+            ->andReturn(['uCorreo' => [$student->email]]);
+        $this->app->instance(SamlAuthService::class, $saml);
+        $provisioner = \Mockery::mock(SamlUserProvisioner::class);
+        $provisioner->shouldReceive('authenticateOrCreate')
+            ->once()
+            ->andReturn($student);
+        $this->app->instance(SamlUserProvisioner::class, $provisioner);
+
+        $this->withSession(['url.intended' => route('alumno.companies.index')])
+            ->post(route('auth.saml.acs'), [
+                'RelayState' => 'relay-state',
+                'SAMLResponse' => 'valid-in-this-test',
+            ])
+            ->assertRedirect(route('alumno.practice-tracking.index'))
+            ->assertSessionMissing('url.intended');
     }
 
     public function test_simulator_reuses_an_existing_account_without_changing_its_role(): void
@@ -96,14 +152,27 @@ class SamlStudentAuthenticationTest extends TestCase
         $this->get(route('auth.saml.simulate'))->assertNotFound();
     }
 
-    public function test_login_page_shows_the_simulator_when_enabled_in_development_environments(): void
+    public function test_login_page_shows_the_simulator_below_local_sign_in_when_enabled(): void
     {
         config(['services.saml2.simulator_enabled' => true]);
 
         $this->get(route('login'))
             ->assertOk()
-            ->assertSee('Acceder como alumno de prueba')
+            ->assertSeeInOrder(['Iniciar sesión', 'Acceso federado UCOL'])
             ->assertSee(route('auth.saml.simulate'));
+    }
+
+    public function test_login_page_shows_the_federated_login_below_local_sign_in_when_enabled(): void
+    {
+        config([
+            'services.saml2.simulator_enabled' => false,
+            'services.saml2.enabled' => true,
+        ]);
+
+        $this->get(route('login'))
+            ->assertOk()
+            ->assertSeeInOrder(['Iniciar sesión', 'Acceso federado UCOL'])
+            ->assertSee(route('auth.saml.login'));
     }
 
     public function test_saml_login_reports_missing_identity_provider_configuration(): void
@@ -193,5 +262,25 @@ class SamlStudentAuthenticationTest extends TestCase
             ->assertOk()
             ->assertHeader('Content-Type', 'application/samlmetadata+xml')
             ->assertSee('<md:EntityDescriptor', false);
+    }
+
+    private function createPracticeRequest(User $student, PracticeRequestStatus $status): PracticeRequest
+    {
+        $company = Company::query()->create(['name' => 'Hotel '.$student->id]);
+
+        return $student->practiceRequests()->create([
+            'company_id' => $company->id,
+            'ucol_email' => $student->email,
+            'nss' => '00000000000',
+            'account_number' => '00000000',
+            'grade_group' => '8A',
+            'start_date' => '2026-11-01',
+            'practice_location' => 'Colima',
+            'letter_recipient' => 'Dirección',
+            'position' => 'Auxiliar',
+            'end_date' => '2027-01-31',
+            'status' => $status,
+            'non_responsiva_accepted_at' => now(),
+        ]);
     }
 }

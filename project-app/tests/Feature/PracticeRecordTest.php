@@ -205,6 +205,9 @@ class PracticeRecordTest extends TestCase
             ->assertSee(route('tutor.practice-acceptances.file', $acceptance))
             ->assertSee(route('practice-termination-letters.print', $issuance))
             ->assertSee(route('tutor.practice-supervisor-evaluations.show', $supervisorEvaluation));
+        $this->get(route('tutor.practice-letters.show', $request->letter))
+            ->assertOk()
+            ->assertSee('href="'.route('tutor.practice-records.show', $request).'"', false);
         $this->get(route('tutor.practice-acceptances.file', $acceptance))->assertOk();
     }
 

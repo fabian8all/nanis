@@ -72,7 +72,7 @@ class Show extends Component
                 .'-'.substr($letter->practiceRequest->account_number, 4),
             'printButtonText' => 'Imprimir carta para consulta',
             'returnUrl' => auth()->user()->role === UserRole::Supervisor
-                ? route('supervisor.practice-records.show', $letter->practiceRequest)
+                ? route('supervisor.practice-tracking.index')
                 : route('tutor.practice-records.show', $letter->practiceRequest),
             'uploadUrl' => $canUploadAcceptance
                 ? route('supervisor.practice-acceptances.upload', $letter)

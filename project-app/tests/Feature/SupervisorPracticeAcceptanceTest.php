@@ -37,7 +37,8 @@ class SupervisorPracticeAcceptanceTest extends TestCase
             ->assertOk()
             ->assertSee('00000000000')
             ->assertSee('0000-0000')
-            ->assertSee('Cargar carta de aceptación');
+            ->assertSee('Cargar carta de aceptación')
+            ->assertSee('href="'.route('supervisor.practice-tracking.index').'"', false);
 
         $this->get(route('supervisor.practice-letters.show', $otherLetter))
             ->assertNotFound();
