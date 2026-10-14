@@ -232,8 +232,8 @@ la carta de aceptación desde la práctica correspondiente.
 **Dependencias:** seguimiento, cartas y carga de aceptación (`GT-HU-004`,
 `GT-HU-010`).
 
-**Pregunta abierta:** confirmar si las acciones aparecen como botones separados
-o en un menú desplegable.
+**Refinamiento resuelto:** las acciones aparecen como dos botones separados:
+`Consultar carta de presentación` y `Cargar carta de aceptación`.
 
 ### GT-HU-034 — Regresar a Seguimiento después de consultar la presentación
 

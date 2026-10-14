@@ -29,6 +29,7 @@ No editar fuera de esta lista sin actualizarla primero. Evita refactors oportuni
 - `project-app/resources/views/livewire/practice-tracking/index.blade.php`
 - `project-app/tests/Feature/PracticeTrackingTest.php`
 - `project-app/tests/Feature/SupervisorPracticeAcceptanceTest.php`
+- `docs/v1.1/backlog/backlog-candidato.md`
 - `.ai/tasks/gt-hu-033-acciones-presentacion-aceptacion/**`
 - `.ai/HANDOFF.md`
 

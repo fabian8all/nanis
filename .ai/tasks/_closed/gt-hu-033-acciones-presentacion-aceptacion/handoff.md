@@ -22,6 +22,7 @@ presentación` y `Cargar carta de aceptación`.
 - `project-app/resources/views/livewire/practice-tracking/index.blade.php`
 - `project-app/tests/Feature/PracticeTrackingTest.php`
 - `project-app/tests/Feature/SupervisorPracticeAcceptanceTest.php`
+- `docs/v1.1/backlog/backlog-candidato.md`
 
 ## Validación
 - `docker compose exec -T app php artisan test --filter='PracticeTrackingTest|SupervisorPracticeAcceptanceTest'` — 12 tests, 110 assertions.

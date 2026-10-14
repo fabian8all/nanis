@@ -1,15 +1,15 @@
 # Handoff
 
-**Fecha:** 2026-10-14 · **Rol:** gestion-proyecto · **Rama:** `sprint/2-navegacion-acciones-operativas`
+**Fecha:** 2026-10-14 · **Rol:** gestion-proyecto · **Rama:** `develop`
 
 ## Objetivo
-Iniciar Sprint 2 de v1.1 desde `develop`, con una tarea Continuum por historia
-asignada por el orquestador.
+Cerrar Sprint 2 de v1.1, integrar sus historias validadas en `develop` y
+registrar las decisiones de refinamiento.
 
 ## Estado
-- El checkout sigue dentro de `~/code/nanis`; la rama activa es
-  `sprint/2-navegacion-acciones-operativas`, creada desde el `develop`
-  sincronizado con `origin/develop` en `d1cc268`.
+- El checkout sigue dentro de `~/code/nanis`; la rama activa es `develop`.
+  Sprint 2 se integró desde `sprint/2-navegacion-acciones-operativas` mediante
+  el merge local `d90ae3a`.
 - Sprint 1 se integró en `develop` mediante el merge `b345549`; el cierre
   documental `d1cc268` y los cambios de Sprint 1 se publicaron en `origin`.
 - El backlog v1.1 contiene 17 historias (`GT-HU-022`–`GT-HU-038`), aprobado
@@ -72,8 +72,8 @@ asignada por el orquestador.
   ejecutándolas en paralelo.
 - `main` y `origin/main` permanecen en `cb5365d`, con el cierre de v1.0.
   Sprint 5 (`a11bd76`) y el cierre v1.0 son ancestros de `develop`.
-- `origin/develop` está sincronizado hasta `d1cc268`. La rama de Sprint 2 aún
-  no se ha publicado.
+- `origin/develop` permanece en `d1cc268`; el merge de Sprint 2 está solo en
+  el `develop` local y no se ha publicado.
 - La fuente original `docs/v1.1/Planeacion/Modificaciones.txt` se conserva junto
   con su versión formateada `modificaciones.md`.
 - Se actualizaron 171 referencias en 52 documentos de tareas archivadas para
@@ -87,8 +87,8 @@ asignada por el orquestador.
   `standalone`. El stack está iniciado: `app` y `db` están activos y la base
   figura saludable; el proxy propio del proyecto no está iniciado.
 - `project-app/README.md` documenta el uso del proxy compartido y los puertos
-  locales. Este cambio previo sigue pendiente de commit; se preservó al
-  integrar Sprint 1 y no forma parte del merge.
+  locales. Este cambio previo sigue pendiente de commit; se preservó durante
+  ambos sprints y no forma parte de sus commits.
 
 ## Worktrees y limpieza
 - Git registra únicamente `~/code/nanis` como worktree.
@@ -104,8 +104,9 @@ asignada por el orquestador.
   ya no aparecen en `.ai/tasks`; existen los directorios destino de v1.0.
 - Las 171 referencias actualizadas resuelven a rutas existentes; `git diff
   --check` pasó usando `core.whitespace=cr-at-eol` para respetar CRLF.
-- Los cinco commits de historia, el merge de Sprint 1 y el cierre documental
-  están publicados en `origin/develop`.
+- Los cinco commits de Sprint 1, su merge y cierre documental están publicados
+  en `origin/develop`. Los cinco commits de Sprint 2 y su merge local aún no
+  se publican.
 - La propuesta asigna las 17 historias una vez, sus enlaces resuelven y no fija
   calendario, duración, estimaciones ni capacidad.
 - Las cinco tareas de Sprint 1 existen, cada una identifica su HU, criterios,
@@ -123,7 +124,7 @@ asignada por el orquestador.
   `http://nanis.net` respondieron `HTTP 200`, este último por el proxy compartido.
 
 ## Pendiente
-- Integrar la rama de Sprint 2 en `develop` y validar el estado final. La
-  integración aún no se publica.
+- La integración de Sprint 2 en `develop` ya está validada pero no publicada.
+  `develop` se mantiene localmente adelantada respecto a `origin/develop`.
 - Decidir cuándo incluir en un commit el cambio previo de
   `project-app/README.md`; se preserva fuera de los commits del sprint.
