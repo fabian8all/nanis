@@ -19,8 +19,8 @@ Sprint 3 se inició en `sprint/3-expediente-versiones-revision-reporte` desde
 `develop`; sus tres tareas Continuum están creadas y asignadas. Para GT-HU-026
 se confirmó sustituir “requisitos de cierre” por “Plan de trabajo” como tercer
 punto del expediente y mostrar una insignia de estado por documento.
-GT-HU-026 y GT-HU-035 están implementadas, validadas y sus tareas cerradas;
-GT-HU-036 sigue en ejecución.
+GT-HU-026, GT-HU-035 y GT-HU-036 están implementadas, validadas y sus tareas
+cerradas. La rama del Sprint 3 está lista para integrarse en `develop`.
 **Base:** [backlog v1.1](../backlog/backlog-candidato.md).
 
 ## Criterios de organización

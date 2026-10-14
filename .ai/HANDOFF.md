@@ -75,8 +75,9 @@ Completar Sprint 3 de v1.1 con los refinamientos confirmados.
 - GT-HU-035 centralizó las etiquetas en español para los estados de versiones
   de aceptación, plan y reporte. Se validó y su tarea Continuum está cerrada y
   archivada; la etiqueta solo cambia la presentación.
-- GT-HU-036 mantiene una tarea Continuum activa; falta validar y cerrar su
-  interfaz de observaciones por sección.
+- GT-HU-036 implementó observaciones por sección inicialmente ocultas con
+  controles accesibles; el comentario general sigue visible y obligatorio al
+  devolver. La tarea Continuum quedó cerrada y archivada.
 - Las tareas del sprint se trabajan en serie dentro de este único checkout;
   no se crearon worktrees ni se inició ejecución paralela.
 - Las ramas y tareas de Sprints 4–5 se crearán al iniciar cada sprint.
@@ -136,7 +137,7 @@ Completar Sprint 3 de v1.1 con los refinamientos confirmados.
   `http://nanis.net` respondieron `HTTP 200`, este último por el proxy compartido.
 
 ## Pendiente
-- Completar en serie las tres tareas activas de Sprint 3; cerrar e integrar el
-  sprint en `develop` solo tras validar las tres historias.
+- Las tres historias de Sprint 3 están validadas y cerradas. Falta integrar la
+  rama en `develop`, actualizar la continuidad y publicar el merge.
 - Decidir cuándo incluir en un commit el cambio previo de
   `project-app/README.md`; se preserva fuera de los commits del sprint.
