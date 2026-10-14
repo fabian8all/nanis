@@ -1,14 +1,17 @@
 # Handoff
 
-**Fecha:** 2026-10-14 · **Rol:** gestion-proyecto · **Rama:** `develop`
+**Fecha:** 2026-10-14 · **Rol:** gestion-proyecto · **Rama:** `sprint/2-navegacion-acciones-operativas`
 
 ## Objetivo
-Cerrar Sprint 1 de v1.1 e integrar sus historias validadas en `develop`.
+Iniciar Sprint 2 de v1.1 desde `develop`, con una tarea Continuum por historia
+asignada por el orquestador.
 
 ## Estado
-- El checkout sigue dentro de `~/code/nanis`; la rama activa es `develop`.
-  Sprint 1 se integró desde `sprint/1-acceso-confiable-destinos-rol` mediante
-  el merge `b345549`.
+- El checkout sigue dentro de `~/code/nanis`; la rama activa es
+  `sprint/2-navegacion-acciones-operativas`, creada desde el `develop`
+  sincronizado con `origin/develop` en `d1cc268`.
+- Sprint 1 se integró en `develop` mediante el merge `b345549`; el cierre
+  documental `d1cc268` y los cambios de Sprint 1 se publicaron en `origin`.
 - El backlog v1.1 contiene 17 historias (`GT-HU-022`–`GT-HU-038`), aprobado
   como base de planificación por la persona solicitante el 2026-10-14.
 - La tarea `.ai/tasks/_closed/planificacion-sprints-v1-1/` cerró la secuencia
@@ -36,13 +39,41 @@ Cerrar Sprint 1 de v1.1 e integrar sus historias validadas en `develop`.
   `url.intended` para el alumno. Los estados cancelado y rechazado no existen
   en el enum y quedan fuera de esta historia. La tarea se cerró y archivó en
   `.ai/tasks/_closed/gt-hu-023-destino-alumno-estado-practica/`.
-- Las ramas y tareas de Sprints 2–5 se crearán al iniciar cada sprint.
+- Sprint 2 incluye GT-HU-024, GT-HU-028, GT-HU-031, GT-HU-032 y GT-HU-033.
+  Se creó y asignó una tarea Continuum por HU: GT-HU-024 a `backend`; las demás
+  a `frontend`, según el alcance de cada historia.
+- GT-HU-028 quedó implementada y validada: Coordinación tiene acceso visible
+  al catálogo y un menú Documentos con las rutas existentes; Rúbricas conserva
+  su enlace operativo. Su tarea se cerró y archivó en
+  `.ai/tasks/_closed/gt-hu-028-navegacion-coordinacion/`.
+- GT-HU-031 cambió los botones genéricos de Seguimiento por acciones que
+  describen el destino, incluida la revisión y corrección de solicitudes. Su
+  tarea se cerró y archivó en
+  `.ai/tasks/_closed/gt-hu-031-rotulos-acciones-seguimiento/`.
+- GT-HU-032 agrupó Cartas pendientes, Planes de trabajo, Evaluaciones y
+  Encuestas en la navegación del Supervisor con sus rutas existentes. Su
+  tarea se cerró y archivó en
+  `.ai/tasks/_closed/gt-hu-032-documentos-supervisor/`.
+- GT-HU-024 quedó implementada con la regla confirmada: solo sin solicitud o
+  con solicitud `Devuelta` se puede seleccionar; `Pendiente`, `Aprobada` y
+  `Completada` bloquean. Una nueva selección en estado devuelto actualiza esa
+  misma solicitud. La tarea se cerró y archivó en
+  `.ai/tasks/_closed/gt-hu-024-catalogo-sin-seleccion-en-tramite/`.
+- Para GT-HU-033, la persona solicitante eligió dos botones separados para
+  consultar la presentación y cargar la aceptación. Se implementaron en la
+  etapa de aceptación con los alcances existentes por Supervisor/empresa. Su
+  tarea se cerró y archivó en
+  `.ai/tasks/_closed/gt-hu-033-acciones-presentacion-aceptacion/`.
+- Las tareas del sprint se trabajan en serie dentro de este único checkout;
+  no se crearon worktrees ni se inició ejecución paralela.
+- Las ramas y tareas de Sprints 3–5 se crearán al iniciar cada sprint.
 - No se crearon worktrees adicionales: por la decisión de mantener el trabajo
   en este checkout, las cinco historias se atenderán en serie; no hay agentes
   ejecutándolas en paralelo.
 - `main` y `origin/main` permanecen en `cb5365d`, con el cierre de v1.0.
   Sprint 5 (`a11bd76`) y el cierre v1.0 son ancestros de `develop`.
-- `develop` contiene commits locales pendientes de publicar; no se hizo push.
+- `origin/develop` está sincronizado hasta `d1cc268`. La rama de Sprint 2 aún
+  no se ha publicado.
 - La fuente original `docs/v1.1/Planeacion/Modificaciones.txt` se conserva junto
   con su versión formateada `modificaciones.md`.
 - Se actualizaron 171 referencias en 52 documentos de tareas archivadas para
@@ -73,27 +104,26 @@ Cerrar Sprint 1 de v1.1 e integrar sus historias validadas en `develop`.
   ya no aparecen en `.ai/tasks`; existen los directorios destino de v1.0.
 - Las 171 referencias actualizadas resuelven a rutas existentes; `git diff
   --check` pasó usando `core.whitespace=cr-at-eol` para respetar CRLF.
-- Los cinco commits de historia y el merge del sprint están en el `develop`
-  local; no se publicaron.
+- Los cinco commits de historia, el merge de Sprint 1 y el cierre documental
+  están publicados en `origin/develop`.
 - La propuesta asigna las 17 historias una vez, sus enlaces resuelven y no fija
   calendario, duración, estimaciones ni capacidad.
 - Las cinco tareas de Sprint 1 existen, cada una identifica su HU, criterios,
   dependencias, write-set y rol asignado por el orquestador.
-- Las cinco tareas de Sprint 1 están cerradas y archivadas; el doctor encontró
-  cero problemas críticos y una advertencia por el paquete de arranque, que
-  supera el umbral de 3500 tokens.
+- Las cinco tareas de Sprint 1 y las cinco tareas de Sprint 2 están cerradas y
+  archivadas. El último doctor encontró cero problemas críticos y una
+  advertencia: el paquete de arranque supera 3500 tokens.
 - Las pruebas conjuntas de las superficies modificadas pasaron (47 tests,
   341 assertions); Pint pasó para los nueve archivos PHP revisados.
+- La regresión conjunta de Sprint 2 pasó (41 tests, 300 assertions) y Pint pasó
+  para los diez archivos PHP modificados del sprint.
 - `docker compose config --quiet` pasó con la anulación local; `app` y el
   `nginx-proxy` compartido comparten la red `proxy`.
 - Los servicios `app` y `db` están en ejecución; `http://localhost:8001` y
   `http://nanis.net` respondieron `HTTP 200`, este último por el proxy compartido.
 
 ## Pendiente
-- Iniciar Sprint 2 desde `develop` cuando se solicite, creando una tarea
-  Continuum por HU y asignándola al rol/agente que designe el orquestador.
-- Refinar antes de comprometer las preguntas abiertas de Sprint 2, incluida la
-  elegibilidad para seleccionar empresa (GT-HU-024) y la presentación de las
-  acciones de aceptación del Supervisor (GT-HU-033).
+- Integrar la rama de Sprint 2 en `develop` y validar el estado final. La
+  integración aún no se publica.
 - Decidir cuándo incluir en un commit el cambio previo de
-  `project-app/README.md`; el override local está ignorado y no se publica.
+  `project-app/README.md`; se preserva fuera de los commits del sprint.

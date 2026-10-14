@@ -1,8 +1,14 @@
 <section>
     <h1 class="h3 mb-2">Empresas con convenio vigente</h1>
-    <p class="text-secondary mb-4">
-        Selecciona la empresa donde deseas realizar tu práctica.
-    </p>
+    @if ($selectionAllowed)
+        <p class="text-secondary mb-4">
+            Selecciona la empresa donde deseas realizar tu práctica.
+        </p>
+    @else
+        <p class="text-secondary mb-4">
+            Puedes consultar el catálogo, pero no seleccionar otra empresa mientras tu solicitud esté pendiente, aprobada o completada.
+        </p>
+    @endif
 
     @if (session()->has('status'))
         <div class="alert alert-info" role="status">{{ session('status') }}</div>
@@ -42,7 +48,9 @@
                             @endif
                         </dl>
 
-                        @if ($selectedCompany?->id === $company->id)
+                        @if (! $selectionAllowed)
+                            <span class="text-secondary">La selección no está disponible para tu solicitud actual.</span>
+                        @elseif ($selectedCompany?->id === $company->id)
                             <span class="badge text-bg-success">Seleccionada</span>
                         @else
                             <button

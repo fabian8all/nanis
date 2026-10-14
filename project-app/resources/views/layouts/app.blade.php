@@ -15,16 +15,24 @@
                 @if ($role === 'coordinator')
                     <a class="navbar-brand" href="{{ route('coordinacion.companies.index') }}">Nanis</a>
                     <span class="navbar-text me-auto">Coordinación</span>
+                    <a class="nav-link me-3" href="{{ route('coordinacion.companies.index') }}">Catálogo</a>
                     <a class="nav-link me-3" href="{{ route('coordinacion.practice-tracking.index') }}">Seguimiento</a>
-                    <a class="nav-link me-3" href="{{ route('coordinacion.practice-requests.index') }}">Solicitudes</a>
-                    <a class="nav-link me-3" href="{{ route('coordinacion.practice-acceptances.index') }}">Aceptaciones</a>
-                    <a class="nav-link me-3" href="{{ route('coordinacion.practice-termination-letters.index') }}">Cartas de término</a>
-                    <a class="nav-link me-3" href="{{ route('coordinacion.practice-plans.index') }}">Planes</a>
-                    <a class="nav-link me-3" href="{{ route('coordinacion.practice-reports.index') }}">Reportes</a>
-                    <a class="nav-link me-3" href="{{ route('coordinacion.practice-evaluations.index') }}">Eval. tutor</a>
-                    <a class="nav-link me-3" href="{{ route('coordinacion.practice-supervisor-evaluations.index') }}">Eval. supervisor</a>
+                    <div class="dropdown me-3">
+                        <button class="nav-link dropdown-toggle border-0 bg-transparent" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Documentos
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="{{ route('coordinacion.practice-requests.index') }}">Solicitudes</a></li>
+                            <li><a class="dropdown-item" href="{{ route('coordinacion.practice-acceptances.index') }}">Aceptaciones</a></li>
+                            <li><a class="dropdown-item" href="{{ route('coordinacion.practice-termination-letters.index') }}">Cartas de término</a></li>
+                            <li><a class="dropdown-item" href="{{ route('coordinacion.practice-plans.index') }}">Planes</a></li>
+                            <li><a class="dropdown-item" href="{{ route('coordinacion.practice-reports.index') }}">Reportes</a></li>
+                            <li><a class="dropdown-item" href="{{ route('coordinacion.practice-evaluations.index') }}">Evaluaciones de tutor</a></li>
+                            <li><a class="dropdown-item" href="{{ route('coordinacion.practice-supervisor-evaluations.index') }}">Evaluaciones de supervisor</a></li>
+                            <li><a class="dropdown-item" href="{{ route('coordinacion.practice-surveys.manage') }}">Encuestas</a></li>
+                        </ul>
+                    </div>
                     <a class="nav-link me-3" href="{{ route('coordinacion.rubrics.manage') }}">Rúbricas</a>
-                    <a class="nav-link me-3" href="{{ route('coordinacion.practice-surveys.manage') }}">Encuestas</a>
                     <form method="POST" action="{{ route('coordinacion.logout') }}">
                         @csrf
                         <button class="btn btn-outline-secondary btn-sm" type="submit">Cerrar sesión</button>
@@ -32,6 +40,7 @@
                 @elseif ($role === 'student')
                     <a class="navbar-brand" href="{{ route('alumno.companies.index') }}">Nanis</a>
                     <span class="navbar-text me-auto">Alumno</span>
+                    <a class="nav-link me-3" href="{{ route('alumno.companies.index') }}">Catálogo</a>
                     <a class="nav-link me-3" href="{{ route('alumno.practice-tracking.index') }}">Seguimiento</a>
                     <a class="nav-link me-3" href="{{ route('alumno.practice-request.show') }}">Solicitud de práctica</a>
                     <form method="POST" action="{{ route('alumno.logout') }}">
@@ -42,10 +51,17 @@
                     <a class="navbar-brand" href="{{ route('supervisor.practice-letters.index') }}">Nanis</a>
                     <span class="navbar-text me-auto">Supervisor de empresa</span>
                     <a class="nav-link me-3" href="{{ route('supervisor.practice-tracking.index') }}">Seguimiento</a>
-                    <a class="nav-link me-3" href="{{ route('supervisor.practice-letters.index') }}">Cartas pendientes</a>
-                    <a class="nav-link me-3" href="{{ route('supervisor.practice-plans.index') }}">Planes de trabajo</a>
-                    <a class="nav-link me-3" href="{{ route('supervisor.practice-supervisor-evaluations.index') }}">Evaluaciones</a>
-                    <a class="nav-link me-3" href="{{ route('supervisor.practice-surveys.index') }}">Encuestas</a>
+                    <div class="dropdown me-3">
+                        <button class="nav-link dropdown-toggle border-0 bg-transparent" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Documentos
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="{{ route('supervisor.practice-letters.index') }}">Cartas pendientes</a></li>
+                            <li><a class="dropdown-item" href="{{ route('supervisor.practice-plans.index') }}">Planes de trabajo</a></li>
+                            <li><a class="dropdown-item" href="{{ route('supervisor.practice-supervisor-evaluations.index') }}">Evaluaciones</a></li>
+                            <li><a class="dropdown-item" href="{{ route('supervisor.practice-surveys.index') }}">Encuestas</a></li>
+                        </ul>
+                    </div>
                     <form method="POST" action="{{ route('supervisor.logout') }}">
                         @csrf
                         <button class="btn btn-outline-secondary btn-sm" type="submit">Cerrar sesión</button>

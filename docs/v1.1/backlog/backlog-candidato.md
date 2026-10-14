@@ -91,8 +91,10 @@ poder iniciar otra selección mientras mi solicitud está en trámite.
 **Dependencias:** `GT-HU-014` y `GT-HU-001`; reglas de estado de
 `GT-HU-023`.
 
-**Pregunta abierta:** confirmar qué estados, además de la solicitud devuelta
-para corrección, dejan de contar como “en trámite”.
+**Refinamiento resuelto:** solo la ausencia de solicitud o el estado devuelto
+permiten seleccionar empresa. Los estados pendiente, aprobado y completado
+bloquean la selección. Si la solicitud devuelta cambia de empresa, se actualiza
+esa misma solicitud al reenviarla.
 
 ### GT-HU-027 — Abrir Seguimiento al ingresar como Coordinación
 

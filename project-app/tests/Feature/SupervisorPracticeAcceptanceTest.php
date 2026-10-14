@@ -40,7 +40,23 @@ class SupervisorPracticeAcceptanceTest extends TestCase
             ->assertSee('Cargar carta de aceptación')
             ->assertSee('href="'.route('supervisor.practice-tracking.index').'"', false);
 
-        $this->get(route('supervisor.practice-letters.show', $otherLetter))
+        $this->get(route('supervisor.practice-tracking.index'))
+            ->assertOk()
+            ->assertSee('Consultar carta de presentación')
+            ->assertSee('Cargar carta de aceptación')
+            ->assertSee('href="'.route('supervisor.practice-letters.show', $letter).'"', false)
+            ->assertSee('href="'.route('supervisor.practice-acceptances.upload', $letter).'"', false)
+            ->assertDontSee('href="'.route('supervisor.practice-letters.show', $otherLetter).'"', false)
+            ->assertDontSee('href="'.route('supervisor.practice-acceptances.upload', $otherLetter).'"', false);
+
+        $this->actingAs($letter->coordinator)
+            ->get(route('coordinacion.practice-tracking.index'))
+            ->assertOk()
+            ->assertDontSee('href="'.route('supervisor.practice-letters.show', $letter).'"', false)
+            ->assertDontSee('href="'.route('supervisor.practice-acceptances.upload', $letter).'"', false);
+
+        $this->actingAs($supervisor)
+            ->get(route('supervisor.practice-letters.show', $otherLetter))
             ->assertNotFound();
     }
 
@@ -85,6 +101,20 @@ class SupervisorPracticeAcceptanceTest extends TestCase
 
         $this->assertDatabaseCount('practice_acceptance_submissions', 0);
         $this->assertSame([], Storage::disk('local')->allFiles('practice-acceptances'));
+    }
+
+    public function test_returned_acceptance_stage_shows_both_supervisor_actions(): void
+    {
+        [$supervisor, $letter] = $this->createApprovedLetter();
+        $this->addSubmission($supervisor, $letter, PracticeAcceptanceStatus::Returned);
+
+        $this->actingAs($supervisor)
+            ->get(route('supervisor.practice-tracking.index'))
+            ->assertOk()
+            ->assertSee('Consultar carta de presentación')
+            ->assertSee('Cargar carta de aceptación')
+            ->assertSee('href="'.route('supervisor.practice-letters.show', $letter).'"', false)
+            ->assertSee('href="'.route('supervisor.practice-acceptances.upload', $letter).'"', false);
     }
 
     public function test_returned_upload_can_be_resubmitted_without_losing_previous_version(): void
@@ -134,6 +164,10 @@ class SupervisorPracticeAcceptanceTest extends TestCase
         $this->addSubmission($supervisor, $letter, PracticeAcceptanceStatus::PendingReview);
         $this->actingAs($supervisor);
 
+        $this->get(route('supervisor.practice-tracking.index'))
+            ->assertOk()
+            ->assertDontSee(route('supervisor.practice-acceptances.upload', $letter));
+
         Livewire::test(Upload::class, ['practiceLetter' => $letter])
             ->set('acceptanceFile', UploadedFile::fake()->createWithContent('aceptacion.pdf', "%PDF-1.4\nCarta de aceptación"))
             ->call('submit')
@@ -141,6 +175,11 @@ class SupervisorPracticeAcceptanceTest extends TestCase
 
         $latest = $letter->practiceRequest->latestAcceptanceSubmission()->firstOrFail();
         $latest->update(['status' => PracticeAcceptanceStatus::Accepted]);
+
+        $this->get(route('supervisor.practice-tracking.index'))
+            ->assertOk()
+            ->assertDontSee('href="'.route('supervisor.practice-letters.show', $letter).'"', false)
+            ->assertDontSee('href="'.route('supervisor.practice-acceptances.upload', $letter).'"', false);
 
         $this->get(route('supervisor.practice-letters.show', $letter))
             ->assertOk()

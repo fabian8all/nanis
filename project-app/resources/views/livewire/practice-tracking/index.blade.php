@@ -96,8 +96,14 @@
                                                 <td>{{ $stage['detail'] }}</td>
                                                 <td>{{ $stage['responsible'] ? ucfirst($stage['responsible']) : '—' }}</td>
                                                 <td>
-                                                    @if ($stage['route'])
-                                                        <a class="btn btn-sm btn-outline-primary" href="{{ $stage['route'] }}">Abrir práctica</a>
+                                                    @if ($stage['actions'] !== [] && $stage['responsible'] === auth()->user()->role->value)
+                                                        <div class="d-flex flex-wrap gap-2">
+                                                            @foreach ($stage['actions'] as $action)
+                                                                <a class="btn btn-sm btn-outline-primary" href="{{ $action['route'] }}">{{ $action['label'] }}</a>
+                                                            @endforeach
+                                                        </div>
+                                                    @elseif ($stage['route'])
+                                                        <a class="btn btn-sm btn-outline-primary" href="{{ $stage['route'] }}">{{ $stage['action'] }}</a>
                                                     @else
                                                         <span class="text-secondary">—</span>
                                                     @endif

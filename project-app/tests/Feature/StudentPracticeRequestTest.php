@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use App\Enums\PracticeRequestStatus;
 use App\Enums\UserRole;
+use App\Livewire\Student\Companies\Index as StudentCompanyCatalog;
 use App\Livewire\Student\PracticeRequests\Show as StudentPracticeRequest;
 use App\Models\Company;
 use App\Models\PracticeRequest;
@@ -164,6 +165,85 @@ class StudentPracticeRequestTest extends TestCase
             ->assertHasErrors('request');
 
         $this->assertSame($existingRequest->id, PracticeRequest::query()->sole()->id);
+    }
+
+    public function test_student_cannot_submit_another_request_when_status_is_approved_or_completed(): void
+    {
+        foreach ([PracticeRequestStatus::Approved, PracticeRequestStatus::Completed] as $status) {
+            $student = User::factory()->create(['role' => UserRole::Student]);
+            $company = Company::query()->create(['name' => "Hotel {$status->value}"]);
+            $student->practiceRequests()->create([
+                'company_id' => $company->id,
+                'ucol_email' => $student->email,
+                'nss' => '00000000000',
+                'account_number' => '00000000',
+                'grade_group' => '8A',
+                'start_date' => '2026-10-01',
+                'practice_location' => 'Colima',
+                'letter_recipient' => 'Dirección',
+                'position' => 'Auxiliar',
+                'end_date' => '2026-12-01',
+                'status' => $status,
+                'non_responsiva_accepted_at' => now(),
+            ]);
+            $this->actingAs($student);
+            session()->put('practice.selected_company_id', $company->id);
+
+            Livewire::test(StudentPracticeRequest::class)
+                ->set('nss', '00000000000')
+                ->set('accountNumber', '00000000')
+                ->set('gradeGroup', '8A')
+                ->set('startDate', '2026-11-01')
+                ->set('endDate', '2027-01-31')
+                ->set('practiceLocation', 'Colima')
+                ->set('letterRecipient', 'Dirección')
+                ->set('position', 'Auxiliar')
+                ->set('acceptNonResponsiva', true)
+                ->call('submit')
+                ->assertHasErrors('request');
+
+            $this->assertSame($status->value, $student->practiceRequests()->sole()->status->value);
+        }
+    }
+
+    public function test_new_company_selection_on_returned_request_updates_that_request(): void
+    {
+        $student = User::factory()->create(['role' => UserRole::Student]);
+        $originalCompany = Company::query()->create(['name' => 'Hotel Original']);
+        $selectedCompany = Company::query()->create(['name' => 'Hotel Nuevo']);
+        $request = $student->practiceRequests()->create([
+            'company_id' => $originalCompany->id,
+            'ucol_email' => $student->email,
+            'nss' => '00000000000',
+            'account_number' => '00000000',
+            'grade_group' => '8A',
+            'start_date' => '2026-10-01',
+            'practice_location' => 'Colima',
+            'letter_recipient' => 'Dirección',
+            'position' => 'Auxiliar',
+            'end_date' => '2026-12-01',
+            'status' => PracticeRequestStatus::Returned,
+            'non_responsiva_accepted_at' => now(),
+        ]);
+        $this->actingAs($student);
+
+        Livewire::test(StudentCompanyCatalog::class)
+            ->call('select', $selectedCompany->id)
+            ->assertSee('Seleccionaste Hotel Nuevo.');
+
+        Livewire::test(StudentPracticeRequest::class)
+            ->assertSee('Hotel Nuevo')
+            ->assertDontSee('Hotel Original')
+            ->call('submit')
+            ->assertHasNoErrors()
+            ->assertRedirect(route('alumno.practice-request.show'));
+
+        $this->assertDatabaseCount('practice_requests', 1);
+        $this->assertDatabaseHas('practice_requests', [
+            'id' => $request->id,
+            'company_id' => $selectedCompany->id,
+            'status' => PracticeRequestStatus::Pending->value,
+        ]);
     }
 
     public function test_student_can_consult_only_their_own_practice_request(): void

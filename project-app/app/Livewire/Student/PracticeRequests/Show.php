@@ -74,10 +74,20 @@ class Show extends Component
         ]);
 
         $existingRequest = $this->currentRequest();
-        $companyId = $existingRequest?->status === PracticeRequestStatus::Returned
+        $selectedCompanyId = session()->get('practice.selected_company_id');
+        if ($selectedCompanyId !== null && ! is_int($selectedCompanyId)) {
+            session()->forget('practice.selected_company_id');
+            $selectedCompanyId = null;
+        }
+
+        $usesExistingReturnedCompany = $existingRequest?->status === PracticeRequestStatus::Returned
+            && ! is_int($selectedCompanyId);
+        $companyId = $usesExistingReturnedCompany
             ? $existingRequest->company_id
-            : session()->get('practice.selected_company_id');
-        DB::transaction(function () use ($data, $companyId): void {
+            : $selectedCompanyId;
+        $companyMustBeActive = ! $usesExistingReturnedCompany;
+
+        DB::transaction(function () use ($data, $companyId, $companyMustBeActive): void {
             $student = auth()->user()->newQuery()->lockForUpdate()->findOrFail(auth()->id());
             $request = $student->practiceRequests()
                 ->whereIn('status', [
@@ -86,6 +96,7 @@ class Show extends Component
                     PracticeRequestStatus::Approved,
                     PracticeRequestStatus::Completed,
                 ])
+                ->latest('id')
                 ->lockForUpdate()
                 ->first();
 
@@ -95,10 +106,10 @@ class Show extends Component
                 ]);
             }
 
-            $effectiveCompanyId = $request?->company_id ?? $companyId;
+            $effectiveCompanyId = $companyId;
             $lockedCompany = Company::query()
                 ->when(
-                    ! $request || $request->status !== PracticeRequestStatus::Returned,
+                    $companyMustBeActive,
                     fn ($query) => $query->where('is_active', true),
                 )
                 ->lockForUpdate()
@@ -144,10 +155,18 @@ class Show extends Component
 
         $request = $this->currentRequest();
 
-        $companyId = $request?->status === PracticeRequestStatus::Returned
+        $selectedCompanyId = session()->get('practice.selected_company_id');
+        if ($selectedCompanyId !== null && ! is_int($selectedCompanyId)) {
+            session()->forget('practice.selected_company_id');
+            $selectedCompanyId = null;
+        }
+
+        $usesExistingReturnedCompany = $request?->status === PracticeRequestStatus::Returned
+            && ! is_int($selectedCompanyId);
+        $companyId = $usesExistingReturnedCompany
             ? $request->company_id
-            : session()->get('practice.selected_company_id');
-        $companyMustBeActive = $request?->status !== PracticeRequestStatus::Returned;
+            : $selectedCompanyId;
+        $companyMustBeActive = ! $usesExistingReturnedCompany;
         $company = is_int($companyId)
             ? Company::query()
                 ->when($companyMustBeActive, fn ($query) => $query->where('is_active', true))
@@ -156,6 +175,10 @@ class Show extends Component
 
         if ($companyId !== null && ! $company) {
             session()->forget('practice.selected_company_id');
+
+            if ($request?->status === PracticeRequestStatus::Returned && ! $usesExistingReturnedCompany) {
+                $company = Company::query()->find($request->company_id);
+            }
         }
 
         return view('livewire.student.practice-requests.show', [

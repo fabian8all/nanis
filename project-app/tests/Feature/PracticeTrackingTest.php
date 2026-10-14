@@ -8,6 +8,8 @@ use App\Enums\PracticeRequestStatus;
 use App\Enums\UserRole;
 use App\Livewire\PracticeTracking\Index;
 use App\Models\Company;
+use App\Models\PracticeLetter;
+use App\Models\PracticeRequest;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Livewire\Livewire;
@@ -30,6 +32,8 @@ class PracticeTrackingTest extends TestCase
             ->assertSee('Ana Alumna')
             ->assertSee('Hotel Faro')
             ->assertSee('Solicitud · Pendiente')
+            ->assertSee('Revisar solicitud')
+            ->assertDontSee('Abrir práctica')
             ->assertSee('Abrir expediente')
             ->assertSee('class="accordion-collapse collapse"', false)
             ->assertSee('aria-expanded="false"', false);
@@ -46,6 +50,19 @@ class PracticeTrackingTest extends TestCase
             ->assertSee('Coordinación debe revisar la solicitud');
 
         $this->assertSame(PracticeRequestStatus::Pending, $request->fresh()->status);
+    }
+
+    public function test_returned_request_action_names_the_correction_destination(): void
+    {
+        [, $student, $request] = $this->createPractice('Hotel Faro', 'Ana Alumna');
+        $request->update(['status' => PracticeRequestStatus::Returned]);
+
+        $this->actingAs($student)
+            ->get(route('alumno.practice-tracking.index'))
+            ->assertOk()
+            ->assertSee('Corregir solicitud')
+            ->assertSee('href="'.route('alumno.practice-request.show').'"', false)
+            ->assertDontSee('Abrir práctica');
     }
 
     public function test_coordinator_tracking_loads_the_latest_practice_report_version(): void
@@ -103,6 +120,7 @@ class PracticeTrackingTest extends TestCase
             ->assertDontSee('Hotel Ajeno')
             ->assertDontSee('Alumno Ajeno')
             ->assertSee('El alumno debe registrar el plan de trabajo')
+            ->assertSee('Consultar solicitud')
             ->assertSee('Tienes 1 acción pendiente');
 
         $this->actingAs($coordinator)
@@ -126,28 +144,16 @@ class PracticeTrackingTest extends TestCase
 
     public function test_company_supervisor_sees_a_pending_acceptance_action_only_for_their_company(): void
     {
-        [, , $request] = $this->createPractice('Hotel Faro', 'Ana Alumna');
+        [$coordinator, , $request] = $this->createPractice('Hotel Faro', 'Ana Alumna');
         $request->update(['status' => PracticeRequestStatus::Approved]);
+        $letter = $this->createLetter($request, $coordinator);
         $supervisor = User::factory()->create([
             'role' => UserRole::Supervisor,
             'company_id' => $request->company_id,
         ]);
-        $otherCompany = Company::query()->create(['name' => 'Hotel Ajeno']);
-        $otherStudent = User::factory()->create(['role' => UserRole::Student]);
-        $otherStudent->practiceRequests()->create([
-            'company_id' => $otherCompany->id,
-            'ucol_email' => $otherStudent->email,
-            'nss' => '00000000000',
-            'account_number' => '00000000',
-            'grade_group' => '8A',
-            'start_date' => '2026-11-01',
-            'practice_location' => 'Colima',
-            'letter_recipient' => 'Dirección',
-            'position' => 'Auxiliar',
-            'end_date' => '2027-01-31',
-            'status' => PracticeRequestStatus::Approved,
-            'non_responsiva_accepted_at' => now(),
-        ]);
+        [$otherCoordinator, , $otherRequest] = $this->createPractice('Hotel Ajeno', 'Alumno Ajeno');
+        $otherRequest->update(['status' => PracticeRequestStatus::Approved]);
+        $otherLetter = $this->createLetter($otherRequest, $otherCoordinator);
 
         $this->actingAs($supervisor)
             ->get(route('supervisor.practice-tracking.index'))
@@ -155,7 +161,31 @@ class PracticeTrackingTest extends TestCase
             ->assertSee('Hotel Faro')
             ->assertDontSee('Hotel Ajeno')
             ->assertSee('El supervisor debe cargar la carta de aceptación')
+            ->assertSee('Consultar carta de presentación')
+            ->assertSee('Cargar carta de aceptación')
+            ->assertSee('href="'.route('supervisor.practice-letters.show', $letter).'"', false)
+            ->assertSee('href="'.route('supervisor.practice-acceptances.upload', $letter).'"', false)
+            ->assertDontSee('href="'.route('supervisor.practice-letters.show', $otherLetter).'"', false)
+            ->assertDontSee('href="'.route('supervisor.practice-acceptances.upload', $otherLetter).'"', false)
             ->assertSee('acción pendiente');
+    }
+
+    private function createLetter(PracticeRequest $request, User $coordinator): PracticeLetter
+    {
+        $folioNumber = PracticeLetter::query()->count() + 1;
+
+        return $request->letter()->create([
+            'coordinator_id' => $coordinator->id,
+            'folio_year' => 2026,
+            'folio_number' => $folioNumber,
+            'folio' => sprintf('CP-2026-%04d', $folioNumber),
+            'letter_recipient' => $request->letter_recipient,
+            'position' => $request->position,
+            'practice_location' => $request->practice_location,
+            'start_date' => $request->start_date,
+            'end_date' => $request->end_date,
+            'issued_at' => now(),
+        ]);
     }
 
     private function createPractice(string $companyName, string $studentName): array
