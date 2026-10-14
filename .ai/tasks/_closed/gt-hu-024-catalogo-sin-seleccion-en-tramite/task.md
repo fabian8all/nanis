@@ -4,9 +4,9 @@
 
 ## Objetivo
 Permitir que el alumno consulte el catálogo sin poder iniciar otra selección
-mientras su solicitud esté en un estado que la persona solicitante defina como
-en trámite. El servidor debe impedir selecciones directas no autorizadas, no
-solo ocultar controles en la interfaz.
+mientras su solicitud esté en trámite. Solo una solicitud devuelta permite
+seleccionar una empresa distinta; el servidor debe impedir selecciones
+directas no autorizadas, no solo ocultar controles en la interfaz.
 
 ## Incluido en el alcance
 - Mantener accesible el catálogo desde la navegación del alumno.
@@ -14,14 +14,17 @@ solo ocultar controles en la interfaz.
   una solicitud existente.
 - Aplicar en la interfaz y en los componentes Livewire la regla acordada para
   bloquear o permitir la selección y el reenvío de solicitud.
+- Permitir selección cuando no existe solicitud o la solicitud vigente está
+  devuelta; bloquearla si está pendiente, aprobada o completada.
+- Al volver a seleccionar con una solicitud devuelta, actualizar esa misma
+  solicitud al reenviarla, sin crear una segunda.
 - Conservar la corrección de una solicitud devuelta y las validaciones de
   empresa activa.
 - Cubrir por pruebas la matriz de estados acordada, los intentos directos y el
   aislamiento por rol.
 
 ## Explícitamente fuera de alcance
-- Cambiar la elegibilidad para seleccionar empresa en estados distintos de
-  los que confirme la persona solicitante.
+- Permitir selección en estados pendiente, aprobado o completado.
 - Cambiar la autenticación, la consulta de solicitudes de otros alumnos o el
   mantenimiento del catálogo de Coordinación.
 - Cambiar las reglas generales de destino implementadas por GT-HU-023.
@@ -35,6 +38,7 @@ No editar fuera de esta lista sin actualizarla primero. Evita refactors oportuni
 - `project-app/app/Livewire/Student/PracticeRequests/Show.php`
 - `project-app/tests/Feature/StudentCompanyCatalogTest.php`
 - `project-app/tests/Feature/StudentPracticeRequestTest.php`
+- `docs/v1.1/backlog/backlog-candidato.md`
 - `.ai/tasks/gt-hu-024-catalogo-sin-seleccion-en-tramite/**`
 - `.ai/HANDOFF.md`
 
@@ -48,9 +52,10 @@ No editar fuera de esta lista sin actualizarla primero. Evita refactors oportuni
 - `project-app/tests/Feature/StudentPracticeRequestTest.php`
 
 ## Refinamiento pendiente
-Confirmar si una solicitud `Completada`, además de `Devuelta`, permite iniciar
-una nueva selección. No implementar la matriz de estados hasta recibir esa
-decisión.
+**Resuelto por la persona solicitante:** solo la ausencia de solicitud o el
+estado `Devuelta` permiten seleccionar empresa. `Pendiente`, `Aprobada` y
+`Completada` bloquean la selección. La selección en una solicitud devuelta
+actualiza esa misma solicitud al reenviarla.
 
 ## Contexto mínimo sugerido
 Según el tamaño declarado arriba, no cargues más de lo necesario:

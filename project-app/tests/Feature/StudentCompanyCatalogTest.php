@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Enums\PracticeRequestStatus;
 use App\Enums\UserRole;
 use App\Livewire\Student\Companies\Index as StudentCompanyCatalog;
 use App\Models\Company;
@@ -43,7 +44,8 @@ class StudentCompanyCatalogTest extends TestCase
             ->assertSee('Calle Norte 10')
             ->assertSee('3125550101')
             ->assertSee('mailto:alfa@example.test')
-            ->assertSee('Contacto Alfa');
+            ->assertSee('Contacto Alfa')
+            ->assertSee('href="'.route('alumno.companies.index').'"', false);
 
         $this->assertDatabaseHas('companies', [
             'id' => $zeta->id,
@@ -71,6 +73,44 @@ class StudentCompanyCatalogTest extends TestCase
 
         $this->assertSame($secondCompany->id, session('practice.selected_company_id'));
         $this->assertDatabaseCount('companies', 2);
+    }
+
+    public function test_catalog_remains_available_but_selection_is_blocked_for_pending_approved_and_completed_requests(): void
+    {
+        foreach ([
+            PracticeRequestStatus::Pending,
+            PracticeRequestStatus::Approved,
+            PracticeRequestStatus::Completed,
+        ] as $status) {
+            $student = User::factory()->create(['role' => UserRole::Student]);
+            $company = Company::query()->create(['name' => "Hotel {$status->value}"]);
+            $otherCompany = Company::query()->create(['name' => 'Hotel Otra']);
+            $student->practiceRequests()->create([
+                'company_id' => $company->id,
+                'ucol_email' => $student->email,
+                'nss' => '00000000000',
+                'account_number' => '00000000',
+                'grade_group' => '8A',
+                'start_date' => '2026-10-01',
+                'practice_location' => 'Colima',
+                'letter_recipient' => 'Dirección',
+                'position' => 'Auxiliar',
+                'end_date' => '2026-12-01',
+                'status' => $status,
+                'non_responsiva_accepted_at' => now(),
+            ]);
+
+            $this->actingAs($student)
+                ->get(route('alumno.companies.index'))
+                ->assertOk()
+                ->assertSee($company->name)
+                ->assertSee('no seleccionar otra empresa')
+                ->assertDontSee('wire:click="select(', false);
+
+            Livewire::test(StudentCompanyCatalog::class)
+                ->call('select', $otherCompany->id)
+                ->assertHasErrors('request');
+        }
     }
 
     public function test_student_cannot_select_an_inactive_company(): void

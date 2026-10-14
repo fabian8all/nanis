@@ -2,8 +2,11 @@
 
 namespace App\Livewire\Student\Companies;
 
+use App\Enums\PracticeRequestStatus;
 use App\Enums\UserRole;
 use App\Models\Company;
+use App\Models\PracticeRequest;
+use Illuminate\Validation\ValidationException;
 use Illuminate\View\View;
 use Livewire\Component;
 
@@ -20,6 +23,13 @@ class Index extends Component
     {
         $this->authorizeStudent();
 
+        $request = $this->currentRequest();
+        if ($request && $request->status !== PracticeRequestStatus::Returned) {
+            throw ValidationException::withMessages([
+                'request' => 'No puedes cambiar la empresa mientras tu solicitud esté pendiente, aprobada o completada.',
+            ]);
+        }
+
         $company = Company::query()
             ->where('is_active', true)
             ->findOrFail($companyId);
@@ -34,6 +44,12 @@ class Index extends Component
     public function render(): View
     {
         $this->authorizeStudent();
+
+        $request = $this->currentRequest();
+        $selectionAllowed = ! $request || $request->status === PracticeRequestStatus::Returned;
+        if (! $selectionAllowed) {
+            session()->forget(self::SELECTED_COMPANY_SESSION_KEY);
+        }
 
         $companies = Company::query()
             ->where('is_active', true)
@@ -55,7 +71,16 @@ class Index extends Component
         return view('livewire.student.companies.index', [
             'companies' => $companies,
             'selectedCompany' => $selectedCompany,
+            'selectionAllowed' => $selectionAllowed,
         ])->layout('layouts.app', ['title' => 'Empresas con convenio']);
+    }
+
+    private function currentRequest(): ?PracticeRequest
+    {
+        return auth()->user()
+            ->practiceRequests()
+            ->latest('id')
+            ->first();
     }
 
     private function authorizeStudent(): void

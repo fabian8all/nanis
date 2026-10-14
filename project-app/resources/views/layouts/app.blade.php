@@ -40,6 +40,7 @@
                 @elseif ($role === 'student')
                     <a class="navbar-brand" href="{{ route('alumno.companies.index') }}">Nanis</a>
                     <span class="navbar-text me-auto">Alumno</span>
+                    <a class="nav-link me-3" href="{{ route('alumno.companies.index') }}">Catálogo</a>
                     <a class="nav-link me-3" href="{{ route('alumno.practice-tracking.index') }}">Seguimiento</a>
                     <a class="nav-link me-3" href="{{ route('alumno.practice-request.show') }}">Solicitud de práctica</a>
                     <form method="POST" action="{{ route('alumno.logout') }}">

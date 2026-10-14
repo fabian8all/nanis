@@ -54,10 +54,13 @@ asignada por el orquestador.
   Encuestas en la navegación del Supervisor con sus rutas existentes. Su
   tarea se cerró y archivó en
   `.ai/tasks/_closed/gt-hu-032-documentos-supervisor/`.
-- GT-HU-024 requiere confirmar si una solicitud completada permite una nueva
-  selección, además del estado devuelto. GT-HU-033 requiere elegir botones
-  separados o un menú desplegable. No se implementarán estas dos historias
-  hasta resolver sus decisiones pendientes.
+- GT-HU-024 quedó implementada con la regla confirmada: solo sin solicitud o
+  con solicitud `Devuelta` se puede seleccionar; `Pendiente`, `Aprobada` y
+  `Completada` bloquean. Una nueva selección en estado devuelto actualiza esa
+  misma solicitud. La tarea se cerró y archivó en
+  `.ai/tasks/_closed/gt-hu-024-catalogo-sin-seleccion-en-tramite/`.
+- GT-HU-033 aún requiere elegir botones separados o un menú desplegable y no se
+  implementará hasta resolver esa decisión.
 - Las tareas del sprint se trabajan en serie dentro de este único checkout;
   no se crearon worktrees ni se inició ejecución paralela.
 - Las ramas y tareas de Sprints 3–5 se crearán al iniciar cada sprint.
@@ -104,10 +107,10 @@ asignada por el orquestador.
   calendario, duración, estimaciones ni capacidad.
 - Las cinco tareas de Sprint 1 existen, cada una identifica su HU, criterios,
   dependencias, write-set y rol asignado por el orquestador.
-- Las cinco tareas de Sprint 1 están cerradas y archivadas. En Sprint 2 quedan
-  tres tareas activas en este worktree porque se ejecutan en serie; el último
-  doctor registró esa advertencia y que el paquete de arranque supera 3500
-  tokens, sin problemas críticos.
+- Las cinco tareas de Sprint 1 están cerradas y archivadas. En Sprint 2 solo
+  queda activa GT-HU-033 en este worktree; las demás se cerraron en serie. El
+  último doctor registró cero problemas críticos y advertencias de tareas
+  activas en un worktree y paquete de arranque sobre 3500 tokens.
 - Las pruebas conjuntas de las superficies modificadas pasaron (47 tests,
   341 assertions); Pint pasó para los nueve archivos PHP revisados.
 - `docker compose config --quiet` pasó con la anulación local; `app` y el
@@ -116,10 +119,9 @@ asignada por el orquestador.
   `http://nanis.net` respondieron `HTTP 200`, este último por el proxy compartido.
 
 ## Pendiente
-- Resolver las dos preguntas de refinamiento de Sprint 2 antes de implementar
-  GT-HU-024 y GT-HU-033.
-- Continuar en serie con las historias pendientes; completar las cinco historias
-  con un commit por tarea, luego integrar la rama a `develop` y validar el
-  sprint.
+- Resolver la presentación pendiente de GT-HU-033, implementarla y cerrarla;
+  después integrar Sprint 2 en `develop` y validar el sprint.
+- Completar las cinco historias con un commit por tarea; luego integrar la rama
+  a `develop` y validar el sprint.
 - Decidir cuándo incluir en un commit el cambio previo de
   `project-app/README.md`; el override local está ignorado y no se publica.
