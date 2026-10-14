@@ -111,7 +111,13 @@ class Show extends Component
         $this->authorizeStudent();
         $request = $this->eligibleRequest();
         $report = $request->practiceReport()
-            ->with(['versions.attachments', 'versions.reviewer:id,name', 'approvedVersion.attachments'])
+            ->with([
+                'versions' => fn ($query) => $query
+                    ->with(['attachments', 'reviewer:id,name'])
+                    ->orderByDesc('updated_at')
+                    ->orderByDesc('id'),
+                'approvedVersion.attachments',
+            ])
             ->first();
         $latest = $report?->versions->sortByDesc('version')->first();
         $editable = $latest && in_array($latest->status, [

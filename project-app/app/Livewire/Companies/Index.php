@@ -116,7 +116,7 @@ class Index extends Component
     {
         $this->authorizeCoordinator();
 
-        $query = Company::query()->orderBy('name')->orderBy('id');
+        $query = Company::query()->orderByDesc('updated_at')->orderByDesc('id');
         $search = trim($this->search);
 
         if ($search !== '') {

@@ -55,7 +55,7 @@ class Index extends Component
                 'company:id,name',
                 'letter:id,practice_request_id,folio',
                 'latestAcceptanceSubmission',
-                'acceptanceSubmissions:id,practice_request_id,supervisor_id,status',
+                'acceptanceSubmissions:id,practice_request_id,supervisor_id,status,updated_at',
                 'practicePlan.latestVersion',
                 'practiceReport.latestVersion',
                 'practiceReport.approvedVersion',
@@ -84,7 +84,8 @@ class Index extends Component
                         ->orWhereHas('company', fn (Builder $company) => $company->where('name', 'like', "%{$search}%"));
                 });
             })
-            ->latest('id');
+            ->orderByDesc('updated_at')
+            ->orderByDesc('id');
 
         $requests = $query->get();
         $rows = $requests->map(function (PracticeRequest $request) use ($summary, $user): array {
@@ -108,6 +109,7 @@ class Index extends Component
                 },
                 'pending' => collect($stages)->filter(fn (array $stage): bool => $stage['responsible'] === $user->role->value
                     && ($stage['responsible_id'] === null || $stage['responsible_id'] === $user->id))->values(),
+                'modifiedAt' => $this->latestModificationTimestamp($request),
             ];
         });
 
@@ -130,6 +132,14 @@ class Index extends Component
                 return $row;
             })->filter(fn (array $row): bool => $row['stages'] !== []);
         }
+
+        $rows = $rows->sort(function (array $left, array $right): int {
+            $modifiedOrder = $right['modifiedAt'] <=> $left['modifiedAt'];
+
+            return $modifiedOrder !== 0
+                ? $modifiedOrder
+                : $right['request']->id <=> $left['request']->id;
+        })->values();
 
         $pendingCount = $rows->sum(fn (array $row): int => $row['pending']->count());
         $paginated = $this->paginateRows($rows);
@@ -156,5 +166,25 @@ class Index extends Component
                 'pageName' => 'page',
             ],
         );
+    }
+
+    private function latestModificationTimestamp(PracticeRequest $request): int
+    {
+        $timestamps = [
+            $request->updated_at?->getTimestamp(),
+            $request->letter?->updated_at?->getTimestamp(),
+            $request->latestAcceptanceSubmission?->updated_at?->getTimestamp(),
+            $request->acceptanceSubmissions->max(
+                fn ($submission): ?int => $submission->updated_at?->getTimestamp(),
+            ),
+            $request->practicePlan?->latestVersion?->updated_at?->getTimestamp(),
+            $request->practiceReport?->latestVersion?->updated_at?->getTimestamp(),
+            $request->practiceReport?->approvedVersion?->updated_at?->getTimestamp(),
+            $request->practiceEvaluation?->updated_at?->getTimestamp(),
+            $request->practiceSupervisorEvaluation?->updated_at?->getTimestamp(),
+            $request->terminationLetterIssuance?->updated_at?->getTimestamp(),
+        ];
+
+        return max(array_filter($timestamps, fn (?int $timestamp): bool => $timestamp !== null));
     }
 }

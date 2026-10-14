@@ -22,7 +22,8 @@ class Index extends Component
                     'practiceRequest.letter:id,practice_request_id,folio',
                     'supervisor:id,name,email',
                 ])
-                ->orderBy('submitted_at')
+                ->orderByDesc('updated_at')
+                ->orderByDesc('id')
                 ->get(),
             'history' => PracticeAcceptanceSubmission::query()
                 ->whereIn('status', [
@@ -36,6 +37,7 @@ class Index extends Component
                     'supervisor:id,name,email',
                 ])
                 ->orderByDesc('reviewed_at')
+                ->orderByDesc('id')
                 ->get(),
         ])->layout('layouts.app', ['title' => 'Cartas de aceptación por revisar']);
     }

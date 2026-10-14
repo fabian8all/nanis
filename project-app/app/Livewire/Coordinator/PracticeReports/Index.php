@@ -107,10 +107,30 @@ class Index extends Component
                 'student:id,name',
                 'company:id,name',
                 'tutor:id,name',
-                'practiceReport.versions.attachments',
+                'practiceReport.latestVersion',
+                'practiceReport.versions' => fn ($query) => $query
+                    ->with('attachments')
+                    ->orderByDesc('updated_at')
+                    ->orderByDesc('id'),
             ])
+            ->orderByDesc('updated_at')
             ->orderByDesc('id')
-            ->get();
+            ->get()
+            ->sort(function (PracticeRequest $left, PracticeRequest $right): int {
+                $leftModifiedAt = max(
+                    $left->updated_at->getTimestamp(),
+                    $left->practiceReport?->latestVersion?->updated_at?->getTimestamp() ?? 0,
+                );
+                $rightModifiedAt = max(
+                    $right->updated_at->getTimestamp(),
+                    $right->practiceReport?->latestVersion?->updated_at?->getTimestamp() ?? 0,
+                );
+                $modifiedOrder = $rightModifiedAt <=> $leftModifiedAt;
+
+                return $modifiedOrder !== 0
+                    ? $modifiedOrder
+                    : $right->id <=> $left->id;
+            })->values();
         $tutors = User::query()->where('role', UserRole::Tutor->value)->orderBy('name')->get(['id', 'name']);
 
         return view('livewire.coordinator.practice-reports.index', [

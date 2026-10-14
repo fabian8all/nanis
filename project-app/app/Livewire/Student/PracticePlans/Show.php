@@ -111,9 +111,14 @@ class Show extends Component
         $plan = PracticePlan::query()
             ->where('practice_request_id', $request->id)
             ->with([
-                'versions.activities',
-                'versions.supervisorReviewer:id,name',
-                'versions.coordinatorReviewer:id,name',
+                'versions' => fn ($query) => $query
+                    ->with([
+                        'activities',
+                        'supervisorReviewer:id,name',
+                        'coordinatorReviewer:id,name',
+                    ])
+                    ->orderByDesc('updated_at')
+                    ->orderByDesc('id'),
             ])
             ->first();
         $latestVersion = $plan?->versions->sortByDesc('version')->first();

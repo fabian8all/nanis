@@ -24,7 +24,7 @@
 
     @if ($report)
         <h2 class="h5 mt-4">Historial de versiones</h2>
-        @foreach ($report->versions->sortBy('version') as $version)
+        @foreach ($report->versions as $version)
             <article class="card mb-3">
                 <div class="card-body">
                     <h3 class="h6">Versión {{ $version->version }} — {{ $version->status->label() }}</h3>

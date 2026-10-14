@@ -12,6 +12,7 @@ use App\Models\PracticeLetter;
 use App\Models\PracticeRequest;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\DB;
 use Livewire\Livewire;
 use Tests\TestCase;
 
@@ -90,6 +91,39 @@ class PracticeTrackingTest extends TestCase
             ->assertSee('Ana Alumna');
 
         $this->assertSame($latestVersion->id, $report->fresh()->latestVersion->id);
+    }
+
+    public function test_tracking_orders_a_request_by_its_latest_related_version_update(): void
+    {
+        [$coordinator, , $olderParent] = $this->createPractice('Hotel Uno', 'Alumna Versión Reciente');
+        [, , $newerParent] = $this->createPractice('Hotel Dos', 'Alumno Padre Reciente');
+        $report = $olderParent->practiceReport()->create([]);
+        $version = $report->versions()->create([
+            'version' => 1,
+            'status' => PracticeReportStatus::Draft,
+            'company_name' => 'Hotel Uno',
+            'area' => 'Área de prueba',
+            'period' => 'Periodo de prueba',
+            'objectives' => 'Objetivos ficticios',
+            'activities' => 'Actividades ficticias',
+            'outcomes' => 'Resultados ficticios',
+            'conclusions' => 'Conclusiones ficticias',
+            'recommendations' => 'Recomendaciones ficticias',
+        ]);
+
+        DB::table('practice_requests')->where('id', $olderParent->id)
+            ->update(['updated_at' => '2026-01-01 12:00:00']);
+        DB::table('practice_requests')->where('id', $newerParent->id)
+            ->update(['updated_at' => '2026-01-03 12:00:00']);
+        DB::table('practice_report_versions')->where('id', $version->id)
+            ->update(['updated_at' => '2026-01-04 12:00:00']);
+
+        $this->actingAs($coordinator);
+
+        Livewire::test(Index::class)
+            ->assertViewHas('rows', fn ($rows) => collect($rows->items())
+                ->pluck('request.student.name')
+                ->all() === ['Alumna Versión Reciente', 'Alumno Padre Reciente']);
     }
 
     public function test_students_only_see_their_own_practices_and_their_pending_actions(): void

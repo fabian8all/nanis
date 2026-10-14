@@ -26,7 +26,7 @@
                 </form>
                 @if ($latest)
                     <p>Reporte — versión {{ $latest->version }}: {{ $latest->status->label() }}</p>
-                    @foreach ($report->versions->sortBy('version') as $version)
+                    @foreach ($report->versions as $version)
                         <details class="mb-2">
                             <summary>Consultar versión {{ $version->version }} — {{ $version->status->label() }}</summary>
                             @include('livewire.student.practice-reports.partials.version', ['version' => $version])

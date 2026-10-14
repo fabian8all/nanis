@@ -53,7 +53,8 @@ class Index extends Component
 
         $companies = Company::query()
             ->where('is_active', true)
-            ->orderBy('name')
+            ->orderByDesc('updated_at')
+            ->orderByDesc('id')
             ->get();
         $selectedCompanyId = session()->get(self::SELECTED_COMPANY_SESSION_KEY);
         $selectedCompany = is_int($selectedCompanyId)

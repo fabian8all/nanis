@@ -132,7 +132,17 @@ class Manage extends Component
         $this->authorizeCoordinator();
 
         return view('livewire.coordinator.rubrics.manage', [
-            'rubrics' => Rubric::query()->with(['currentVersion', 'versions.criteria'])->get(),
+            'rubrics' => Rubric::query()
+                ->with([
+                    'currentVersion',
+                    'versions' => fn ($query) => $query
+                        ->with('criteria')
+                        ->orderByDesc('updated_at')
+                        ->orderByDesc('id'),
+                ])
+                ->orderByDesc('updated_at')
+                ->orderByDesc('id')
+                ->get(),
             'selectedVersion' => RubricVersion::query()->with('rubric')->findOrFail($this->versionId),
         ])->layout('layouts.app', ['title' => 'Rúbricas de evaluación']);
     }

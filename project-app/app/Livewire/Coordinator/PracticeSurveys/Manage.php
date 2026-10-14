@@ -205,7 +205,11 @@ class Manage extends Component
 
         return view('livewire.coordinator.practice-surveys.manage', [
             'selectedVersion' => $selectedVersion,
-            'versions' => PracticeSurveyVersion::query()->with('questions')->orderByDesc('version')->get(),
+            'versions' => PracticeSurveyVersion::query()
+                ->with('questions')
+                ->orderByDesc('updated_at')
+                ->orderByDesc('id')
+                ->get(),
             'publishedVersion' => PracticeSurveyVersion::query()
                 ->where('status', PracticeSurveyVersionStatus::Published)
                 ->orderByDesc('version')
@@ -214,7 +218,9 @@ class Manage extends Component
                 ->whereHas('latestAcceptanceSubmission', fn ($query) => $query
                     ->where('status', PracticeAcceptanceStatus::Accepted))
                 ->whereDoesntHave('satisfactionSurveyRequest')
+                ->withMax('latestAcceptanceSubmission as acceptance_modified_at', 'updated_at')
                 ->with(['student:id,name', 'company:id,name', 'latestAcceptanceSubmission.supervisor:id,name'])
+                ->orderByDesc('acceptance_modified_at')
                 ->orderByDesc('id')
                 ->get(),
             'surveyRequests' => PracticeSurveyRequest::query()
@@ -225,6 +231,7 @@ class Manage extends Component
                     'version',
                     'answers.question',
                 ])
+                ->orderByDesc('updated_at')
                 ->orderByDesc('id')
                 ->get(),
         ])->layout('layouts.app', ['title' => 'Encuestas de satisfacción']);

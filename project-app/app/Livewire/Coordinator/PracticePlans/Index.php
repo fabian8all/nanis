@@ -18,7 +18,8 @@ class Index extends Component
                     'practicePlan.practiceRequest.student:id,name',
                     'practicePlan.practiceRequest.company:id,name',
                 ])
-                ->orderByDesc('submitted_at')
+                ->orderByDesc('updated_at')
+                ->orderByDesc('id')
                 ->get(),
         ])->layout('layouts.app', ['title' => 'Planes de trabajo']);
     }

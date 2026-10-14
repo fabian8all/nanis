@@ -26,8 +26,26 @@ class Index extends Component
                     'practiceReport.approvedVersion',
                     'practiceEvaluation',
                 ])
+                ->orderByDesc('updated_at')
                 ->orderByDesc('id')
-                ->get(),
+                ->get()
+                ->sort(function (PracticeRequest $left, PracticeRequest $right): int {
+                    $leftModifiedAt = max(
+                        $left->updated_at->getTimestamp(),
+                        $left->practiceReport->approvedVersion->updated_at->getTimestamp(),
+                        $left->practiceEvaluation?->updated_at?->getTimestamp() ?? 0,
+                    );
+                    $rightModifiedAt = max(
+                        $right->updated_at->getTimestamp(),
+                        $right->practiceReport->approvedVersion->updated_at->getTimestamp(),
+                        $right->practiceEvaluation?->updated_at?->getTimestamp() ?? 0,
+                    );
+                    $modifiedOrder = $rightModifiedAt <=> $leftModifiedAt;
+
+                    return $modifiedOrder !== 0
+                        ? $modifiedOrder
+                        : $right->id <=> $left->id;
+                })->values(),
         ])->layout('layouts.app', ['title' => 'Evaluaciones de tutor']);
     }
 

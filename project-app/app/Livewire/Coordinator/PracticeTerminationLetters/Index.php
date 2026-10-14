@@ -33,7 +33,8 @@ class Index extends Component
                     'student:id,name',
                     'company:id,name',
                 ])
-                ->latest('id')
+                ->orderByDesc('updated_at')
+                ->orderByDesc('id')
                 ->paginate(20),
         ])->layout('layouts.app', ['title' => 'Cartas de término']);
     }

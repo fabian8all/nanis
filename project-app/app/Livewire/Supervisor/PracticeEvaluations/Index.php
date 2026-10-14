@@ -31,8 +31,28 @@ class Index extends Component
                     'practicePlan.latestVersion',
                     'practiceSupervisorEvaluation',
                 ])
+                ->orderByDesc('updated_at')
                 ->orderByDesc('id')
-                ->get(),
+                ->get()
+                ->sort(function (PracticeRequest $left, PracticeRequest $right): int {
+                    $leftModifiedAt = max(
+                        $left->updated_at->getTimestamp(),
+                        $left->latestAcceptanceSubmission->updated_at->getTimestamp(),
+                        $left->practicePlan->latestVersion->updated_at->getTimestamp(),
+                        $left->practiceSupervisorEvaluation?->updated_at?->getTimestamp() ?? 0,
+                    );
+                    $rightModifiedAt = max(
+                        $right->updated_at->getTimestamp(),
+                        $right->latestAcceptanceSubmission->updated_at->getTimestamp(),
+                        $right->practicePlan->latestVersion->updated_at->getTimestamp(),
+                        $right->practiceSupervisorEvaluation?->updated_at?->getTimestamp() ?? 0,
+                    );
+                    $modifiedOrder = $rightModifiedAt <=> $leftModifiedAt;
+
+                    return $modifiedOrder !== 0
+                        ? $modifiedOrder
+                        : $right->id <=> $left->id;
+                })->values(),
         ])->layout('layouts.app', ['title' => 'Evaluaciones finales del supervisor']);
     }
 

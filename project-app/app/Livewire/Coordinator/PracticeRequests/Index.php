@@ -23,7 +23,8 @@ class Index extends Component
                 ->select(['id', 'user_id', 'company_id', 'grade_group', 'start_date', 'end_date', 'status', 'created_at'])
                 ->with(['student:id,name,email', 'company:id,name'])
                 ->where('status', PracticeRequestStatus::Pending)
-                ->oldest('created_at')
+                ->orderByDesc('updated_at')
+                ->orderByDesc('id')
                 ->get(),
         ])->layout('layouts.app', ['title' => 'Solicitudes de práctica']);
     }

@@ -114,7 +114,7 @@ class CompanyCatalogTest extends TestCase
             ->assertViewHas('companies', fn ($companies) => $companies->count() === 20 && $companies->total() === 22)
             ->call('nextPage')
             ->assertSet('paginators.page', 2)
-            ->assertSee('Hotel Z')
+            ->assertViewHas('companies', fn ($companies) => $companies->count() === 2 && $companies->total() === 22)
             ->set('search', 'Hotel Z')
             ->assertSet('paginators.page', 1)
             ->assertViewHas('companies', fn ($companies) => $companies->total() === 1)

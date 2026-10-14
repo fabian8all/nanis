@@ -31,8 +31,22 @@ class Index extends Component
                 'practiceRequest.latestAcceptanceSubmission',
                 'practiceRequest.acceptanceSubmissions' => fn ($query) => $query->with('reviewer:id,name')->orderBy('version'),
             ])
-            ->orderByDesc('issued_at')
-            ->get();
+            ->orderByDesc('updated_at')
+            ->orderByDesc('id')
+            ->get()
+            ->sort(function (PracticeLetter $left, PracticeLetter $right): int {
+                $leftSubmissionUpdate = $left->practiceRequest->acceptanceSubmissions
+                    ->max(fn ($submission): ?int => $submission->updated_at?->getTimestamp()) ?? 0;
+                $rightSubmissionUpdate = $right->practiceRequest->acceptanceSubmissions
+                    ->max(fn ($submission): ?int => $submission->updated_at?->getTimestamp()) ?? 0;
+                $leftModifiedAt = max($left->updated_at->getTimestamp(), $leftSubmissionUpdate);
+                $rightModifiedAt = max($right->updated_at->getTimestamp(), $rightSubmissionUpdate);
+                $modifiedOrder = $rightModifiedAt <=> $leftModifiedAt;
+
+                return $modifiedOrder !== 0
+                    ? $modifiedOrder
+                    : $right->id <=> $left->id;
+            })->values();
 
         return view('livewire.supervisor.practice-letters.index', [
             'letters' => $letters,

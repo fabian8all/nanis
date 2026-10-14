@@ -17,7 +17,8 @@ class Index extends Component
             'versions' => PracticeReportVersion::query()
                 ->whereHas('report.practiceRequest', fn ($query) => $query->where('tutor_id', auth()->id()))
                 ->with(['report.practiceRequest.student:id,name', 'report.practiceRequest.company:id,name'])
-                ->orderByDesc('submitted_at')
+                ->orderByDesc('updated_at')
+                ->orderByDesc('id')
                 ->get(),
         ])->layout('layouts.app', ['title' => 'Reportes finales']);
     }

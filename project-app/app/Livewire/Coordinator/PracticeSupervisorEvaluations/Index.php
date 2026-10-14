@@ -22,7 +22,8 @@ class Index extends Component
                     'practiceRequest.company:id,name',
                     'supervisor:id,name',
                 ])
-                ->orderByDesc('submitted_at')
+                ->orderByDesc('updated_at')
+                ->orderByDesc('id')
                 ->get(),
         ])->layout('layouts.app', ['title' => 'Evaluaciones finales del supervisor']);
     }

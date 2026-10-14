@@ -18,7 +18,8 @@ class Index extends Component
             'evaluations' => PracticeEvaluation::query()
                 ->where('status', PracticeEvaluationStatus::Submitted->value)
                 ->with(['practiceRequest.student:id,name', 'practiceRequest.company:id,name', 'tutor:id,name'])
-                ->orderByDesc('submitted_at')
+                ->orderByDesc('updated_at')
+                ->orderByDesc('id')
                 ->get(),
         ])->layout('layouts.app', ['title' => 'Evaluaciones de tutor']);
     }

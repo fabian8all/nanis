@@ -22,7 +22,8 @@ class Index extends Component
                     PracticeSurveyRequestStatus::Responded,
                 ])
                 ->with(['practiceRequest.student:id,name', 'practiceRequest.company:id,name'])
-                ->orderByDesc('requested_at')
+                ->orderByDesc('updated_at')
+                ->orderByDesc('id')
                 ->get(),
         ])->layout('layouts.app', ['title' => 'Encuestas pendientes']);
     }
