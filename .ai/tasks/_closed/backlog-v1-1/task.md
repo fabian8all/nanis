@@ -2,7 +2,8 @@
 
 **Creada:** 2026-10-13 · **Tamaño:** large · **Owner:** (sin asignar) · **Rol:** Gestión de proyecto (ágil/Scrum) (`comun/gestion-proyecto`)
 
-**Estado:** entregable candidato terminado; pendiente revisión humana.
+**Estado:** backlog aprobado como base de planificación por la persona
+solicitante el 2026-10-14; preguntas abiertas conservadas para refinamiento.
 
 ## Objetivo
 Elaborar un backlog candidato, trazable y verificable para las modificaciones
@@ -76,5 +77,10 @@ No editar fuera de esta lista sin actualizarla primero. Evita refactors oportuni
   los IDs `GT-HU-001` a `GT-HU-021` del backlog v1.0.
 - Se añadieron enlaces de ida y vuelta entre el backlog, su documento fuente y
   `docs/README.md`.
-- La validación humana de prioridades, estados límite y alcance de “todas las
-  listas” queda pendiente; no se asignaron sprints, fechas ni estimaciones.
+- La persona solicitante aprobó el backlog y sus prioridades como base de
+  planificación el 2026-10-14. Las preguntas abiertas sobre estados límite y
+  el alcance de “todas las listas” se conservan para refinamiento; en esta
+  tarea no se asignaron sprints ni se establecieron fechas o estimaciones.
+- La persona solicitante aprobó el backlog como base de planificación el
+  2026-10-14. La asignación a sprints se registra en la nueva tarea
+  `.ai/tasks/_closed/planificacion-sprints-v1-1/`.

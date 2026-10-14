@@ -1,8 +1,10 @@
 # Backlog candidato — versión 1.1
 
-**Estado:** borrador para revisión. Las historias traducen las solicitudes de
-[`Planeacion/modificaciones.md`](../Planeacion/modificaciones.md); no son
-requisitos institucionales aprobados ni compromisos de entrega.
+**Estado:** aprobado por la persona solicitante el 2026-10-14 como base de
+planificación. Las historias traducen las solicitudes de
+[`Planeacion/modificaciones.md`](../Planeacion/modificaciones.md); las
+preguntas abiertas se conservan para refinamiento y no establecen políticas
+institucionales ni compromisos de entrega.
 
 ## Propósito
 
@@ -10,7 +12,7 @@ Reducir fricciones de navegación y consulta por rol, corregir accesos rotos y
 facilitar la revisión de prácticas, reportes y empresas, conservando los
 permisos y reglas del prototipo v1.0.
 
-## Prioridades propuestas
+## Prioridades aprobadas como base de planificación
 
 - **P0 — Bloqueo:** impide consultar o completar una parte esencial del flujo,
   o produce un error de acceso/ruta.
@@ -19,9 +21,9 @@ permisos y reglas del prototipo v1.0.
 - **P2 — Usabilidad transversal:** orden, búsqueda y controles que facilitan
   encontrar y procesar información.
 
-Las prioridades son una propuesta inicial para validar con Coordinación y la
-persona solicitante. No implican orden de implementación, sprints, estimaciones,
-capacidad ni fechas.
+La persona solicitante aprobó el backlog y estas prioridades como base para
+planificar. No determinan por sí solas el orden de implementación, las
+estimaciones, la capacidad ni las fechas.
 
 ## Épica GT-EP-06 — Acceso y navegación por rol
 
@@ -430,5 +432,6 @@ las bandejas/listas principales de registros.
 - La búsqueda, el orden y la paginación deben mantener los filtros, los
   límites de autorización por rol y el comportamiento de pantallas con cero
   resultados.
-- La implementación y priorización de estas historias requiere revisión y
-  aprobación; no se asignan a sprints ni se establecen fechas o estimaciones.
+-   La distribución de historias en sprints se documenta por separado en
+  [`../sprints/plan-sprints-candidato.md`](../sprints/plan-sprints-candidato.md)
+  y requiere revisión. No se establecen fechas, duración ni estimaciones.
