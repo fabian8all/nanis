@@ -13,7 +13,7 @@
     @foreach ($history as $item)
         <article class="card mb-2">
             <div class="card-body">
-                <h3 class="h6">Versión {{ $item->version }} — {{ $item->status->value }}</h3>
+                <h3 class="h6">Versión {{ $item->version }} — {{ $item->status->label() }}</h3>
                 @include('livewire.student.practice-reports.partials.version', ['version' => $item])
                 @if ($item->review_comment)
                     <p>Comentario general: {{ $item->review_comment }}</p>
@@ -44,10 +44,13 @@
             'conclusions' => 'Conclusiones',
             'recommendations' => 'Recomendaciones',
         ] as $section => $label)
-            <div class="mb-3">
-                <label class="form-label" for="comment-{{ $section }}">Observación: {{ $label }} (opcional)</label>
-                <textarea class="form-control" id="comment-{{ $section }}" wire:model="sectionComments.{{ $section }}" maxlength="2000"></textarea>
-            </div>
+            <details class="mb-3" wire:key="section-comment-{{ $section }}">
+                <summary>Observación: {{ $label }} (opcional)</summary>
+                <div class="mt-2">
+                    <label class="form-label" for="comment-{{ $section }}">Comentario del Tutor para {{ $label }}</label>
+                    <textarea class="form-control" id="comment-{{ $section }}" wire:model="sectionComments.{{ $section }}" maxlength="2000"></textarea>
+                </div>
+            </details>
         @endforeach
         <button class="btn btn-success" type="button" wire:click="approve">Aprobar reporte</button>
         <button class="btn btn-warning" type="button" wire:click="returnForChanges">Devolver al alumno</button>

@@ -12,7 +12,10 @@
         <p class="text-secondary">Vista limitada: solo se muestran los documentos de tu práctica asignada.</p>
 
         <section class="mb-4" aria-labelledby="supervisor-cover-letter-heading">
-            <h2 id="supervisor-cover-letter-heading" class="h5">Carta de presentación</h2>
+            <h2 id="supervisor-cover-letter-heading" class="h5">
+                Carta de presentación
+                <span class="badge text-bg-secondary" data-document-status="{{ $documentStatuses['presentation'] }}">{{ $documentStatuses['presentation'] }}</span>
+            </h2>
             @if ($practiceRequest->letter)
                 <a class="btn btn-outline-primary btn-sm" href="{{ route('supervisor.practice-letters.show', $practiceRequest->letter) }}">
                     Consultar carta de presentación
@@ -23,7 +26,10 @@
         </section>
 
         <section class="mb-4" aria-labelledby="supervisor-acceptance-heading">
-            <h2 id="supervisor-acceptance-heading" class="h5">Carta de aceptación</h2>
+            <h2 id="supervisor-acceptance-heading" class="h5">
+                Carta de aceptación
+                <span class="badge text-bg-secondary" data-document-status="{{ $documentStatuses['acceptance'] }}">{{ $documentStatuses['acceptance'] }}</span>
+            </h2>
             @if ($practiceRequest->latestAcceptanceSubmission?->status === \App\Enums\PracticeAcceptanceStatus::Accepted)
                 <a class="btn btn-outline-primary btn-sm" href="{{ route('supervisor.practice-acceptances.file', $practiceRequest->latestAcceptanceSubmission) }}">
                     Consultar carta de aceptación
@@ -34,7 +40,10 @@
         </section>
 
         <section class="mb-4" aria-labelledby="supervisor-report-heading">
-            <h2 id="supervisor-report-heading" class="h5">Reporte final del alumno</h2>
+            <h2 id="supervisor-report-heading" class="h5">
+                Reporte final del alumno
+                <span class="badge text-bg-secondary" data-document-status="{{ $documentStatuses['supervisor_report'] }}">{{ $documentStatuses['supervisor_report'] }}</span>
+            </h2>
             @if ($approvedReport && $approvedReport->status === \App\Enums\PracticeReportStatus::Approved)
                 <dl class="row">
                     <dt class="col-sm-3">Empresa</dt>
@@ -68,7 +77,10 @@
         </section>
 
         <section aria-labelledby="supervisor-own-evaluation-heading">
-            <h2 id="supervisor-own-evaluation-heading" class="h5">Tu evaluación</h2>
+            <h2 id="supervisor-own-evaluation-heading" class="h5">
+                Tu evaluación
+                <span class="badge text-bg-secondary" data-document-status="{{ $documentStatuses['supervisor_evaluation'] }}">{{ $documentStatuses['supervisor_evaluation'] }}</span>
+            </h2>
             @if ($practiceRequest->practiceSupervisorEvaluation?->status === \App\Enums\PracticeEvaluationStatus::Submitted)
                 <p>Evaluación enviada · Resultado: {{ number_format($practiceRequest->practiceSupervisorEvaluation->score_total, 2) }}/100</p>
                 <a href="{{ route('supervisor.practice-supervisor-evaluations.show', $practiceRequest->practiceSupervisorEvaluation) }}">Consultar tu evaluación</a>
@@ -99,7 +111,10 @@
         </section>
 
         <section class="mb-4" aria-labelledby="presentation-letter-heading">
-            <h2 id="presentation-letter-heading" class="h5">Carta de presentación</h2>
+            <h2 id="presentation-letter-heading" class="h5">
+                Carta de presentación
+                <span class="badge text-bg-secondary" data-document-status="{{ $documentStatuses['presentation'] }}">{{ $documentStatuses['presentation'] }}</span>
+            </h2>
             @if ($practiceRequest->letter)
                 @php($presentationRoute = $isCoordinator ? 'coordinacion.practice-letters.print' : ($userIsTutor ? 'tutor.practice-letters.show' : 'alumno.practice-letters.show'))
                 <a class="btn btn-outline-primary btn-sm" href="{{ route($presentationRoute, $practiceRequest->letter) }}">
@@ -111,7 +126,10 @@
         </section>
 
         <section class="mb-4" aria-labelledby="acceptance-letter-heading">
-            <h2 id="acceptance-letter-heading" class="h5">Carta de aceptación</h2>
+            <h2 id="acceptance-letter-heading" class="h5">
+                Carta de aceptación
+                <span class="badge text-bg-secondary" data-document-status="{{ $documentStatuses['acceptance'] }}">{{ $documentStatuses['acceptance'] }}</span>
+            </h2>
             @if ($practiceRequest->latestAcceptanceSubmission?->status === \App\Enums\PracticeAcceptanceStatus::Accepted)
                 @php($acceptanceRoute = $isCoordinator ? 'coordinacion.practice-acceptances.file' : ($userIsTutor ? 'tutor.practice-acceptances.file' : 'alumno.practice-acceptances.file'))
                 <a class="btn btn-outline-primary btn-sm" href="{{ route($acceptanceRoute, $practiceRequest->latestAcceptanceSubmission) }}">
@@ -122,38 +140,38 @@
             @endif
         </section>
 
-        <section class="mb-4" aria-labelledby="termination-letter-heading">
-            <h2 id="termination-letter-heading" class="h5">Carta de término</h2>
-            @if ($practiceRequest->terminationLetterIssuance)
-                <p>Coordinación emitió la carta de término.</p>
-                <a class="btn btn-outline-primary btn-sm" href="{{ route('practice-termination-letters.print', $practiceRequest->terminationLetterIssuance) }}">
-                    Consultar e imprimir carta de término
-                </a>
+        <section class="mb-4" aria-labelledby="practice-plan-heading">
+            <h2 id="practice-plan-heading" class="h5">
+                Plan de trabajo
+                <span class="badge text-bg-secondary" data-document-status="{{ $documentStatuses['plan'] }}">{{ $documentStatuses['plan'] }}</span>
+            </h2>
+            @if ($latestPlan)
+                @if ($isStudent)
+                    <a class="btn btn-outline-primary btn-sm" href="{{ route('alumno.practice-plans.show', $practiceRequest) }}">
+                        Consultar plan de trabajo
+                    </a>
+                @elseif ($isCoordinator)
+                    <a class="btn btn-outline-primary btn-sm" href="{{ route('coordinacion.practice-plans.review', $latestPlan) }}">
+                        Consultar plan de trabajo
+                    </a>
+                @else
+                    <p class="text-secondary">Estado del plan de trabajo: {{ $documentStatuses['plan'] }}.</p>
+                @endif
             @else
-                <p class="text-secondary">
-                    @if ($canIssueLetter)
-                        Los requisitos están listos para que Coordinación emita la carta.
-                    @else
-                        Coordinación emitirá la carta cuando el reporte esté aprobado y ambas evaluaciones se hayan enviado.
-                    @endif
-                </p>
-                @if ($isCoordinator && $canIssueLetter)
-                    @error('issuance') <div class="alert alert-danger" role="alert">{{ $message }}</div> @enderror
-                    <button
-                        class="btn btn-primary"
-                        type="button"
-                        wire:click="issueTerminationLetter"
-                        wire:confirm="¿Emitir la carta de término e indicar el cierre del expediente?"
-                        wire:loading.attr="disabled"
-                    >
-                        Emitir e imprimir carta de término
-                    </button>
+                <p class="text-secondary">No hay un plan de trabajo entregado.</p>
+                @if ($isStudent)
+                    <a class="btn btn-outline-primary btn-sm" href="{{ route('alumno.practice-plans.show', $practiceRequest) }}">
+                        Registrar plan de trabajo
+                    </a>
                 @endif
             @endif
         </section>
 
         <section class="mb-4" aria-labelledby="approved-report-heading">
-            <h2 id="approved-report-heading" class="h5">Reporte final aprobado</h2>
+            <h2 id="approved-report-heading" class="h5">
+                Reporte final aprobado
+                <span class="badge text-bg-secondary" data-document-status="{{ $documentStatuses['report'] }}">{{ $documentStatuses['report'] }}</span>
+            </h2>
             @if ($approvedReport && $approvedReport->status === \App\Enums\PracticeReportStatus::Approved)
                 <dl class="row">
                     <dt class="col-sm-3">Empresa</dt>
@@ -183,15 +201,20 @@
                 @endif
             @else
                 <p class="text-secondary">No hay un reporte final aprobado.</p>
-                <a class="btn btn-outline-primary btn-sm" href="{{ route('alumno.practice-reports.show', $practiceRequest) }}">
-                    Consultar reporte final
-                </a>
+                @if ($isStudent)
+                    <a class="btn btn-outline-primary btn-sm" href="{{ route('alumno.practice-reports.show', $practiceRequest) }}">
+                        Consultar reporte final
+                    </a>
+                @endif
             @endif
         </section>
 
         <div class="row g-4">
             <section class="col-md-6" aria-labelledby="supervisor-evaluation-heading">
-                <h2 id="supervisor-evaluation-heading" class="h5">Evaluación terminal del Supervisor</h2>
+                <h2 id="supervisor-evaluation-heading" class="h5">
+                    Evaluación terminal del Supervisor
+                    <span class="badge text-bg-secondary" data-document-status="{{ $documentStatuses['supervisor_evaluation'] }}">{{ $documentStatuses['supervisor_evaluation'] }}</span>
+                </h2>
                 @if ($practiceRequest->practiceSupervisorEvaluation?->status === \App\Enums\PracticeEvaluationStatus::Submitted)
                     <p>Evaluación enviada · Resultado: {{ number_format($practiceRequest->practiceSupervisorEvaluation->score_total, 2) }}/100</p>
                     <a href="{{ route($isCoordinator ? 'coordinacion.practice-supervisor-evaluations.show' : ($userIsTutor ? 'tutor.practice-supervisor-evaluations.show' : 'alumno.practice-supervisor-evaluations.show'), $practiceRequest->practiceSupervisorEvaluation) }}">
@@ -203,7 +226,10 @@
             </section>
 
             <section class="col-md-6" aria-labelledby="tutor-evaluation-heading">
-                <h2 id="tutor-evaluation-heading" class="h5">Evaluación terminal del Tutor</h2>
+                <h2 id="tutor-evaluation-heading" class="h5">
+                    Evaluación terminal del Tutor
+                    <span class="badge text-bg-secondary" data-document-status="{{ $documentStatuses['tutor_evaluation'] }}">{{ $documentStatuses['tutor_evaluation'] }}</span>
+                </h2>
                 @if ($practiceRequest->practiceEvaluation?->status === \App\Enums\PracticeEvaluationStatus::Submitted)
                     <p>Evaluación enviada · Resultado: {{ number_format($practiceRequest->practiceEvaluation->score_total, 2) }}/100</p>
                     <a href="{{ route($isCoordinator ? 'coordinacion.practice-evaluations.show' : ($userIsTutor ? 'tutor.practice-evaluations.show' : 'alumno.practice-evaluations.show'), $practiceRequest->practiceEvaluation) }}">
@@ -214,5 +240,38 @@
                 @endif
             </section>
         </div>
+
+        <section class="mb-4" aria-labelledby="termination-letter-heading">
+            <h2 id="termination-letter-heading" class="h5">
+                Carta de término
+                <span class="badge text-bg-secondary" data-document-status="{{ $documentStatuses['termination_letter'] }}">{{ $documentStatuses['termination_letter'] }}</span>
+            </h2>
+            @if ($practiceRequest->terminationLetterIssuance)
+                <p>Coordinación emitió la carta de término.</p>
+                <a class="btn btn-outline-primary btn-sm" href="{{ route('practice-termination-letters.print', $practiceRequest->terminationLetterIssuance) }}">
+                    Consultar e imprimir carta de término
+                </a>
+            @else
+                <p class="text-secondary">
+                    @if ($canIssueLetter)
+                        Los requisitos están listos para que Coordinación emita la carta.
+                    @else
+                        Coordinación emitirá la carta cuando el reporte esté aprobado y ambas evaluaciones se hayan enviado.
+                    @endif
+                </p>
+                @if ($isCoordinator && $canIssueLetter)
+                    @error('issuance') <div class="alert alert-danger" role="alert">{{ $message }}</div> @enderror
+                    <button
+                        class="btn btn-primary"
+                        type="button"
+                        wire:click="issueTerminationLetter"
+                        wire:confirm="¿Emitir la carta de término e indicar el cierre del expediente?"
+                        wire:loading.attr="disabled"
+                    >
+                        Emitir e imprimir carta de término
+                    </button>
+                @endif
+            @endif
+        </section>
     @endif
 </section>

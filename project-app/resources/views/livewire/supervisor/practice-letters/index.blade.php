@@ -31,7 +31,7 @@
                         <ul class="mt-2 mb-0">
                             @foreach ($request->acceptanceSubmissions as $submission)
                                 <li>
-                                    Versión {{ $submission->version }} — {{ $submission->status->value }}
+                                    Versión {{ $submission->version }} — {{ $submission->status->label() }}
                                     — <a href="{{ route('supervisor.practice-acceptances.file', $submission) }}">Descargar archivo</a>
                                     @if ($submission->review_comment)
                                         <br>Comentario de Coordinación: {{ $submission->review_comment }}

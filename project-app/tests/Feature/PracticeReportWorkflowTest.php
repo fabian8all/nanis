@@ -64,6 +64,11 @@ class PracticeReportWorkflowTest extends TestCase
 
         $version = PracticeReportVersion::query()->sole();
         $this->assertSame(PracticeReportStatus::PendingTutorReview, $version->status);
+        $this->actingAs($tutor)
+            ->get(route('tutor.practice-reports.index'))
+            ->assertOk()
+            ->assertSee('Pendiente de revisión por el Tutor')
+            ->assertDontSee('pending_tutor_review');
         $attachment = $version->attachments()->sole();
         Storage::disk('local')->assertExists($attachment->file_path);
         $this->get(route('practice-reports.attachments.download', $attachment))->assertOk();
@@ -100,6 +105,8 @@ class PracticeReportWorkflowTest extends TestCase
             ->get(route('alumno.practice-reports.show', $request))
             ->assertOk()
             ->assertSee('Versión aprobada: 1')
+            ->assertSee('Versión 1 — Aprobada')
+            ->assertDontSee('approved')
             ->assertDontSee('Está cerrado.');
     }
 

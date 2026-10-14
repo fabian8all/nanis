@@ -183,18 +183,25 @@ orden del proceso y distinguir los que aún no están disponibles.
 **Criterios de aceptación**
 
 - El expediente presenta, en este orden: carta de presentación; carta de
-  aceptación; requisitos de cierre; reporte final aprobado; evaluaciones;
-  carta de término.
+  aceptación; plan de trabajo; reporte final aprobado; evaluaciones; carta de
+  término.
 - Si un documento todavía no existe o no está disponible para ese rol, no se
   muestra un botón **Consultar** activo que apunte a un enlace roto. Se puede
   ocultar o deshabilitar según el diseño final.
+- Cada punto del expediente muestra una insignia con el estado real del
+  documento según su flujo: no entregado, en revisión, devuelto, aprobado,
+  enviado o emitido, según corresponda. No se presenta un estado de aprobación
+  para documentos que no tienen ese flujo.
 - Se conserva la matriz de permisos vigente del expediente; la reorganización
-  visual no habilita documentos adicionales a ningún rol.
+  visual ni las insignias habilitan documentos o estados adicionales a ningún
+  rol. El resumen agregado de requisitos de cierre conserva su función actual.
 
 **Dependencias:** expediente y permisos (`GT-HU-012`).
 
-**Pregunta abierta:** acordar qué comprende exactamente “requisitos de cierre”
-y si se presenta como sección o como documentos individuales.
+**Refinamiento resuelto:** la persona solicitante aclaró que el tercer punto
+debe ser **Plan de trabajo**; el reporte aprobado, las evaluaciones y la carta
+de término permanecen como puntos separados. Cada insignia refleja la entrega
+y/o aprobación disponible en el flujo real de cada documento.
 
 ### GT-HU-031 — Nombrar los botones de Seguimiento por acción y destino
 

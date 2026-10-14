@@ -71,7 +71,8 @@ class PracticePlanWorkflowTest extends TestCase
             ->get(route('coordinacion.practice-plans.index'))
             ->assertOk()
             ->assertSee($student->name)
-            ->assertSee('pending_supervisor_review');
+            ->assertSee('Pendiente de revisión por el Supervisor')
+            ->assertDontSee('pending_supervisor_review');
 
         $this->actingAs(User::factory()->create([
             'role' => UserRole::Supervisor,

@@ -11,10 +11,16 @@ GT-HU-025 fue verificada y quedó cubierta por pruebas de acceso y aislamiento
 sin requerir un cambio en la lógica de aplicación.
 Sprint 2 se completó en `sprint/2-navegacion-acciones-operativas`; sus cinco
 tareas Continuum están cerradas. Las cinco historias están implementadas,
-validadas e integradas en `develop` mediante el merge local `d90ae3a`. Para
+validadas e integradas en `develop` mediante el merge `d90ae3a`. Para
 GT-HU-024 se confirmó la matriz de estados y para GT-HU-033 se eligieron
 botones separados. El merge `d90ae3a` y el cierre documental están publicados
 en `origin/develop`.
+Sprint 3 se inició en `sprint/3-expediente-versiones-revision-reporte` desde
+`develop`; sus tres tareas Continuum están creadas y asignadas. Para GT-HU-026
+se confirmó sustituir “requisitos de cierre” por “Plan de trabajo” como tercer
+punto del expediente y mostrar una insignia de estado por documento.
+GT-HU-026, GT-HU-035 y GT-HU-036 están implementadas, validadas y sus tareas
+cerradas. La rama del Sprint 3 está lista para integrarse en `develop`.
 **Base:** [backlog v1.1](../backlog/backlog-candidato.md).
 
 ## Criterios de organización
@@ -80,12 +86,15 @@ Supervisor en GT-HU-033 serán botones separados o un menú desplegable.
 aceptación/plan/reporte (`GT-HU-004`, `GT-HU-005`, `GT-HU-007`) y revisión de
 reporte (`GT-HU-007`) ya existen en v1.0.
 
-**Salida:** documentos en orden de proceso, enlaces disponibles según rol,
-estados traducidos solo en presentación y observaciones de reporte accesibles
-sin perder contenido.
+**Salida:** carta de presentación, carta de aceptación, Plan de trabajo,
+reporte final aprobado, evaluaciones y carta de término en ese orden. Cada
+punto muestra el estado de entrega/revisión/aprobación que corresponda; los
+estados de versiones se traducen solo en presentación y las observaciones del
+reporte se consultan por sección sin perder contenido ni el comentario general.
 
-**Refinamiento requerido:** precisar qué documentos conforman “requisitos de
-cierre” antes de cerrar el orden final de GT-HU-026.
+**Refinamiento resuelto:** el tercer punto es Plan de trabajo. Reporte,
+evaluaciones y carta de término conservan sus puntos propios; las insignias
+reflejan únicamente estados existentes en cada flujo.
 
 ### Sprint 4 — Administración del catálogo de empresas
 
@@ -133,5 +142,7 @@ su rama desde `develop` y una tarea Continuum por historia, asignada por el
 orquestador al rol/agente adecuado. Para Sprint 1 ya se crearon la rama y las
 tareas de GT-HU-022, GT-HU-023, GT-HU-025, GT-HU-027 y GT-HU-034. Las tareas de
 Sprint 2 se crearon al iniciar la rama `sprint/2-navegacion-acciones-operativas`;
-las de Sprints 3–5 se crearán al iniciar cada uno. Las ramas de Sprints 1 y 2
-permanecen disponibles y están integradas localmente en `develop`.
+las tres tareas de Sprint 3 se crearon al iniciar
+`sprint/3-expediente-versiones-revision-reporte`. Las de Sprints 4–5 se crearán
+al iniciar cada uno. Las ramas de Sprints 1 y 2 permanecen disponibles y están
+integradas en `develop`.

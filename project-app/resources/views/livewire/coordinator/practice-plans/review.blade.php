@@ -18,7 +18,7 @@
     <h2 class="h5 mt-4">Historial</h2>
     @foreach ($history as $historicalVersion)
         <div class="border rounded p-3 mb-2">
-            <strong>Versión {{ $historicalVersion->version }} — {{ $historicalVersion->status->value }}</strong>
+            <strong>Versión {{ $historicalVersion->version }} — {{ $historicalVersion->status->label() }}</strong>
             @if ($historicalVersion->supervisor_review_comment)
                 <p>Supervisor: {{ $historicalVersion->supervisor_review_comment }}</p>
             @endif
