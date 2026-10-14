@@ -19,8 +19,8 @@ contenido presentado.
 
 ## Estado para reanudar
 
-La tarea Continuum está archivada en esta carpeta. Registrar el commit de
-GT-HU-037 y continuar con GT-HU-038 en el mismo checkout, empezando por
+La tarea Continuum está archivada en esta carpeta y GT-HU-037 quedó en el
+commit `f23d463`. Continuar con GT-HU-038 en el mismo checkout, empezando por
 inventariar los campos de búsqueda y controles existentes en listas
 principales, historiales, administración de rúbricas y opciones de selección.
 No integrar Sprint 5 ni hacer push hasta terminar y validar ambas historias.

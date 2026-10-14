@@ -30,8 +30,9 @@
   de versiones, administración de rúbricas y opciones de selección. GT-HU-037
   está implementada, validada (64 tests, 581 assertions, Pint) y su tarea está
   archivada en `.ai/tasks/_closed/gt-hu-037-ordenar-listas-por-modificacion/`.
-  GT-HU-038 aún requiere inventario de campos de búsqueda y controles
-  existentes.
+  El commit de la historia es `f23d463`. GT-HU-038 aún requiere inventario de
+  campos de búsqueda y controles existentes. Preservar el cambio previo ajeno
+  de `project-app/README.md`, que queda fuera del commit de la historia.
 - El catálogo muestra nombre, dirección, teléfono, email y persona de contacto; Coordinación da altas/bajas manualmente. La baja oculta a la empresa en nuevas solicitudes, pero conserva referencias existentes y no afecta prácticas iniciadas.
 - Conciliar canales del prototipo frente a Drive/correo/Classroom/papel descritos en el procedimiento institucional 2025.
 - HU-006, HU-007, HU-016 y HU-017 están implementadas y desplegadas en Sprint 4. La rúbrica de Tutor publicada en desarrollo es temporal/ficticia para demostración; falta que Coordinación publique las rúbricas institucionales. La rúbrica Supervisor continúa como borrador, por lo que HU-006 no inicia aún en demo. La práctica sintética recorre aceptación, plan y reporte aprobados.

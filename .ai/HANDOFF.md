@@ -23,10 +23,13 @@ Completar Sprint 5 de v1.1, iniciado desde `develop`.
   solicitudes consideran también relaciones visibles y los historiales usan
   la fecha de la versión/revisión mostrada. Pasó la regresión dirigida
   (64 tests, 581 assertions) y Pint; la tarea Continuum está archivada en
-  `.ai/tasks/_closed/gt-hu-037-ordenar-listas-por-modificacion/`.
+  `.ai/tasks/_closed/gt-hu-037-ordenar-listas-por-modificacion/`. Su commit es
+  `f23d463`.
 - GT-HU-038 sigue pendiente de inventario detallado de campos de búsqueda y
   controles existentes. Al reanudar, continuar con ese inventario; las
-  historias se trabajan en serie en este único checkout.
+  historias se trabajan en serie en este único checkout. Preservar el cambio
+  previo no relacionado de `project-app/README.md`; no incluirlo en commits de
+  Sprint 5.
 - Sprint 3 se integró desde `sprint/3-expediente-versiones-revision-reporte`
   mediante el merge `c367237`; el cierre documental quedó publicado en
   `origin/develop` hasta `76a3896`.

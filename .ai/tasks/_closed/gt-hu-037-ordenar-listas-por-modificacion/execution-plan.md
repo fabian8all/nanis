@@ -15,5 +15,5 @@ Completados los tres pasos. Las listas se ordenan por `updated_at` del registro
 o versión mostrada, con desempate por ID; las filas de solicitudes consideran
 la actualización más reciente del padre y de las relaciones visibles. La
 regresión dirigida pasó con 64 tests y 581 assertions; Pint pasó para los PHP
-modificados y la tarea está archivada. Siguiente: registrar el commit de
-GT-HU-037 y continuar con el inventario de búsqueda de GT-HU-038.
+modificados, la tarea está archivada y la historia quedó en `f23d463`.
+Siguiente: continuar con el inventario de búsqueda de GT-HU-038.
