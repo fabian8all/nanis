@@ -1,47 +1,40 @@
 # Handoff
 
-**Fecha:** 2026-10-13 · **Rol:** backend · **Rama:** `develop`
+**Fecha:** 2026-10-14 · **Rol:** gestion-proyecto · **Rama:** `develop`
 
-## Objetivo
-Cerrar v1.0, integrar `develop` en `main`, organizar la documentación por
-versión y preparar la tarea de backlog para v1.1.
+## Objetivo de la sesión
+Retomar y completar la tarea Continuum `backlog-v1-1`: convertir las solicitudes
+de v1.1 en un backlog candidato trazable.
 
 ## Resultado
-- Se corrigió la relación `PracticeReport::latestVersion()` que impedía cargar
-  Seguimiento y se añadieron pruebas de regresión.
-- Las fichas de Seguimiento se convirtieron en acordeones Bootstrap, colapsados
-  inicialmente, con resumen de alumno, empresa y etapa, acceso al expediente y
-  detalle de etapas al expandir.
-- La documentación y entregables quedaron bajo `docs/v1.0/`. La planeación
-  siguiente está en `docs/v1.1/Planeacion/modificaciones.md`; su PDF de
-  referencia indica 400 horas, distinto del criterio de 240 horas del prototipo.
-- `cierre-expediente-roles-carta` se archivó en `.ai/tasks/_closed/`.
-- El cierre v1.0 se integró por fast-forward y quedó publicado en
-  `main`/`origin/main` en `cb5365d`; el commit de release es `8a6b9f0`.
-- `develop`/`origin/develop` está en `e86097f` e incluye la tarea activa de
-  backlog para v1.1, que no forma parte de la rama de release.
+- Se creó `docs/v1.1/backlog/backlog-candidato.md` con 17 historias, IDs
+  `GT-HU-022`–`GT-HU-038`, prioridades candidatas, criterios de aceptación,
+  dependencias y preguntas abiertas.
+- Se enlazó el backlog y su fuente desde `docs/README.md`; las referencias
+  resuelven a archivos existentes.
+- La tarea se cerró y archivó en `.ai/tasks/_closed/backlog-v1-1/`.
+- `main`/`origin/main` conserva el cierre v1.0 en `cb5365d`. `develop` contiene
+  el trabajo de backlog v1.1; no integrar a `main` hasta que se revise y
+  apruebe el alcance.
 
 ## Validación
-- Seguimiento: **5 pruebas, 36 aserciones** aprobadas.
-- Pint: **3 archivos PHP** aprobados.
-- Se verificó previamente por HTTP que Coordinación obtiene 200 en
-  `/coordinacion/seguimiento` y que la primera página muestra 15 acordeones
-  colapsados.
-- Los PDFs entregables se conservaron dentro de `docs/v1.0/entregables/`.
+- 17 historias únicas; se confirmó que no reutilizan los IDs v1.0
+  `GT-HU-001`–`GT-HU-021`.
+- Cada historia incluye prioridad, criterios de aceptación y dependencias.
+- Se comprobó cobertura de todos los grupos de solicitudes, con trazabilidad
+  explícita para orden, búsqueda y paginación de listas.
+- Los enlaces del README y del backlog resuelven; `git diff --check` pasó con
+  reconocimiento de CRLF.
+- No se ejecutaron pruebas de aplicación por ser un cambio exclusivamente
+  documental.
 
-## Continuidad
-- La sesión de Continuum se cerró y archivó el handoff anterior. El comando
-  informó `Pint: command not found` y dejó un borrador truncado; este handoff se
-  completó manualmente.
-- La sesión nueva está pausada para continuar mañana. No se empezó a elaborar
-  el backlog.
-- Preservar las modificaciones locales preexistentes en
-  `.continuum/tools/continuum`, `.githooks/pre-commit` y `tools/continuum`, así
-  como los cambios no integrados que permanecen en el worktree del Sprint 5.
+## Pendiente
+Revisar las preguntas abiertas de `.ai/tasks/_closed/backlog-v1-1/handoff.md`
+con Coordinación y la persona solicitante antes de aprobar prioridades,
+comprometer sprints o iniciar implementación. Continúa pendiente la validación
+humana/institucional de flujos y rúbricas de v1.0.
 
-## Siguiente paso
-Mañana, iniciar leyendo este handoff, `.ai/state/estado-dev.md` y
-`.ai/tasks/backlog-v1-1/task.md`. La tarea está asignada al rol
-`gestion-proyecto`; comenzar por el paso 1 del plan: revisar las fuentes y
-mapear las solicitudes de `docs/v1.1/Planeacion/modificaciones.md`. La
-validación humana/institucional de flujos y rúbricas continúa pendiente.
+## Cambios locales que deben preservarse
+No incluir ni revertir las modificaciones preexistentes en
+`.continuum/tools/continuum`, `.githooks/pre-commit` y `tools/continuum`, ni
+los cambios aún no integrados del worktree `sprint/5-cierre-expediente-encuesta`.

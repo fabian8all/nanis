@@ -14,8 +14,10 @@ conservar el alcance y los entregables de cada etapa.
 | `v1.0/formatos/` | Formatos de referencia saneados |
 | `v1.0/entregables/` | PDFs de backlog y plan de sprints |
 | `v1.0/manuales/` | Manuales de usuario y operación |
-| `v1.1/Planeacion/modificaciones.md` | Solicitudes que servirán de entrada para el backlog de v1.1 |
+| [`v1.1/Planeacion/modificaciones.md`](v1.1/Planeacion/modificaciones.md) | Solicitudes que sirven de entrada para el backlog de v1.1 |
+| [`v1.1/backlog/backlog-candidato.md`](v1.1/backlog/backlog-candidato.md) | Backlog candidato de historias y criterios de aceptación para revisión |
 
 `v1.0/` conserva la documentación del prototipo cerrado. Las modificaciones
-para la siguiente versión se refinan en una tarea de Continuum antes de
-convertirse en backlog aprobado.
+para la siguiente versión se refinan en la tarea Continuum
+`.ai/tasks/backlog-v1-1/`; el backlog de v1.1 sigue siendo candidato hasta su
+revisión y aprobación.

@@ -2,6 +2,8 @@
 
 **Creada:** 2026-10-13 · **Tamaño:** large · **Owner:** (sin asignar) · **Rol:** Gestión de proyecto (ágil/Scrum) (`comun/gestion-proyecto`)
 
+**Estado:** entregable candidato terminado; pendiente revisión humana.
+
 ## Objetivo
 Elaborar un backlog candidato, trazable y verificable para las modificaciones
 de v1.1, descomponiendo las solicitudes de `docs/v1.1/Planeacion/modificaciones.md`
@@ -65,3 +67,14 @@ No editar fuera de esta lista sin actualizarla primero. Evita refactors oportuni
 - No se agregan fechas ni duraciones de sprint.
 - El backlog y el índice de documentación enlazan correctamente y reciben una
   revisión final de consistencia.
+
+## Resultado
+- Se elaboró `docs/v1.1/backlog/backlog-candidato.md` con 17 historias
+  candidatas, prioridades propuestas, criterios de aceptación, dependencias y
+  preguntas abiertas.
+- Se verificó que los IDs `GT-HU-022` a `GT-HU-038` son nuevos y no reutilizan
+  los IDs `GT-HU-001` a `GT-HU-021` del backlog v1.0.
+- Se añadieron enlaces de ida y vuelta entre el backlog, su documento fuente y
+  `docs/README.md`.
+- La validación humana de prioridades, estados límite y alcance de “todas las
+  listas” queda pendiente; no se asignaron sprints, fechas ni estimaciones.
