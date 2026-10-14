@@ -24,6 +24,10 @@ Continuum por historia y asignación explícita del rol implementador.
   explícitas de aislamiento y de denegación para otros roles, sin cambio de
   lógica de aplicación. Su tarea se cerró y archivó en
   `.ai/tasks/_closed/gt-hu-025-consultar-solicitud-propia/`.
+- GT-HU-027 redirige ahora a Coordinación a Seguimiento. Se probaron la
+  autenticación y autorización del destino, y que los destinos existentes de
+  Alumno, Supervisión y Tutoría se conservan. Su tarea se cerró y archivó en
+  `.ai/tasks/_closed/gt-hu-027-destino-coordinacion-seguimiento/`.
 - GT-HU-023 está bloqueada para implementación hasta acordar el destino de
   solicitudes devueltas, canceladas, rechazadas (si ese estado se permite) y
   prácticas completadas. No se asumirá ese comportamiento.

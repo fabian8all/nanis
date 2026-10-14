@@ -8,6 +8,7 @@ Continuum, asignadas a los roles `frontend` y `backend`. GT-HU-023 queda
 pendiente de refinamiento antes de su implementación. GT-HU-022 está
 implementada y validada; GT-HU-025 fue verificada y quedó cubierta por pruebas
 de acceso y aislamiento sin requerir un cambio en la lógica de aplicación.
+GT-HU-027 está implementada y validada.
 **Base:** [backlog v1.1](../backlog/backlog-candidato.md).
 
 ## Criterios de organización

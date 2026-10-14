@@ -35,7 +35,7 @@ class AuthenticatedSessionController extends Controller
 
         $user = Auth::user();
         $destination = match ($user?->role) {
-            UserRole::Coordinator => 'coordinacion.companies.index',
+            UserRole::Coordinator => 'coordinacion.practice-tracking.index',
             UserRole::Supervisor => $user->email_verified_at && $user->company_id !== null
                     ? 'supervisor.practice-letters.index'
                     : null,

@@ -7,11 +7,18 @@ use App\Models\Company;
 use App\Models\User;
 use Illuminate\Foundation\Http\Middleware\PreventRequestForgery;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Routing\Middleware\ThrottleRequests;
 use Tests\TestCase;
 
 class CoordinatorAuthenticationTest extends TestCase
 {
     use RefreshDatabase;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->withoutMiddleware(ThrottleRequests::class);
+    }
 
     public function test_coordinator_can_sign_in(): void
     {
@@ -27,8 +34,10 @@ class CoordinatorAuthenticationTest extends TestCase
             'password' => 'CorrectHorseBattery1!',
         ]);
 
-        $response->assertRedirect(route('coordinacion.companies.index'));
+        $response->assertRedirect(route('coordinacion.practice-tracking.index'));
         $this->assertAuthenticatedAs($coordinator);
+
+        $this->get(route('coordinacion.practice-tracking.index'))->assertOk();
     }
 
     public function test_user_with_an_invalid_password_cannot_sign_in(): void
@@ -105,6 +114,22 @@ class CoordinatorAuthenticationTest extends TestCase
         $this->assertAuthenticatedAs($supervisor);
     }
 
+    public function test_tutor_can_sign_in_to_practice_reports(): void
+    {
+        $this->withoutMiddleware(PreventRequestForgery::class);
+        $tutor = User::factory()->create([
+            'role' => UserRole::Tutor,
+            'password' => 'CorrectHorseBattery1!',
+        ]);
+
+        $this->post(route('login.store'), [
+            'email' => $tutor->email,
+            'password' => 'CorrectHorseBattery1!',
+        ])->assertRedirect(route('tutor.practice-reports.index'));
+
+        $this->assertAuthenticatedAs($tutor);
+    }
+
     public function test_unverified_supervisor_cannot_sign_in(): void
     {
         $this->withoutMiddleware(PreventRequestForgery::class);
@@ -131,8 +156,14 @@ class CoordinatorAuthenticationTest extends TestCase
         $this->get(route('coordinacion.companies.index'))
             ->assertRedirect(route('login'));
 
+        $this->get(route('coordinacion.practice-tracking.index'))
+            ->assertRedirect(route('login'));
+
         $this->actingAs(User::factory()->create(['role' => UserRole::Student]))
             ->get(route('coordinacion.companies.index'))
+            ->assertForbidden();
+
+        $this->get(route('coordinacion.practice-tracking.index'))
             ->assertForbidden();
     }
 }
