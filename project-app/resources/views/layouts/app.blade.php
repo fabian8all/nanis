@@ -50,10 +50,17 @@
                     <a class="navbar-brand" href="{{ route('supervisor.practice-letters.index') }}">Nanis</a>
                     <span class="navbar-text me-auto">Supervisor de empresa</span>
                     <a class="nav-link me-3" href="{{ route('supervisor.practice-tracking.index') }}">Seguimiento</a>
-                    <a class="nav-link me-3" href="{{ route('supervisor.practice-letters.index') }}">Cartas pendientes</a>
-                    <a class="nav-link me-3" href="{{ route('supervisor.practice-plans.index') }}">Planes de trabajo</a>
-                    <a class="nav-link me-3" href="{{ route('supervisor.practice-supervisor-evaluations.index') }}">Evaluaciones</a>
-                    <a class="nav-link me-3" href="{{ route('supervisor.practice-surveys.index') }}">Encuestas</a>
+                    <div class="dropdown me-3">
+                        <button class="nav-link dropdown-toggle border-0 bg-transparent" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Documentos
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="{{ route('supervisor.practice-letters.index') }}">Cartas pendientes</a></li>
+                            <li><a class="dropdown-item" href="{{ route('supervisor.practice-plans.index') }}">Planes de trabajo</a></li>
+                            <li><a class="dropdown-item" href="{{ route('supervisor.practice-supervisor-evaluations.index') }}">Evaluaciones</a></li>
+                            <li><a class="dropdown-item" href="{{ route('supervisor.practice-surveys.index') }}">Encuestas</a></li>
+                        </ul>
+                    </div>
                     <form method="POST" action="{{ route('supervisor.logout') }}">
                         @csrf
                         <button class="btn btn-outline-secondary btn-sm" type="submit">Cerrar sesión</button>

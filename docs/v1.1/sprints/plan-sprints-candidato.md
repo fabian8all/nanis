@@ -10,8 +10,8 @@ GT-HU-022, GT-HU-023, GT-HU-027 y GT-HU-034 están implementadas y validadas.
 GT-HU-025 fue verificada y quedó cubierta por pruebas de acceso y aislamiento
 sin requerir un cambio en la lógica de aplicación.
 Sprint 2 está iniciado en `sprint/2-navegacion-acciones-operativas`; sus cinco
-tareas Continuum están asignadas. GT-HU-028 y GT-HU-031 están implementadas y
-validadas;
+tareas Continuum están asignadas. GT-HU-028, GT-HU-031 y GT-HU-032 están
+implementadas y validadas;
 GT-HU-024 y GT-HU-033 requieren resolver sus preguntas de refinamiento antes
 de implementarlas.
 **Base:** [backlog v1.1](../backlog/backlog-candidato.md).
