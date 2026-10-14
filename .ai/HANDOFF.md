@@ -1,13 +1,15 @@
 # Handoff
 
-**Fecha:** 2026-10-14 · **Rol:** gestion-proyecto · **Rama:** `sprint/3-expediente-versiones-revision-reporte`
+**Fecha:** 2026-10-14 · **Rol:** gestion-proyecto · **Rama:** `develop`
 
 ## Objetivo
-Completar Sprint 3 de v1.1 con los refinamientos confirmados.
+Cerrar Sprint 3 de v1.1, integrado y validado en `develop`.
 
 ## Estado
-- El checkout sigue dentro de `~/code/nanis`; la rama activa es
-  `sprint/3-expediente-versiones-revision-reporte`, creada desde `develop`.
+- El checkout sigue dentro de `~/code/nanis`; la rama activa es `develop`.
+- Sprint 3 se integró desde `sprint/3-expediente-versiones-revision-reporte`
+  mediante el merge `c367237`. Su publicación en `origin/develop` se realiza
+  como parte de este cierre.
 - Sprint 2 y su cierre documental están publicados en `origin/develop` hasta
   `bea2c2e`.
 - Sprint 1 se integró en `develop` mediante el merge `b345549`; el cierre
@@ -131,13 +133,15 @@ Completar Sprint 3 de v1.1 con los refinamientos confirmados.
   341 assertions); Pint pasó para los nueve archivos PHP revisados.
 - La regresión conjunta de Sprint 2 pasó (41 tests, 300 assertions) y Pint pasó
   para los diez archivos PHP modificados del sprint.
+- La regresión dirigida de Sprint 3 pasó (24 tests, 303 assertions); Pint pasó
+  para diez archivos PHP de las historias modificadas.
 - `docker compose config --quiet` pasó con la anulación local; `app` y el
   `nginx-proxy` compartido comparten la red `proxy`.
 - Los servicios `app` y `db` están en ejecución; `http://localhost:8001` y
   `http://nanis.net` respondieron `HTTP 200`, este último por el proxy compartido.
 
 ## Pendiente
-- Las tres historias de Sprint 3 están validadas y cerradas. Falta integrar la
-  rama en `develop`, actualizar la continuidad y publicar el merge.
+- Sprint 3 está integrado y validado en `develop`; publicar el merge y el
+  cierre documental en `origin/develop` como último paso.
 - Decidir cuándo incluir en un commit el cambio previo de
   `project-app/README.md`; se preserva fuera de los commits del sprint.

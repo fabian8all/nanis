@@ -1,8 +1,8 @@
 # Pendientes
 
-- Al 2026-10-14, el checkout principal `~/code/nanis` trabaja en
-  `sprint/3-expediente-versiones-revision-reporte`, creada desde `develop`;
-  `origin/develop` está publicado en `bea2c2e` y `main` permanece en
+- Al 2026-10-14, el checkout principal `~/code/nanis` trabaja en `develop`;
+  el merge de Sprint 3 es `c367237` y se publica a `origin/develop` durante el
+  cierre. `main` permanece en
   `cb5365d` con el cierre de v1.0. Sprint 5 y el cierre v1.0 son ancestros de
   `develop`. La persona solicitante aprobó el backlog
   v1.1 como base de planificación y la secuencia de cinco sprints; v1.1 aún no
@@ -14,7 +14,8 @@
   comprometer cada sprint, resolver las preguntas abiertas correspondientes;
   no establecer fechas, duración, estimaciones ni capacidad.
 - Sprint 3 se inició en `sprint/3-expediente-versiones-revision-reporte`.
-  GT-HU-026, GT-HU-035 y GT-HU-036 tienen tareas Continuum creadas y asignadas.
+  GT-HU-026, GT-HU-035 y GT-HU-036 están implementadas y cerradas; sus tareas
+  Continuum están archivadas.
   Para GT-HU-026 se confirmó que el tercer punto del expediente sea Plan de
   trabajo y que cada documento tenga una insignia de estado según su flujo.
 - El catálogo muestra nombre, dirección, teléfono, email y persona de contacto; Coordinación da altas/bajas manualmente. La baja oculta a la empresa en nuevas solicitudes, pero conserva referencias existentes y no afecta prácticas iniciadas.
