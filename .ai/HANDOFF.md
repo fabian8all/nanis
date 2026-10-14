@@ -46,6 +46,10 @@ asignada por el orquestador.
   al catálogo y un menú Documentos con las rutas existentes; Rúbricas conserva
   su enlace operativo. Su tarea se cerró y archivó en
   `.ai/tasks/_closed/gt-hu-028-navegacion-coordinacion/`.
+- GT-HU-031 cambió los botones genéricos de Seguimiento por acciones que
+  describen el destino, incluida la revisión y corrección de solicitudes. Su
+  tarea se cerró y archivó en
+  `.ai/tasks/_closed/gt-hu-031-rotulos-acciones-seguimiento/`.
 - GT-HU-024 requiere confirmar si una solicitud completada permite una nueva
   selección, además del estado devuelto. GT-HU-033 requiere elegir botones
   separados o un menú desplegable. No se implementarán estas dos historias
@@ -110,7 +114,7 @@ asignada por el orquestador.
 ## Pendiente
 - Resolver las dos preguntas de refinamiento de Sprint 2 antes de implementar
   GT-HU-024 y GT-HU-033.
-- Continuar en serie con GT-HU-031 y GT-HU-032; completar las cinco historias
+- Continuar en serie con GT-HU-032; completar las cinco historias
   con un commit por tarea, luego integrar la rama a `develop` y validar el
   sprint.
 - Decidir cuándo incluir en un commit el cambio previo de

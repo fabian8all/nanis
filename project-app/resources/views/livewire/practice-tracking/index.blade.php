@@ -97,7 +97,7 @@
                                                 <td>{{ $stage['responsible'] ? ucfirst($stage['responsible']) : '—' }}</td>
                                                 <td>
                                                     @if ($stage['route'])
-                                                        <a class="btn btn-sm btn-outline-primary" href="{{ $stage['route'] }}">Abrir práctica</a>
+                                                        <a class="btn btn-sm btn-outline-primary" href="{{ $stage['route'] }}">{{ $stage['action'] }}</a>
                                                     @else
                                                         <span class="text-secondary">—</span>
                                                     @endif

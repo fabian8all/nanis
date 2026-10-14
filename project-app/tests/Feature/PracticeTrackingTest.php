@@ -30,6 +30,8 @@ class PracticeTrackingTest extends TestCase
             ->assertSee('Ana Alumna')
             ->assertSee('Hotel Faro')
             ->assertSee('Solicitud · Pendiente')
+            ->assertSee('Revisar solicitud')
+            ->assertDontSee('Abrir práctica')
             ->assertSee('Abrir expediente')
             ->assertSee('class="accordion-collapse collapse"', false)
             ->assertSee('aria-expanded="false"', false);
@@ -46,6 +48,19 @@ class PracticeTrackingTest extends TestCase
             ->assertSee('Coordinación debe revisar la solicitud');
 
         $this->assertSame(PracticeRequestStatus::Pending, $request->fresh()->status);
+    }
+
+    public function test_returned_request_action_names_the_correction_destination(): void
+    {
+        [, $student, $request] = $this->createPractice('Hotel Faro', 'Ana Alumna');
+        $request->update(['status' => PracticeRequestStatus::Returned]);
+
+        $this->actingAs($student)
+            ->get(route('alumno.practice-tracking.index'))
+            ->assertOk()
+            ->assertSee('Corregir solicitud')
+            ->assertSee('href="'.route('alumno.practice-request.show').'"', false)
+            ->assertDontSee('Abrir práctica');
     }
 
     public function test_coordinator_tracking_loads_the_latest_practice_report_version(): void
@@ -103,6 +118,7 @@ class PracticeTrackingTest extends TestCase
             ->assertDontSee('Hotel Ajeno')
             ->assertDontSee('Alumno Ajeno')
             ->assertSee('El alumno debe registrar el plan de trabajo')
+            ->assertSee('Consultar solicitud')
             ->assertSee('Tienes 1 acción pendiente');
 
         $this->actingAs($coordinator)
@@ -155,6 +171,7 @@ class PracticeTrackingTest extends TestCase
             ->assertSee('Hotel Faro')
             ->assertDontSee('Hotel Ajeno')
             ->assertSee('El supervisor debe cargar la carta de aceptación')
+            ->assertSee('Cargar carta de aceptación')
             ->assertSee('acción pendiente');
     }
 

@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 class PracticeTrackingSummary
 {
     /**
-     * @return array<int, array{label: string, status: string, detail: string, responsible: string|null, route: string|null}>
+     * @return array<int, array{label: string, status: string, detail: string, responsible: string|null, route: string|null, action: string|null}>
      */
     public function stages(PracticeRequest $request): array
     {
@@ -231,15 +231,54 @@ class PracticeTrackingSummary
         array $parameters = [],
         ?int $responsibleId = null,
     ): array {
+        $route = $route && Route::has($route) ? $route : null;
+
         return [
             'label' => $label,
             'status' => $status,
             'detail' => $detail,
             'responsible' => $responsible?->value,
             'responsible_id' => $responsibleId,
-            'route' => $route && Route::has($route)
-                ? route($route, $parameters)
-                : null,
+            'route' => $route ? route($route, $parameters) : null,
+            'action' => $route ? $this->actionLabel($route, $status) : null,
         ];
+    }
+
+    private function actionLabel(string $route, string $status): string
+    {
+        return match ($route) {
+            'coordinacion.practice-requests.review' => 'Revisar solicitud',
+            'alumno.practice-request.show' => match ($status) {
+                'Devuelta' => 'Corregir solicitud',
+                'Aprobada', 'Aceptada' => 'Consultar solicitud',
+                default => throw new \LogicException("Missing action label for tracking status [{$status}] at route [{$route}]."),
+            },
+            'coordinacion.practice-acceptances.review' => 'Revisar aceptación',
+            'supervisor.practice-letters.index' => match ($status) {
+                'Devuelta' => 'Corregir carta de aceptación',
+                'Pendiente' => 'Cargar carta de aceptación',
+                default => throw new \LogicException("Missing action label for tracking status [{$status}] at route [{$route}]."),
+            },
+            'alumno.practice-plans.show' => match ($status) {
+                'Pendiente' => 'Registrar plan de trabajo',
+                'Devuelto' => 'Corregir plan de trabajo',
+                'Aprobado' => 'Consultar plan de trabajo',
+                default => throw new \LogicException("Missing action label for tracking status [{$status}] at route [{$route}]."),
+            },
+            'supervisor.practice-plans.index',
+            'coordinacion.practice-plans.review' => 'Revisar plan de trabajo',
+            'alumno.practice-reports.show' => match ($status) {
+                'Pendiente' => 'Preparar reporte final',
+                'Borrador' => 'Completar reporte final',
+                'Devuelto' => 'Corregir reporte final',
+                'Aprobado' => 'Consultar reporte final',
+                default => throw new \LogicException("Missing action label for tracking status [{$status}] at route [{$route}]."),
+            },
+            'tutor.practice-reports.review' => 'Revisar reporte final',
+            'tutor.practice-evaluations.index',
+            'supervisor.practice-supervisor-evaluations.index' => 'Completar evaluación terminal',
+            'coordinacion.practice-records.show' => 'Consultar expediente de práctica',
+            default => throw new \LogicException("Missing action label for tracking route [{$route}]."),
+        };
     }
 }
