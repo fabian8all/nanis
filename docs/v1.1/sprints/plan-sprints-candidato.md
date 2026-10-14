@@ -9,6 +9,9 @@ orquestador a `frontend` o `backend`; las cinco tareas están cerradas.
 GT-HU-022, GT-HU-023, GT-HU-027 y GT-HU-034 están implementadas y validadas.
 GT-HU-025 fue verificada y quedó cubierta por pruebas de acceso y aislamiento
 sin requerir un cambio en la lógica de aplicación.
+Sprint 2 está iniciado en `sprint/2-navegacion-acciones-operativas`; sus cinco
+tareas Continuum están activas y asignadas. GT-HU-024 y GT-HU-033 requieren
+resolver sus preguntas de refinamiento antes de implementarlas.
 **Base:** [backlog v1.1](../backlog/backlog-candidato.md).
 
 ## Criterios de organización
@@ -126,5 +129,6 @@ duración, estimaciones, capacidad ni velocidad. Al iniciar cada sprint se crea
 su rama desde `develop` y una tarea Continuum por historia, asignada por el
 orquestador al rol/agente adecuado. Para Sprint 1 ya se crearon la rama y las
 tareas de GT-HU-022, GT-HU-023, GT-HU-025, GT-HU-027 y GT-HU-034. Las tareas de
-los Sprints 2–5 se crearán cuando se inicie cada uno. La rama de Sprint 1
+Sprint 2 se crearon al iniciar la rama `sprint/2-navegacion-acciones-operativas`;
+las de Sprints 3–5 se crearán al iniciar cada uno. La rama de Sprint 1
 permanece disponible y ya está integrada en `develop`.
