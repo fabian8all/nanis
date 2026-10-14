@@ -7,9 +7,9 @@ Consolidar el trabajo en `~/code/nanis` y dejar el checkout principal en
 `develop`, conservando `main` como cierre de v1.0 y `develop` como base de v1.1.
 
 ## Estado
-- El checkout `~/code/nanis` está en `develop` (`64925ed`), alineado con
-  `origin/develop`; contiene el backlog candidato v1.1 de 17 historias
-  (`GT-HU-022`–`GT-HU-038`).
+- El checkout `~/code/nanis` está en `develop`; contiene el backlog candidato
+  v1.1 de 17 historias (`GT-HU-022`–`GT-HU-038`) y dos commits locales de
+  consolidación documental por delante de `origin/develop` (`64925ed`).
 - `main` y `origin/main` permanecen en `cb5365d`, con el cierre de v1.0.
   Sprint 5 (`a11bd76`) y el cierre v1.0 son ancestros de `develop`.
 - La fuente original `docs/v1.1/Planeacion/Modificaciones.txt` se conserva junto
@@ -36,6 +36,7 @@ Consolidar el trabajo en `~/code/nanis` y dejar el checkout principal en
   ya no aparecen en `.ai/tasks`; existen los directorios destino de v1.0.
 - Las 171 referencias actualizadas resuelven a rutas existentes; `git diff
   --check` pasó usando `core.whitespace=cr-at-eol` para respetar CRLF.
+- Los commits nuevos están solo en el `develop` local; no se publicaron.
 
 ## Pendiente
 - Terminar la limpieza del directorio residual si se concede acceso a la ruta
