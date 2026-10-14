@@ -13,6 +13,17 @@
         <div class="alert alert-success" role="status">{{ session('status') }}</div>
     @endif
 
+    <div class="mb-3">
+        <label class="form-label" for="companySearch">Buscar empresa disponible</label>
+        <input
+            class="form-control"
+            id="companySearch"
+            type="search"
+            wire:model.live.debounce.300ms="search"
+            placeholder="Escribe un nombre"
+        >
+    </div>
+
     @if ($showForm)
         <div class="card mb-4">
             <div class="card-header">{{ $editingId ? 'Editar empresa' : 'Agregar empresa' }}</div>
@@ -105,10 +116,14 @@
                     </tr>
                 @empty
                     <tr>
-                        <td class="text-secondary" colspan="4">Todavía no hay empresas registradas.</td>
+                        <td class="text-secondary" colspan="4">
+                            {{ trim($search) !== '' ? 'No se encontraron empresas disponibles que coincidan con la búsqueda.' : 'Todavía no hay empresas registradas.' }}
+                        </td>
                     </tr>
                 @endforelse
             </tbody>
         </table>
     </div>
+
+    {{ $companies->links() }}
 </div>

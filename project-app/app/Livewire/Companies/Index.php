@@ -5,12 +5,17 @@ namespace App\Livewire\Companies;
 use App\Models\Company;
 use Illuminate\View\View;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class Index extends Component
 {
+    use WithPagination;
+
     public ?int $editingId = null;
 
     public bool $showForm = false;
+
+    public string $search = '';
 
     public string $name = '';
 
@@ -102,14 +107,26 @@ class Index extends Component
         $this->resetForm();
     }
 
+    public function updatedSearch(): void
+    {
+        $this->resetPage();
+    }
+
     public function render(): View
     {
         $this->authorizeCoordinator();
 
+        $query = Company::query()->orderBy('name')->orderBy('id');
+        $search = trim($this->search);
+
+        if ($search !== '') {
+            $query
+                ->where('is_active', true)
+                ->where('name', 'like', "%{$search}%");
+        }
+
         return view('livewire.companies.index', [
-            'companies' => Company::query()
-                ->orderBy('name')
-                ->get(),
+            'companies' => $query->paginate(20),
         ])->layout('layouts.app', ['title' => 'Catálogo de empresas']);
     }
 

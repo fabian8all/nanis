@@ -28,6 +28,8 @@ No editar fuera de esta lista sin actualizarla primero. Evita refactors oportuni
 - `project-app/app/Livewire/Companies/Index.php`
 - `project-app/resources/views/livewire/companies/index.blade.php`
 - `project-app/tests/Feature/CompanyCatalogTest.php`
+- `.ai/HANDOFF.md`
+- `.ai/state/topics/pendientes.md`
 
 ## Fuentes de verdad a leer antes de empezar
 - `.ai/state/estado-dev.md`

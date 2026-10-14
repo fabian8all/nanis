@@ -87,6 +87,7 @@ class CompanyCatalogTest extends TestCase
         ]);
 
         Livewire::test(Index::class)
+            ->assertSee('Hotel Ejemplo')
             ->call('toggleActive', $company->id)
             ->assertSee('La empresa volvió a estar disponible para nuevas solicitudes.');
 
@@ -94,6 +95,33 @@ class CompanyCatalogTest extends TestCase
             'id' => $company->id,
             'is_active' => true,
         ]);
+    }
+
+    public function test_search_only_matches_active_companies_and_resets_pagination(): void
+    {
+        $this->actingAs(User::factory()->create(['role' => UserRole::Coordinator]));
+
+        foreach (range(1, 20) as $index) {
+            Company::query()->create(['name' => 'Hotel Repetido']);
+        }
+
+        Company::query()->create(['name' => 'Hotel Z']);
+        $hiddenCompany = Company::query()->create(['name' => 'Hotel Z Oculto']);
+        $hiddenCompany->is_active = false;
+        $hiddenCompany->save();
+
+        Livewire::test(Index::class)
+            ->assertViewHas('companies', fn ($companies) => $companies->count() === 20 && $companies->total() === 22)
+            ->call('nextPage')
+            ->assertSet('paginators.page', 2)
+            ->assertSee('Hotel Z')
+            ->set('search', 'Hotel Z')
+            ->assertSet('paginators.page', 1)
+            ->assertViewHas('companies', fn ($companies) => $companies->total() === 1)
+            ->assertSee('Hotel Z')
+            ->assertDontSee('Hotel Z Oculto')
+            ->set('search', 'No existe')
+            ->assertSee('No se encontraron empresas disponibles que coincidan con la búsqueda.');
     }
 
     public function test_company_email_must_be_valid_when_provided(): void

@@ -80,14 +80,21 @@ Completar Sprint 4 de v1.1 y luego integrarlo y publicarlo en `develop`.
   controles accesibles; el comentario general sigue visible y obligatorio al
   devolver. La tarea Continuum quedó cerrada y archivada.
 - Sprint 4 contiene GT-HU-029 y GT-HU-030. Las tareas se asignaron a
-  `frontend` y `backend`, respectivamente; GT-HU-029 está implementada,
-  validada y archivada, y GT-HU-030 está pendiente de implementación.
+  `frontend` y `backend`, respectivamente; ambas historias están implementadas,
+  validadas y sus tareas archivadas. GT-HU-029 quedó en `52d0ac4`.
 - Para GT-HU-030 se resolvió que la búsqueda incluya solo empresas disponibles
   (`is_active = true`), mientras la lista sin búsqueda conserva las ocultas
-  para permitir su reactivación. Se documentó en el backlog y el plan.
+  para permitir su reactivación. La búsqueda parcial pagina 20 resultados,
+  reinicia la página al cambiar y muestra un estado vacío. Se documentó en el
+  backlog y el plan.
 - GT-HU-029 oculta el formulario hasta iniciar un alta o edición y conserva
   campos, validaciones, permisos y cancelación sin guardar. La regresión del
   catálogo pasó con 12 tests y 74 assertions; Pint pasó para el componente.
+- La regresión conjunta del catálogo pasó con 13 tests y 83 assertions;
+  Pint pasó para el componente y las pruebas. El primer intento de construir
+  la imagen agotó el timeout TLS contra Docker Hub, pero el reintento terminó
+  y la regresión pasó también en la imagen recién reconstruida. El servicio
+  `app` se recreó y `localhost:8001` y `nanis.net` responden HTTP 200.
 - Las tareas del sprint se trabajan en serie dentro de este único checkout;
   no se crearon worktrees ni se inició ejecución paralela.
 - Sprint 5 y sus tareas se crearán al iniciar ese sprint.
@@ -149,8 +156,6 @@ Completar Sprint 4 de v1.1 y luego integrarlo y publicarlo en `develop`.
   `http://nanis.net` respondieron `HTTP 200`, este último por el proxy compartido.
 
 ## Pendiente
-- Completar GT-HU-029, después GT-HU-030, validar Sprint 4, cerrar y archivar
-  sus tareas Continuum, integrar el sprint en `develop` y publicar a
-  `origin/develop`.
+- Integrar Sprint 4 en `develop` y publicar el merge a `origin/develop`.
 - Decidir cuándo incluir en un commit el cambio previo de
   `project-app/README.md`; se preserva fuera de los commits del sprint.
