@@ -70,6 +70,13 @@ Completar Sprint 3 de v1.1 con los refinamientos confirmados.
   cierre” por “Plan de trabajo” como tercer punto y mostrar una insignia con
   el estado de entrega/aprobación de cada documento. El resumen agregado de
   requisitos de cierre conserva su función actual.
+- GT-HU-026 se implementó y validó en el commit `60e8fe4`; su tarea Continuum
+  está cerrada y archivada.
+- GT-HU-035 centralizó las etiquetas en español para los estados de versiones
+  de aceptación, plan y reporte. Se validó y su tarea Continuum está cerrada y
+  archivada; la etiqueta solo cambia la presentación.
+- GT-HU-036 mantiene una tarea Continuum activa; falta validar y cerrar su
+  interfaz de observaciones por sección.
 - Las tareas del sprint se trabajan en serie dentro de este único checkout;
   no se crearon worktrees ni se inició ejecución paralela.
 - Las ramas y tareas de Sprints 4–5 se crearán al iniciar cada sprint.

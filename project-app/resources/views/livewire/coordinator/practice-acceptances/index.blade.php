@@ -28,7 +28,7 @@
                 <h3 class="h5">{{ $submission->practiceRequest->letter->folio }} — versión {{ $submission->version }}</h3>
                 <p class="mb-1">Alumno: {{ $submission->practiceRequest->student->name }}</p>
                 <p class="mb-1">Empresa: {{ $submission->practiceRequest->company->name }}</p>
-                <p class="mb-2">Estado: {{ $submission->status->value }} · revisada {{ $submission->reviewed_at->format('d/m/Y H:i') }}</p>
+                <p class="mb-2">Estado: {{ $submission->status->label() }} · revisada {{ $submission->reviewed_at->format('d/m/Y H:i') }}</p>
                 @if ($submission->review_comment)
                     <p>Comentario: {{ $submission->review_comment }}</p>
                 @endif

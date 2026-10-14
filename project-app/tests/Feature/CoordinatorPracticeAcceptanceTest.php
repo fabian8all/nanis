@@ -29,6 +29,10 @@ class CoordinatorPracticeAcceptanceTest extends TestCase
             ->assertHasErrors(['reviewComment' => 'required']);
 
         Livewire::test(Review::class, ['practiceAcceptance' => $submission])
+            ->assertSee('Pendiente de revisión')
+            ->assertDontSee('pending_review');
+
+        Livewire::test(Review::class, ['practiceAcceptance' => $submission])
             ->set('reviewComment', 'Falta la firma de la empresa.')
             ->call('returnForChanges')
             ->assertHasNoErrors()
@@ -43,6 +47,8 @@ class CoordinatorPracticeAcceptanceTest extends TestCase
             ->get(route('supervisor.practice-letters.index'))
             ->assertOk()
             ->assertSee($letter->folio)
+            ->assertSee('Devuelta')
+            ->assertDontSee('returned')
             ->assertSee('Falta la firma de la empresa.');
     }
 
@@ -67,6 +73,8 @@ class CoordinatorPracticeAcceptanceTest extends TestCase
             ->assertOk()
             ->assertSee('Historial de cartas revisadas')
             ->assertSee($letter->folio)
+            ->assertSee('Aprobada')
+            ->assertDontSee('accepted')
             ->assertSee('Documento legible.');
         $this->get(route('coordinacion.practice-acceptances.review', $submission))
             ->assertOk()

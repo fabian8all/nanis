@@ -13,7 +13,7 @@
     @foreach ($history as $item)
         <article class="card mb-2">
             <div class="card-body">
-                <h3 class="h6">Versión {{ $item->version }} — {{ $item->status->value }}</h3>
+                <h3 class="h6">Versión {{ $item->version }} — {{ $item->status->label() }}</h3>
                 @include('livewire.student.practice-reports.partials.version', ['version' => $item])
                 @if ($item->review_comment)
                     <p>Comentario general: {{ $item->review_comment }}</p>

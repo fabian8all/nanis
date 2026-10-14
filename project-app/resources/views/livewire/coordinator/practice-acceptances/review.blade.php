@@ -17,7 +17,7 @@
     <ul class="mb-4">
         @foreach ($history as $version)
             <li>
-                Versión {{ $version->version }} — {{ $version->status->value }}
+                Versión {{ $version->version }} — {{ $version->status->label() }}
                 @if ($version->review_comment) — {{ $version->review_comment }} @endif
                 @if ($version->reviewer) — revisó {{ $version->reviewer->name }} @endif
             </li>

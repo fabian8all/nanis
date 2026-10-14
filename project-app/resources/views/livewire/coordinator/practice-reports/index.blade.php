@@ -25,10 +25,10 @@
                     <div class="col-auto"><button class="btn btn-outline-primary" type="submit">Guardar asignación</button></div>
                 </form>
                 @if ($latest)
-                    <p>Reporte — versión {{ $latest->version }}: {{ $latest->status->value }}</p>
+                    <p>Reporte — versión {{ $latest->version }}: {{ $latest->status->label() }}</p>
                     @foreach ($report->versions->sortBy('version') as $version)
                         <details class="mb-2">
-                            <summary>Consultar versión {{ $version->version }} — {{ $version->status->value }}</summary>
+                            <summary>Consultar versión {{ $version->version }} — {{ $version->status->label() }}</summary>
                             @include('livewire.student.practice-reports.partials.version', ['version' => $version])
                             @if ($version->review_comment)
                                 <p>Comentario general: {{ $version->review_comment }}</p>

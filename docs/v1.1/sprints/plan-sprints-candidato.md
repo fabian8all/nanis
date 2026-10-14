@@ -11,7 +11,7 @@ GT-HU-025 fue verificada y quedó cubierta por pruebas de acceso y aislamiento
 sin requerir un cambio en la lógica de aplicación.
 Sprint 2 se completó en `sprint/2-navegacion-acciones-operativas`; sus cinco
 tareas Continuum están cerradas. Las cinco historias están implementadas,
-validadas e integradas en `develop` mediante el merge local `d90ae3a`. Para
+validadas e integradas en `develop` mediante el merge `d90ae3a`. Para
 GT-HU-024 se confirmó la matriz de estados y para GT-HU-033 se eligieron
 botones separados. El merge `d90ae3a` y el cierre documental están publicados
 en `origin/develop`.
@@ -19,6 +19,8 @@ Sprint 3 se inició en `sprint/3-expediente-versiones-revision-reporte` desde
 `develop`; sus tres tareas Continuum están creadas y asignadas. Para GT-HU-026
 se confirmó sustituir “requisitos de cierre” por “Plan de trabajo” como tercer
 punto del expediente y mostrar una insignia de estado por documento.
+GT-HU-026 y GT-HU-035 están implementadas, validadas y sus tareas cerradas;
+GT-HU-036 sigue en ejecución.
 **Base:** [backlog v1.1](../backlog/backlog-candidato.md).
 
 ## Criterios de organización
