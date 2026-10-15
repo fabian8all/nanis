@@ -31,6 +31,7 @@ no aparece en la página o búsqueda actual.
 ## Continuidad
 
 La tarea quedó archivada y el commit de historia es `7fca340`. GT-HU-037 y
-GT-HU-038 están integradas en `develop` mediante el merge `1e1d4ed`; queda
-publicar `develop` en `origin`. Preservar `project-app/README.md`, un
+GT-HU-038 están integradas en `develop` mediante el merge `1e1d4ed`; la
+integración y su cierre documental se publicaron en `origin/develop` hasta
+`a1215b7`. Preservar `project-app/README.md`, un
 cambio local previo que queda fuera de este write-set y del commit de historia.

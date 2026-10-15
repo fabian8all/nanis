@@ -35,9 +35,9 @@ Completar Sprint 5 de v1.1, iniciado desde `develop`.
   Pasaron 134 tests/1077 assertions, Pint, `git diff --check` y Continuum
   doctor (0 problemas críticos; advertencia del presupuesto de arranque).
   La tarea está archivada y su commit es `7fca340`; Sprint 5 se integró en
-  `develop` mediante `1e1d4ed`. Falta cerrar documentalmente y publicar la
-  integración. Preservar el cambio previo ajeno de `project-app/README.md`;
-  excluirlo de commits del sprint.
+  `develop` mediante `1e1d4ed`, y la integración con su cierre documental se
+  publicó en `origin/develop` hasta `a1215b7`. Preservar el cambio previo ajeno
+  de `project-app/README.md`; excluirlo de commits del sprint.
 - Sprint 3 se integró desde `sprint/3-expediente-versiones-revision-reporte`
   mediante el merge `c367237`; el cierre documental quedó publicado en
   `origin/develop` hasta `76a3896`.
@@ -129,7 +129,7 @@ Completar Sprint 5 de v1.1, iniciado desde `develop`.
   no se crearon worktrees ni se inició ejecución paralela.
 - Sprint 5 termina con GT-HU-037 y GT-HU-038 implementadas y validadas; ambas
   historias están comprometidas y la rama del sprint está integrada en
-  `develop` (`1e1d4ed`). Falta publicar `develop` en `origin`.
+  `develop` (`1e1d4ed`); la integración se publicó en `origin/develop`.
 - No se crearon worktrees adicionales: por la decisión de mantener el trabajo
   en este checkout, las cinco historias se atenderán en serie; no hay agentes
   ejecutándolas en paralelo.
@@ -188,7 +188,5 @@ Completar Sprint 5 de v1.1, iniciado desde `develop`.
   `http://nanis.net` respondieron `HTTP 200`, este último por el proxy compartido.
 
 ## Pendiente
-- Publicar en `origin/develop` la integración de Sprint 5 (`1e1d4ed`) después
-  de este cierre documental.
 - Decidir cuándo incluir en un commit el cambio previo de
   `project-app/README.md`; se preserva fuera de los commits del sprint.
