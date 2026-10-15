@@ -30,8 +30,7 @@ no aparece en la página o búsqueda actual.
 
 ## Continuidad
 
-La tarea quedó archivada; falta crear su commit de historia en la rama Sprint 5.
-GT-HU-037 ya estaba cerrada; al integrar GT-HU-038, ambas historias del sprint
-estarán listas para integrar `sprint/5-experiencia-transversal-listas` en
-`develop` y publicar la integración. Preservar `project-app/README.md`, un
+La tarea quedó archivada y el commit de historia es `7fca340`. GT-HU-037 y
+GT-HU-038 están integradas en `develop` mediante el merge `1e1d4ed`; queda
+publicar `develop` en `origin`. Preservar `project-app/README.md`, un
 cambio local previo que queda fuera de este write-set y del commit de historia.

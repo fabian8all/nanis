@@ -1,11 +1,11 @@
 # Pendientes
 
-- Al 2026-10-14, el checkout principal `~/code/nanis` trabaja en
-  `sprint/5-experiencia-transversal-listas`, creada desde `develop`. Sprint 4
-  se integró con el merge `bfaed9d` y se publicó con el cierre documental
-  `d3f3449`; `develop` y `origin/develop` están sincronizadas. `main` permanece en
-  `cb5365d` con el cierre de v1.0. Sprint 5 y el cierre v1.0 son ancestros de
-  `develop`. La persona solicitante aprobó el backlog
+- Al 2026-10-15, el checkout principal `~/code/nanis` trabaja en `develop`.
+  Sprint 4 se integró con el merge `bfaed9d` y se publicó con el cierre
+  documental `d3f3449`. Sprint 5 se integró localmente mediante `1e1d4ed`;
+  falta cerrar documentalmente y publicar `develop` en `origin`. `main`
+  permanece en `cb5365d` con el cierre de v1.0. Sprint 5 y el cierre v1.0 son
+  ancestros de `develop`. La persona solicitante aprobó el backlog
   v1.1 como base de planificación y la secuencia de cinco sprints; v1.1 aún no
   se ha integrado a `main`.
 - La fuente original de solicitudes para v1.1 se conserva en
@@ -35,8 +35,9 @@
   encuestas y opciones de selección tienen búsqueda/paginación donde faltaban;
   Seguimiento y catálogo de Coordinación no duplican controles. Suite Laravel:
   134 tests/1077 assertions; Pint y doctor pasan, con advertencia de presupuesto
-  de arranque. Su tarea está archivada; falta el commit de historia y sigue
-  integrar Sprint 5 en `develop` y publicar. Preservar el cambio previo ajeno de
+  de arranque. Su tarea está archivada; el commit de GT-HU-038 es `7fca340` y
+  Sprint 5 se integró en `develop` mediante `1e1d4ed`; falta publicar la rama.
+  Preservar el cambio previo ajeno de
   `project-app/README.md`, que queda fuera de commits de historia.
 - El catálogo muestra nombre, dirección, teléfono, email y persona de contacto; Coordinación da altas/bajas manualmente. La baja oculta a la empresa en nuevas solicitudes, pero conserva referencias existentes y no afecta prácticas iniciadas.
 - Conciliar canales del prototipo frente a Drive/correo/Classroom/papel descritos en el procedimiento institucional 2025.
