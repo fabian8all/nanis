@@ -5,16 +5,29 @@ namespace App\Livewire\Supervisor\PracticeLetters;
 use App\Enums\PracticeAcceptanceStatus;
 use App\Enums\PracticeRequestStatus;
 use App\Models\PracticeLetter;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Pagination\LengthAwarePaginator as Paginator;
+use Illuminate\Support\Collection;
 use Illuminate\View\View;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class Index extends Component
 {
+    use WithPagination;
+
+    public string $search = '';
+
+    public function updatedSearch(): void
+    {
+        $this->resetPage();
+    }
+
     public function render(): View
     {
         $this->authorizeSupervisor();
 
-        $letters = PracticeLetter::query()
+        $query = PracticeLetter::query()
             ->whereHas('practiceRequest', fn ($query) => $query
                 ->where('company_id', auth()->user()->company_id)
                 ->where('status', PracticeRequestStatus::Approved->value)
@@ -30,7 +43,17 @@ class Index extends Component
                 'practiceRequest.student:id,name',
                 'practiceRequest.latestAcceptanceSubmission',
                 'practiceRequest.acceptanceSubmissions' => fn ($query) => $query->with('reviewer:id,name')->orderBy('version'),
-            ])
+            ]);
+        $search = trim($this->search);
+        if ($search !== '') {
+            $query->where(function ($query) use ($search): void {
+                $query
+                    ->where('folio', 'like', "%{$search}%")
+                    ->orWhereHas('practiceRequest.student', fn ($student) => $student->where('name', 'like', "%{$search}%"));
+            });
+        }
+
+        $letters = $query
             ->orderByDesc('updated_at')
             ->orderByDesc('id')
             ->get()
@@ -49,8 +72,22 @@ class Index extends Component
             })->values();
 
         return view('livewire.supervisor.practice-letters.index', [
-            'letters' => $letters,
+            'letters' => $this->paginateCollection($letters),
         ])->layout('layouts.app', ['title' => 'Cartas pendientes de aceptación']);
+    }
+
+    private function paginateCollection(Collection $items): LengthAwarePaginator
+    {
+        $perPage = 15;
+        $page = Paginator::resolveCurrentPage();
+
+        return new Paginator(
+            $items->forPage($page, $perPage)->values(),
+            $items->count(),
+            $perPage,
+            $page,
+            ['path' => Paginator::resolveCurrentPath()],
+        );
     }
 
     private function authorizeSupervisor(): void

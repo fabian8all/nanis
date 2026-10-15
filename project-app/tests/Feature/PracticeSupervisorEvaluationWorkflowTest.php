@@ -8,7 +8,9 @@ use App\Enums\PracticePlanStatus;
 use App\Enums\PracticeRequestStatus;
 use App\Enums\RubricType;
 use App\Enums\UserRole;
+use App\Livewire\Coordinator\PracticeSupervisorEvaluations\Index as CoordinatorSupervisorEvaluationQueue;
 use App\Livewire\Student\PracticePlans\Show as StudentPlan;
+use App\Livewire\Supervisor\PracticeEvaluations\Index as SupervisorEvaluationQueue;
 use App\Livewire\Supervisor\PracticeEvaluations\Manage;
 use App\Models\Company;
 use App\Models\PracticeSupervisorEvaluation;
@@ -76,6 +78,12 @@ class PracticeSupervisorEvaluationWorkflowTest extends TestCase
             ->assertHasErrors('evaluation');
         $this->assertSame(1, PracticeSupervisorEvaluation::query()->count());
 
+        $this->actingAs($coordinator);
+        Livewire::test(CoordinatorSupervisorEvaluationQueue::class)
+            ->set('search', $student->name)
+            ->assertViewHas('evaluations', fn ($evaluations) => $evaluations->total() === 1)
+            ->assertSee($student->name);
+
         $this->actingAs($student)
             ->get(route('alumno.practice-supervisor-evaluations.show', $evaluation))
             ->assertOk()
@@ -125,6 +133,17 @@ class PracticeSupervisorEvaluationWorkflowTest extends TestCase
         $this->actingAs(User::factory()->create(['role' => UserRole::Student]))
             ->get(route('supervisor.practice-supervisor-evaluations.index'))
             ->assertForbidden();
+    }
+
+    public function test_supervisor_evaluation_queue_search_keeps_the_assigned_scope(): void
+    {
+        [$student, $supervisor, , $request] = $this->createEligiblePractice();
+        $this->actingAs($supervisor);
+
+        Livewire::test(SupervisorEvaluationQueue::class)
+            ->set('search', $student->name)
+            ->assertViewHas('requests', fn ($requests) => $requests->total() === 1)
+            ->assertSee($request->company->name);
     }
 
     private function createEligiblePractice(

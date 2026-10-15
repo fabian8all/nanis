@@ -23,6 +23,11 @@
         </div>
     @endif
 
+    <div class="mb-3">
+        <label class="form-label" for="studentCompanySearch">Buscar empresas</label>
+        <input id="studentCompanySearch" class="form-control" type="search" wire:model.live.debounce.300ms="search" placeholder="Nombre, dirección, teléfono, correo o contacto">
+    </div>
+
     <div class="row g-3">
         @forelse ($companies as $company)
             <div class="col-md-6">
@@ -68,8 +73,9 @@
             </div>
         @empty
             <div class="col-12">
-                <p class="text-secondary">Por el momento no hay empresas disponibles para nuevas prácticas.</p>
+                <p class="text-secondary">{{ trim($search) !== '' ? 'No hay empresas que coincidan con la búsqueda.' : 'Por el momento no hay empresas disponibles para nuevas prácticas.' }}</p>
             </div>
         @endforelse
     </div>
+    {{ $companies->links() }}
 </section>

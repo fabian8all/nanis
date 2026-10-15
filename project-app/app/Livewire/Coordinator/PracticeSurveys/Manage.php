@@ -12,12 +12,36 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\ValidationException;
 use Illuminate\View\View;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class Manage extends Component
 {
+    use WithPagination;
+
     public int $versionId;
 
     public array $questions = [];
+
+    public string $versionsSearch = '';
+
+    public string $eligibleSearch = '';
+
+    public string $surveyRequestsSearch = '';
+
+    public function updatedVersionsSearch(): void
+    {
+        $this->resetPage('versionsPage');
+    }
+
+    public function updatedEligibleSearch(): void
+    {
+        $this->resetPage('eligiblePage');
+    }
+
+    public function updatedSurveyRequestsSearch(): void
+    {
+        $this->resetPage('surveyRequestsPage');
+    }
 
     public function mount(): void
     {
@@ -202,38 +226,82 @@ class Manage extends Component
         $selectedVersion = PracticeSurveyVersion::query()
             ->with('questions')
             ->findOrFail($this->versionId);
+        $versionsQuery = PracticeSurveyVersion::query()
+            ->with('questions')
+            ->orderByDesc('updated_at')
+            ->orderByDesc('id');
+        $versionsSearch = trim($this->versionsSearch);
+        if ($versionsSearch !== '') {
+            $versionsQuery->where(function ($query) use ($versionsSearch): void {
+                $query->where('status', 'like', "%{$versionsSearch}%");
+                if (ctype_digit($versionsSearch)) {
+                    $query->orWhere('version', (int) $versionsSearch);
+                }
+            });
+        }
+
+        $eligibleQuery = PracticeRequest::query()
+            ->whereHas('latestAcceptanceSubmission', fn ($query) => $query
+                ->where('status', PracticeAcceptanceStatus::Accepted))
+            ->whereDoesntHave('satisfactionSurveyRequest')
+            ->withMax('latestAcceptanceSubmission as acceptance_modified_at', 'updated_at')
+            ->with(['student:id,name', 'company:id,name', 'latestAcceptanceSubmission.supervisor:id,name']);
+        $eligibleSearch = trim($this->eligibleSearch);
+        if ($eligibleSearch !== '') {
+            $eligibleQuery->where(function ($query) use ($eligibleSearch): void {
+                $query
+                    ->whereHas('student', fn ($student) => $student->where('name', 'like', "%{$eligibleSearch}%"))
+                    ->orWhereHas('company', fn ($company) => $company->where('name', 'like', "%{$eligibleSearch}%"))
+                    ->orWhereHas('latestAcceptanceSubmission.supervisor', fn ($supervisor) => $supervisor
+                        ->where('name', 'like', "%{$eligibleSearch}%"));
+            });
+        }
+
+        $surveyRequestsQuery = PracticeSurveyRequest::query()
+            ->with([
+                'practiceRequest.student:id,name',
+                'practiceRequest.company:id,name',
+                'supervisor:id,name',
+                'version',
+                'answers.question',
+            ])
+            ->orderByDesc('updated_at')
+            ->orderByDesc('id');
+        $surveyRequestsSearch = trim($this->surveyRequestsSearch);
+        if ($surveyRequestsSearch !== '') {
+            $surveyRequestsQuery->where(function ($query) use ($surveyRequestsSearch): void {
+                $query
+                    ->whereHas('practiceRequest.student', fn ($student) => $student->where('name', 'like', "%{$surveyRequestsSearch}%"))
+                    ->orWhereHas('practiceRequest.company', fn ($company) => $company->where('name', 'like', "%{$surveyRequestsSearch}%"))
+                    ->orWhereHas('supervisor', fn ($supervisor) => $supervisor->where('name', 'like', "%{$surveyRequestsSearch}%"));
+                $status = match (mb_strtolower($surveyRequestsSearch)) {
+                    'solicitada' => PracticeSurveyRequestStatus::Requested->value,
+                    'respondida' => PracticeSurveyRequestStatus::Responded->value,
+                    'cancelada' => PracticeSurveyRequestStatus::Cancelled->value,
+                    default => null,
+                };
+                if ($status !== null) {
+                    $query->orWhere('status', $status);
+                }
+                if (ctype_digit($surveyRequestsSearch)) {
+                    $query->orWhereHas('version', fn ($version) => $version->where('version', (int) $surveyRequestsSearch));
+                }
+            });
+        }
 
         return view('livewire.coordinator.practice-surveys.manage', [
             'selectedVersion' => $selectedVersion,
-            'versions' => PracticeSurveyVersion::query()
-                ->with('questions')
-                ->orderByDesc('updated_at')
-                ->orderByDesc('id')
-                ->get(),
+            'versions' => $versionsQuery->paginate(10, ['*'], 'versionsPage'),
             'publishedVersion' => PracticeSurveyVersion::query()
                 ->where('status', PracticeSurveyVersionStatus::Published)
                 ->orderByDesc('version')
                 ->first(),
-            'eligiblePractices' => PracticeRequest::query()
-                ->whereHas('latestAcceptanceSubmission', fn ($query) => $query
-                    ->where('status', PracticeAcceptanceStatus::Accepted))
-                ->whereDoesntHave('satisfactionSurveyRequest')
-                ->withMax('latestAcceptanceSubmission as acceptance_modified_at', 'updated_at')
-                ->with(['student:id,name', 'company:id,name', 'latestAcceptanceSubmission.supervisor:id,name'])
+            'eligiblePractices' => $eligibleQuery
                 ->orderByDesc('acceptance_modified_at')
                 ->orderByDesc('id')
-                ->get(),
-            'surveyRequests' => PracticeSurveyRequest::query()
-                ->with([
-                    'practiceRequest.student:id,name',
-                    'practiceRequest.company:id,name',
-                    'supervisor:id,name',
-                    'version',
-                    'answers.question',
-                ])
-                ->orderByDesc('updated_at')
-                ->orderByDesc('id')
-                ->get(),
+                ->paginate(15, ['*'], 'eligiblePage'),
+            'surveyRequests' => $surveyRequestsQuery
+                ->paginate(15, ['*'], 'surveyRequestsPage'),
         ])->layout('layouts.app', ['title' => 'Encuestas de satisfacción']);
     }
 

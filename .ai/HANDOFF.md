@@ -25,11 +25,19 @@ Completar Sprint 5 de v1.1, iniciado desde `develop`.
   (64 tests, 581 assertions) y Pint; la tarea Continuum está archivada en
   `.ai/tasks/_closed/gt-hu-037-ordenar-listas-por-modificacion/`. Su commit es
   `f23d463`.
-- GT-HU-038 sigue pendiente de inventario detallado de campos de búsqueda y
-  controles existentes. Al reanudar, continuar con ese inventario; las
-  historias se trabajan en serie en este único checkout. Preservar el cambio
-  previo no relacionado de `project-app/README.md`; no incluirlo en commits de
-  Sprint 5.
+- GT-HU-038 está implementada en `sprint/5-experiencia-transversal-listas`:
+  se agregaron búsqueda/paginación a las bandejas, historiales globales de
+  versiones, administración de rúbricas/encuestas, opciones de tutor y
+  catálogo de empresas del alumno que carecían de esos controles. Las listas
+  existentes de Seguimiento y catálogo de Coordinación conservan sus controles
+  sin duplicados; se preservan alcance por rol, filtros, estados vacíos y la
+  selección de empresa en sesión. El inventario y el handoff están en
+  `.ai/tasks/_closed/gt-hu-038-buscar-paginar-listas-restantes/`.
+  Pasaron 134 tests/1077 assertions, Pint, `git diff --check` y Continuum
+  doctor (0 problemas críticos; advertencia del presupuesto de arranque).
+  La tarea está archivada; falta el commit de la historia y después integrar
+  Sprint 5 en `develop` y publicar la integración. Preservar el cambio previo ajeno de
+  `project-app/README.md`; excluirlo de commits del sprint.
 - Sprint 3 se integró desde `sprint/3-expediente-versiones-revision-reporte`
   mediante el merge `c367237`; el cierre documental quedó publicado en
   `origin/develop` hasta `76a3896`.
@@ -119,7 +127,9 @@ Completar Sprint 5 de v1.1, iniciado desde `develop`.
   `app` se recreó y `localhost:8001` y `nanis.net` responden HTTP 200.
 - Las tareas del sprint se trabajan en serie dentro de este único checkout;
   no se crearon worktrees ni se inició ejecución paralela.
-- Sprint 5 y sus tareas se crearán al iniciar ese sprint.
+- Sprint 5 termina con GT-HU-037 y GT-HU-038 implementadas y validadas; falta
+  el commit de GT-HU-038 y la integración/publicación de la rama del sprint en
+  `develop`.
 - No se crearon worktrees adicionales: por la decisión de mantener el trabajo
   en este checkout, las cinco historias se atenderán en serie; no hay agentes
   ejecutándolas en paralelo.
@@ -178,9 +188,7 @@ Completar Sprint 5 de v1.1, iniciado desde `develop`.
   `http://nanis.net` respondieron `HTTP 200`, este último por el proxy compartido.
 
 ## Pendiente
-- Inventariar listas, revisar criterios específicos y completar el write-set
-  antes de cada implementación; implementar GT-HU-037 y después GT-HU-038.
-- Integrar Sprint 5 en `develop` y publicar el merge a `origin/develop` al
-  terminar y validar ambas historias.
+- Crear el commit de GT-HU-038; después integrar Sprint 5 en `develop` y
+  publicar el merge a `origin/develop`.
 - Decidir cuándo incluir en un commit el cambio previo de
   `project-app/README.md`; se preserva fuera de los commits del sprint.

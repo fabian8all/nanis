@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use App\Enums\PracticeRequestStatus;
 use App\Enums\UserRole;
+use App\Livewire\Coordinator\PracticeRequests\Index as CoordinatorPracticeRequests;
 use App\Livewire\Coordinator\PracticeRequests\Review;
 use App\Livewire\Student\PracticeRequests\Show as StudentPracticeRequest;
 use App\Models\Company;
@@ -47,6 +48,25 @@ class CoordinatorPracticeRequestReviewTest extends TestCase
             ->assertSee('Datos protegidos')
             ->assertDontSee('00000000000')
             ->assertDontSee('00000000');
+    }
+
+    public function test_request_queue_search_filters_pending_records_and_resets_pagination(): void
+    {
+        $coordinator = User::factory()->create(['role' => UserRole::Coordinator]);
+        $this->actingAs($coordinator);
+        foreach (range(1, 16) as $index) {
+            [$student] = $this->createPendingRequest();
+            $student->update(['name' => sprintf('Alumna %02d', $index)]);
+        }
+
+        Livewire::test(CoordinatorPracticeRequests::class)
+            ->call('nextPage')
+            ->assertSet('paginators.page', 2)
+            ->assertViewHas('requests', fn ($requests) => $requests->total() === 16)
+            ->set('search', 'Alumna 01')
+            ->assertSet('paginators.page', 1)
+            ->assertViewHas('requests', fn ($requests) => $requests->total() === 1)
+            ->assertSee('Alumna 01');
     }
 
     public function test_return_requires_comment_and_records_decision_for_student(): void

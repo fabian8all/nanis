@@ -6,8 +6,10 @@ use App\Enums\PracticeAcceptanceStatus;
 use App\Enums\PracticePlanStatus;
 use App\Enums\PracticeRequestStatus;
 use App\Enums\UserRole;
+use App\Livewire\Coordinator\PracticePlans\Index as CoordinatorPlanQueue;
 use App\Livewire\Coordinator\PracticePlans\Review as CoordinatorReview;
 use App\Livewire\Student\PracticePlans\Show as StudentPlan;
+use App\Livewire\Supervisor\PracticePlans\Index as SupervisorPlanQueue;
 use App\Livewire\Supervisor\PracticePlans\Review as SupervisorReview;
 use App\Models\Company;
 use App\Models\PracticePlan;
@@ -178,6 +180,25 @@ class PracticePlanWorkflowTest extends TestCase
         $newVersion = PracticePlanVersion::query()->where('version', 2)->firstOrFail();
         $this->assertSame(PracticePlanStatus::PendingSupervisorReview, $newVersion->status);
         $this->assertSame('Incluye un resultado medible.', $version->fresh()->coordinator_review_comment);
+    }
+
+    public function test_coordinator_and_supervisor_plan_queues_search_their_version_records(): void
+    {
+        [$student, $supervisor, $coordinator, $request] = $this->createPractice(accepted: true);
+        $supervisor->update(['email_verified_at' => now()]);
+        $this->submitPlan($student, $request);
+
+        $this->actingAs($coordinator);
+        Livewire::test(CoordinatorPlanQueue::class)
+            ->set('search', $student->name)
+            ->assertViewHas('versions', fn ($versions) => $versions->total() === 1)
+            ->assertSee($student->name);
+
+        $this->actingAs($supervisor);
+        Livewire::test(SupervisorPlanQueue::class)
+            ->set('search', $student->name)
+            ->assertViewHas('versions', fn ($versions) => $versions->total() === 1)
+            ->assertSee($student->name);
     }
 
     private function createPractice(bool $accepted = false): array

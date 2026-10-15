@@ -1,5 +1,9 @@
 <section>
     <h1 class="h3 mb-3">Evaluaciones finales asignadas</h1>
+    <div class="mb-3">
+        <label class="form-label" for="supervisorPracticeEvaluationSearch">Buscar prácticas</label>
+        <input id="supervisorPracticeEvaluationSearch" class="form-control" type="search" wire:model.live.debounce.300ms="search" placeholder="Alumno o empresa">
+    </div>
     @forelse ($requests as $request)
         <article class="card mb-3">
             <div class="card-body">
@@ -16,6 +20,7 @@
             </div>
         </article>
     @empty
-        <div class="alert alert-info">No hay prácticas con aceptación y plan aprobados para evaluar.</div>
+        <div class="alert alert-info">{{ trim($search) !== '' ? 'No hay prácticas que coincidan con la búsqueda.' : 'No hay prácticas con aceptación y plan aprobados para evaluar.' }}</div>
     @endforelse
+    {{ $requests->links() }}
 </section>

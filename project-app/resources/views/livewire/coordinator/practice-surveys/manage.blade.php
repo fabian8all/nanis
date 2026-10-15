@@ -12,14 +12,21 @@
             <h2 id="survey-configuration-heading" class="h5">Cuestionario institucional</h2>
             <p>La escala de cada pregunta es de 1 a 5. Una versión publicada no se puede modificar; las nuevas solicitudes conservan la versión vigente al crearse.</p>
 
+            <div class="mb-3">
+                <label class="form-label" for="surveyVersionSearch">Buscar versiones</label>
+                <input id="surveyVersionSearch" class="form-control" type="search" wire:model.live.debounce.300ms="versionsSearch" placeholder="Número de versión o estado">
+            </div>
             <ul class="list-group mb-3">
-                @foreach ($versions as $version)
+                @forelse ($versions as $version)
                     <li class="list-group-item d-flex justify-content-between align-items-center">
                         <span>Versión {{ $version->version }} — {{ $version->isPublished() ? 'Publicada' : 'Borrador' }}</span>
                         <button class="btn btn-link btn-sm" type="button" wire:click="selectVersion({{ $version->id }})">Consultar</button>
                     </li>
-                @endforeach
+                @empty
+                    <li class="list-group-item text-secondary">{{ trim($versionsSearch) !== '' ? 'No hay versiones que coincidan con la búsqueda.' : 'Aún no hay versiones del cuestionario.' }}</li>
+                @endforelse
             </ul>
+            {{ $versions->links() }}
 
             @if ($selectedVersion->isPublished())
                 <h3 class="h6">Versión {{ $selectedVersion->version }} publicada</h3>
@@ -62,29 +69,40 @@
         <h2 id="request-survey-heading" class="h5">Solicitar una encuesta</h2>
         @if (! $publishedVersion)
             <div class="alert alert-info">Publica el cuestionario institucional antes de solicitar respuestas.</div>
-        @elseif ($eligiblePractices->isEmpty())
-            <div class="alert alert-info">No hay prácticas con aceptación vigente sin solicitud de encuesta.</div>
         @else
-            <div class="table-responsive">
-                <table class="table table-striped align-middle">
-                    <thead><tr><th>Alumno</th><th>Empresa</th><th>Supervisor directo</th><th><span class="visually-hidden">Acción</span></th></tr></thead>
-                    <tbody>
-                        @foreach ($eligiblePractices as $practice)
-                            <tr wire:key="eligible-practice-{{ $practice->id }}">
-                                <td>{{ $practice->student->name }}</td>
-                                <td>{{ $practice->company->name }}</td>
-                                <td>{{ $practice->latestAcceptanceSubmission->supervisor->name }}</td>
-                                <td><button class="btn btn-sm btn-outline-primary" type="button" wire:click="requestSurvey({{ $practice->id }})">Solicitar encuesta</button></td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
+            <div class="mb-3">
+                <label class="form-label" for="eligiblePracticeSearch">Buscar prácticas elegibles</label>
+                <input id="eligiblePracticeSearch" class="form-control" type="search" wire:model.live.debounce.300ms="eligibleSearch" placeholder="Alumno, empresa o supervisor">
             </div>
+            @if ($eligiblePractices->isEmpty())
+                <div class="alert alert-info">{{ trim($eligibleSearch) !== '' ? 'No hay prácticas elegibles que coincidan con la búsqueda.' : 'No hay prácticas con aceptación vigente sin solicitud de encuesta.' }}</div>
+            @else
+                <div class="table-responsive">
+                    <table class="table table-striped align-middle">
+                        <thead><tr><th>Alumno</th><th>Empresa</th><th>Supervisor directo</th><th><span class="visually-hidden">Acción</span></th></tr></thead>
+                        <tbody>
+                            @foreach ($eligiblePractices as $practice)
+                                <tr wire:key="eligible-practice-{{ $practice->id }}">
+                                    <td>{{ $practice->student->name }}</td>
+                                    <td>{{ $practice->company->name }}</td>
+                                    <td>{{ $practice->latestAcceptanceSubmission->supervisor->name }}</td>
+                                    <td><button class="btn btn-sm btn-outline-primary" type="button" wire:click="requestSurvey({{ $practice->id }})">Solicitar encuesta</button></td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+                {{ $eligiblePractices->links() }}
+            @endif
         @endif
     </section>
 
     <section aria-labelledby="survey-results-heading">
         <h2 id="survey-results-heading" class="h5">Solicitudes y respuestas</h2>
+        <div class="mb-3">
+            <label class="form-label" for="surveyRequestSearch">Buscar solicitudes y respuestas</label>
+            <input id="surveyRequestSearch" class="form-control" type="search" wire:model.live.debounce.300ms="surveyRequestsSearch" placeholder="Alumno, empresa o supervisor">
+        </div>
         @forelse ($surveyRequests as $surveyRequest)
             <article class="card mb-3" wire:key="survey-request-{{ $surveyRequest->id }}">
                 <div class="card-header d-flex flex-wrap justify-content-between gap-2">
@@ -121,7 +139,8 @@
                 </div>
             </article>
         @empty
-            <div class="alert alert-info">Todavía no hay solicitudes de encuesta.</div>
+            <div class="alert alert-info">{{ trim($surveyRequestsSearch) !== '' ? 'No hay solicitudes que coincidan con la búsqueda.' : 'Todavía no hay solicitudes de encuesta.' }}</div>
         @endforelse
+        {{ $surveyRequests->links() }}
     </section>
 </section>

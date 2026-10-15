@@ -4,6 +4,11 @@
         <div class="alert alert-success" role="status">{{ session('status') }}</div>
     @endif
 
+    <div class="mb-3">
+        <label class="form-label" for="supervisorPlanSearch">Buscar versiones de planes</label>
+        <input id="supervisorPlanSearch" class="form-control" type="search" wire:model.live.debounce.300ms="search" placeholder="Alumno o empresa">
+    </div>
+
     @forelse ($versions as $version)
         <article class="card mb-3" wire:key="plan-version-{{ $version->id }}">
             <div class="card-body">
@@ -18,6 +23,7 @@
             </div>
         </article>
     @empty
-        <div class="alert alert-info">No hay planes de trabajo.</div>
+        <div class="alert alert-info">{{ trim($search) !== '' ? 'No hay planes que coincidan con la búsqueda.' : 'No hay planes de trabajo.' }}</div>
     @endforelse
+    {{ $versions->links() }}
 </section>

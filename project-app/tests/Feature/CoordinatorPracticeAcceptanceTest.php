@@ -5,7 +5,9 @@ namespace Tests\Feature;
 use App\Enums\PracticeAcceptanceStatus;
 use App\Enums\PracticeRequestStatus;
 use App\Enums\UserRole;
+use App\Livewire\Coordinator\PracticeAcceptances\Index as CoordinatorAcceptanceQueue;
 use App\Livewire\Coordinator\PracticeAcceptances\Review;
+use App\Livewire\Supervisor\PracticeLetters\Index as SupervisorLetterQueue;
 use App\Models\Company;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -67,6 +69,7 @@ class CoordinatorPracticeAcceptanceTest extends TestCase
 
         $this->assertSame(PracticeAcceptanceStatus::Accepted, $submission->fresh()->status);
         $this->assertSame('Documento legible.', $submission->fresh()->review_comment);
+        $this->assertSame($coordinator->id, $submission->fresh()->reviewed_by);
         Storage::disk('local')->assertExists($submission->file_path);
 
         $this->get(route('coordinacion.practice-acceptances.index'))
@@ -90,6 +93,40 @@ class CoordinatorPracticeAcceptanceTest extends TestCase
         $this->get(route('supervisor.practice-acceptances.upload', $letter))
             ->assertNotFound();
         $this->assertDatabaseCount('practice_acceptance_submissions', 1);
+    }
+
+    public function test_acceptance_queues_search_independently_and_supervisor_scope_is_preserved(): void
+    {
+        [$coordinator, $supervisor, , $submission] = $this->createPendingSubmission();
+        $student = $submission->practiceRequest->student;
+        $supervisor->update(['email_verified_at' => now()]);
+
+        $this->actingAs($supervisor);
+        Livewire::test(SupervisorLetterQueue::class)
+            ->set('search', $student->name)
+            ->assertViewHas('letters', fn ($letters) => $letters->total() === 1)
+            ->assertSee($student->name);
+
+        $submission->practiceRequest->acceptanceSubmissions()->create([
+            'supervisor_id' => $supervisor->id,
+            'version' => 2,
+            'file_path' => "practice-acceptances/{$submission->practice_request_id}/accepted.pdf",
+            'file_extension' => 'pdf',
+            'mime_type' => 'application/pdf',
+            'file_size' => 8,
+            'status' => PracticeAcceptanceStatus::Accepted,
+            'reviewed_by' => $coordinator->id,
+            'reviewed_at' => now(),
+            'submitted_at' => now(),
+        ]);
+
+        $this->actingAs($coordinator);
+        Livewire::test(CoordinatorAcceptanceQueue::class)
+            ->set('pendingSearch', $student->name)
+            ->assertViewHas('submissions', fn ($submissions) => $submissions->total() === 1)
+            ->set('historySearch', $student->name)
+            ->assertViewHas('history', fn ($history) => $history->total() === 1)
+            ->assertSee('versión 2');
     }
 
     public function test_only_coordinators_and_the_assigned_company_supervisor_can_download_private_file(): void

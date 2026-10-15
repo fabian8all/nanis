@@ -80,6 +80,30 @@ class StudentCompanyCatalogTest extends TestCase
         $this->assertDatabaseCount('companies', 2);
     }
 
+    public function test_search_paginates_active_company_options_without_clearing_a_selection(): void
+    {
+        $this->actingAs(User::factory()->create(['role' => UserRole::Student]));
+        $selected = Company::query()->create([
+            'name' => 'Hotel de búsqueda',
+            'contact_person' => 'Contacto buscado',
+        ]);
+        foreach (range(1, 16) as $index) {
+            Company::query()->create(['name' => "Hotel {$index}"]);
+        }
+
+        Livewire::test(StudentCompanyCatalog::class)
+            ->call('select', $selected->id)
+            ->call('nextPage')
+            ->assertSet('paginators.page', 2)
+            ->set('search', 'Contacto buscado')
+            ->assertSet('paginators.page', 1)
+            ->assertViewHas('companies', fn ($companies) => $companies->total() === 1)
+            ->assertSee('Hotel de búsqueda')
+            ->assertSee('Empresa seleccionada');
+
+        $this->assertSame($selected->id, session('practice.selected_company_id'));
+    }
+
     public function test_catalog_remains_available_but_selection_is_blocked_for_pending_approved_and_completed_requests(): void
     {
         foreach ([

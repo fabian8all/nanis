@@ -9,14 +9,34 @@ use App\Enums\UserRole;
 use App\Models\PracticeReportVersion;
 use App\Models\PracticeRequest;
 use App\Models\User;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Pagination\LengthAwarePaginator as Paginator;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\ValidationException;
 use Illuminate\View\View;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class Index extends Component
 {
+    use WithPagination;
+
     public array $tutorAssignments = [];
+
+    public string $search = '';
+
+    public string $tutorSearch = '';
+
+    public function updatedSearch(): void
+    {
+        $this->resetPage();
+    }
+
+    public function updatedTutorSearch(): void
+    {
+        $this->resetPage('tutorsPage');
+    }
 
     public function assignTutor(int $practiceRequestId): void
     {
@@ -98,7 +118,7 @@ class Index extends Component
     public function render(): View
     {
         $this->authorizeCoordinator();
-        $requests = PracticeRequest::query()
+        $query = PracticeRequest::query()
             ->whereHas('practicePlan.versions', fn ($query) => $query
                 ->where('status', PracticePlanStatus::Approved->value))
             ->whereHas('acceptanceSubmissions', fn ($query) => $query
@@ -112,7 +132,18 @@ class Index extends Component
                     ->with('attachments')
                     ->orderByDesc('updated_at')
                     ->orderByDesc('id'),
-            ])
+            ]);
+        $search = trim($this->search);
+        if ($search !== '') {
+            $query->where(function ($query) use ($search): void {
+                $query
+                    ->whereHas('student', fn ($student) => $student->where('name', 'like', "%{$search}%"))
+                    ->orWhereHas('company', fn ($company) => $company->where('name', 'like', "%{$search}%"))
+                    ->orWhereHas('tutor', fn ($tutor) => $tutor->where('name', 'like', "%{$search}%"));
+            });
+        }
+
+        $requests = $query
             ->orderByDesc('updated_at')
             ->orderByDesc('id')
             ->get()
@@ -131,12 +162,38 @@ class Index extends Component
                     ? $modifiedOrder
                     : $right->id <=> $left->id;
             })->values();
-        $tutors = User::query()->where('role', UserRole::Tutor->value)->orderBy('name')->get(['id', 'name']);
+        $tutorsQuery = User::query()->where('role', UserRole::Tutor->value);
+        $tutorSearch = trim($this->tutorSearch);
+        if ($tutorSearch !== '') {
+            $tutorsQuery->where(function ($query) use ($tutorSearch): void {
+                $query
+                    ->where('name', 'like', "%{$tutorSearch}%")
+                    ->orWhere('email', 'like', "%{$tutorSearch}%");
+            });
+        }
+        $tutors = $tutorsQuery
+            ->orderBy('name')
+            ->orderBy('id')
+            ->paginate(15, ['id', 'name'], 'tutorsPage');
 
         return view('livewire.coordinator.practice-reports.index', [
-            'requests' => $requests,
+            'requests' => $this->paginateCollection($requests),
             'tutors' => $tutors,
         ])->layout('layouts.app', ['title' => 'Reportes finales']);
+    }
+
+    private function paginateCollection(Collection $items): LengthAwarePaginator
+    {
+        $perPage = 15;
+        $page = Paginator::resolveCurrentPage();
+
+        return new Paginator(
+            $items->forPage($page, $perPage)->values(),
+            $items->count(),
+            $perPage,
+            $page,
+            ['path' => Paginator::resolveCurrentPath()],
+        );
     }
 
     private function isEligible(PracticeRequest $request): bool
