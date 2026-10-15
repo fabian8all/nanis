@@ -102,7 +102,7 @@
                                                                 <a class="btn btn-sm btn-outline-primary" href="{{ $action['route'] }}">{{ $action['label'] }}</a>
                                                             @endforeach
                                                         </div>
-                                                    @elseif ($stage['route'])
+                                                    @elseif ($stage['route'] && $stage['route_role'] === auth()->user()->role->value)
                                                         <a class="btn btn-sm btn-outline-primary" href="{{ $stage['route'] }}">{{ $stage['action'] }}</a>
                                                     @else
                                                         <span class="text-secondary">—</span>

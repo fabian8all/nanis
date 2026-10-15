@@ -164,6 +164,18 @@ class PracticeTrackingTest extends TestCase
             ->assertSee($otherRequest->student->name);
     }
 
+    public function test_students_do_not_see_links_to_other_roles_pending_actions(): void
+    {
+        [, $student, $request] = $this->createPractice('Hotel Faro', 'Ana Alumna');
+
+        $this->actingAs($student)
+            ->get(route('alumno.practice-tracking.index'))
+            ->assertOk()
+            ->assertSee('Coordinación debe revisar la solicitud')
+            ->assertDontSee('Revisar solicitud')
+            ->assertDontSee(route('coordinacion.practice-requests.review', $request), false);
+    }
+
     public function test_roles_without_a_practice_scope_are_forbidden(): void
     {
         User::factory()->create(['role' => UserRole::Tutor]);

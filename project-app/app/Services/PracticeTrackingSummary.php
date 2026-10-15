@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 class PracticeTrackingSummary
 {
     /**
-     * @return array<int, array{label: string, status: string, detail: string, responsible: string|null, route: string|null, action: string|null, actions: array<int, array{label: string, route: string}>}>
+     * @return array<int, array{label: string, status: string, detail: string, responsible: string|null, route: string|null, route_role: string|null, action: string|null, actions: array<int, array{label: string, route: string}>}>
      */
     public function stages(PracticeRequest $request): array
     {
@@ -274,9 +274,21 @@ class PracticeTrackingSummary
             'responsible' => $responsible?->value,
             'responsible_id' => $responsibleId,
             'route' => $route ? route($route, $parameters) : null,
+            'route_role' => $route ? $this->routeRole($route) : null,
             'action' => $route ? $this->actionLabel($route, $status) : null,
             'actions' => $actions,
         ];
+    }
+
+    private function routeRole(string $route): ?string
+    {
+        return match (strstr($route, '.', true)) {
+            'coordinacion' => UserRole::Coordinator->value,
+            'supervisor' => UserRole::Supervisor->value,
+            'tutor' => UserRole::Tutor->value,
+            'alumno' => UserRole::Student->value,
+            default => null,
+        };
     }
 
     private function actionLabel(string $route, string $status): string
