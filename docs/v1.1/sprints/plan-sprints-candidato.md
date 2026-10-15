@@ -130,10 +130,16 @@ catálogo se cubre en GT-HU-030.
 pertinente y solo reciben búsqueda/paginación cuando les falte alguno de esos
 controles. Se mantienen filtros y límites de autorización.
 
-**Refinamiento requerido:** confirmar si se incluyen historiales de versiones,
-administración de rúbricas y listas auxiliares; definir fecha y campos de
-búsqueda por lista. Empezar con un inventario para delimitar el alcance antes
-de implementar.
+**Refinamiento resuelto:** se incluyen las bandejas/listas principales,
+historiales de versiones, listas administrativas de rúbricas y opciones de
+selección; se omiten duplicados de controles ya existentes. Cuando el contenido
+es una versión o revisión relacionada, se ordena por su modificación más
+reciente y se desempata por identificador estable. Las tareas
+`gt-hu-037-ordenar-listas-por-modificacion` y
+`gt-hu-038-buscar-paginar-listas-restantes` se crearon en
+`sprint/5-experiencia-transversal-listas` y se asignaron a `backend`.
+El inventario previo a implementación delimitará los campos pertinentes de
+búsqueda por lista.
 
 ## Cobertura de historias
 
@@ -153,7 +159,8 @@ tareas de GT-HU-022, GT-HU-023, GT-HU-025, GT-HU-027 y GT-HU-034. Las tareas de
 Sprint 2 se crearon al iniciar la rama `sprint/2-navegacion-acciones-operativas`;
 las tres tareas de Sprint 3 se crearon al iniciar
 `sprint/3-expediente-versiones-revision-reporte`; las dos tareas de Sprint 4
-se crearon al iniciar `sprint/4-catalogo-administracion-empresas`. Las de
-Sprint 5 se crearán al iniciar ese sprint. Las ramas de Sprints 1–3 permanecen
+se crearon al iniciar `sprint/4-catalogo-administracion-empresas`; las dos
+tareas de Sprint 5 se crearon al iniciar
+`sprint/5-experiencia-transversal-listas`. Las ramas de Sprints 1–3 permanecen
 disponibles y están integradas en `develop`; también está integrada la rama de
 Sprint 4.

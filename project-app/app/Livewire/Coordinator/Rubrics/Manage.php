@@ -6,17 +6,30 @@ use App\Enums\RubricType;
 use App\Models\Rubric;
 use App\Models\RubricCriterion;
 use App\Models\RubricVersion;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class Manage extends Component
 {
+    use WithPagination;
+
     public int $rubricId;
 
     public int $versionId;
 
     public array $criteria = [];
+
+    public string $searchVersions = '';
+
+    public function updatedSearchVersions(): void
+    {
+        foreach (Rubric::query()->pluck('id') as $rubricId) {
+            $this->resetPage("rubricVersions{$rubricId}");
+        }
+    }
 
     public function mount(): void
     {
@@ -131,10 +144,42 @@ class Manage extends Component
     {
         $this->authorizeCoordinator();
 
+        $rubrics = Rubric::query()
+            ->with('currentVersion')
+            ->orderByDesc('updated_at')
+            ->orderByDesc('id')
+            ->get();
+        foreach ($rubrics as $rubric) {
+            $rubric->setRelation('versions', $this->versionsFor($rubric));
+        }
+
         return view('livewire.coordinator.rubrics.manage', [
-            'rubrics' => Rubric::query()->with(['currentVersion', 'versions.criteria'])->get(),
+            'rubrics' => $rubrics,
             'selectedVersion' => RubricVersion::query()->with('rubric')->findOrFail($this->versionId),
         ])->layout('layouts.app', ['title' => 'Rúbricas de evaluación']);
+    }
+
+    private function versionsFor(Rubric $rubric): LengthAwarePaginator
+    {
+        $query = $rubric->versions()->orderByDesc('updated_at')->orderByDesc('id');
+        $search = trim($this->searchVersions);
+        if ($search !== '') {
+            $query->where(function ($query) use ($search): void {
+                $status = match (mb_strtolower($search)) {
+                    'publicada' => 'published',
+                    'borrador' => 'draft',
+                    default => $search,
+                };
+                $query
+                    ->where('status', 'like', "%{$status}%")
+                    ->orWhereHas('rubric', fn ($rubric) => $rubric->where('type', 'like', "%{$search}%"));
+                if (ctype_digit($search)) {
+                    $query->orWhere('version', (int) $search);
+                }
+            });
+        }
+
+        return $query->paginate(10, ['*'], "rubricVersions{$rubric->id}");
     }
 
     private function selectVersion(RubricVersion $version): void

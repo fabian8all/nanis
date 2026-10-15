@@ -5,6 +5,11 @@
         <div class="alert alert-danger"><ul class="mb-0">@foreach ($errors->all() as $error)<li>{{ $error }}</li>@endforeach</ul></div>
     @endif
 
+    <div class="mb-3">
+        <label class="form-label" for="rubricVersionSearch">Buscar versiones de rúbrica</label>
+        <input id="rubricVersionSearch" class="form-control" type="search" wire:model.live.debounce.300ms="searchVersions" placeholder="Tipo de rúbrica, versión o estado">
+    </div>
+
     <div class="row g-3">
         @foreach ($rubrics as $rubric)
             <div class="col-md-6">
@@ -14,13 +19,16 @@
                         <p>Vigente: {{ $rubric->currentVersion ? 'v'.$rubric->currentVersion->version : 'ninguna' }}</p>
                         <button class="btn btn-outline-primary btn-sm" wire:click="newDraft({{ $rubric->id }})">Crear borrador</button>
                         <ul class="list-group list-group-flush mt-2">
-                            @foreach ($rubric->versions as $version)
+                            @forelse ($rubric->versions as $version)
                                 <li class="list-group-item d-flex justify-content-between">
                                     <span>v{{ $version->version }} — {{ $version->status === 'published' ? 'publicada' : 'borrador' }}</span>
                                     <button class="btn btn-link btn-sm" wire:click="select({{ $rubric->id }}, {{ $version->id }})">Ver / editar</button>
                                 </li>
-                            @endforeach
+                            @empty
+                                <li class="list-group-item text-secondary">{{ trim($searchVersions) !== '' ? 'No hay versiones que coincidan con la búsqueda.' : 'Esta rúbrica aún no tiene versiones.' }}</li>
+                            @endforelse
                         </ul>
+                        {{ $rubric->versions->links() }}
                     </div>
                 </article>
             </div>

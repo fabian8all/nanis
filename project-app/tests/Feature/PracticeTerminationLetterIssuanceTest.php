@@ -116,6 +116,18 @@ class PracticeTerminationLetterIssuanceTest extends TestCase
         $this->assertFalse(Route::has('alumno.practice-termination-letters.file'));
     }
 
+    public function test_termination_queue_search_keeps_eligibility_constraints(): void
+    {
+        [$coordinator, $student, , $request] = $this->createPractice();
+        $this->addClosureEvidence($request);
+        $this->actingAs($coordinator);
+
+        Livewire::test(CoordinatorLetterQueue::class)
+            ->set('search', $student->name)
+            ->assertViewHas('practices', fn ($practices) => $practices->total() === 1)
+            ->assertSee($request->company->name);
+    }
+
     private function createPractice(): array
     {
         $company = Company::query()->create(['name' => 'Unidad receptora de prueba']);

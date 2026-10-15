@@ -1,9 +1,9 @@
 # Pendientes
 
-- Al 2026-10-14, el checkout principal `~/code/nanis` trabaja en `develop`.
-  Sprint 4 se integró con el merge `bfaed9d` y se publica junto con el cierre
-  documental. Antes del merge, `origin/develop` estaba en `76a3896`; `main`
-  permanece en
+- Al 2026-10-14, el checkout principal `~/code/nanis` trabaja en
+  `sprint/5-experiencia-transversal-listas`, creada desde `develop`. Sprint 4
+  se integró con el merge `bfaed9d` y se publicó con el cierre documental
+  `d3f3449`; `develop` y `origin/develop` están sincronizadas. `main` permanece en
   `cb5365d` con el cierre de v1.0. Sprint 5 y el cierre v1.0 son ancestros de
   `develop`. La persona solicitante aprobó el backlog
   v1.1 como base de planificación y la secuencia de cinco sprints; v1.1 aún no
@@ -24,6 +24,20 @@
   búsqueda se refinó para mostrar solo empresas disponibles, conservando las
   ocultas en la lista sin filtro para permitir su reactivación. Se trabajaron
   en serie. La regresión conjunta pasó con 13 tests y 83 assertions.
+- Sprint 5 se inició en `sprint/5-experiencia-transversal-listas`. Sus tareas
+  GT-HU-037 y GT-HU-038 están asignadas a `backend`; se resolvió ordenar por la
+  fecha de la versión/revisión mostrada y se incluyeron en alcance historiales
+  de versiones, administración de rúbricas y opciones de selección. GT-HU-037
+  está implementada, validada (64 tests, 581 assertions, Pint) y su tarea está
+  archivada en `.ai/tasks/_closed/gt-hu-037-ordenar-listas-por-modificacion/`.
+  El commit de la historia es `f23d463`. GT-HU-038 está implementada y validada:
+  las bandejas principales, historiales globales de versiones, rúbricas,
+  encuestas y opciones de selección tienen búsqueda/paginación donde faltaban;
+  Seguimiento y catálogo de Coordinación no duplican controles. Suite Laravel:
+  134 tests/1077 assertions; Pint y doctor pasan, con advertencia de presupuesto
+  de arranque. Su tarea está archivada; falta el commit de historia y sigue
+  integrar Sprint 5 en `develop` y publicar. Preservar el cambio previo ajeno de
+  `project-app/README.md`, que queda fuera de commits de historia.
 - El catálogo muestra nombre, dirección, teléfono, email y persona de contacto; Coordinación da altas/bajas manualmente. La baja oculta a la empresa en nuevas solicitudes, pero conserva referencias existentes y no afecta prácticas iniciadas.
 - Conciliar canales del prototipo frente a Drive/correo/Classroom/papel descritos en el procedimiento institucional 2025.
 - HU-006, HU-007, HU-016 y HU-017 están implementadas y desplegadas en Sprint 4. La rúbrica de Tutor publicada en desarrollo es temporal/ficticia para demostración; falta que Coordinación publique las rúbricas institucionales. La rúbrica Supervisor continúa como borrador, por lo que HU-006 no inicia aún en demo. La práctica sintética recorre aceptación, plan y reporte aprobados.

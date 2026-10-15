@@ -9,6 +9,8 @@ use App\Enums\PracticeReportStatus;
 use App\Enums\PracticeRequestStatus;
 use App\Enums\RubricType;
 use App\Enums\UserRole;
+use App\Livewire\Coordinator\PracticeEvaluations\Index as CoordinatorEvaluationQueue;
+use App\Livewire\Tutor\PracticeEvaluations\Index as TutorEvaluationQueue;
 use App\Livewire\Tutor\PracticeEvaluations\Manage;
 use App\Models\Company;
 use App\Models\PracticeEvaluation;
@@ -72,6 +74,17 @@ class PracticeEvaluationWorkflowTest extends TestCase
         $this->assertNotNull($evaluation->submitted_at);
         $this->assertSame('Medio', $evaluation->criteria()->firstOrFail()->score_label);
 
+        Livewire::test(TutorEvaluationQueue::class)
+            ->set('search', $student->name)
+            ->assertViewHas('requests', fn ($requests) => $requests->total() === 1)
+            ->assertSee($student->name);
+        $this->actingAs($coordinator);
+        Livewire::test(CoordinatorEvaluationQueue::class)
+            ->set('search', $student->name)
+            ->assertViewHas('evaluations', fn ($evaluations) => $evaluations->total() === 1)
+            ->assertSee($student->name);
+
+        $this->actingAs($tutor);
         Livewire::test(Manage::class, ['practiceRequest' => $request])
             ->call('saveDraft')
             ->assertHasErrors('evaluation');

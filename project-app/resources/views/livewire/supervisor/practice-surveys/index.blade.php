@@ -2,6 +2,11 @@
     <h1 class="h3 mb-3">Encuestas de satisfacción</h1>
     @if (session('status')) <div class="alert alert-success" role="status">{{ session('status') }}</div> @endif
 
+    <div class="mb-3">
+        <label class="form-label" for="supervisorSurveySearch">Buscar encuestas</label>
+        <input id="supervisorSurveySearch" class="form-control" type="search" wire:model.live.debounce.300ms="search" placeholder="Alumno o empresa">
+    </div>
+
     @forelse ($requests as $surveyRequest)
         <article class="card mb-3">
             <div class="card-body">
@@ -17,6 +22,7 @@
             </div>
         </article>
     @empty
-        <div class="alert alert-info">No tienes encuestas de satisfacción solicitadas o respondidas.</div>
+        <div class="alert alert-info">{{ trim($search) !== '' ? 'No hay encuestas que coincidan con la búsqueda.' : 'No tienes encuestas de satisfacción solicitadas o respondidas.' }}</div>
     @endforelse
+    {{ $requests->links() }}
 </section>

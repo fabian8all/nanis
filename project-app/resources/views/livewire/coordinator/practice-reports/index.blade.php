@@ -4,6 +4,19 @@
         <div class="alert alert-success" role="status">{{ session('status') }}</div>
     @endif
     @error('report') <div class="alert alert-warning">{{ $message }}</div> @enderror
+    <div class="mb-3">
+        <label class="form-label" for="practiceReportSearch">Buscar prácticas</label>
+        <input id="practiceReportSearch" class="form-control" type="search" wire:model.live.debounce.300ms="search" placeholder="Alumno, empresa o tutor">
+    </div>
+    <div class="mb-3">
+        <label class="form-label" for="tutorSearch">Buscar tutores para asignar</label>
+        <input id="tutorSearch" class="form-control" type="search" wire:model.live.debounce.300ms="tutorSearch" placeholder="Nombre o correo">
+    </div>
+    @if ($tutors->isEmpty())
+        <div class="alert alert-secondary">{{ trim($tutorSearch) !== '' ? 'No hay tutores que coincidan con la búsqueda.' : 'No hay tutores disponibles para asignar.' }}</div>
+    @else
+        {{ $tutors->links() }}
+    @endif
     @forelse ($requests as $request)
         @php($report = $request->practiceReport)
         @php($latest = $report?->versions->sortByDesc('version')->first())
@@ -16,6 +29,9 @@
                         <label class="form-label" for="tutor-{{ $request->id }}">Asignar tutor</label>
                         <select class="form-select" id="tutor-{{ $request->id }}" wire:model="tutorAssignments.{{ $request->id }}" required>
                             <option value="">Selecciona un tutor</option>
+                            @if ($request->tutor && ! $tutors->contains('id', $request->tutor->id))
+                                <option value="{{ $request->tutor->id }}">{{ $request->tutor->name }} (asignado)</option>
+                            @endif
                             @foreach ($tutors as $tutor)
                                 <option value="{{ $tutor->id }}">{{ $tutor->name }}</option>
                             @endforeach
@@ -26,7 +42,7 @@
                 </form>
                 @if ($latest)
                     <p>Reporte — versión {{ $latest->version }}: {{ $latest->status->label() }}</p>
-                    @foreach ($report->versions->sortBy('version') as $version)
+                    @foreach ($report->versions as $version)
                         <details class="mb-2">
                             <summary>Consultar versión {{ $version->version }} — {{ $version->status->label() }}</summary>
                             @include('livewire.student.practice-reports.partials.version', ['version' => $version])
@@ -54,6 +70,7 @@
             </div>
         </article>
     @empty
-        <div class="alert alert-info">Aún no hay prácticas con aceptación y plan aprobados.</div>
+        <div class="alert alert-info">{{ trim($search) !== '' ? 'No hay prácticas que coincidan con la búsqueda.' : 'Aún no hay prácticas con aceptación y plan aprobados.' }}</div>
     @endforelse
+    {{ $requests->links() }}
 </section>

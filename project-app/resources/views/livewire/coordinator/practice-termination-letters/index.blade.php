@@ -5,8 +5,13 @@
         <div class="alert alert-success" role="status">{{ session('status') }}</div>
     @endif
 
+    <div class="mb-3">
+        <label class="form-label" for="terminationLetterSearch">Buscar expedientes</label>
+        <input id="terminationLetterSearch" class="form-control" type="search" wire:model.live.debounce.300ms="search" placeholder="Alumno o empresa">
+    </div>
+
     @if ($practices->isEmpty())
-        <div class="alert alert-info">No hay expedientes pendientes de emisión de carta.</div>
+        <div class="alert alert-info">{{ trim($search) !== '' ? 'No hay expedientes que coincidan con la búsqueda.' : 'No hay expedientes pendientes de emisión de carta.' }}</div>
     @else
         <div class="table-responsive">
             <table class="table table-striped align-middle">

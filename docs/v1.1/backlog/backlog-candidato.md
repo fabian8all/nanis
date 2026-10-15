@@ -372,8 +372,10 @@ más recientemente para localizar el trabajo actualizado.
 **Dependencias:** inventario de listas y definición del dato de modificación
 que representa cada una.
 
-**Pregunta abierta:** confirmar cómo ordenar vistas cuyo contenido cambia por
-una versión o revisión relacionada sin actualizar el registro padre.
+**Refinamiento resuelto:** cuando la lista muestra una versión o revisión
+relacionada, se usa la fecha de modificación de la versión/revisión mostrada
+para ordenar y un identificador estable para resolver empates, aunque el
+`updated_at` del registro padre no haya cambiado.
 
 ### GT-HU-038 — Buscar y paginar las listas que aún no lo permiten
 
@@ -398,9 +400,10 @@ encontrar registros sin recorrer todos los resultados manualmente.
 se cubre específicamente en `GT-HU-030`; Seguimiento ya tiene búsqueda,
 filtros y paginación (`GT-HU-010`).
 
-**Pregunta abierta:** confirmar si la solicitud incluye historiales de
-versiones, listas administrativas de rúbricas y opciones de selección, o solo
-las bandejas/listas principales de registros.
+**Refinamiento resuelto:** el alcance incluye las bandejas/listas principales,
+los historiales de versiones, las listas administrativas de rúbricas y las
+opciones de selección. Las listas que ya cuentan con búsqueda y paginación no
+reciben controles duplicados.
 
 ## Trazabilidad de las solicitudes
 

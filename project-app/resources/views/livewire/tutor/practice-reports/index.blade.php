@@ -3,6 +3,10 @@
     @if (session('status'))
         <div class="alert alert-success" role="status">{{ session('status') }}</div>
     @endif
+    <div class="mb-3">
+        <label class="form-label" for="tutorReportSearch">Buscar reportes</label>
+        <input id="tutorReportSearch" class="form-control" type="search" wire:model.live.debounce.300ms="search" placeholder="Alumno o empresa">
+    </div>
     @forelse ($versions as $version)
         <article class="card mb-3">
             <div class="card-body">
@@ -15,6 +19,7 @@
             </div>
         </article>
     @empty
-        <div class="alert alert-info">No hay reportes finales asignados.</div>
+        <div class="alert alert-info">{{ trim($search) !== '' ? 'No hay reportes que coincidan con la búsqueda.' : 'No hay reportes finales asignados.' }}</div>
     @endforelse
+    {{ $versions->links() }}
 </section>

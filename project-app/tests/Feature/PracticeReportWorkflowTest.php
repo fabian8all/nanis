@@ -9,6 +9,7 @@ use App\Enums\PracticeRequestStatus;
 use App\Enums\UserRole;
 use App\Livewire\Coordinator\PracticeReports\Index as CoordinatorReports;
 use App\Livewire\Student\PracticeReports\Show as StudentReport;
+use App\Livewire\Tutor\PracticeReports\Index as TutorReportQueue;
 use App\Livewire\Tutor\PracticeReports\Review as TutorReview;
 use App\Models\Company;
 use App\Models\PracticeReportVersion;
@@ -149,6 +150,39 @@ class PracticeReportWorkflowTest extends TestCase
         $this->assertSame('Explica mejor los resultados.', $version->fresh()->review_comment);
         $this->assertSame(PracticeReportStatus::PendingTutorReview, PracticeReportVersion::query()->latest('version')->firstOrFail()->status);
         $this->assertSame('Actividad', $version->activities);
+    }
+
+    public function test_coordinator_and_tutor_report_lists_search_by_the_visible_student(): void
+    {
+        [$student, $tutor, $coordinator, $request] = $this->createEligiblePractice();
+        $request->update(['tutor_id' => $tutor->id]);
+        $report = $request->practiceReport()->create([]);
+        $report->versions()->create([
+            'version' => 1,
+            'status' => PracticeReportStatus::Draft,
+            'company_name' => $request->company->name,
+            'area' => 'Operaciones',
+            'period' => 'Periodo de prueba',
+            'objectives' => 'Objetivo',
+            'activities' => 'Actividades',
+            'outcomes' => 'Resultados',
+            'conclusions' => 'Conclusiones',
+            'recommendations' => 'Recomendaciones',
+        ]);
+
+        $this->actingAs($coordinator);
+        Livewire::test(CoordinatorReports::class)
+            ->set('search', $student->name)
+            ->set('tutorSearch', $tutor->name)
+            ->assertViewHas('requests', fn ($requests) => $requests->total() === 1)
+            ->assertViewHas('tutors', fn ($tutors) => $tutors->total() === 1)
+            ->assertSee($student->name);
+
+        $this->actingAs($tutor);
+        Livewire::test(TutorReportQueue::class)
+            ->set('search', $student->name)
+            ->assertViewHas('versions', fn ($versions) => $versions->total() === 1)
+            ->assertSee($student->name);
     }
 
     private function createEligiblePractice(): array

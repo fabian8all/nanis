@@ -6,6 +6,11 @@
         <div class="alert alert-success" role="status">{{ session('status') }}</div>
     @endif
 
+    <div class="mb-3">
+        <label class="form-label" for="practiceRequestSearch">Buscar solicitudes</label>
+        <input id="practiceRequestSearch" class="form-control" type="search" wire:model.live.debounce.300ms="search" placeholder="Alumno, correo, empresa o grado/grupo">
+    </div>
+
     <div class="table-responsive">
         <table class="table table-striped align-middle">
             <caption class="visually-hidden">Solicitudes de práctica pendientes de revisión.</caption>
@@ -33,9 +38,10 @@
                         </td>
                     </tr>
                 @empty
-                    <tr><td class="text-secondary" colspan="5">No hay solicitudes pendientes de revisión.</td></tr>
+                    <tr><td class="text-secondary" colspan="5">{{ trim($search) !== '' ? 'No hay solicitudes que coincidan con la búsqueda.' : 'No hay solicitudes pendientes de revisión.' }}</td></tr>
                 @endforelse
             </tbody>
         </table>
     </div>
+    {{ $requests->links() }}
 </section>

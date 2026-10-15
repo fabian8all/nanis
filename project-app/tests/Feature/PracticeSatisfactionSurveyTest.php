@@ -7,6 +7,7 @@ use App\Enums\PracticeSurveyVersionStatus;
 use App\Enums\UserRole;
 use App\Livewire\Coordinator\PracticeSurveys\Manage;
 use App\Livewire\Supervisor\PracticeSurveys\Answer;
+use App\Livewire\Supervisor\PracticeSurveys\Index as SupervisorSurveyQueue;
 use App\Models\Company;
 use App\Models\PracticeSurveyAnswer;
 use App\Models\PracticeSurveyRequest;
@@ -79,6 +80,30 @@ class PracticeSatisfactionSurveyTest extends TestCase
             'id' => $originalVersionId,
             'status' => PracticeSurveyVersionStatus::Published->value,
         ]);
+    }
+
+    public function test_survey_versions_eligible_practices_and_requests_are_searchable(): void
+    {
+        [$student, $coordinator, $supervisor, , $practiceRequest] = $this->createPractice();
+        $this->actingAs($coordinator);
+        $this->publishQuestionnaire([
+            ['question' => '¿Cómo evalúa la experiencia?', 'allow_comment' => true],
+        ]);
+
+        Livewire::test(Manage::class)
+            ->set('versionsSearch', '1')
+            ->assertViewHas('versions', fn ($versions) => $versions->total() === 1)
+            ->set('eligibleSearch', $student->name)
+            ->assertViewHas('eligiblePractices', fn ($practices) => $practices->total() === 1)
+            ->call('requestSurvey', $practiceRequest->id)
+            ->set('surveyRequestsSearch', $student->name)
+            ->assertViewHas('surveyRequests', fn ($requests) => $requests->total() === 1);
+
+        $this->actingAs($supervisor);
+        Livewire::test(SupervisorSurveyQueue::class)
+            ->set('search', $student->name)
+            ->assertViewHas('requests', fn ($requests) => $requests->total() === 1)
+            ->assertSee($practiceRequest->company->name);
     }
 
     public function test_assigned_supervisor_can_review_only_their_own_final_response_and_coordinator_can_review_all(): void

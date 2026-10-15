@@ -118,6 +118,24 @@ class CoordinatorRubricManagementTest extends TestCase
             ->assertSee('Rúbricas de evaluación');
     }
 
+    public function test_rubric_version_lists_can_be_searched_without_changing_the_selected_draft(): void
+    {
+        $coordinator = User::factory()->create(['role' => UserRole::Coordinator]);
+        $this->actingAs($coordinator);
+        $supervisorRubric = Rubric::query()->where('type', RubricType::Supervisor->value)->firstOrFail();
+        $component = Livewire::test(Manage::class);
+        $selectedVersionId = $component->get('versionId');
+        $supervisorRubric->versions()->create(['version' => 2, 'status' => 'draft']);
+
+        $component
+            ->set('searchVersions', '2')
+            ->assertSet('versionId', $selectedVersionId)
+            ->assertViewHas('rubrics', fn ($rubrics) => array_sum(array_map(
+                fn ($rubric) => $rubric->versions->total(),
+                $rubrics->all(),
+            )) === 1);
+    }
+
     public function test_new_drafts_keep_version_sequences_and_criteria_separate_by_rubric_type(): void
     {
         $coordinator = User::factory()->create(['role' => UserRole::Coordinator]);

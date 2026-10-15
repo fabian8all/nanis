@@ -9,6 +9,7 @@ use App\Models\Company;
 use App\Models\User;
 use Illuminate\Foundation\Http\Middleware\PreventRequestForgery;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\DB;
 use Livewire\Livewire;
 use Tests\TestCase;
 
@@ -16,7 +17,7 @@ class StudentCompanyCatalogTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_student_sees_only_active_companies_in_name_order_with_contact_details(): void
+    public function test_student_sees_active_companies_by_recent_update_with_contact_details(): void
     {
         $this->actingAs(User::factory()->create(['role' => UserRole::Student]));
         $zeta = Company::query()->create([
@@ -29,17 +30,21 @@ class StudentCompanyCatalogTest extends TestCase
         $inactiveCompany = Company::query()->create(['name' => 'Hotel Inactivo']);
         $inactiveCompany->is_active = false;
         $inactiveCompany->save();
-        Company::query()->create([
+        $alpha = Company::query()->create([
             'name' => 'Hotel Alfa',
             'address' => 'Calle Norte 10',
             'phone' => '3125550101',
             'email' => 'alfa@example.test',
             'contact_person' => 'Contacto Alfa',
         ]);
+        $sameUpdate = Company::query()->create(['name' => 'Hotel Empate']);
+        DB::table('companies')->where('id', $zeta->id)->update(['updated_at' => '2026-06-02 12:00:00']);
+        DB::table('companies')->where('id', $alpha->id)->update(['updated_at' => '2026-06-01 12:00:00']);
+        DB::table('companies')->where('id', $sameUpdate->id)->update(['updated_at' => '2026-06-02 12:00:00']);
 
         $this->get(route('alumno.companies.index'))
             ->assertOk()
-            ->assertSeeInOrder(['Hotel Alfa', 'Hotel Zeta'])
+            ->assertSeeInOrder(['Hotel Empate', 'Hotel Zeta', 'Hotel Alfa'])
             ->assertDontSee('Hotel Inactivo')
             ->assertSee('Calle Norte 10')
             ->assertSee('3125550101')
@@ -73,6 +78,30 @@ class StudentCompanyCatalogTest extends TestCase
 
         $this->assertSame($secondCompany->id, session('practice.selected_company_id'));
         $this->assertDatabaseCount('companies', 2);
+    }
+
+    public function test_search_paginates_active_company_options_without_clearing_a_selection(): void
+    {
+        $this->actingAs(User::factory()->create(['role' => UserRole::Student]));
+        $selected = Company::query()->create([
+            'name' => 'Hotel de búsqueda',
+            'contact_person' => 'Contacto buscado',
+        ]);
+        foreach (range(1, 16) as $index) {
+            Company::query()->create(['name' => "Hotel {$index}"]);
+        }
+
+        Livewire::test(StudentCompanyCatalog::class)
+            ->call('select', $selected->id)
+            ->call('nextPage')
+            ->assertSet('paginators.page', 2)
+            ->set('search', 'Contacto buscado')
+            ->assertSet('paginators.page', 1)
+            ->assertViewHas('companies', fn ($companies) => $companies->total() === 1)
+            ->assertSee('Hotel de búsqueda')
+            ->assertSee('Empresa seleccionada');
+
+        $this->assertSame($selected->id, session('practice.selected_company_id'));
     }
 
     public function test_catalog_remains_available_but_selection_is_blocked_for_pending_approved_and_completed_requests(): void

@@ -9,10 +9,20 @@ use App\Models\PracticeRequest;
 use Illuminate\Validation\ValidationException;
 use Illuminate\View\View;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class Index extends Component
 {
+    use WithPagination;
+
     private const SELECTED_COMPANY_SESSION_KEY = 'practice.selected_company_id';
+
+    public string $search = '';
+
+    public function updatedSearch(): void
+    {
+        $this->resetPage();
+    }
 
     public function boot(): void
     {
@@ -51,13 +61,27 @@ class Index extends Component
             session()->forget(self::SELECTED_COMPANY_SESSION_KEY);
         }
 
-        $companies = Company::query()
-            ->where('is_active', true)
-            ->orderBy('name')
-            ->get();
+        $query = Company::query()
+            ->where('is_active', true);
+        $search = trim($this->search);
+        if ($search !== '') {
+            $query->where(function ($query) use ($search): void {
+                $query
+                    ->where('name', 'like', "%{$search}%")
+                    ->orWhere('address', 'like', "%{$search}%")
+                    ->orWhere('phone', 'like', "%{$search}%")
+                    ->orWhere('email', 'like', "%{$search}%")
+                    ->orWhere('contact_person', 'like', "%{$search}%");
+            });
+        }
+
+        $companies = $query
+            ->orderByDesc('updated_at')
+            ->orderByDesc('id')
+            ->paginate(15);
         $selectedCompanyId = session()->get(self::SELECTED_COMPANY_SESSION_KEY);
         $selectedCompany = is_int($selectedCompanyId)
-            ? $companies->firstWhere('id', $selectedCompanyId)
+            ? Company::query()->where('is_active', true)->find($selectedCompanyId)
             : null;
 
         if ($selectedCompanyId !== null && $selectedCompany === null) {

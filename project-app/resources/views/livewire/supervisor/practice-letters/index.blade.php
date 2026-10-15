@@ -2,6 +2,11 @@
     <h1 class="h3 mb-2">Cartas pendientes de aceptación</h1>
     <p class="text-secondary">Solo se muestran cartas emitidas para {{ auth()->user()->company->name }}.</p>
 
+    <div class="mb-3">
+        <label class="form-label" for="supervisorLetterSearch">Buscar cartas</label>
+        <input id="supervisorLetterSearch" class="form-control" type="search" wire:model.live.debounce.300ms="search" placeholder="Folio o alumno">
+    </div>
+
     @forelse ($letters as $letter)
         @php($request = $letter->practiceRequest)
         @php($latestSubmission = $request->latestAcceptanceSubmission)
@@ -44,6 +49,7 @@
             </div>
         </article>
     @empty
-        <div class="alert alert-info" role="status">No hay cartas de presentación pendientes de aceptación para esta empresa.</div>
+        <div class="alert alert-info" role="status">{{ trim($search) !== '' ? 'No hay cartas que coincidan con la búsqueda.' : 'No hay cartas de presentación pendientes de aceptación para esta empresa.' }}</div>
     @endforelse
+    {{ $letters->links() }}
 </section>
