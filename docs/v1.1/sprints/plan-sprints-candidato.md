@@ -28,6 +28,10 @@ implementadas, validadas y con sus tareas cerradas. El sprint se integró en
 `develop` mediante el merge `bfaed9d` y se publica a `origin/develop` con este
 cierre. Se decidió buscar solo empresas disponibles, conservando las ocultas
 en la lista sin filtro para reactivarlas.
+Sprint 5 se completó en `sprint/5-experiencia-transversal-listas`: GT-HU-037
+y GT-HU-038 están implementadas, validadas (134 pruebas, 1077 aserciones) y
+con sus tareas cerradas. Se integró en `develop` mediante el merge `1e1d4ed` y
+se publicó en `origin/develop`. Con ello concluyen los cinco sprints de v1.1.
 **Base:** [backlog v1.1](../backlog/backlog-candidato.md).
 
 ## Criterios de organización

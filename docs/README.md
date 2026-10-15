@@ -17,6 +17,8 @@ conservar el alcance y los entregables de cada etapa.
 | [`v1.1/Planeacion/modificaciones.md`](v1.1/Planeacion/modificaciones.md) | Solicitudes que sirven de entrada para el backlog de v1.1 |
 | [`v1.1/backlog/backlog-candidato.md`](v1.1/backlog/backlog-candidato.md) | Backlog aprobado como base de planificación |
 | [`v1.1/sprints/plan-sprints-candidato.md`](v1.1/sprints/plan-sprints-candidato.md) | Secuencia aprobada de sprints para v1.1 |
+| `v1.1/entregables/` | PDFs del backlog y del plan de sprints de v1.1 |
+| `v1.2/backlog/`, `v1.2/sprints/`, `v1.2/planeacion/`, `v1.2/entregables/` | Estructura preparada para la versión v1.2 |
 
 También se conserva la fuente original de solicitudes en
 [`v1.1/Planeacion/Modificaciones.txt`](v1.1/Planeacion/Modificaciones.txt).

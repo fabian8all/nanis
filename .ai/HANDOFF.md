@@ -7,6 +7,17 @@ Completar Sprint 5 de v1.1, iniciado desde `develop`.
 
 ## Estado
 - El checkout sigue dentro de `~/code/nanis`; la rama activa es `develop`.
+- Para pruebas locales se ejecutó `DevelopmentDatasetSeeder` tras la limpieza
+  de la base: 20 empresas, 50 solicitudes, 25 aceptaciones, 20 planes y 10
+  reportes. Hay 59 cuentas en total (incluye dos cuentas adicionales a las 57
+  del conjunto demo: 2 coordinadores y 51 alumnos); las credenciales siguen
+  solo en `.env`.
+- El simulador SAML ahora lee `SAML_SIMULATOR_EMAIL` del `.env` montado en el
+  contenedor (`./.env:/var/www/html/.env:ro` en `docker-compose.yml`); basta
+  editar el archivo, sin reiniciar. El login con contraseña no cambió.
+- Se creó `docs/v1.1/entregables/` (PDF de backlog y plan de sprints) y la
+  estructura vacía `docs/v1.2/`; la lista de modificaciones de v1.2 está
+  pendiente de la persona solicitante. v1.1 se integra en `main`.
 - Sprint 4 se integró mediante el merge `bfaed9d`; su cierre documental
   `d3f3449` se publicó en `origin/develop`.
 - Sprint 5 contiene GT-HU-037 y GT-HU-038. Las tareas Continuum se crearon en
