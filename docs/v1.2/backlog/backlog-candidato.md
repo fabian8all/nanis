@@ -75,7 +75,8 @@ sesión para empezar desde mi espacio de trabajo.
 
 **Criterios de aceptación**
 
-- Después de autenticarse, Coordinación llega directamente a Seguimiento.
+- Tanto el inicio de sesión local como el federado llevan a Coordinación
+  directamente a Seguimiento.
 - No se muestra la página intermedia con enlaces al catálogo y a la revisión
   de solicitudes.
 - El destino conserva la autenticación requerida y la autorización de
@@ -83,7 +84,12 @@ sesión para empezar desde mi espacio de trabajo.
 - Los destinos posteriores al acceso de otros roles no cambian como efecto
   colateral.
 
-**Dependencias:** Seguimiento y las rutas protegidas de Coordinación existentes.
+**Estado conocido:** las pruebas de autenticación confirman el destino directo
+para el acceso local. El flujo SAML todavía termina en `home`; Sprint 1 debe
+completar ese flujo sin cambiar las rutas de otros roles.
+
+**Dependencias:** Seguimiento, las rutas protegidas de Coordinación y el
+controlador de sesión SAML.
 
 ### GT-HU-042 — Abrir Seguimiento al ingresar como Supervisor
 
@@ -122,6 +128,11 @@ administrar las rúbricas sin encontrar un error 404.
 
 **Dependencias:** ruta y permisos actuales de administración de rúbricas.
 
+**Estado conocido:** la navegación y la ruta de administración existen en
+`develop`; las pruebas de navegación y gestión pasan. En v1.2 se verificará la
+regresión y se cerrará la tarea si la evidencia sigue pasando; no se duplicará
+la implementación.
+
 ### GT-HU-053 — Configurar la identidad del simulador SAML por entorno
 
 **Prioridad:** pendiente · **Trazabilidad:** solicitud complementaria anotada
@@ -141,8 +152,9 @@ prueba sin modificar código.
   contraseña ni agrega credenciales al repositorio.
 
 **Estado conocido:** el handoff vigente indica que esta capacidad ya se
-implementó; antes de comprometer trabajo, verificar el comportamiento actual
-y decidir si esta historia debe registrarse como entregada o si falta algo.
+implementó. La persona solicitante confirmó conservarla en Sprint 1 solo como
+verificación y documentación, sin desarrollo nuevo. No se versionarán valores
+de `.env` ni credenciales.
 
 ## Épica GT-EP-12 — Seguimiento y acciones del Supervisor
 
@@ -362,9 +374,15 @@ reasignación después de iniciar revisiones.
    previo?
 8. ¿La asignación de Tutor corresponde al alumno o a cada práctica? ¿Puede
    cambiarse durante el flujo?
-9. ¿Debe GT-HU-053 formar parte del backlog v1.2? El handoff registra la
-   solicitud, pero la capacidad ya figura como implementada y no aparece en
-   `modificaciones.txt`.
+## Refinamientos confirmados
+
+- GT-HU-053 se mantiene en Sprint 1 exclusivamente para verificar y documentar
+  la configuración SAML existente; no se hará desarrollo nuevo.
+- GT-HU-052 ya cuenta con una ruta de Rúbricas, un enlace de navegación y
+  pruebas de acceso para Coordinación. La tarea de Sprint 1 verificará esa
+  cobertura y solo solicitará cambios si encuentra una regresión.
+- Para GT-HU-041, el acceso local de Coordinación ya redirige a Seguimiento;
+  falta cubrir el destino posterior al acceso SAML.
 
 ## Notas de planificación
 

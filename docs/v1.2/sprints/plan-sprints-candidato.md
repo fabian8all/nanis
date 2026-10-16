@@ -33,7 +33,7 @@ velocidad.
 |---|---|---|---|
 | 1 | GT-HU-041 — Abrir Seguimiento al ingresar como Coordinación | `backend` | Resolver el destino posterior a la autenticación y conservar las reglas de acceso por rol. |
 | 1 | GT-HU-042 — Abrir Seguimiento al ingresar como Supervisor | `backend` | Resolver el destino posterior a la autenticación y mantener el alcance de datos asignados. |
-| 1 | GT-HU-052 — Corregir el acceso de Coordinación a Rúbricas | `backend` | Verificar ruta y autorización del módulo existente. |
+| 1 | GT-HU-052 — Corregir el acceso de Coordinación a Rúbricas | `qa` | Confirmar por prueba que el enlace y la ruta existente siguen disponibles solo para Coordinación; no duplicar una corrección ya entregada. |
 | 1 | GT-HU-053 — Configurar la identidad del simulador SAML por entorno | `devops-infraestructura` | Verificar la configuración del entorno y su documentación sin exponer credenciales. |
 | 2 | GT-HU-043 — Filtrar las prácticas de Seguimiento por estado | `frontend` | Diseñar y construir el control visual de filtro o pestañas y sus estados. |
 | 2 | GT-HU-044 — Abrir directamente el plan de trabajo del alumno | `backend` | Resolver destino del registro específico y validar rol/asignación. |
@@ -52,21 +52,26 @@ velocidad.
 ### Sprint 1 — Acceso directo y navegación por rol
 
 **Historias y perfiles:** GT-HU-041 (`backend`), GT-HU-042 (`backend`),
-GT-HU-052 (`backend`) y GT-HU-053 (`devops-infraestructura`).
+GT-HU-052 (`qa`) y GT-HU-053 (`devops-infraestructura`).
+
+**Rama:** `sprint/v1.2-1-acceso-navegacion-rol`, creada desde `develop`.
 
 **Dependencias:** existen Seguimiento, el módulo de Rúbricas y la configuración
 local del simulador SAML. Se deben verificar las rutas y permisos vigentes antes
 de cambiar destinos.
 
 **Salida:** la autenticación conduce a cada rol al espacio autorizado; el
-enlace Rúbricas abre el módulo correcto. Para GT-HU-053, el handoff vigente
-indica que la configuración por `SAML_SIMULATOR_EMAIL` ya existe: verificarla
-y documentarla; no duplicar implementación si satisface el criterio.
+enlace Rúbricas abre el módulo correcto. La autenticación local de Coordinación
+ya redirige a Seguimiento; GT-HU-041 debe completar la redirección SAML, cuyo
+controlador actualmente vuelve a `home`. Las pruebas actuales de navegación y
+gestión de Rúbricas pasan, por lo que GT-HU-052 será una tarea de verificación
+QA. La persona solicitante confirmó que GT-HU-053 se limita a verificar y
+documentar la configuración existente por `SAML_SIMULATOR_EMAIL`, sin código
+nuevo.
 
-**Refinamiento requerido:** confirmar que la capacidad SAML anotada en el
-handoff se incorpora al alcance v1.2, pues no aparece en
-`modificaciones.txt`. Confirmar también que el destino de Coordinación es la
-vista actual de Seguimiento y que no debe conservarse una página intermedia.
+**Refinamiento requerido:** probar las rutas de inicio local y SAML para
+Coordinación y Supervisor, preservando los destinos de Alumno y Tutor y la
+autorización vigente.
 
 ### Sprint 2 — Acciones de trabajo del Supervisor
 
@@ -135,8 +140,8 @@ hayan creado o iniciado.
 ## Pendientes antes de comprometer sprints
 
 - Resolver las preguntas abiertas vinculadas a cada sprint en el backlog.
-- Confirmar si GT-HU-053 entra en v1.2 o queda fuera por ser una capacidad ya
-  implementada y no estar en el archivo de modificaciones.
+- GT-HU-053 se confirmó como verificación y documentación, sin desarrollo
+  nuevo, pese a no aparecer en el archivo de modificaciones.
 - Crear una tarea Continuum por historia al iniciar el sprint correspondiente
   y asignarla al perfil indicado, según el write-set refinado.
 - No establecer fechas, duración, estimaciones, capacidad ni velocidad.

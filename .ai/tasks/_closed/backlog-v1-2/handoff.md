@@ -20,7 +20,8 @@ Continuum a cada una.
 
 ## Pendiente antes de implementar
 
-Refinar las preguntas abiertas anotadas en el backlog y el plan. En particular,
-confirmar si GT-HU-053, que proviene de una solicitud complementaria y ya
-implementada según el handoff, permanece como alcance v1.2. No se creó ninguna
-tarea de implementación ni se aprobó prioridad, duración o fecha.
+La persona solicitante confirmó iniciar Sprint 1 y mantener GT-HU-053 solo
+para verificación/documentación, sin desarrollo nuevo. También se verificó
+que GT-HU-052 ya tiene ruta de Rúbricas y pruebas de navegación/gestión. Las
+preguntas de refinamiento restantes están en backlog y plan; no se aprobaron
+prioridades, duración ni fechas.

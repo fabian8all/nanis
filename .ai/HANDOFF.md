@@ -195,9 +195,13 @@ perfiles asignados y versiones PDF, a partir de las modificaciones aportadas.
   documentos Markdown; ambos PDF son válidos. La matriz asigna un perfil
   Continuum a cada una de las 15 historias.
 - El backlog y los sprints siguen siendo propuestas candidatas, no aprobadas.
-  Antes de comprometer implementación, resolver las preguntas abiertas, en
-  particular confirmar si GT-HU-053 —solicitud complementaria ya implementada
-  según el handoff— permanece en el alcance.
+  La persona solicitante autorizó iniciar Sprint 1. GT-HU-053 queda en ese
+  sprint exclusivamente para verificación/documentación, sin desarrollo nuevo.
+- Las pruebas dirigidas de Coordinación pasaron (21 tests, 108 assertions).
+  GT-HU-041 ya cumple para autenticación local; el controlador SAML aún lleva
+  a `home`. GT-HU-052 ya tiene ruta/enlace y pruebas vigentes; se asignará a
+  `qa` como verificación. La rama de Sprint 1 y sus cuatro tareas Continuum
+  todavía deben crearse.
 - Flujo confirmado por la persona solicitante para v1.2: cada sprint tiene una
   rama creada desde `develop`; una tarea Continuum por HU, asignada al perfil
   indicado; commit de cada HU al aprobar su cierre; al terminar el sprint, su
@@ -205,11 +209,14 @@ perfiles asignados y versiones PDF, a partir de las modificaciones aportadas.
   rama `v1.2` desde `develop` y usarla como snapshot de la versión antes de
   integrarla en `main`. Actualizar el protocolo canónico antes de ese cierre;
   no integrar v1.2 directamente desde `develop` a `main`.
-- La persona solicitante pidió comenzar Sprint 1. Está pendiente decidir si
-  GT-HU-053 permanece en ese sprint; las otras historias asignadas son
-  GT-HU-041, GT-HU-042 y GT-HU-052.
-- Revisar durante el refinamiento si el simulador SAML configurado por `.env`,
-  anotado en el handoff previo, debe incluirse en el backlog.
+- La persona solicitante confirmó iniciar Sprint 1 con GT-HU-041, GT-HU-042,
+  GT-HU-052 y GT-HU-053; HU-053 será solo verificación/documentación y HU-052
+  una verificación QA de la ruta/enlace ya existentes.
+- Se confirmó el flujo de v1.2: rama de sprint desde `develop`, tarea
+  Continuum por HU asignada al perfil indicado, commit después de aprobar cada
+  cierre y merge del sprint a `develop`. Al completar todos los sprints, crear
+  `v1.2` desde `develop` y luego unirla a `main`; actualizar `AI_COLLABORATION.md`
+  antes del cierre.
 
 ## Worktrees y limpieza
 - Git registra únicamente `~/code/nanis` como worktree.

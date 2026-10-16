@@ -6,15 +6,21 @@
   partir de `docs/v1.2/planeacion/modificaciones.txt`. La copia formateada está
   en `docs/v1.2/planeacion/modificaciones.md`. El backlog candidato contiene
   15 historias y el plan cuatro sprints con perfil asignado por historia; se
-  generaron los dos PDF de entregables. Ambos documentos requieren revisión y
-  aprobación antes de comprometer la implementación; confirmar GT-HU-053, que
-  proviene del handoff y no del archivo de modificaciones.
+  generaron los dos PDF de entregables. La persona solicitante autorizó iniciar
+  Sprint 1 y confirmó que GT-HU-053 será solo verificación/documentación, sin
+  desarrollo nuevo. GT-HU-052 ya tiene ruta y pruebas vigentes; queda como
+  verificación QA, sin duplicar la implementación.
 - Flujo v1.2 acordado: una rama desde `develop` por sprint; una tarea
   Continuum por HU asignada al perfil responsable; commit de cada HU tras
   aprobar su cierre; merge de cada sprint a `develop`. Solo después de completar
   todos los sprints, crear `v1.2` desde `develop` y mergear esa rama a `main`.
   Actualizar `AI_COLLABORATION.md` antes del cierre de versión para reflejar
   este flujo sin divergencias.
+- Antes de crear tareas de Sprint 1, actualizar la matriz por evidencia:
+  GT-HU-041 está cubierta para login local pero requiere resolver el destino
+  SAML; GT-HU-042 debe dirigir al Supervisor al Seguimiento; GT-HU-052 se asigna
+  a `qa` para verificar su cobertura actual; GT-HU-053 se asigna a
+  `devops-infraestructura` únicamente para verificación/documentación.
 - Al 2026-10-15, el checkout principal `~/code/nanis` trabaja en `develop`.
   Sprint 4 se integró con el merge `bfaed9d` y se publicó con el cierre
   documental `d3f3449`. Sprint 5 se integró mediante `1e1d4ed` y se publicó
