@@ -212,12 +212,15 @@ y commit aprobado antes de integrar el sprint en `develop`.
   GT-HU-052 y GT-HU-053; HU-053 será solo verificación/documentación y HU-052
   una verificación QA de la ruta/enlace ya existentes.
 - La rama `sprint/v1.2-1-acceso-navegacion-rol` se creó desde `develop`.
-  Continuum mantiene activas GT-HU-052 y GT-HU-053, asignadas a `qa` y
-  `devops-infraestructura`; se trabajarán en serie. GT-HU-041 y GT-HU-042
-  están validadas, aprobadas, cerradas, archivadas y comprometidas en esta rama.
+  Continuum mantiene activa GT-HU-053, asignada a `devops-infraestructura`;
+  se trabajará en serie. GT-HU-041, GT-HU-042 y GT-HU-052 están validadas,
+  aprobadas, cerradas, archivadas y comprometidas en esta rama.
 - GT-HU-042 cambió los destinos local y SAML a Seguimiento y amplió
   `EnsureSupervisor` para exigir empresa además de rol y correo verificado.
   Regresión dirigida: 38 tests, 223 assertions; Pint pasó.
+- GT-HU-052 verificó la ruta y el enlace de Rúbricas sin cambios de
+  aplicación; Coordinación accede y Estudiante recibe denegación. Pasaron
+  11 tests y 52 assertions; fue aprobada, cerrada y archivada.
 - Se confirmó el flujo de v1.2: rama de sprint desde `develop`, tarea
   Continuum por HU asignada al perfil indicado, commit después de aprobar cada
   cierre y merge del sprint a `develop`. Al completar todos los sprints, crear

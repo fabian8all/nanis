@@ -17,12 +17,15 @@
   Actualizar `AI_COLLABORATION.md` antes del cierre de versión para reflejar
   este flujo sin divergencias.
 - Sprint 1 v1.2 está en `sprint/v1.2-1-acceso-navegacion-rol`, creada
-  desde `develop`. GT-HU-041 y GT-HU-042 están validadas, aprobadas,
-  cerradas, archivadas y comprometidas. Quedan activas GT-HU-052 (`qa`) y
-  GT-HU-053 (`devops-infraestructura`), para trabajarse en serie.
+  desde `develop`. GT-HU-041, GT-HU-042 y GT-HU-052 están validadas,
+  aprobadas, cerradas, archivadas y comprometidas. Queda activa GT-HU-053
+  (`devops-infraestructura`), para trabajarse en serie.
 - GT-HU-042 dirige al Supervisor con empresa y correo verificado a
   Seguimiento por login local y SAML; el guard compartido niega el acceso
   sin empresa. Pasaron 38 tests, 223 assertions y Pint.
+- GT-HU-052 verificó la ruta y el enlace de Rúbricas; Coordinación accede
+  y Estudiante recibe denegación. Pasaron 11 tests y 52 assertions; su
+  tarea se aprobó, cerró y archivó sin cambios de aplicación.
 - Al 2026-10-15, el checkout principal `~/code/nanis` trabaja en `develop`.
   Sprint 4 se integró con el merge `bfaed9d` y se publicó con el cierre
   documental `d3f3449`. Sprint 5 se integró mediante `1e1d4ed` y se publicó
