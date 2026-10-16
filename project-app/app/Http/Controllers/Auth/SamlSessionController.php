@@ -118,6 +118,10 @@ class SamlSessionController extends Controller
             return redirect()->route($studentPracticeDestination->routeFor($user));
         }
 
-        return redirect()->intended(route('home'));
+        $destination = $user->role === UserRole::Coordinator
+            ? route('coordinacion.practice-tracking.index')
+            : route('home');
+
+        return redirect()->intended($destination);
     }
 }

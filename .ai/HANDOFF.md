@@ -1,13 +1,13 @@
 # Handoff
 
-**Fecha:** 2026-10-16 · **Rol:** gestion-proyecto · **Rama:** `develop`
+**Fecha:** 2026-10-16 · **Rol:** backend · **Rama:** `sprint/v1.2-1-acceso-navegacion-rol`
 
 ## Objetivo
-Preparar y entregar el backlog candidato y la propuesta de sprints de v1.2, con
-perfiles asignados y versiones PDF, a partir de las modificaciones aportadas.
+Completar Sprint 1 de v1.2 en su rama, cerrando cada HU con su tarea Continuum
+y commit aprobado antes de integrar el sprint en `develop`.
 
 ## Estado
-- El checkout sigue dentro de `~/code/nanis`; la rama activa es `develop`.
+- El checkout sigue dentro de `~/code/nanis`; la rama activa es `sprint/v1.2-1-acceso-navegacion-rol`.
 - Para pruebas locales se ejecutó `DevelopmentDatasetSeeder` tras la limpieza
   de la base: 20 empresas, 50 solicitudes, 25 aceptaciones, 20 planes y 10
   reportes. Hay 59 cuentas en total (incluye dos cuentas adicionales a las 57
@@ -198,10 +198,9 @@ perfiles asignados y versiones PDF, a partir de las modificaciones aportadas.
   La persona solicitante autorizó iniciar Sprint 1. GT-HU-053 queda en ese
   sprint exclusivamente para verificación/documentación, sin desarrollo nuevo.
 - Las pruebas dirigidas de Coordinación pasaron (21 tests, 108 assertions).
-  GT-HU-041 ya cumple para autenticación local; el controlador SAML aún lleva
-  a `home`. GT-HU-052 ya tiene ruta/enlace y pruebas vigentes; se asignará a
-  `qa` como verificación. La rama de Sprint 1 y sus cuatro tareas Continuum
-  todavía deben crearse.
+  GT-HU-041 ya cumplía en autenticación local; su destino SAML ya está corregido.
+  GT-HU-052 ya tiene ruta/enlace y pruebas vigentes; se asigna a `qa`
+  como verificación.
 - Flujo confirmado por la persona solicitante para v1.2: cada sprint tiene una
   rama creada desde `develop`; una tarea Continuum por HU, asignada al perfil
   indicado; commit de cada HU al aprobar su cierre; al terminar el sprint, su
@@ -212,6 +211,11 @@ perfiles asignados y versiones PDF, a partir de las modificaciones aportadas.
 - La persona solicitante confirmó iniciar Sprint 1 con GT-HU-041, GT-HU-042,
   GT-HU-052 y GT-HU-053; HU-053 será solo verificación/documentación y HU-052
   una verificación QA de la ruta/enlace ya existentes.
+- La rama `sprint/v1.2-1-acceso-navegacion-rol` se creó desde `develop`.
+  Continuum mantiene activas GT-HU-042, GT-HU-052 y GT-HU-053, asignadas
+  a `backend`, `qa` y `devops-infraestructura`; se trabajarán en serie.
+  GT-HU-041 está validada (25 tests, 137 assertions, Pint), aprobada,
+  cerrada y archivada. Su cambio queda comprometido en esta rama antes de continuar.
 - Se confirmó el flujo de v1.2: rama de sprint desde `develop`, tarea
   Continuum por HU asignada al perfil indicado, commit después de aprobar cada
   cierre y merge del sprint a `develop`. Al completar todos los sprints, crear
