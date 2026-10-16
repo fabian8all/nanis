@@ -216,6 +216,21 @@ class PracticeTrackingTest extends TestCase
             ->assertSee('acción pendiente');
     }
 
+    public function test_supervisor_without_a_company_is_denied_from_supervisor_routes(): void
+    {
+        $supervisor = User::factory()->create([
+            'role' => UserRole::Supervisor,
+            'company_id' => null,
+        ]);
+
+        $this->actingAs($supervisor)
+            ->get(route('supervisor.practice-tracking.index'))
+            ->assertForbidden();
+
+        $this->get(route('supervisor.practice-letters.index'))
+            ->assertForbidden();
+    }
+
     private function createLetter(PracticeRequest $request, User $coordinator): PracticeLetter
     {
         $folioNumber = PracticeLetter::query()->count() + 1;

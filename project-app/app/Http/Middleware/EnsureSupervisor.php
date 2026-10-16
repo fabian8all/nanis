@@ -10,7 +10,12 @@ class EnsureSupervisor
 {
     public function handle(Request $request, Closure $next): Response
     {
-        abort_unless($request->user()?->isSupervisor() && $request->user()?->email_verified_at !== null, 403);
+        abort_unless(
+            $request->user()?->isSupervisor()
+                && $request->user()?->email_verified_at !== null
+                && $request->user()?->company_id !== null,
+            403,
+        );
 
         return $next($request);
     }

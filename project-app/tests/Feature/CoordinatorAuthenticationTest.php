@@ -140,7 +140,7 @@ class CoordinatorAuthenticationTest extends TestCase
         $this->assertGuest();
     }
 
-    public function test_verified_supervisor_can_sign_in_to_company_letters(): void
+    public function test_verified_supervisor_can_sign_in_to_practice_tracking(): void
     {
         $this->withoutMiddleware(PreventRequestForgery::class);
         $company = Company::query()->create(['name' => 'Hotel Supervisor']);
@@ -153,9 +153,10 @@ class CoordinatorAuthenticationTest extends TestCase
         $this->post(route('login.store'), [
             'email' => $supervisor->email,
             'password' => 'CorrectHorseBattery1!',
-        ])->assertRedirect(route('supervisor.practice-letters.index'));
+        ])->assertRedirect(route('supervisor.practice-tracking.index'));
 
         $this->assertAuthenticatedAs($supervisor);
+        $this->get(route('supervisor.practice-tracking.index'))->assertOk();
     }
 
     public function test_tutor_can_sign_in_to_practice_reports(): void
@@ -181,6 +182,26 @@ class CoordinatorAuthenticationTest extends TestCase
         $supervisor = User::factory()->unverified()->create([
             'role' => UserRole::Supervisor,
             'company_id' => $company->id,
+            'password' => 'CorrectHorseBattery1!',
+        ]);
+
+        $this->from(route('login'))
+            ->post(route('login.store'), [
+                'email' => $supervisor->email,
+                'password' => 'CorrectHorseBattery1!',
+            ])
+            ->assertRedirect(route('login'))
+            ->assertSessionHasErrors('email');
+
+        $this->assertGuest();
+    }
+
+    public function test_supervisor_without_a_company_cannot_sign_in(): void
+    {
+        $this->withoutMiddleware(PreventRequestForgery::class);
+        $supervisor = User::factory()->create([
+            'role' => UserRole::Supervisor,
+            'company_id' => null,
             'password' => 'CorrectHorseBattery1!',
         ]);
 
