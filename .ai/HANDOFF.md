@@ -1,13 +1,13 @@
 # Handoff
 
-**Fecha:** 2026-10-16 · **Rol:** backend · **Rama:** `sprint/v1.2-1-acceso-navegacion-rol`
+**Fecha:** 2026-10-16 | **Rol:** backend | **Rama:** `develop`
 
 ## Objetivo
-Completar Sprint 1 de v1.2 en su rama, cerrando cada HU con su tarea Continuum
-y commit aprobado antes de integrar el sprint en `develop`.
+Continuar v1.2 desde `develop` tras integrar Sprint 1; abrir Sprint 2
+con base en el backlog y el plan de sprints aprobados.
 
 ## Estado
-- El checkout sigue dentro de `~/code/nanis`; la rama activa es `sprint/v1.2-1-acceso-navegacion-rol`.
+- El checkout sigue dentro de `~/code/nanis`; la rama activa es `develop`.
 - Para pruebas locales se ejecutó `DevelopmentDatasetSeeder` tras la limpieza
   de la base: 20 empresas, 50 solicitudes, 25 aceptaciones, 20 planes y 10
   reportes. Hay 59 cuentas en total (incluye dos cuentas adicionales a las 57
@@ -211,9 +211,12 @@ y commit aprobado antes de integrar el sprint en `develop`.
 - La persona solicitante confirmó iniciar Sprint 1 con GT-HU-041, GT-HU-042,
   GT-HU-052 y GT-HU-053; HU-053 será solo verificación/documentación y HU-052
   una verificación QA de la ruta/enlace ya existentes.
-- La rama `sprint/v1.2-1-acceso-navegacion-rol` se creó desde `develop`.
-  Las cuatro HU están validadas, aprobadas, cerradas, archivadas y
-  comprometidas. La rama está lista para integrarse en `develop`.
+- Sprint 1 v1.2 se integró en `develop` mediante el merge `dca6ae9` y
+  se publicó en `origin/develop`. Sus cuatro HU están aprobadas, cerradas,
+  archivadas y comprometidas en la rama del sprint.
+- La regresión conjunta de Sprint 1 pasó: 49 tests y 275 assertions.
+  Continuum no tiene tareas activas; el doctor reporta cero problemas
+  críticos y una advertencia por el presupuesto de contexto.
 - GT-HU-042 cambió los destinos local y SAML a Seguimiento y amplió
   `EnsureSupervisor` para exigir empresa además de rol y correo verificado.
   Regresión dirigida: 38 tests, 223 assertions; Pint pasó.

@@ -16,10 +16,11 @@
   todos los sprints, crear `v1.2` desde `develop` y mergear esa rama a `main`.
   Actualizar `AI_COLLABORATION.md` antes del cierre de versión para reflejar
   este flujo sin divergencias.
-- Sprint 1 v1.2 está en `sprint/v1.2-1-acceso-navegacion-rol`, creada
-  desde `develop`. Las cuatro HU están validadas, aprobadas, cerradas,
-  archivadas y comprometidas. La rama está lista para integrarse en
-  `develop`; después iniciar Sprint 2 desde esa integración.
+- Sprint 1 v1.2 se integró en `develop` mediante `dca6ae9` y se publicó
+  en `origin/develop`. Las cuatro HU están aprobadas, cerradas, archivadas
+  y comprometidas. La regresión conjunta pasó con 49 tests y 275 assertions.
+- Siguiente: iniciar Sprint 2 desde `develop` con una rama propia y crear
+  una tarea Continuum asignada por el orquestador para cada HU.
 - GT-HU-042 dirige al Supervisor con empresa y correo verificado a
   Seguimiento por login local y SAML; el guard compartido niega el acceso
   sin empresa. Pasaron 38 tests, 223 assertions y Pint.
