@@ -1,5 +1,20 @@
 # Pendientes
 
+- El 2026-10-16 se completó y archivó la tarea Continuum
+  `.ai/tasks/_closed/backlog-v1-2/`, asignada al rol `gestion-proyecto`, para
+  preparar backlog, sprints y PDFs de v1.2 a
+  partir de `docs/v1.2/planeacion/modificaciones.txt`. La copia formateada está
+  en `docs/v1.2/planeacion/modificaciones.md`. El backlog candidato contiene
+  15 historias y el plan cuatro sprints con perfil asignado por historia; se
+  generaron los dos PDF de entregables. Ambos documentos requieren revisión y
+  aprobación antes de comprometer la implementación; confirmar GT-HU-053, que
+  proviene del handoff y no del archivo de modificaciones.
+- Flujo v1.2 acordado: una rama desde `develop` por sprint; una tarea
+  Continuum por HU asignada al perfil responsable; commit de cada HU tras
+  aprobar su cierre; merge de cada sprint a `develop`. Solo después de completar
+  todos los sprints, crear `v1.2` desde `develop` y mergear esa rama a `main`.
+  Actualizar `AI_COLLABORATION.md` antes del cierre de versión para reflejar
+  este flujo sin divergencias.
 - Al 2026-10-15, el checkout principal `~/code/nanis` trabaja en `develop`.
   Sprint 4 se integró con el merge `bfaed9d` y se publicó con el cierre
   documental `d3f3449`. Sprint 5 se integró mediante `1e1d4ed` y se publicó

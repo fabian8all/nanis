@@ -1,9 +1,10 @@
 # Handoff
 
-**Fecha:** 2026-10-15 · **Rol:** gestion-proyecto · **Rama:** `develop`
+**Fecha:** 2026-10-16 · **Rol:** gestion-proyecto · **Rama:** `develop`
 
 ## Objetivo
-Completar Sprint 5 de v1.1, iniciado desde `develop`.
+Preparar y entregar el backlog candidato y la propuesta de sprints de v1.2, con
+perfiles asignados y versiones PDF, a partir de las modificaciones aportadas.
 
 ## Estado
 - El checkout sigue dentro de `~/code/nanis`; la rama activa es `develop`.
@@ -16,8 +17,8 @@ Completar Sprint 5 de v1.1, iniciado desde `develop`.
   contenedor (`./.env:/var/www/html/.env:ro` en `docker-compose.yml`); basta
   editar el archivo, sin reiniciar. El login con contraseña no cambió.
 - Se creó `docs/v1.1/entregables/` (PDF de backlog y plan de sprints) y la
-  estructura vacía `docs/v1.2/`; la lista de modificaciones de v1.2 está
-  pendiente de la persona solicitante. v1.1 se integra en `main`.
+  estructura de `docs/v1.2/`; la persona solicitante ya aportó el listado de
+  modificaciones. v1.1 se integra en `main`.
 - Sprint 4 se integró mediante el merge `bfaed9d`; su cierre documental
   `d3f3449` se publicó en `origin/develop`.
 - Sprint 5 contiene GT-HU-037 y GT-HU-038. Las tareas Continuum se crearon en
@@ -164,6 +165,52 @@ Completar Sprint 5 de v1.1, iniciado desde `develop`.
   locales. Este cambio previo sigue pendiente de commit; se preservó durante
   ambos sprints y no forma parte de sus commits.
 
+- Seguimiento ya no muestra a un rol enlaces de acciones de otro rol (daban
+  403): `PracticeTrackingSummary` a?ade `route_role` y la vista filtra; commit
+  `ea8a713` en `develop`, a?n sin publicar en `origin`. `main` sigue en `cae5a0a`.
+- El 403/`fopen` en login con contrase?a ven?a de carpetas de `storage` creadas
+  como `root` por comandos `artisan`/`tinker` dentro del contenedor; se corrigi?
+  con `chown -R www-data:www-data storage bootstrap/cache`. Evitar ejecutar
+  artisan como root o repetir el `chown` si reaparece.
+- Hallazgo abierto: con "Acceso federado UCOL", Supervisor y Tutor caen en
+  `home.blade.php`, que solo tiene enlaces para Coordinador y Alumno
+  (`SamlSessionController::redirectAfterAuthentication` usa `home`). Se propuso
+  redirigirlos a su destino por rol como el login con contrase?a; falta aprobaci?n.
+- El handoff previo registra como requerimiento adicional configurar el simulador SAML por `.env`; se
+  incluyo de forma separada como GT-HU-053, pendiente de confirmar porque no figura en el archivo fuente.
+
+## Continuidad v1.2 — 2026-10-16
+
+- La tarea `.ai/tasks/_closed/backlog-v1-2/` se completó y archivó; estaba
+  asignada al rol `gestion-proyecto`.
+- La persona solicitante aportó `docs/v1.2/planeacion/modificaciones.txt`;
+  permanece intacto. Su copia con formato es
+  `docs/v1.2/planeacion/modificaciones.md`.
+- Ya están redactados `docs/v1.2/backlog/backlog-candidato.md` (15 historias)
+  y `docs/v1.2/sprints/plan-sprints-candidato.md` (cuatro sprints candidatos).
+  Cada historia está asignada una sola vez y tiene un perfil responsable del
+  catálogo Continuum.
+- Se generaron `docs/v1.2/entregables/backlog-candidato.pdf` (7 páginas) y
+  `docs/v1.2/entregables/plan-sprints-candidato.pdf` (4 páginas) desde sus
+  documentos Markdown; ambos PDF son válidos. La matriz asigna un perfil
+  Continuum a cada una de las 15 historias.
+- El backlog y los sprints siguen siendo propuestas candidatas, no aprobadas.
+  Antes de comprometer implementación, resolver las preguntas abiertas, en
+  particular confirmar si GT-HU-053 —solicitud complementaria ya implementada
+  según el handoff— permanece en el alcance.
+- Flujo confirmado por la persona solicitante para v1.2: cada sprint tiene una
+  rama creada desde `develop`; una tarea Continuum por HU, asignada al perfil
+  indicado; commit de cada HU al aprobar su cierre; al terminar el sprint, su
+  rama se integra en `develop`. Tras completar todos los sprints, crear una
+  rama `v1.2` desde `develop` y usarla como snapshot de la versión antes de
+  integrarla en `main`. Actualizar el protocolo canónico antes de ese cierre;
+  no integrar v1.2 directamente desde `develop` a `main`.
+- La persona solicitante pidió comenzar Sprint 1. Está pendiente decidir si
+  GT-HU-053 permanece en ese sprint; las otras historias asignadas son
+  GT-HU-041, GT-HU-042 y GT-HU-052.
+- Revisar durante el refinamiento si el simulador SAML configurado por `.env`,
+  anotado en el handoff previo, debe incluirse en el backlog.
+
 ## Worktrees y limpieza
 - Git registra únicamente `~/code/nanis` como worktree.
 - Los worktrees auxiliares de `main` y `develop` se retiraron; se conservaron
@@ -201,3 +248,7 @@ Completar Sprint 5 de v1.1, iniciado desde `develop`.
 ## Pendiente
 - Decidir cuándo incluir en un commit el cambio previo de
   `project-app/README.md`; se preserva fuera de los commits del sprint.
+- Publicar `develop` (`ea8a713`) e integrar en `main`/`origin` cuando se confirme.
+- Decidir el redirect/enlaces de Supervisor y Tutor tras acceso federado.
+- Completar `.ai/tasks/backlog-v1-2/` y generar/revisar el backlog candidato
+  v1.2 antes de planificar su implementación.

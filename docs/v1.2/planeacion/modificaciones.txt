@@ -1,0 +1,16 @@
+-Sección para editar el perfil del usuario para editar los datos personales (excepto el correo) y "crear" o cambiar contraseña.
+-Al iniciar sesión como coordinador, entra a una página con 2 enlaces (para ir a catálogo de Coordinación o Revisar solicitudes). Quitar esta vista, que entre diréctamente a seguimiento.
+Supervisor -> Seguimiento:
+	-Al iniciar sesión que ingrese directo a seguimiento, no a cartas pendientes de aceptación.
+	-Que filtre la lista por estados o se agrupe en pestañas por estados(1.-Aceptación - pendiente, 2.- Evaluación pendiente, 3.- Plan pendiente ...) 
+	-El botón "Revisar plan de trabajo" debe mandas directo al plan de trabajo del alumno en cuestión, no al catálogo de planes de trabajo.
+	-Similar al caso anterior "Completar evaluación terminal" debe enviar directo a la evaluación, no al catálogo de evaluaciones.
+*Expediente:
+	-Incluír en "Requisitos de término" el estado de los documentos iniciales (Carta de presentación, Carta de aceptación, Plan de trabajo) y pasar "Carta de término emitida hasta abajo"
+	-Concentrar todos los documentos en un accordion (Documentos) que al ingresar aparezca colapsado.
+	-Botón de "Registrar plan de trabajo" y "Consultar reporte final" aparecen desde antes de tiempo y mandan a un "error 404 - Not found"
+	-Carta de presentación si se accede desde expediente, el botón "volver" manda a solicitudes de práctica, debería regresar al lugar de donde se llegó al documento.
+	-Igual que en el caso anterior al "Consultar plan de trabajo" no se tiene un botón para regresar.
+-El coordinador no puede asignar tutor al alumno.
+-Con perfil de coordinador, enlace de la barra "Rúbricas" manda error 404.
+
