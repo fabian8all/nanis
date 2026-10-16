@@ -16,11 +16,19 @@
   todos los sprints, crear `v1.2` desde `develop` y mergear esa rama a `main`.
   Actualizar `AI_COLLABORATION.md` antes del cierre de versión para reflejar
   este flujo sin divergencias.
-- Antes de crear tareas de Sprint 1, actualizar la matriz por evidencia:
-  GT-HU-041 está cubierta para login local pero requiere resolver el destino
-  SAML; GT-HU-042 debe dirigir al Supervisor al Seguimiento; GT-HU-052 se asigna
-  a `qa` para verificar su cobertura actual; GT-HU-053 se asigna a
-  `devops-infraestructura` únicamente para verificación/documentación.
+- Sprint 1 v1.2 está en `sprint/v1.2-1-acceso-navegacion-rol`, creada
+  desde `develop`. Las cuatro HU están validadas, aprobadas, cerradas,
+  archivadas y comprometidas. La rama está lista para integrarse en
+  `develop`; después iniciar Sprint 2 desde esa integración.
+- GT-HU-042 dirige al Supervisor con empresa y correo verificado a
+  Seguimiento por login local y SAML; el guard compartido niega el acceso
+  sin empresa. Pasaron 38 tests, 223 assertions y Pint.
+- GT-HU-052 verificó la ruta y el enlace de Rúbricas; Coordinación accede
+  y Estudiante recibe denegación. Pasaron 11 tests y 52 assertions; su
+  tarea se aprobó, cerró y archivó sin cambios de aplicación.
+- GT-HU-053 verificó el montaje `.env` de solo lectura, el uso de
+  `SAML_SIMULATOR_EMAIL`, ausencia de caché e ignorado Git sin exponer
+  valores. No hubo cambios locales; fue aprobada, cerrada y archivada.
 - Al 2026-10-15, el checkout principal `~/code/nanis` trabaja en `develop`.
   Sprint 4 se integró con el merge `bfaed9d` y se publicó con el cierre
   documental `d3f3449`. Sprint 5 se integró mediante `1e1d4ed` y se publicó

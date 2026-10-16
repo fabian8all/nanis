@@ -39,7 +39,7 @@ class AuthenticatedSessionController extends Controller
         $destination = match ($user?->role) {
             UserRole::Coordinator => 'coordinacion.practice-tracking.index',
             UserRole::Supervisor => $user->email_verified_at && $user->company_id !== null
-                    ? 'supervisor.practice-letters.index'
+                    ? 'supervisor.practice-tracking.index'
                     : null,
             UserRole::Tutor => 'tutor.practice-reports.index',
             UserRole::Student => app()->environment(['local', 'testing']) && $user instanceof User
